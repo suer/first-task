@@ -1,9 +1,13 @@
 import SwiftUI
 
 struct FavButton: View {
+    var action: (() -> ())?
+
     var body: some View {
         Button(action: {
-            // do nothing
+            if let action = self.action {
+                action()
+            }
         }) {
             Image(systemName: "pencil")
                 .frame(width: 50, height: 50)
@@ -17,6 +21,6 @@ struct FavButton: View {
 
 struct FavButton_Previews: PreviewProvider {
     static var previews: some View {
-        FavButton()
+        FavButton(action: nil)
     }
 }
