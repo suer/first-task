@@ -19,6 +19,7 @@
 		804467C724DF98DF00011164 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C624DF98DF00011164 /* TaskList.swift */; };
 		804467C924DF98F100011164 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C824DF98F100011164 /* TaskRow.swift */; };
 		804467CC24DF9A0800011164 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CB24DF9A0800011164 /* Task.swift */; };
+		804467CE24DFA33600011164 /* FavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CD24DFA33600011164 /* FavButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		804467C624DF98DF00011164 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		804467C824DF98F100011164 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		804467CB24DF9A0800011164 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		804467CD24DFA33600011164 /* FavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				8044679524DF97CC00011164 /* SceneDelegate.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
 				804467C624DF98DF00011164 /* TaskList.swift */,
+				804467CD24DFA33600011164 /* FavButton.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
@@ -290,6 +293,7 @@
 				8044679424DF97CC00011164 /* AppDelegate.swift in Sources */,
 				804467C724DF98DF00011164 /* TaskList.swift in Sources */,
 				8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */,
+				804467CE24DFA33600011164 /* FavButton.swift in Sources */,
 				804467C924DF98F100011164 /* TaskRow.swift in Sources */,
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
 				804467CC24DF9A0800011164 /* Task.swift in Sources */,

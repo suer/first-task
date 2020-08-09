@@ -5,11 +5,22 @@ struct TaskList: View {
     @State var tasks: [Task]
 
     var body: some View {
-        List {
-            ForEach(tasks) { task in
-                TaskRow(task: task)
+        ZStack {
+            List {
+                ForEach(tasks) { task in
+                    TaskRow(task: task)
+                }
+                .onDelete(perform: removeRow)
             }
-            .onDelete(perform: removeRow)
+
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    FavButton()
+                }.padding()
+            }.padding()
+
         }
     }
 
