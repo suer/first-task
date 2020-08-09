@@ -36,7 +36,10 @@ struct TaskList: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                     Button(action: {
-                        print(self.$newTaskTitle)
+                        if let task = Task.create(title: self.$newTaskTitle.wrappedValue) {
+                            self.tasks.append(task)
+                        }
+                        self.$newTaskTitle.wrappedValue = ""
                         self.showModal = false
                         UIApplication.shared.closeKeyboard()
                     }) {
@@ -54,6 +57,9 @@ struct TaskList: View {
     }
 
     func removeRow(offsets: IndexSet) {
+        offsets.forEach { i in
+            Task.destroy(task: tasks[i])
+        }
         tasks.remove(atOffsets: offsets)
     }
 }
@@ -62,8 +68,8 @@ struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
         TaskList(
             tasks: [
-                Task(id: 1, title: "ミルクを買う"),
-                Task(id: 2, title: "メールを返す")
+                Task.make(id: UUID(), title: "ミルクを買う"),
+                Task.make(id: UUID(), title: "メールを返す")
         ])
     }
 }

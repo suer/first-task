@@ -1,13 +1,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let dummyTasks = [
-            Task(id: 1, title: "ミルクを買う"),
-            Task(id: 2, title: "メールを返す")
-    ]
+    @Environment(\.managedObjectContext) var context
 
     var body: some View {
-        TaskList(tasks: dummyTasks)
+        TaskList(tasks: Task.list())
     }
 }
 
