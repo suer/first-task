@@ -1,16 +1,13 @@
-//
-//  ContentView.swift
-//  FirstTask
-//
-//  Created by SuetsuguRyo on 2020/08/09.
-//  Copyright © 2020 codefirst. All rights reserved.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    let dummyTasks = [
+            Task(id: 1, title: "ミルクを買う"),
+            Task(id: 2, title: "メールを返す")
+    ]
+
     var body: some View {
-        Text("Hello, World!")
+        TaskList(tasks: dummyTasks)
     }
 }
 
