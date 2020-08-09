@@ -28,11 +28,27 @@ struct TaskList: View {
             }.padding()
 
             BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
-                FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true)
+                HStack {
+                    FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { text in
+                    }
                     .frame(width: 300, height: 50)
                     .keyboardType(.default)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+
+                    Button(action: {
+                        print(self.$newTaskTitle)
+                        self.showModal = false
+                        UIApplication.shared.closeKeyboard()
+                    }) {
+                        Image(systemName: "paperplane")
+                            .frame(width: 40, height: 40)
+                            .imageScale(.large)
+                            .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                    }
+                }
+                .padding()
             }
         }
     }
@@ -49,5 +65,11 @@ struct TaskList_Previews: PreviewProvider {
                 Task(id: 1, title: "ミルクを買う"),
                 Task(id: 2, title: "メールを返す")
         ])
+    }
+}
+
+extension UIApplication {
+    func closeKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
