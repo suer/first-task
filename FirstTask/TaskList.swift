@@ -1,12 +1,20 @@
 import SwiftUI
+import MobileCoreServices
 
 struct TaskList: View {
-    var tasks: [Task]
+    @State var tasks: [Task]
 
     var body: some View {
-        List(tasks) { task in
-            TaskRow(task: task)
+        List {
+            ForEach(tasks) { task in
+                TaskRow(task: task)
+            }
+            .onDelete(perform: removeRow)
         }
+    }
+
+    func removeRow(offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
     }
 }
 
