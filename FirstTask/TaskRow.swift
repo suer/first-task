@@ -7,12 +7,12 @@ struct TaskRow: View {
         HStack {
             Circle()
                 .fill(Color(task.completed
-                    ? UIColor.darkText
+                    ? UIColor.label
                     : UIColor.systemBackground))
                 .frame(width: 20, height: 20)
                 .overlay(
                     Circle()
-                        .stroke(Color(UIColor.darkText))
+                        .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
             ).onTapGesture {
                 self.task.completed.toggle()
