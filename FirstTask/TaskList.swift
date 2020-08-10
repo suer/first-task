@@ -6,7 +6,7 @@ struct TaskList: View {
     @State var showModal: Bool = false
     @State var newTaskTitle: String = ""
     @State var keyboardHeight: CGFloat = CGFloat(340)
-
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
@@ -17,7 +17,7 @@ struct TaskList: View {
                     .onDelete(perform: removeRow)
                 }
                 .navigationBarTitle("Tasks")
-
+                
                 VStack {
                     Spacer()
                     HStack {
@@ -28,7 +28,7 @@ struct TaskList: View {
                         }
                     }.padding()
                 }.padding()
-
+                
                 BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
                     HStack {
                         FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { text in
@@ -36,7 +36,7 @@ struct TaskList: View {
                         .frame(width: 300, height: 50)
                         .keyboardType(.default)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                        
                         Button(action: {
                             if let task = Task.create(title: self.$newTaskTitle.wrappedValue) {
                                 self.tasks.append(task)
@@ -58,7 +58,7 @@ struct TaskList: View {
             }
         }
     }
-
+    
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
             Task.destroy(task: tasks[i])
