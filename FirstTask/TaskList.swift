@@ -8,50 +8,53 @@ struct TaskList: View {
     @State var keyboardHeight: CGFloat = CGFloat(340)
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            List {
-                ForEach(tasks) { task in
-                    TaskRow(task: task)
+        NavigationView {
+            ZStack(alignment: .bottom) {
+                List {
+                    ForEach(tasks) { task in
+                        TaskRow(task: task)
+                    }
+                    .onDelete(perform: removeRow)
                 }
-                .onDelete(perform: removeRow)
-            }
+                .navigationBarTitle("Tasks")
 
-            VStack {
-                Spacer()
-                HStack {
+                VStack {
                     Spacer()
-                    FabButton {
-                        self.showModal = true
-                        // TDOO: キーボードの高さを取得して keyboardHeight を設定する
-                    }
-                }.padding()
-            }.padding()
-
-            BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
-                HStack {
-                    FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { text in
-                    }
-                    .frame(width: 300, height: 50)
-                    .keyboardType(.default)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    Button(action: {
-                        if let task = Task.create(title: self.$newTaskTitle.wrappedValue) {
-                            self.tasks.append(task)
+                    HStack {
+                        Spacer()
+                        FabButton {
+                            self.showModal = true
+                            // TDOO: キーボードの高さを取得して keyboardHeight を設定する
                         }
-                        self.$newTaskTitle.wrappedValue = ""
-                        self.showModal = false
-                        UIApplication.shared.closeKeyboard()
-                    }) {
-                        Image(systemName: "paperplane")
-                            .frame(width: 40, height: 40)
-                            .imageScale(.large)
-                            .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
+                    }.padding()
+                }.padding()
+
+                BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
+                    HStack {
+                        FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { text in
+                        }
+                        .frame(width: 300, height: 50)
+                        .keyboardType(.default)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                        Button(action: {
+                            if let task = Task.create(title: self.$newTaskTitle.wrappedValue) {
+                                self.tasks.append(task)
+                            }
+                            self.$newTaskTitle.wrappedValue = ""
+                            self.showModal = false
+                            UIApplication.shared.closeKeyboard()
+                        }) {
+                            Image(systemName: "paperplane")
+                                .frame(width: 40, height: 40)
+                                .imageScale(.large)
+                                .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
         }
     }
