@@ -20,7 +20,7 @@ struct TaskList: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    FavButton {
+                    FabButton {
                         self.showModal = true
                         // TDOO: キーボードの高さを取得して keyboardHeight を設定する
                     }
