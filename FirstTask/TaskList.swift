@@ -2,7 +2,12 @@ import SwiftUI
 import MobileCoreServices
 
 struct TaskList: View {
-    @State var tasks: [Task]
+    @FetchRequest(
+       entity: Task.entity(),
+       sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
+       predicate: NSPredicate(format: "completed == %@", NSNumber(value: false))
+    ) var tasks: FetchedResults<Task>
+
     @State var showModal: Bool = false
     @State var newTaskTitle: String = ""
     @State var keyboardHeight: CGFloat = CGFloat(340)
@@ -38,9 +43,7 @@ struct TaskList: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         
                         Button(action: {
-                            if let task = Task.create(title: self.$newTaskTitle.wrappedValue) {
-                                self.tasks.append(task)
-                            }
+                            _ = Task.create(title: self.$newTaskTitle.wrappedValue)
                             self.$newTaskTitle.wrappedValue = ""
                             self.showModal = false
                             UIApplication.shared.closeKeyboard()
@@ -63,17 +66,18 @@ struct TaskList: View {
         offsets.forEach { i in
             Task.destroy(task: tasks[i])
         }
-        tasks.remove(atOffsets: offsets)
     }
 }
 
 struct TaskList_Previews: PreviewProvider {
+    @FetchRequest(
+       entity: Task.entity(),
+       sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
+       predicate: NSPredicate(format: "completed == %@", NSNumber(value: false))
+    ) var tasks: FetchedResults<Task>
+
     static var previews: some View {
-        TaskList(
-            tasks: [
-                Task.make(id: UUID(), title: "ミルクを買う"),
-                Task.make(id: UUID(), title: "メールを返す")
-        ])
+        TaskList()
     }
 }
 

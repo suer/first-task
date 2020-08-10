@@ -4,7 +4,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var context
 
     var body: some View {
-        TaskList(tasks: Task.list())
+        TaskList()
     }
 }
 
