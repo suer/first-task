@@ -2,9 +2,23 @@ import SwiftUI
 
 struct TaskRow: View {
     var task: Task
-
+    
     var body: some View {
-        Text(task.title ?? "")
+        HStack {
+            Circle()
+                .fill(Color(task.completed
+                    ? UIColor.darkText
+                    : UIColor.systemBackground))
+                .frame(width: 20, height: 20)
+                .overlay(
+                    Circle()
+                        .stroke(Color(UIColor.darkText))
+                        .frame(width: 20, height: 20)
+            ).onTapGesture {
+                self.task.completed = !self.task.completed
+            }
+            Text(task.title ?? "")
+        }
     }
 }
 
