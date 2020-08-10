@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FavButton: View {
+struct FabButton: View {
     var action: (() -> ())?
 
     var body: some View {
@@ -19,8 +19,8 @@ struct FavButton: View {
     }
 }
 
-struct FavButton_Previews: PreviewProvider {
+struct FabButton_Previews: PreviewProvider {
     static var previews: some View {
-        FavButton(action: nil)
+        FabButton(action: nil)
     }
 }

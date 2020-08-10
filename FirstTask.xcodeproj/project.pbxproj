@@ -18,7 +18,7 @@
 		804467B924DF97D000011164 /* FirstTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467B824DF97D000011164 /* FirstTaskUITests.swift */; };
 		804467C724DF98DF00011164 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C624DF98DF00011164 /* TaskList.swift */; };
 		804467C924DF98F100011164 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C824DF98F100011164 /* TaskRow.swift */; };
-		804467CE24DFA33600011164 /* FavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CD24DFA33600011164 /* FavButton.swift */; };
+		804467CE24DFA33600011164 /* FabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CD24DFA33600011164 /* FabButton.swift */; };
 		804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CF24DFD7A900011164 /* FocusableTextField.swift */; };
 		804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D124DFD80A00011164 /* BottomSheetModal.swift */; };
 		804467D424E0260A00011164 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D324E0260A00011164 /* Task+Extensions.swift */; };
@@ -60,7 +60,7 @@
 		804467BA24DF97D000011164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		804467C624DF98DF00011164 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		804467C824DF98F100011164 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
-		804467CD24DFA33600011164 /* FavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavButton.swift; sourceTree = "<group>"; };
+		804467CD24DFA33600011164 /* FabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabButton.swift; sourceTree = "<group>"; };
 		804467CF24DFD7A900011164 /* FocusableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableTextField.swift; sourceTree = "<group>"; };
 		804467D124DFD80A00011164 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
 		804467D324E0260A00011164 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				804467C624DF98DF00011164 /* TaskList.swift */,
 				804467D124DFD80A00011164 /* BottomSheetModal.swift */,
 				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
-				804467CD24DFA33600011164 /* FavButton.swift */,
+				804467CD24DFA33600011164 /* FabButton.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
@@ -302,7 +302,7 @@
 				8044679424DF97CC00011164 /* AppDelegate.swift in Sources */,
 				804467C724DF98DF00011164 /* TaskList.swift in Sources */,
 				8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */,
-				804467CE24DFA33600011164 /* FavButton.swift in Sources */,
+				804467CE24DFA33600011164 /* FabButton.swift in Sources */,
 				804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */,
 				804467C924DF98F100011164 /* TaskRow.swift in Sources */,
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,
