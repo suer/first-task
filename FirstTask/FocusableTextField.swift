@@ -14,7 +14,9 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            text = textField.text ?? ""
+            if (textField.markedTextRange == nil) {
+                text = textField.text ?? ""
+            }
         }
 
         func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
