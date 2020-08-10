@@ -26,12 +26,13 @@ struct BottomSheetModal<Content: View>: View {
             alignment: .center)
           .opacity(0.65)
           .animation(.spring())
+          .gesture(TapGesture().onEnded { self.isShown = false })
   }
 
   private var modal: some View {
     self.content()
       .frame(width: UIScreen.main.bounds.width, height: height, alignment: .top)
-      .background(Color.white)
+      .background(Color(UIColor.systemBackground))
       .cornerRadius(10)
   }
 }
