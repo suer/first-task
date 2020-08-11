@@ -62,4 +62,13 @@ extension Task: Identifiable {
         }
 
     }
+
+    func toggleDone() {
+        self.completedAt = self.completedAt == nil ? Date() : nil
+        do {
+            try CoreDataSupport.context.save()
+        } catch {
+            // do nothing
+        }
+    }
 }

@@ -15,7 +15,7 @@ struct TaskRow: View {
                         .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
             ).onTapGesture {
-                self.task.completedAt = Date()
+                self.task.toggleDone()
             }
             Text(task.title ?? "")
         }
