@@ -5,7 +5,7 @@ struct TaskList: View {
     @FetchRequest(
        entity: Task.entity(),
        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-       predicate: NSPredicate(format: "completed == %@", NSNumber(value: false))
+       predicate: NSPredicate(format: "completedAt == nil")
     ) var tasks: FetchedResults<Task>
 
     @State var showModal: Bool = false

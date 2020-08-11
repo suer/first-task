@@ -6,7 +6,7 @@ struct TaskRow: View {
     var body: some View {
         HStack {
             Circle()
-                .fill(Color(task.completed
+                .fill(Color(task.completedAt != nil
                     ? UIColor.label
                     : UIColor.systemBackground))
                 .frame(width: 20, height: 20)
@@ -15,7 +15,7 @@ struct TaskRow: View {
                         .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
             ).onTapGesture {
-                self.task.completed.toggle()
+                self.task.toggleDone()
             }
             Text(task.title ?? "")
         }
