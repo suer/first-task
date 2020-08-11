@@ -3,11 +3,11 @@ import CoreData
 
 extension Task: Identifiable {
     
-    static func make(id: UUID, title: String, completed: Bool = false) -> Task {
+    static func make(id: UUID, title: String, completedAt: Date = Date()) -> Task {
         let task = Task(context: CoreDataSupport.context)
         task.id = id
         task.title = title
-        task.completed = completed
+        task.completedAt = completedAt
         return task
     }
 
@@ -15,7 +15,6 @@ extension Task: Identifiable {
         let task = Task(context: CoreDataSupport.context)
         task.id = UUID()
         task.title = title
-        task.completed = false
         let now = Date()
         task.createdAt = now
         task.updatedAt = now
