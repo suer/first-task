@@ -9,10 +9,10 @@ struct FabButton: View {
                 action()
             }
         }) {
-            Image(systemName: "pencil")
+            Image(systemName: "plus")
                 .frame(width: 50, height: 50)
                 .imageScale(.large)
-                .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
+                .background(Color(UIColor(named: "Accent")!))
                 .foregroundColor(.white)
                 .clipShape(Circle())
         }
