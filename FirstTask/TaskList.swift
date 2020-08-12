@@ -51,7 +51,7 @@ struct TaskList: View {
                             Image(systemName: "arrow.up")
                                 .frame(width: 40, height: 40)
                                 .imageScale(.large)
-                                .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
+                                .background(Color(UIColor(named: "Accent")!))
                                 .foregroundColor(.white)
                                 .clipShape(Circle())
                         }
