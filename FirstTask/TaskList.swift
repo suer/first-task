@@ -31,8 +31,8 @@ struct TaskList: View {
                             self.showModal = true
                             // TDOO: キーボードの高さを取得して keyboardHeight を設定する
                         }
-                    }.padding()
-                }.padding()
+                    }.padding(10)
+                }.padding(10)
                 
                 BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
                     HStack {
@@ -48,7 +48,7 @@ struct TaskList: View {
                             self.showModal = false
                             UIApplication.shared.closeKeyboard()
                         }) {
-                            Image(systemName: "paperplane")
+                            Image(systemName: "arrow.up")
                                 .frame(width: 40, height: 40)
                                 .imageScale(.large)
                                 .background(Color(UIColor(red: 33/255, green: 125/255, blue: 251/255, alpha: 1.0)))
