@@ -9,6 +9,7 @@ struct TaskList: View {
     ) var tasks: FetchedResults<Task>
 
     @State var showModal: Bool = false
+    @State var showingEditModal: Bool = false
     @State var newTaskTitle: String = ""
     @State var keyboardHeight: CGFloat = CGFloat(340)
     @State var editing: Bool = false
@@ -18,7 +19,14 @@ struct TaskList: View {
             ZStack(alignment: .bottom) {
                 List {
                     ForEach(tasks) { task in
-                        TaskRow(task: task)
+                        Button(action: { self.showingEditModal.toggle() }) {
+                            TaskRow(task: task)
+                        }
+                        .sheet(isPresented: self.$showingEditModal, onDismiss: {
+                            task.save()
+                        }) {
+                            TaskEditView(task: task)
+                        }
                     }
                     .onDelete(perform: removeRow)
                     .onMove(perform: move)

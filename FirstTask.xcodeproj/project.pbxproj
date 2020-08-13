@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
 		8044679424DF97CC00011164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044679324DF97CC00011164 /* AppDelegate.swift */; };
 		8044679624DF97CC00011164 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044679524DF97CC00011164 /* SceneDelegate.swift */; };
 		8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		8044679024DF97CC00011164 /* FirstTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8044679324DF97CC00011164 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8044679524DF97CC00011164 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
+				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467A424DF97D000011164 /* Info.plist */,
@@ -308,6 +311,7 @@
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,
 				804467D424E0260A00011164 /* Task+Extensions.swift in Sources */,
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
+				19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */,
 				804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */,
 				8044679624DF97CC00011164 /* SceneDelegate.swift in Sources */,
 			);

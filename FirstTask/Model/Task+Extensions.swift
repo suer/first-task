@@ -62,9 +62,23 @@ extension Task: Identifiable {
         }
 
     }
-
+    
+    public var wrappedTitle: String {
+        get{title ?? ""}
+        set{title = newValue}
+    }
+    
+    public var wrappedMemo: String {
+        get{memo ?? ""}
+        set{memo = newValue}
+    }
+    
     func toggleDone() {
         self.completedAt = self.completedAt == nil ? Date() : nil
+        self.save()
+    }
+    
+    func save() {
         do {
             try CoreDataSupport.context.save()
         } catch {
