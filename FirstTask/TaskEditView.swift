@@ -7,9 +7,9 @@ struct TaskEditView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Input title", text: $task.wrappedTitle)
+                IMETextField(title: "Input title", text: $task.wrappedTitle)
                 Section(header: Text("Memo")) {
-                    TextField("", text: $task.wrappedMemo)
+                    IMETextField(title: "", text: $task.wrappedMemo)
                 }
             }.navigationBarTitle("Edit Task")
                 .navigationBarItems(trailing: Button(action: {
