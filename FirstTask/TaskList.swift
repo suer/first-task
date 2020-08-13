@@ -11,7 +11,8 @@ struct TaskList: View {
     @State var showModal: Bool = false
     @State var newTaskTitle: String = ""
     @State var keyboardHeight: CGFloat = CGFloat(340)
-    
+    @State var editing: Bool = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
@@ -20,9 +21,16 @@ struct TaskList: View {
                         TaskRow(task: task)
                     }
                     .onDelete(perform: removeRow)
+                    .onMove(perform: move)
+                    .onLongPressGesture {
+                        withAnimation {
+                            self.editing = true
+                        }
+                    }
                 }
                 .navigationBarTitle("Tasks")
-                
+                .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
+
                 VStack {
                     Spacer()
                     HStack {
@@ -65,6 +73,14 @@ struct TaskList: View {
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
             Task.destroy(task: tasks[i])
+        }
+    }
+
+    func move(from source: IndexSet, to destination: Int) {
+        Task.reorder(tasks: tasks.map { $0 }, source: source, destination: destination)
+
+        withAnimation {
+            self.editing = false
         }
     }
 }
