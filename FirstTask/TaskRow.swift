@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TaskRow: View {
-    var task: Task
+    @ObservedObject var task: Task
     
     var body: some View {
         HStack {
