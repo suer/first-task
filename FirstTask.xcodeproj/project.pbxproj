@@ -126,13 +126,13 @@
 				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
+				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467A424DF97D000011164 /* Info.plist */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				8044679E24DF97D000011164 /* Preview Content */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
-				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
