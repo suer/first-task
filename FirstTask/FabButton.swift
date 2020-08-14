@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FabButton: View {
-    var action: (() -> ())?
+    var action: (() -> Void)?
 
     var body: some View {
         Button(action: {

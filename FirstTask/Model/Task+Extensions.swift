@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 extension Task: Identifiable {
-    
+
     static func make(id: UUID, title: String, completedAt: Date = Date()) -> Task {
         let task = Task(context: CoreDataSupport.context)
         task.id = id
@@ -62,22 +62,22 @@ extension Task: Identifiable {
         }
 
     }
-    
+
     public var wrappedTitle: String {
-        get{title ?? ""}
-        set{title = newValue}
+        get { title ?? "" }
+        set { title = newValue }
     }
-    
+
     public var wrappedMemo: String {
-        get{memo ?? ""}
-        set{memo = newValue}
+        get { memo ?? "" }
+        set { memo = newValue }
     }
-    
+
     func toggleDone() {
         self.completedAt = self.completedAt == nil ? Date() : nil
         self.save()
     }
-    
+
     func save() {
         do {
             try CoreDataSupport.context.save()

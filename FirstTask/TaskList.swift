@@ -49,15 +49,15 @@ struct TaskList: View {
                         }
                     }.padding(10)
                 }.padding(10)
-                
+
                 BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
                     HStack {
-                        FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { text in
+                        FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { _ in
                         }
                         .frame(width: 300, height: 50)
                         .keyboardType(.default)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
+
                         Button(action: {
                             _ = Task.create(title: self.$newTaskTitle.wrappedValue)
                             self.$newTaskTitle.wrappedValue = ""
@@ -77,7 +77,7 @@ struct TaskList: View {
             }
         }
     }
-    
+
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
             Task.destroy(task: tasks[i])
