@@ -5,16 +5,16 @@ struct FocusableTextField: UIViewRepresentable {
     class Coordinator: NSObject, UITextFieldDelegate {
 
         @Binding var text: String
-        let onTextFieldShouldEndEditing: (String) -> ()
+        let onTextFieldShouldEndEditing: (String) -> Void
         var didBecomeFirstResponder = false
 
-        init(text: Binding<String>, onTextFieldShouldEndEditing: @escaping (String) -> ()) {
+        init(text: Binding<String>, onTextFieldShouldEndEditing: @escaping (String) -> Void) {
             _text = text
             self.onTextFieldShouldEndEditing = onTextFieldShouldEndEditing
         }
 
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            if (textField.markedTextRange == nil) {
+            if textField.markedTextRange == nil {
                 text = textField.text ?? ""
             }
         }
@@ -26,7 +26,7 @@ struct FocusableTextField: UIViewRepresentable {
     }
 
     @Binding var text: String
-    let onTextFieldShouldEndEditing: (String) -> ()
+    let onTextFieldShouldEndEditing: (String) -> Void
     var isFirstResponder: Bool = false
 
     func makeUIView(context: UIViewRepresentableContext<FocusableTextField>) -> UITextField {
@@ -42,7 +42,7 @@ struct FocusableTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<FocusableTextField>) {
         uiView.text = text
-        if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder {
             uiView.becomeFirstResponder()
             context.coordinator.didBecomeFirstResponder = true
         }

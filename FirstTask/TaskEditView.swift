@@ -3,7 +3,7 @@ import SwiftUI
 struct TaskEditView: View {
     @ObservedObject var task: Task
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         NavigationView {
             Form {

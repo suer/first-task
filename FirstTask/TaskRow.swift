@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TaskRow: View {
     @ObservedObject var task: Task
-    
+
     var body: some View {
         HStack {
             Circle()

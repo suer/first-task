@@ -3,9 +3,9 @@ import SwiftUI
 struct BottomSheetModal<Content: View>: View {
     @Binding var isShown: Bool
     @Binding var height: CGFloat
-    
+
     var content: () -> Content
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             if isShown {
@@ -15,7 +15,7 @@ struct BottomSheetModal<Content: View>: View {
         }
         .edgesIgnoringSafeArea(.all)
     }
-    
+
     private var background: some View {
         Color.black
             .frame(
@@ -28,7 +28,7 @@ struct BottomSheetModal<Content: View>: View {
             .animation(.spring())
             .gesture(TapGesture().onEnded { self.isShown = false })
     }
-    
+
     private var modal: some View {
         self.content()
             .frame(width: UIScreen.main.bounds.width, height: height, alignment: .top)
