@@ -60,7 +60,7 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>new-task</string>
+			<string>UIApplicationShortcutIconTypeAdd</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>New Task</string>
 			<key>UIApplicationShortcutItemType</key>
