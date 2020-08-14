@@ -8,11 +8,12 @@ struct TaskList: View {
        predicate: NSPredicate(format: "completedAt == nil")
     ) var tasks: FetchedResults<Task>
 
-    @State var showModal: Bool = false
     @State var showingEditModal: Bool = false
     @State var newTaskTitle: String = ""
     @State var keyboardHeight: CGFloat = CGFloat(340)
     @State var editing: Bool = false
+
+    @EnvironmentObject var appSettings: AppSettings
 
     var body: some View {
         NavigationView {
@@ -38,19 +39,18 @@ struct TaskList: View {
                 }
                 .navigationBarTitle("Tasks")
                 .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-
                 VStack {
                     Spacer()
                     HStack {
                         Spacer()
                         FabButton {
-                            self.showModal = true
+                            self.appSettings.showAddTaskModal = true
                             // TDOO: キーボードの高さを取得して keyboardHeight を設定する
                         }
                     }.padding(10)
                 }.padding(10)
 
-                BottomSheetModal(isShown: $showModal, height: $keyboardHeight) {
+                BottomSheetModal(isShown: $appSettings.showAddTaskModal, height: $keyboardHeight) {
                     HStack {
                         FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { _ in
                         }
@@ -61,7 +61,7 @@ struct TaskList: View {
                         Button(action: {
                             _ = Task.create(title: self.$newTaskTitle.wrappedValue)
                             self.$newTaskTitle.wrappedValue = ""
-                            self.showModal = false
+                            self.appSettings.showAddTaskModal = false
                             UIApplication.shared.closeKeyboard()
                         }) {
                             Image(systemName: "arrow.up")

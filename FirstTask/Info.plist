@@ -56,5 +56,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>UIApplicationShortcutIconTypeAdd</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New Task</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>org.codefirst.firsttask.newtask</string>
+		</dict>
+	</array>
 </dict>
 </plist>
