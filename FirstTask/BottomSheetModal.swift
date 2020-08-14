@@ -2,7 +2,6 @@ import SwiftUI
 
 struct BottomSheetModal<Content: View>: View {
     @Binding var isShown: Bool
-    @Binding var height: CGFloat
 
     var content: () -> Content
 
@@ -31,8 +30,8 @@ struct BottomSheetModal<Content: View>: View {
 
     private var modal: some View {
         self.content()
-            .frame(width: UIScreen.main.bounds.width, height: height, alignment: .top)
+            .frame(width: UIScreen.main.bounds.width, alignment: .top)
             .background(Color(UIColor.systemBackground))
-            .cornerRadius(10)
+            .keyboardAwarePadding()
     }
 }
