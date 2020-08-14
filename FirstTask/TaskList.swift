@@ -10,7 +10,6 @@ struct TaskList: View {
 
     @State var showingEditModal: Bool = false
     @State var newTaskTitle: String = ""
-    @State var keyboardHeight: CGFloat = CGFloat(340)
     @State var editing: Bool = false
 
     @EnvironmentObject var appSettings: AppSettings
@@ -45,34 +44,35 @@ struct TaskList: View {
                         Spacer()
                         FabButton {
                             self.appSettings.showAddTaskModal = true
-                            // TDOO: キーボードの高さを取得して keyboardHeight を設定する
                         }
                     }.padding(10)
                 }.padding(10)
 
-                BottomSheetModal(isShown: $appSettings.showAddTaskModal, height: $keyboardHeight) {
-                    HStack {
-                        FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { _ in
-                        }
-                        .frame(width: 300, height: 50)
-                        .keyboardType(.default)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                BottomSheetModal(isShown: $appSettings.showAddTaskModal) {
+                    GeometryReader { geometry in
+                        HStack {
+                            FocusableTextField(text: self.$newTaskTitle, isFirstResponder: true) { _ in }
+                                .frame(width: geometry.size.width - 40, height: 50)
+                                .keyboardType(.default)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                        Button(action: {
-                            _ = Task.create(title: self.$newTaskTitle.wrappedValue)
-                            self.$newTaskTitle.wrappedValue = ""
-                            self.appSettings.showAddTaskModal = false
-                            UIApplication.shared.closeKeyboard()
-                        }) {
-                            Image(systemName: "arrow.up")
-                                .frame(width: 40, height: 40)
-                                .imageScale(.large)
-                                .background(Color(UIColor(named: "Accent")!))
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
+                            Button(action: {
+                                _ = Task.create(title: self.$newTaskTitle.wrappedValue)
+                                self.$newTaskTitle.wrappedValue = ""
+                                self.appSettings.showAddTaskModal = false
+                                UIApplication.shared.closeKeyboard()
+                            }) {
+                                Image(systemName: "arrow.up")
+                                    .frame(width: 40, height: 40)
+                                    .imageScale(.large)
+                                    .background(Color(UIColor(named: "Accent")!))
+                                    .foregroundColor(.white)
+                                    .clipShape(Circle())
+                            }
                         }
                     }
                     .padding()
+                    .frame(height: 80)
                 }
             }
         }
