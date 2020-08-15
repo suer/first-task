@@ -11,6 +11,12 @@ struct TaskEditView: View {
                 Section(header: Text("Memo")) {
                     IMETextField(title: "", text: $task.wrappedMemo)
                 }
+                Section(header: Text("Due Date")) {
+                    Toggle("Set Due Date", isOn: $task.useDueDate)
+                    if $task.useDueDate.wrappedValue {
+                        DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
+                    }
+                }
             }.navigationBarTitle("Edit Task")
                 .navigationBarItems(trailing: Button(action: {
                     self.presentationMode.wrappedValue.dismiss()

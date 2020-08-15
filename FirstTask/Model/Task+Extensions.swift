@@ -73,6 +73,22 @@ extension Task: Identifiable {
         set { memo = newValue }
     }
 
+    public var wrappedDueDate: Date {
+        get { dueDate ?? .distantPast }
+        set { dueDate = newValue }
+    }
+
+    public var useDueDate: Bool {
+        get { dueDate != nil }
+        set {
+            if newValue {
+                dueDate = Date()
+            } else {
+                dueDate = nil
+            }
+        }
+    }
+
     func toggleDone() {
         self.completedAt = self.completedAt == nil ? Date() : nil
         self.save()
