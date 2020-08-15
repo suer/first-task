@@ -11,6 +11,12 @@ struct TaskEditView: View {
                 Section(header: Text("Memo")) {
                     IMETextField(title: "", text: $task.wrappedMemo)
                 }
+                Section(header: Text("Start Date")) {
+                     Toggle("Set Start Date", isOn: $task.useStartDate)
+                     if $task.useStartDate.wrappedValue {
+                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
+                     }
+                }
                 Section(header: Text("Due Date")) {
                     Toggle("Set Due Date", isOn: $task.useDueDate)
                     if $task.useDueDate.wrappedValue {
