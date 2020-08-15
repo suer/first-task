@@ -73,6 +73,22 @@ extension Task: Identifiable {
         set { memo = newValue }
     }
 
+    public var wrappedStartDate: Date {
+        get { startDate ?? .distantPast }
+        set { startDate = newValue }
+    }
+
+    public var useStartDate: Bool {
+        get { startDate != nil }
+        set {
+            if newValue {
+                startDate = Date()
+            } else {
+                startDate = nil
+            }
+        }
+    }
+
     public var wrappedDueDate: Date {
         get { dueDate ?? .distantPast }
         set { dueDate = newValue }
