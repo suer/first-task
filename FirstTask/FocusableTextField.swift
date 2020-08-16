@@ -33,6 +33,7 @@ struct FocusableTextField: UIViewRepresentable {
         let textField = UITextField()
         textField.delegate = context.coordinator
         textField.borderStyle = .roundedRect
+        textField.returnKeyType = .done
         return textField
     }
 

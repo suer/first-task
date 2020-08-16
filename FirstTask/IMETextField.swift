@@ -56,6 +56,7 @@ struct IMETextField: UIViewRepresentable {
         textField.placeholder = title
         textField.text = text
         textField.delegate = context.coordinator
+        textField.returnKeyType = .done
         return textField
     }
 
