@@ -9,7 +9,7 @@ struct TaskEditView: View {
             Form {
                 IMETextField(title: "Input title", text: $task.wrappedTitle)
                 Section(header: Text("Memo")) {
-                    IMETextField(title: "", text: $task.wrappedMemo)
+                    MultilineTextField("", text: $task.wrappedMemo)
                 }
                 Section(header: Text("Start Date")) {
                      Toggle("Set Start Date", isOn: $task.useStartDate)
