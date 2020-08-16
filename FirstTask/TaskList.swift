@@ -30,6 +30,7 @@ struct TaskList: View {
                     }
                     .onDelete(perform: removeRow)
                     .onMove(perform: move)
+                    .onTapGesture { } // work around to scroll list with onLongPressGesture
                     .onLongPressGesture {
                         withAnimation {
                             self.editing = true
