@@ -3,6 +3,11 @@ import CoreData
 
 extension Task: Identifiable {
 
+    var allTags: [Tag] {
+        (self.tags as? Set<Tag> ?? [])
+            .sorted { ($0.name ?? "") <= ($1.name ?? "") }
+    }
+
     static func make(id: UUID, title: String, completedAt: Date = Date()) -> Task {
         let task = Task(context: CoreDataSupport.context)
         task.id = id
