@@ -13,4 +13,13 @@ extension Tag: Identifiable {
             return nil
         }
     }
+
+    static func destroy(context: NSManagedObjectContext, tag: Tag) {
+        do {
+            context.delete(tag)
+            try context.save()
+        } catch {
+            // do nothing
+        }
+    }
 }
