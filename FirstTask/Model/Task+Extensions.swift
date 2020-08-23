@@ -8,41 +8,41 @@ extension Task: Identifiable {
             .sorted { ($0.name ?? "") <= ($1.name ?? "") }
     }
 
-    static func make(id: UUID, title: String, completedAt: Date = Date()) -> Task {
-        let task = Task(context: CoreDataSupport.context)
+    static func make(context: NSManagedObjectContext, id: UUID, title: String, completedAt: Date = Date()) -> Task {
+        let task = Task(context: context)
         task.id = id
         task.title = title
         task.completedAt = completedAt
         return task
     }
 
-    static func create(title: String) -> Task? {
-        let task = Task(context: CoreDataSupport.context)
+    static func create(context: NSManagedObjectContext, title: String) -> Task? {
+        let task = Task(context: context)
         task.id = UUID()
         task.title = title
         let now = Date()
         task.createdAt = now
         task.updatedAt = now
-        task.displayOrder = maxDisplayOrder() + 1
+        task.displayOrder = maxDisplayOrder(context: context) + 1
         do {
-            try CoreDataSupport.context.save()
+            try context.save()
             return task
         } catch {
             return nil
         }
     }
 
-    static func destroy(task: Task) {
+    static func destroy(context: NSManagedObjectContext, task: Task) {
         do {
-            CoreDataSupport.context.delete(task)
-            try CoreDataSupport.context.save()
+            context.delete(task)
+            try context.save()
         } catch {
             // do nothing
         }
     }
 
-    static func maxDisplayOrder() -> Int64 {
-        let context = CoreDataSupport.context
+    static func maxDisplayOrder(context: NSManagedObjectContext) -> Int64 {
+        let context = context
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
@@ -56,7 +56,7 @@ extension Task: Identifiable {
         fetchRequest.propertiesToFetch = [expressionDescription]
 
         do {
-            let results = try CoreDataSupport.context.fetch(fetchRequest)
+            let results = try context.fetch(fetchRequest)
             if let max = (results.first as AnyObject).value(forKey: "maxDisplayOrder") as? Int64 {
                 return max
             } else {
@@ -110,20 +110,20 @@ extension Task: Identifiable {
         }
     }
 
-    func toggleDone() {
+    func toggleDone(context: NSManagedObjectContext) {
         self.completedAt = self.completedAt == nil ? Date() : nil
-        self.save()
+        self.save(context: context)
     }
 
-    func save() {
+    func save(context: NSManagedObjectContext) {
         do {
-            try CoreDataSupport.context.save()
+            try context.save()
         } catch {
             // do nothing
         }
     }
 
-    static func reorder(tasks: [Task], source: IndexSet, destination: Int) {
+    static func reorder(context: NSManagedObjectContext, tasks: [Task], source: IndexSet, destination: Int) {
         var reordered = tasks
         reordered.move(fromOffsets: source, toOffset: destination)
 
@@ -132,7 +132,7 @@ extension Task: Identifiable {
         }
 
         do {
-            try CoreDataSupport.context.save()
+            try context.save()
         } catch {
             // do nothing
         }

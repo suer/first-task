@@ -2,20 +2,15 @@ import SwiftUI
 import MobileCoreServices
 
 struct TagList: View {
-    let task: Task
-    @State var tags: [Tag]
+    @Environment(\.managedObjectContext) var viewContext
+    @ObservedObject var task: Task
     @State var showAddTagModal = false
     @State var newTagName = ""
-
-    init(task: Task) {
-        self.task = task
-        self._tags = State.init(initialValue: task.allTags)
-    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
             List {
-                ForEach(tags) { tag in
+                ForEach(task.allTags) { tag in
                     Text(tag.name ?? "")
                 }
             }
@@ -39,9 +34,7 @@ struct TagList: View {
                             .textFieldStyle(RoundedBorderTextFieldStyle())
 
                         Button(action: {
-                            if let tag = Tag.create(task: self.task, name: self.newTagName) {
-                                self.tags = self.task.allTags
-                            }
+                            _ = Tag.create(context: self.viewContext, task: self.task, name: self.newTagName)
                             self.$newTagName.wrappedValue = ""
                             self.showAddTagModal = false
 
@@ -65,6 +58,7 @@ struct TagList: View {
 
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
-        TagList(task: Task.make(id: UUID(), title: "test"))
+        let context = CoreDataSupport.context
+        return TagList(task: Task.make(context: context, id: UUID(), title: "test")).environment(\.managedObjectContext, context)
     }
 }
