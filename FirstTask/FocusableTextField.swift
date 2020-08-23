@@ -44,8 +44,10 @@ struct FocusableTextField: UIViewRepresentable {
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<FocusableTextField>) {
         uiView.text = text
         if isFirstResponder && !context.coordinator.didBecomeFirstResponder {
-            uiView.becomeFirstResponder()
-            context.coordinator.didBecomeFirstResponder = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // XXX: workaround crash on TagList view
+                uiView.becomeFirstResponder()
+                context.coordinator.didBecomeFirstResponder = true
+            }
         }
     }
 }

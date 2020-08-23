@@ -23,6 +23,14 @@ struct TaskEditView: View {
                         DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
                     }
                 }
+
+                Section(header: Text("Tags")) {
+                    List {
+                        NavigationLink(destination: TagList(task: self.task)) {
+                            Text("Tags")
+                        }
+                    }
+                }
             }.navigationBarTitle("Edit Task")
                 .navigationBarItems(trailing: Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
