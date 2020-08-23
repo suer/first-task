@@ -13,8 +13,15 @@ struct TagView: View {
                 ForEach(tags, id: \.self) { tag in
                     Text(tag.name ?? "")
                 }
+                .onDelete(perform: removeRow)
             }
             .navigationBarTitle("Tags", displayMode: .inline)
+        }
+    }
+
+    func removeRow(offsets: IndexSet) {
+        offsets.forEach { i in
+            Tag.destroy(context: self.viewContext, tag: tags[i])
         }
     }
 }
