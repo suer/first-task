@@ -2,6 +2,7 @@ import SwiftUI
 import MobileCoreServices
 
 struct TaskList: View {
+    @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(
        entity: Task.entity(),
        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
@@ -23,9 +24,10 @@ struct TaskList: View {
                             TaskRow(task: task)
                         }
                         .sheet(isPresented: self.$showingEditModal, onDismiss: {
-                            task.save()
+                            task.save(context: self.viewContext)
                         }) {
                             TaskEditView(task: task)
+                                .environment(\.managedObjectContext, self.viewContext)
                         }
                     }
                     .onDelete(perform: removeRow)
@@ -58,7 +60,7 @@ struct TaskList: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
                             Button(action: {
-                                _ = Task.create(title: self.$newTaskTitle.wrappedValue)
+                                _ = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
                                 self.$newTaskTitle.wrappedValue = ""
                                 self.appSettings.showAddTaskModal = false
                                 UIApplication.shared.closeKeyboard()
@@ -81,12 +83,12 @@ struct TaskList: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Task.destroy(task: tasks[i])
+            Task.destroy(context: self.viewContext, task: tasks[i])
         }
     }
 
     func move(from source: IndexSet, to destination: Int) {
-        Task.reorder(tasks: tasks.map { $0 }, source: source, destination: destination)
+        Task.reorder(context: self.viewContext, tasks: tasks.map { $0 }, source: source, destination: destination)
 
         withAnimation {
             self.editing = false

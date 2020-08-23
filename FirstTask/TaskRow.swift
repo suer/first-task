@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TaskRow: View {
+    @Environment(\.managedObjectContext) var viewContext
     @ObservedObject var task: Task
 
     var body: some View {
@@ -15,7 +16,7 @@ struct TaskRow: View {
                         .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
             ).onTapGesture {
-                self.task.toggleDone()
+                self.task.toggleDone(context: self.viewContext)
             }
             Text(task.title ?? "")
         }
@@ -24,6 +25,6 @@ struct TaskRow: View {
 
 struct TaskRow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRow(task: Task.make(id: UUID(), title: "ミルクを買う"))
+        TaskRow(task: Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う"))
     }
 }
