@@ -11,6 +11,7 @@ struct TaskList: View {
 
     @State var showingEditModal: Bool = false
     @State var newTaskTitle: String = ""
+    @State var showingSettingMenuModal: Bool = false
     @State var editing: Bool = false
 
     @EnvironmentObject var appSettings: AppSettings
@@ -39,8 +40,20 @@ struct TaskList: View {
                         }
                     }
                 }
-                .navigationBarTitle("Tasks")
                 .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
+                .navigationBarTitle("Tasks")
+                .navigationBarItems(trailing: Button(action: { self.showingSettingMenuModal.toggle()
+                }
+                ) {
+                    Image(systemName: "gear")
+                        .frame(width: 40, height: 40)
+                        .imageScale(.large)
+                        .clipShape(Circle())
+                }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
+                    self.showingSettingMenuModal = false
+                }) {
+                    SettingMenuView().environment(\.managedObjectContext, self.viewContext)
+                })
                 VStack {
                     Spacer()
                     HStack {
