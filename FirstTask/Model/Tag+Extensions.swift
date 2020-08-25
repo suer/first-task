@@ -5,8 +5,8 @@ extension Tag: Identifiable {
     static func create(context: NSManagedObjectContext, name: String, task: Task? = nil) -> Tag? {
         let tag = Tag(context: context)
         tag.name = name
-        if task != nil {
-            tag.addToTasks(task!)
+        if let task = task {
+            tag.addToTasks(task)
         }
         do {
             try context.save()
