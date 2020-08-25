@@ -34,7 +34,7 @@ struct TagList: View {
                             .textFieldStyle(RoundedBorderTextFieldStyle())
 
                         Button(action: {
-                            _ = Tag.create(context: self.viewContext, task: self.task, name: self.newTagName)
+                            _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
                             self.$newTagName.wrappedValue = ""
                             self.showAddTagModal = false
 

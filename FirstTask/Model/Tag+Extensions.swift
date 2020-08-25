@@ -2,10 +2,12 @@ import Foundation
 import CoreData
 
 extension Tag: Identifiable {
-    static func create(context: NSManagedObjectContext, task: Task, name: String) -> Tag? {
+    static func create(context: NSManagedObjectContext, name: String, task: Task? = nil) -> Tag? {
         let tag = Tag(context: context)
         tag.name = name
-        tag.addToTasks(task)
+        if let task = task {
+            tag.addToTasks(task)
+        }
         do {
             try context.save()
             return tag
