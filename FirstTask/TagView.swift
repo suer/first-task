@@ -29,33 +29,11 @@ struct TagView: View {
                 }
                 .navigationBarTitle("Tags", displayMode: .inline)
             }
-            BottomSheetModal(isShown: $showingAddTagModal) {
-                 GeometryReader { geometry in
-                     HStack {
-                         FocusableTextField(text: self.$newTagName, isFirstResponder: true) { _ in }
-                             .frame(width: geometry.size.width - 40, height: 50)
-                             .keyboardType(.default)
-                             .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                         Button(action: {
-                             _ = Tag.create(context: self.viewContext, name: self.newTagName)
-                             self.$newTagName.wrappedValue = ""
-                             self.showingAddTagModal = false
-
-                             UIApplication.shared.closeKeyboard()
-                         }) {
-                             Image(systemName: "arrow.up")
-                                 .frame(width: 40, height: 40)
-                                 .imageScale(.large)
-                                 .background(Color(UIColor(named: "Accent")!))
-                                 .foregroundColor(.white)
-                                 .clipShape(Circle())
-                         }
-                     }
-                 }
-                 .padding()
-                 .frame(height: 80)
-             }
+            BottomTextFieldSheetModal(isShown: self.$showingAddTagModal, text: self.$newTagName) {
+                _ = Tag.create(context: self.viewContext, name: self.newTagName)
+                self.$newTagName.wrappedValue = ""
+                self.showingAddTagModal = false
+            }
         }
     }
 
