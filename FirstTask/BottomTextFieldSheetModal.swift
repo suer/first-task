@@ -13,29 +13,29 @@ struct BottomTextFieldSheetModal: View {
 
     var body: some View {
         BottomSheetModal(isShown: self.$isShown) {
-             GeometryReader { geometry in
-                 HStack {
-                     FocusableTextField(text: self.$text, isFirstResponder: true) { _ in }
-                         .frame(width: geometry.size.width - 40, height: 50)
-                         .keyboardType(.default)
-                         .textFieldStyle(RoundedBorderTextFieldStyle())
+            GeometryReader { geometry in
+                HStack {
+                    FocusableTextField(text: self.$text, isFirstResponder: true) { _ in }
+                        .frame(width: geometry.size.width - 40, height: 50)
+                        .keyboardType(.default)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                     Button(action: {
-                         self.action()
-                         self.$text.wrappedValue = ""
-                         UIApplication.shared.closeKeyboard()
-                     }) {
-                         Image(systemName: "arrow.up")
-                             .frame(width: 40, height: 40)
-                             .imageScale(.large)
-                             .background(Color(UIColor(named: "Accent")!))
-                             .foregroundColor(.white)
-                             .clipShape(Circle())
-                     }
-                 }
-             }
-             .padding()
-             .frame(height: 80)
-         }
+                    Button(action: {
+                        self.action()
+                        self.$text.wrappedValue = ""
+                        UIApplication.shared.closeKeyboard()
+                    }) {
+                        Image(systemName: "arrow.up")
+                            .frame(width: 40, height: 40)
+                            .imageScale(.large)
+                            .background(Color(UIColor(named: "Accent")!))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                    }
+                }
+            }
+            .padding()
+            .frame(height: 80)
+        }
     }
 }
