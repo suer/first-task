@@ -10,9 +10,9 @@ struct TaskList: View {
     ) var tasks: FetchedResults<Task>
 
     @State var showingEditModal: Bool = false
-    @State var newTaskTitle: String = ""
     @State var showingSettingMenuModal: Bool = false
     @State var editing: Bool = false
+    @State var newTaskTitle: String = ""
 
     @EnvironmentObject var appSettings: AppSettings
 
@@ -42,7 +42,9 @@ struct TaskList: View {
                 }
                 .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
                 .navigationBarTitle("Tasks")
-                .navigationBarItems(trailing: Button(action: { self.showingSettingMenuModal.toggle()
+                .navigationBarItems(trailing: Button(action: {
+                    self.showingEditModal = false
+                    self.showingSettingMenuModal = true
                 }
                 ) {
                     Image(systemName: "gear")
