@@ -25,32 +25,9 @@ struct TagList: View {
                 }.padding(10)
             }.padding(10)
 
-            BottomSheetModal(isShown: $showAddTagModal) {
-                GeometryReader { geometry in
-                    HStack {
-                        FocusableTextField(text: self.$newTagName, isFirstResponder: true) { _ in }
-                            .frame(width: geometry.size.width - 40, height: 50)
-                            .keyboardType(.default)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                        Button(action: {
-                            _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
-                            self.$newTagName.wrappedValue = ""
-                            self.showAddTagModal = false
-
-                            UIApplication.shared.closeKeyboard()
-                        }) {
-                            Image(systemName: "arrow.up")
-                                .frame(width: 40, height: 40)
-                                .imageScale(.large)
-                                .background(Color(UIColor(named: "Accent")!))
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-                    }
-                }
-                .padding()
-                .frame(height: 80)
+            BottomTextFieldSheetModal(isShown: self.$showAddTagModal, text: self.$newTagName) {
+                _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
+                self.showAddTagModal = false
             }
         }
     }
