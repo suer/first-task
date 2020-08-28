@@ -71,7 +71,11 @@ struct TaskList: View {
                     self.appSettings.showAddTaskModal = false
                 }
             }
-        }
+        }.onAppear(perform: {
+            UNUserNotificationCenter
+                .current()
+                .requestAuthorization(options: [.badge]) { _, _ in }
+        })
     }
 
     func removeRow(offsets: IndexSet) {
