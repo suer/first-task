@@ -91,7 +91,11 @@ struct TaskList: View {
                     .frame(height: 80)
                 }
             }
-        }
+        }.onAppear(perform: {
+            UNUserNotificationCenter
+                .current()
+                .requestAuthorization(options: [.badge]) { _, _ in }
+        })
     }
 
     func removeRow(offsets: IndexSet) {
