@@ -76,7 +76,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 
         // badge
-        UIApplication.shared.applicationIconBadgeNumber = Int(Task.maxDisplayOrder(context: CoreDataSupport.context))
+        UIApplication.shared.applicationIconBadgeNumber = Int(Task.countActiveTasks(context: CoreDataSupport.context))
     }
 
 }
