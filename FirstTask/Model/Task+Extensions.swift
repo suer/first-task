@@ -65,7 +65,17 @@ extension Task: Identifiable {
         } catch {
             return 0
         }
+    }
 
+    static func countActiveTasks(context: NSManagedObjectContext) -> Int {
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
+        request.predicate = NSPredicate(format: "completedAt == nil")
+        do {
+            return try context.count(for: request)
+        } catch {
+            return 0
+        }
     }
 
     public var wrappedTitle: String {
