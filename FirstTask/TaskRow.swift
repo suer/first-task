@@ -18,7 +18,21 @@ struct TaskRow: View {
             ).onTapGesture {
                 self.task.toggleDone(context: self.viewContext)
             }
-            Text(task.title ?? "")
+            VStack {
+                HStack {
+                    Text(task.title ?? "")
+                    Spacer()
+                }
+                if task.allTags.count > 0 {
+                    HStack {
+                        ForEach(task.allTags) { tag in
+                            TagBubble(tag: tag)
+                        }
+                        Spacer()
+                    }.padding(.top, 4)
+                }
+            }
+
         }
     }
 }

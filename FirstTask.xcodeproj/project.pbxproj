@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
+		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
 		19C2489424E916D2001D04A3 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C2489324E916D2001D04A3 /* MultilineTextField.swift */; };
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
 		19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6B24E57021002B02CF /* IMETextField.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTextFieldSheetModal.swift; sourceTree = "<group>"; };
 		1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
+		19578B6724FB065C0041B165 /* TagBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBubble.swift; sourceTree = "<group>"; };
 		19C2489324E916D2001D04A3 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		19F5BA6B24E57021002B02CF /* IMETextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMETextField.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				19F8F4B924F218CC00F352EA /* SettingMenuView.swift */,
 				19F8F4BB24F2216900F352EA /* TagView.swift */,
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
+				19578B6724FB065C0041B165 /* TagBubble.swift */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
 				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
+				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */,
 				8044679424DF97CC00011164 /* AppDelegate.swift in Sources */,
