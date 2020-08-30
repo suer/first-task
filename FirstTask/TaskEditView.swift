@@ -28,7 +28,16 @@ struct TaskEditView: View {
                 Section(header: Text("Tags")) {
                     List {
                         NavigationLink(destination: TagList(task: self.task).environment(\.managedObjectContext, self.viewContext)) {
-                            Text("Tags")
+                            Group {
+                                if task.allTags.count > 0 {
+                                    ForEach(task.allTags) { tag in
+                                        TagBubble(tag: tag)
+                                    }
+                                    Spacer()
+                                } else {
+                                    Text("Tags")
+                                }
+                            }
                         }
                     }
                 }
