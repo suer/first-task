@@ -24,4 +24,12 @@ extension Tag: Identifiable {
             // do nothing
         }
     }
+
+    static func destroyAll(context: NSManagedObjectContext) {
+        do {
+            try context.execute(NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: "Tag")))
+        } catch {
+            // do nothing
+        }
+    }
 }

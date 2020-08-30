@@ -3,6 +3,9 @@ import MobileCoreServices
 
 struct TagList: View {
     @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+    ) var tags: FetchedResults<Tag>
     @ObservedObject var task: Task
     @State var showAddTagModal = false
     @State var newTagName = ""
@@ -10,8 +13,17 @@ struct TagList: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             List {
-                ForEach(task.allTags) { tag in
-                    Text(tag.name ?? "")
+                ForEach(tags) { tag in
+                    HStack {
+                        Image(systemName: self.task.allTags.contains(tag) ? "checkmark.circle.fill" : "circle")
+                        Text(tag.name ?? "")
+                    }.onTapGesture {
+                        if self.task.allTags.contains(tag) {
+                            self.task.removeFromTags(tag)
+                        } else {
+                            self.task.addToTags(tag)
+                        }
+                    }
                 }
             }
 
@@ -36,6 +48,11 @@ struct TagList: View {
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
         let context = CoreDataSupport.context
-        return TagList(task: Task.make(context: context, id: UUID(), title: "test")).environment(\.managedObjectContext, context)
+        Tag.destroyAll(context: context)
+        let tag = Tag.create(context: context, name: "重要")
+        _ = Tag.create(context: context, name: "買い物")
+        let task = Task.make(context: context, id: UUID(), title: "test")
+        task.addToTags(tag!)
+        return TagList(task: task).environment(\.managedObjectContext, context)
     }
 }
