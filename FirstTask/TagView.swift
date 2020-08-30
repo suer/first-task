@@ -74,6 +74,6 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView()
+        TagView().environment(\.managedObjectContext, CoreDataSupport.context)
     }
 }
