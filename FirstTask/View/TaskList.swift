@@ -3,18 +3,18 @@ import MobileCoreServices
 
 struct TaskList: View {
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var appSettings: AppSettings
+
     @FetchRequest(
-       entity: Task.entity(),
-       sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-       predicate: NSPredicate(format: "completedAt == nil")
+        entity: Task.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
+        predicate: NSPredicate(format: "completedAt == nil")
     ) var tasks: FetchedResults<Task>
 
     @State var showingEditModal: Bool = false
     @State var showingSettingMenuModal: Bool = false
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
-
-    @EnvironmentObject var appSettings: AppSettings
 
     var body: some View {
         NavigationView {
@@ -94,14 +94,10 @@ struct TaskList: View {
 }
 
 struct TaskList_Previews: PreviewProvider {
-    @FetchRequest(
-       entity: Task.entity(),
-       sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-       predicate: NSPredicate(format: "completed == %@", NSNumber(value: false))
-    ) var tasks: FetchedResults<Task>
-
     static var previews: some View {
         TaskList()
+            .environment(\.managedObjectContext, CoreDataSupport.context)
+            .environmentObject(AppSettings())
     }
 }
 
