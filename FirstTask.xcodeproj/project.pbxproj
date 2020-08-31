@@ -114,6 +114,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19A3EB2124FD09C50071C40B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				804467D124DFD80A00011164 /* BottomSheetModal.swift */,
+				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
+				8044679A24DF97CC00011164 /* ContentView.swift */,
+				804467CD24DFA33600011164 /* FabButton.swift */,
+				19F8F4B924F218CC00F352EA /* SettingMenuView.swift */,
+				19578B6724FB065C0041B165 /* TagBubble.swift */,
+				8021776D24EFEFC50076A24C /* TagList.swift */,
+				19F8F4BB24F2216900F352EA /* TagView.swift */,
+				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
+				804467C624DF98DF00011164 /* TaskList.swift */,
+				804467C824DF98F100011164 /* TaskRow.swift */,
+				19A3EB2224FD0A0B0071C40B /* UIKit */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19A3EB2224FD0A0B0071C40B /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
+				19F5BA6B24E57021002B02CF /* IMETextField.swift */,
+				1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */,
+				19C2489324E916D2001D04A3 /* MultilineTextField.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		8044678724DF97CC00011164 = {
 			isa = PBXGroup;
 			children = (
@@ -137,31 +167,17 @@
 		8044679224DF97CC00011164 /* FirstTask */ = {
 			isa = PBXGroup;
 			children = (
-				804467CA24DF99F800011164 /* Model */,
 				8044679324DF97CC00011164 /* AppDelegate.swift */,
-				8044679524DF97CC00011164 /* SceneDelegate.swift */,
-				8044679A24DF97CC00011164 /* ContentView.swift */,
-				804467C624DF98DF00011164 /* TaskList.swift */,
-				804467D124DFD80A00011164 /* BottomSheetModal.swift */,
-				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
-				804467CD24DFA33600011164 /* FabButton.swift */,
-				804467C824DF98F100011164 /* TaskRow.swift */,
-				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
-				19F5BA6B24E57021002B02CF /* IMETextField.swift */,
-				1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */,
-				19C2489324E916D2001D04A3 /* MultilineTextField.swift */,
-				8044679C24DF97D000011164 /* Assets.xcassets */,
-				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
-				804467A424DF97D000011164 /* Info.plist */,
-				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
-				8044679E24DF97D000011164 /* Preview Content */,
-				804467D524E02F0400011164 /* CoreDataSupport.swift */,
 				8089D1CD24E6BDAC00988D74 /* AppSettings.swift */,
-				8021776D24EFEFC50076A24C /* TagList.swift */,
-				19F8F4B924F218CC00F352EA /* SettingMenuView.swift */,
-				19F8F4BB24F2216900F352EA /* TagView.swift */,
-				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
-				19578B6724FB065C0041B165 /* TagBubble.swift */,
+				8044679C24DF97D000011164 /* Assets.xcassets */,
+				804467D524E02F0400011164 /* CoreDataSupport.swift */,
+				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
+				804467A424DF97D000011164 /* Info.plist */,
+				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
+				804467CA24DF99F800011164 /* Model */,
+				8044679E24DF97D000011164 /* Preview Content */,
+				8044679524DF97CC00011164 /* SceneDelegate.swift */,
+				19A3EB2124FD09C50071C40B /* View */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -195,8 +211,8 @@
 		804467CA24DF99F800011164 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				804467D324E0260A00011164 /* Task+Extensions.swift */,
 				8021776F24EFF0A30076A24C /* Tag+Extensions.swift */,
+				804467D324E0260A00011164 /* Task+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
