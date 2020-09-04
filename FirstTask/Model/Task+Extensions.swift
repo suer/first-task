@@ -120,6 +120,13 @@ extension Task: Identifiable {
         }
     }
 
+    func hasTag(tagName: String) -> Bool {
+        if tagName.isEmpty {
+            return true
+        }
+        return allTags.first(where: { $0.name == tagName }) != nil
+    }
+
     func toggleDone(context: NSManagedObjectContext) {
         self.completedAt = self.completedAt == nil ? Date() : nil
         self.save(context: context)

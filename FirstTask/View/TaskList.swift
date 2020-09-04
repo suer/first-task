@@ -13,14 +13,16 @@ struct TaskList: View {
 
     @State var showingEditModal: Bool = false
     @State var showingSettingMenuModal: Bool = false
+    @State var showingSearchModal: Bool = false
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
+    @State var filteringTagName = ""
 
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ForEach(tasks) { task in
+                    ForEach(tasks.filter { $0.hasTag(tagName: self.filteringTagName) }) { task in
                         Button(action: { self.showingEditModal.toggle() }) {
                             TaskRow(task: task)
                         }
@@ -42,20 +44,10 @@ struct TaskList: View {
                 }
                 .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
                 .navigationBarTitle("Tasks")
-                .navigationBarItems(trailing: Button(action: {
-                    self.showingEditModal = false
-                    self.showingSettingMenuModal = true
-                }
-                ) {
-                    Image(systemName: "gear")
-                        .frame(width: 40, height: 40)
-                        .imageScale(.large)
-                        .clipShape(Circle())
-                }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
-                    self.showingSettingMenuModal = false
-                }) {
-                    SettingMenuView().environment(\.managedObjectContext, self.viewContext)
-                })
+                .navigationBarItems(
+                    leading: settingButton,
+                    trailing: searchButton
+                )
                 VStack {
                     Spacer()
                     HStack {
@@ -71,11 +63,7 @@ struct TaskList: View {
                     self.appSettings.showAddTaskModal = false
                 }
             }
-        }.onAppear(perform: {
-            UNUserNotificationCenter
-                .current()
-                .requestAuthorization(options: [.badge]) { _, _ in }
-        })
+        }
     }
 
     func removeRow(offsets: IndexSet) {
@@ -89,6 +77,42 @@ struct TaskList: View {
 
         withAnimation {
             self.editing = false
+        }
+    }
+
+    private var settingButton: some View {
+        Button(action: {
+            self.showingEditModal = false
+            self.showingSearchModal = false
+            self.showingSettingMenuModal = true
+        }) {
+            Image(systemName: "gear")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .clipShape(Circle())
+        }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
+            self.showingSettingMenuModal = false
+        }) {
+            SettingMenuView().environment(\.managedObjectContext, self.viewContext)
+        }
+    }
+
+    private var searchButton: some View {
+        Button(action: {
+            self.showingEditModal = false
+            self.showingSettingMenuModal = false
+            self.showingSearchModal = true
+        }) {
+            Image(systemName: "magnifyingglass")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .clipShape(Circle())
+        }.sheet(isPresented: self.$showingSearchModal, onDismiss: {
+            self.showingSearchModal = false
+        }) {
+            SearchView(filteringTagName: self.$filteringTagName)
+                .environment(\.managedObjectContext, self.viewContext)
+                .environmentObject(AppSettings())
         }
     }
 }
