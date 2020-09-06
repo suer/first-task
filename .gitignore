@@ -1,2 +1,5 @@
 xcuserdata/
 *.xcworkspace
+*.app.dSYM.zip
+*.ipa
+fastlane/report.xml
