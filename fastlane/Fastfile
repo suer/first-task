@@ -1,0 +1,19 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Submit a new Beta Build to DeployGate"
+  lane :dg do
+    update_project_team(
+      path: 'FirstTask.xcodeproj',
+      teamid: ENV['TEAM_ID'])
+    gym(xcargs: "-allowProvisioningUpdates")
+    deploygate(
+      api_token: ENV['DEPLOYGATE_API_KEY'],
+      user: ENV['DEPLOYGATE_USER'],
+      message: "Build #{lane_context[SharedValues::BUILD_NUMBER]}")
+    update_project_team(
+      path: 'FirstTask.xcodeproj',
+      teamid: '')
+  end
+end
+
