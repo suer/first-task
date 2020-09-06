@@ -124,7 +124,7 @@ extension Task: Identifiable {
         if tagName.isEmpty {
             return true
         }
-        return allTags.first(where: { $0.name == tagName }) != nil
+        return allTags.contains(where: { $0.name == tagName })
     }
 
     func toggleDone(context: NSManagedObjectContext) {
