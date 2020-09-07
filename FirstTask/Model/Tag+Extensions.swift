@@ -32,4 +32,23 @@ extension Tag: Identifiable {
             // do nothing
         }
     }
+
+    static func findByName(context: NSManagedObjectContext, name: String) -> Tag? {
+        if name.isEmpty {
+            return nil
+        }
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Tag", in: context)
+        request.predicate = NSPredicate(format: "name == %@", name)
+        do {
+            if let tag = try context.fetch(request).first {
+                if let tag = tag as? Tag {
+                    return tag
+                }
+            }
+        } catch {
+            // do nothing
+        }
+        return nil
+    }
 }

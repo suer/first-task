@@ -59,7 +59,10 @@ struct TaskList: View {
                 }.padding(10)
 
                 BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                    _ = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+                    let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+                    if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
+                        task?.addToTags(tag)
+                    }
                     self.appSettings.showAddTaskModal = false
                 }
             }
