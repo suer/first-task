@@ -41,10 +41,8 @@ extension Tag: Identifiable {
         request.entity = NSEntityDescription.entity(forEntityName: "Tag", in: context)
         request.predicate = NSPredicate(format: "name == %@", name)
         do {
-            if let tag = try context.fetch(request).first {
-                if let tag = tag as? Tag {
-                    return tag
-                }
+            if let tag = try context.fetch(request).first as? Tag {
+                return tag
             }
         } catch {
             // do nothing
