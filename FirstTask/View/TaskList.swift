@@ -38,7 +38,8 @@ struct TaskList: View {
                     .onTapGesture { } // work around to scroll list with onLongPressGesture
                     .onLongPressGesture {
                         withAnimation {
-                            self.editing = true
+                            // XXX: editing with filtered view
+                            self.editing = self.filteringTagName.isEmpty
                         }
                     }
                 }
