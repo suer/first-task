@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
+		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
+		1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1D2507ABAE00D74BA7 /* Date.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
 		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
@@ -55,6 +58,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
+		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
+		1905DA1D2507ABAE00D74BA7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTextFieldSheetModal.swift; sourceTree = "<group>"; };
 		1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		19578B6724FB065C0041B165 /* TagBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBubble.swift; sourceTree = "<group>"; };
@@ -116,6 +122,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1905DA172507A1C500D74BA7 /* Use Case */ = {
+			isa = PBXGroup;
+			children = (
+				1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */,
+				1905DA182507A22700D74BA7 /* CreateTodayTag.swift */,
+			);
+			path = "Use Case";
+			sourceTree = "<group>";
+		};
+		1905DA1C2507AB8C00D74BA7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1905DA1D2507ABAE00D74BA7 /* Date.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		19A3EB2124FD09C50071C40B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,12 +197,14 @@
 				8089D1CD24E6BDAC00988D74 /* AppSettings.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
+				1905DA1C2507AB8C00D74BA7 /* Extension */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				804467A424DF97D000011164 /* Info.plist */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467CA24DF99F800011164 /* Model */,
 				8044679E24DF97D000011164 /* Preview Content */,
 				8044679524DF97CC00011164 /* SceneDelegate.swift */,
+				1905DA172507A1C500D74BA7 /* Use Case */,
 				19A3EB2124FD09C50071C40B /* View */,
 			);
 			path = FirstTask;
@@ -372,15 +397,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */,
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
 				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */,
+				1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */,
 				8044679424DF97CC00011164 /* AppDelegate.swift in Sources */,
 				19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */,
 				8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */,
 				804467C724DF98DF00011164 /* TaskList.swift in Sources */,
+				1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */,
 				8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */,
 				8021776E24EFEFC50076A24C /* TagList.swift in Sources */,
 				804467CE24DFA33600011164 /* FabButton.swift in Sources */,
