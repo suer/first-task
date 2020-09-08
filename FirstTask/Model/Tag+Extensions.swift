@@ -2,11 +2,14 @@ import Foundation
 import CoreData
 
 extension Tag: Identifiable {
-    static func create(context: NSManagedObjectContext, name: String, task: Task? = nil) -> Tag? {
+    static func create(context: NSManagedObjectContext, name: String, task: Task? = nil, kind: String? = nil) -> Tag? {
         let tag = Tag(context: context)
         tag.name = name
         if let task = task {
             tag.addToTasks(task)
+        }
+        if let kind = kind {
+            tag.kind = kind
         }
         do {
             try context.save()
@@ -40,6 +43,20 @@ extension Tag: Identifiable {
         let request = NSFetchRequest<NSFetchRequestResult>()
         request.entity = NSEntityDescription.entity(forEntityName: "Tag", in: context)
         request.predicate = NSPredicate(format: "name == %@", name)
+        do {
+            if let tag = try context.fetch(request).first as? Tag {
+                return tag
+            }
+        } catch {
+            // do nothing
+        }
+        return nil
+    }
+
+    static func findByKind(context: NSManagedObjectContext, kind: String) -> Tag? {
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = NSEntityDescription.entity(forEntityName: "Tag", in: context)
+        request.predicate = NSPredicate(format: "kind == %@", kind)
         do {
             if let tag = try context.fetch(request).first as? Tag {
                 return tag

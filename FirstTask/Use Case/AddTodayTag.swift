@@ -10,8 +10,7 @@ class AddTodayTag {
     func call() {
         let today = Date()
 
-        // XXX: use kind
-        if let todayTag = Tag.findByName(context: context, name: "Today") {
+        if let todayTag = Tag.findByKind(context: context, kind: "today") {
             let request = NSFetchRequest<NSFetchRequestResult>()
             request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
             request.predicate = NSPredicate(format: "startDate >= %@ AND startDate <= %@", today.startOfDay as NSDate, today.endOfDay as NSDate)
