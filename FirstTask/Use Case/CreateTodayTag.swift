@@ -8,9 +8,8 @@ class CreateTodayTag {
     }
 
     func call() {
-        // XXX: use kind
-        if Tag.findByName(context: context, name: "Today") == nil {
-            _ = Tag.create(context: context, name: "Today")
+        if Tag.findByKind(context: context, kind: "today") == nil {
+            _ = Tag.create(context: context, name: "Today", kind: "today")
         }
     }
 }
