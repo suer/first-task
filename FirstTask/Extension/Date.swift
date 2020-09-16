@@ -11,4 +11,10 @@ extension Date {
         components.second = -1
         return Calendar.current.date(byAdding: components, to: startOfDay)!
     }
+
+    var startOfNextDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
 }
