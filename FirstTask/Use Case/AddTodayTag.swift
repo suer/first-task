@@ -13,7 +13,8 @@ class AddTodayTag {
         if let todayTag = Tag.findByKind(context: context, kind: "today") {
             let request = NSFetchRequest<NSFetchRequestResult>()
             request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
-            request.predicate = NSPredicate(format: "startDate >= %@ AND startDate <= %@", today.startOfDay as NSDate, today.endOfDay as NSDate)
+            request.predicate = NSPredicate(format: "completedAt == nil AND startDate >= %@ AND startDate <= %@",
+                                            today.startOfDay as NSDate, today.endOfDay as NSDate)
             do {
                 let tasks = try context.fetch(request)
                 tasks.forEach {
