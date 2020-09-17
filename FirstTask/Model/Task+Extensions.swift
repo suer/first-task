@@ -68,12 +68,9 @@ extension Task: Identifiable {
     }
 
     static func countTodayTasks(context: NSManagedObjectContext) -> Int {
-        let today = Date()
-
         let request = NSFetchRequest<NSFetchRequestResult>()
         request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
-        request.predicate = NSPredicate(format: "completedAt == nil AND startDate >= %@ AND startDate <= %@",
-                                        today.startOfDay as NSDate, today.endOfDay as NSDate)
+        request.predicate = NSPredicate(format: "completedAt == nil AND ANY tags.kind = 'today'")
         do {
             return try context.count(for: request)
         } catch {
