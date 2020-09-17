@@ -11,9 +11,7 @@ struct TaskList: View {
         predicate: NSPredicate(format: "completedAt == nil")
     ) var tasks: FetchedResults<Task>
 
-    @State var showingEditModal: Bool = false
-    @State var showingSettingMenuModal: Bool = false
-    @State var showingSearchModal: Bool = false
+    @ObservedObject var modalState = ModalState()
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
@@ -23,10 +21,10 @@ struct TaskList: View {
             ZStack(alignment: .bottom) {
                 List {
                     ForEach(tasks.filter { $0.hasTag(tagName: self.filteringTagName) }) { task in
-                        Button(action: { self.showingEditModal.toggle() }) {
-                            TaskRow(task: task)
+                        Button(action: { self.modalState.showingEditModal.toggle() }) {
+                            TaskRow(task: task, modalState: self.modalState)
                         }
-                        .sheet(isPresented: self.$showingEditModal, onDismiss: {
+                        .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
                             task.save(context: self.viewContext)
                         }) {
                             TaskEditView(task: task)
@@ -86,16 +84,16 @@ struct TaskList: View {
 
     private var settingButton: some View {
         Button(action: {
-            self.showingEditModal = false
-            self.showingSearchModal = false
-            self.showingSettingMenuModal = true
+            self.modalState.showingEditModal = false
+            self.modalState.showingSearchModal = false
+            self.modalState.showingSettingMenuModal = true
         }) {
             Image(systemName: "gear")
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
-            self.showingSettingMenuModal = false
+        }.sheet(isPresented: self.$modalState.showingSettingMenuModal, onDismiss: {
+            self.modalState.showingSettingMenuModal = false
         }) {
             SettingMenuView().environment(\.managedObjectContext, self.viewContext)
         }
@@ -103,16 +101,16 @@ struct TaskList: View {
 
     private var searchButton: some View {
         Button(action: {
-            self.showingEditModal = false
-            self.showingSettingMenuModal = false
-            self.showingSearchModal = true
+            self.modalState.showingEditModal = false
+            self.modalState.showingSettingMenuModal = false
+            self.modalState.showingSearchModal = true
         }) {
             Image(systemName: "magnifyingglass")
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(isPresented: self.$showingSearchModal, onDismiss: {
-            self.showingSearchModal = false
+        }.sheet(isPresented: self.$modalState.showingSearchModal, onDismiss: {
+            self.modalState.showingSearchModal = false
         }) {
             SearchView(filteringTagName: self.$filteringTagName)
                 .environment(\.managedObjectContext, self.viewContext)

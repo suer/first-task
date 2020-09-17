@@ -38,6 +38,7 @@
 		804467D424E0260A00011164 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D324E0260A00011164 /* Task+Extensions.swift */; };
 		804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D524E02F0400011164 /* CoreDataSupport.swift */; };
 		8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089D1CD24E6BDAC00988D74 /* AppSettings.swift */; };
+		80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EF0E0E2511B554004D0C1C /* ModalState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		804467D324E0260A00011164 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		804467D524E02F0400011164 /* CoreDataSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSupport.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		80EF0E0E2511B554004D0C1C /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +195,8 @@
 		8044679224DF97CC00011164 /* FirstTask */ = {
 			isa = PBXGroup;
 			children = (
+				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
 				8044679324DF97CC00011164 /* AppDelegate.swift */,
-				8089D1CD24E6BDAC00988D74 /* AppSettings.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
 				1905DA1C2507AB8C00D74BA7 /* Extension */,
@@ -243,6 +245,15 @@
 				804467D324E0260A00011164 /* Task+Extensions.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		80EF0E0D2511B52C004D0C1C /* ObservableObject */ = {
+			isa = PBXGroup;
+			children = (
+				8089D1CD24E6BDAC00988D74 /* AppSettings.swift */,
+				80EF0E0E2511B554004D0C1C /* ModalState.swift */,
+			);
+			path = ObservableObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +427,7 @@
 				19E6F1A32502FB78004561C8 /* SearchView.swift in Sources */,
 				19F8F4BC24F2216900F352EA /* TagView.swift in Sources */,
 				804467C924DF98F100011164 /* TaskRow.swift in Sources */,
+				80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */,
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,
 				804467D424E0260A00011164 /* Task+Extensions.swift in Sources */,
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
