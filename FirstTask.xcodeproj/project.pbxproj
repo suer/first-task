@@ -37,6 +37,7 @@
 		804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D124DFD80A00011164 /* BottomSheetModal.swift */; };
 		804467D424E0260A00011164 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D324E0260A00011164 /* Task+Extensions.swift */; };
 		804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D524E02F0400011164 /* CoreDataSupport.swift */; };
+		80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */; };
 		8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089D1CD24E6BDAC00988D74 /* AppSettings.swift */; };
 		80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EF0E0E2511B554004D0C1C /* ModalState.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,7 @@
 		804467D124DFD80A00011164 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
 		804467D324E0260A00011164 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		804467D524E02F0400011164 /* CoreDataSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSupport.swift; sourceTree = "<group>"; };
+		80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTagsOperation.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		80EF0E0E2511B554004D0C1C /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 				8044679524DF97CC00011164 /* SceneDelegate.swift */,
 				1905DA172507A1C500D74BA7 /* Use Case */,
 				19A3EB2124FD09C50071C40B /* View */,
+				80775DFD250907A6007ED383 /* Operation */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -254,6 +257,14 @@
 				80EF0E0E2511B554004D0C1C /* ModalState.swift */,
 			);
 			path = ObservableObject;
+			sourceTree = "<group>";
+		};
+		80775DFD250907A6007ED383 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */,
+			);
+			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,6 +422,7 @@
 				1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */,
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
 				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
+				80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */,
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */,

@@ -8,12 +8,19 @@
 
 import UIKit
 import CoreData
+import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "org.codefirst.firsttask.addTodayTags", using: nil) { task in
+            if let task = task as? BGProcessingTask {
+                self.handleAppProcessing(task: task)
+            }
+        }
+
         return true
     }
 
@@ -76,4 +83,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func scheduleAppProcessing() {
+        let request = BGProcessingTaskRequest(identifier: "org.codefirst.firsttask.addTodayTags")
+        request.requiresNetworkConnectivity = false
+        request.requiresExternalPower = true
+        request.earliestBeginDate = Date().startOfNextDay
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Could not schedule app processing: \(error)")
+        }
+    }
+
+    private func handleAppProcessing(task: BGProcessingTask) {
+        scheduleAppProcessing()
+
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+
+        task.expirationHandler = {
+            queue.cancelAllOperations()
+        }
+
+        let operation = AddTodayTagsOperaiton()
+        operation.completionBlock = {
+            task.setTaskCompleted(success: operation.isFinished)
+        }
+        queue.addOperation(operation)
+    }
 }
