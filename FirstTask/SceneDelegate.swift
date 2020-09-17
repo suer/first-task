@@ -76,7 +76,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 
         // badge
-        UIApplication.shared.applicationIconBadgeNumber = Int(Task.countActiveTasks(context: CoreDataSupport.context))
+        UIApplication.shared.applicationIconBadgeNumber = Int(Task.countTodayTasks(context: CoreDataSupport.context))
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.scheduleAppProcessing()
