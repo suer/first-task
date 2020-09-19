@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension Tag: Identifiable {
+extension Tag {
     static func create(context: NSManagedObjectContext, name: String, task: Task? = nil, kind: String? = nil) -> Tag? {
         let tag = Tag(context: context)
         tag.name = name
