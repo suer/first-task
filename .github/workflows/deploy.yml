@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+ push:
+   branches: [ master ]
+
+jobs:
+ build:
+
+   runs-on: macos-latest
+
+   steps:
+   - uses: actions/checkout@v2
+
+   - name: Setup LicensePlist
+     run: curl -fsSL https://raw.githubusercontent.com/mono0926/LicensePlist/master/install.sh | sh
+
+   - name: Select Xcode version
+     run: sudo xcode-select -s '/Applications/Xcode_12.1.app/Contents/Developer'
+
+   - name: Setup p12 certificate file
+     run: |
+       echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
+       base64 --decode distribution.p12.txt > distribution.p12
+
+   - name: Setup provisioning profile
+     run: |
+       echo "${{ secrets.PROVISIONING_PROFILE }}" > distribution.mobileprovision.txt
+       base64 --decode distribution.mobileprovision.txt > distribution.mobileprovision
+
+   - name: Build and deploy to DeployGate
+     env:
+       TEAM_ID: ${{ secrets.TEAM_ID }}
+       DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
+       DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
+       KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+       CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+     run: bundle exec fastlane dg
