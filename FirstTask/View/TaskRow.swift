@@ -3,7 +3,6 @@ import SwiftUI
 struct TaskRow: View {
     @Environment(\.managedObjectContext) var viewContext
     @ObservedObject var task: Task
-    @ObservedObject var modalState: ModalState
 
     var body: some View {
         HStack {
@@ -33,15 +32,12 @@ struct TaskRow: View {
                     }.padding(.top, 4)
                 }
             }
-
-        }.onTapGesture {
-            self.modalState.showingEditModal.toggle()
         }
     }
 }
 
 struct TaskRow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRow(task: Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う"), modalState: ModalState())
+        TaskRow(task: Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う"))
     }
 }

@@ -16,6 +16,7 @@ struct TaskList: View {
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
+    @State var editingTask: Task = Task()
 
     var filter: (Task) -> Bool = { _ in true }
 
@@ -23,13 +24,16 @@ struct TaskList: View {
         ZStack(alignment: .bottom) {
             List {
                 ForEach(tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }) { task in
-                    Button(action: { self.modalState.showingEditModal.toggle() }) {
-                        TaskRow(task: task, modalState: self.modalState)
+                    TaskRow(task: task)
+                    .contentShape(Rectangle()) // can tap Spacer
+                    .onTapGesture {
+                        editingTask = task
+                        self.modalState.showingEditModal.toggle()
                     }
                     .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
-                        task.save(context: self.viewContext)
+                        editingTask.save(context: self.viewContext)
                     }) {
-                        TaskEditView(task: task)
+                        TaskEditView(task: editingTask)
                             .environment(\.managedObjectContext, self.viewContext)
                     }
                 }
@@ -42,6 +46,7 @@ struct TaskList: View {
                         self.editing = self.filteringTagName.isEmpty
                     }
                 }
+
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
