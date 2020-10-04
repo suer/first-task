@@ -127,6 +127,13 @@ extension Task {
         return allTags.contains(where: { $0.name == tagName })
     }
 
+    func hasTagByKind(tagKind: String) -> Bool {
+        if tagKind.isEmpty {
+            return true
+        }
+        return allTags.contains(where: { $0.kind == tagKind })
+    }
+
     func toggleDone(context: NSManagedObjectContext) {
         self.completedAt = self.completedAt == nil ? Date() : nil
         self.save(context: context)

@@ -15,55 +15,56 @@ struct TaskList: View {
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
+    @State var navigationBarTitle = "Tasks"
+
+    var filter: (Task) -> Bool = { _ in true }
 
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .bottom) {
-                List {
-                    ForEach(tasks.filter { $0.hasTag(tagName: self.filteringTagName) }) { task in
-                        Button(action: { self.modalState.showingEditModal.toggle() }) {
-                            TaskRow(task: task, modalState: self.modalState)
-                        }
-                        .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
-                            task.save(context: self.viewContext)
-                        }) {
-                            TaskEditView(task: task)
-                                .environment(\.managedObjectContext, self.viewContext)
-                        }
+        ZStack(alignment: .bottom) {
+            List {
+                ForEach(tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }) { task in
+                    Button(action: { self.modalState.showingEditModal.toggle() }) {
+                        TaskRow(task: task, modalState: self.modalState)
                     }
-                    .onDelete(perform: removeRow)
-                    .onMove(perform: move)
-                    .onTapGesture { } // work around to scroll list with onLongPressGesture
-                    .onLongPressGesture {
-                        withAnimation {
-                            // XXX: editing with filtered view
-                            self.editing = self.filteringTagName.isEmpty
-                        }
+                    .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
+                        task.save(context: self.viewContext)
+                    }) {
+                        TaskEditView(task: task)
+                            .environment(\.managedObjectContext, self.viewContext)
                     }
                 }
-                .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-                .navigationBarTitle("Tasks")
-                .navigationBarItems(
-                    leading: settingButton,
-                    trailing: searchButton
-                )
-                VStack {
+                .onDelete(perform: removeRow)
+                .onMove(perform: move)
+                .onTapGesture { } // work around to scroll list with onLongPressGesture
+                .onLongPressGesture {
+                    withAnimation {
+                        // XXX: editing with filtered view
+                        self.editing = self.filteringTagName.isEmpty
+                    }
+                }
+            }
+            .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
+            .navigationBarTitle(navigationBarTitle)
+            .navigationBarItems(
+                leading: settingButton,
+                trailing: searchButton
+            )
+            VStack {
+                Spacer()
+                HStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        FabButton {
-                            self.appSettings.showAddTaskModal = true
-                        }
-                    }.padding(10)
-                }.padding(10)
-
-                BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                    let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
-                    if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
-                        task?.addToTags(tag)
+                    FabButton {
+                        self.appSettings.showAddTaskModal = true
                     }
-                    self.appSettings.showAddTaskModal = false
+                }.padding(10)
+            }.padding(10)
+
+            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+                let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+                if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
+                    task?.addToTags(tag)
                 }
+                self.appSettings.showAddTaskModal = false
             }
         }
     }
@@ -121,9 +122,11 @@ struct TaskList: View {
 
 struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
-        TaskList()
-            .environment(\.managedObjectContext, CoreDataSupport.context)
-            .environmentObject(AppSettings())
+        NavigationView {
+            TaskList()
+                .environment(\.managedObjectContext, CoreDataSupport.context)
+                .environmentObject(AppSettings())
+        }
     }
 }
 
