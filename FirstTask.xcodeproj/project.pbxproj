@@ -13,6 +13,8 @@
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
 		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
+		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
+		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		19C2489424E916D2001D04A3 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C2489324E916D2001D04A3 /* MultilineTextField.swift */; };
 		19E6F1A32502FB78004561C8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6F1A22502FB78004561C8 /* SearchView.swift */; };
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
@@ -66,6 +68,8 @@
 		19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTextFieldSheetModal.swift; sourceTree = "<group>"; };
 		1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		19578B6724FB065C0041B165 /* TagBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBubble.swift; sourceTree = "<group>"; };
+		197EA4CE2529A24C00317E53 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		19C2489324E916D2001D04A3 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		19E6F1A22502FB78004561C8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
+				197EA4D62529A83500317E53 /* ProjectRow.swift */,
 				19E6F1A22502FB78004561C8 /* SearchView.swift */,
 				19F8F4B924F218CC00F352EA /* SettingMenuView.swift */,
 				19578B6724FB065C0041B165 /* TagBubble.swift */,
@@ -158,6 +163,7 @@
 				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
 				804467C624DF98DF00011164 /* TaskList.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
+				197EA4CE2529A24C00317E53 /* TopView.swift */,
 				19A3EB2224FD0A0B0071C40B /* UIKit */,
 			);
 			path = View;
@@ -197,7 +203,6 @@
 		8044679224DF97CC00011164 /* FirstTask */ = {
 			isa = PBXGroup;
 			children = (
-				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
 				8044679324DF97CC00011164 /* AppDelegate.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
@@ -206,11 +211,12 @@
 				804467A424DF97D000011164 /* Info.plist */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467CA24DF99F800011164 /* Model */,
+				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
+				80775DFD250907A6007ED383 /* Operation */,
 				8044679E24DF97D000011164 /* Preview Content */,
 				8044679524DF97CC00011164 /* SceneDelegate.swift */,
 				1905DA172507A1C500D74BA7 /* Use Case */,
 				19A3EB2124FD09C50071C40B /* View */,
-				80775DFD250907A6007ED383 /* Operation */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -250,6 +256,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		80775DFD250907A6007ED383 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
 		80EF0E0D2511B52C004D0C1C /* ObservableObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,14 +271,6 @@
 				80EF0E0E2511B554004D0C1C /* ModalState.swift */,
 			);
 			path = ObservableObject;
-			sourceTree = "<group>";
-		};
-		80775DFD250907A6007ED383 /* Operation */ = {
-			isa = PBXGroup;
-			children = (
-				80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */,
-			);
-			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */,
 				1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */,
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
 				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
@@ -445,6 +452,7 @@
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
 				19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */,
 				804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */,
+				197EA4CF2529A24C00317E53 /* TopView.swift in Sources */,
 				8044679624DF97CC00011164 /* SceneDelegate.swift in Sources */,
 				19C2489424E916D2001D04A3 /* MultilineTextField.swift in Sources */,
 			);
