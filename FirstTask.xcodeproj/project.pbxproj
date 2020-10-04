@@ -197,7 +197,6 @@
 		8044679224DF97CC00011164 /* FirstTask */ = {
 			isa = PBXGroup;
 			children = (
-				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
 				8044679324DF97CC00011164 /* AppDelegate.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
@@ -206,11 +205,12 @@
 				804467A424DF97D000011164 /* Info.plist */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467CA24DF99F800011164 /* Model */,
+				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
+				80775DFD250907A6007ED383 /* Operation */,
 				8044679E24DF97D000011164 /* Preview Content */,
 				8044679524DF97CC00011164 /* SceneDelegate.swift */,
 				1905DA172507A1C500D74BA7 /* Use Case */,
 				19A3EB2124FD09C50071C40B /* View */,
-				80775DFD250907A6007ED383 /* Operation */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -250,6 +250,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		80775DFD250907A6007ED383 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
 		80EF0E0D2511B52C004D0C1C /* ObservableObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,14 +265,6 @@
 				80EF0E0E2511B554004D0C1C /* ModalState.swift */,
 			);
 			path = ObservableObject;
-			sourceTree = "<group>";
-		};
-		80775DFD250907A6007ED383 /* Operation */ = {
-			isa = PBXGroup;
-			children = (
-				80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */,
-			);
-			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
