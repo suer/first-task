@@ -3,6 +3,10 @@ import SwiftUI
 struct TopView: View {
     @Environment(\.managedObjectContext) var viewContext
 
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+    ) var tags: FetchedResults<Tag>
+
     @State var showingAddTaskModal = false
     @State var newTaskTitle: String = ""
 
@@ -21,6 +25,14 @@ struct TopView: View {
                         HStack {
                             Image(systemName: "plus")
                             Text("Add Project")
+                        }
+                    }
+
+                    Section(header: Text("Tags")) {
+                        ForEach(tags.filter { $0.kind != "today" }) { tag in
+                            ProjectRow(icon: "tag", name: tag.name ?? "") { task in
+                                task.hasTag(tagName: tag.name ?? "")
+                            }
                         }
                     }
                 }
