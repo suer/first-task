@@ -7,6 +7,7 @@ struct TopView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
     ) var tags: FetchedResults<Tag>
 
+    @State var showingSettingMenuModal = false
     @State var showingAddTaskModal = false
     @State var newTaskTitle: String = ""
 
@@ -38,6 +39,9 @@ struct TopView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .navigationBarTitle("FirstTask")
+                .navigationBarItems(
+                    leading: settingButton
+                )
 
                 VStack {
                     Spacer()
@@ -54,6 +58,21 @@ struct TopView: View {
                     self.showingAddTaskModal = false
                 }
             }
+        }
+    }
+
+    private var settingButton: some View {
+        Button(action: {
+            self.showingSettingMenuModal = true
+        }) {
+            Image(systemName: "gear")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .clipShape(Circle())
+        }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
+            self.showingSettingMenuModal = false
+        }) {
+            SettingMenuView().environment(\.managedObjectContext, self.viewContext)
         }
     }
 }

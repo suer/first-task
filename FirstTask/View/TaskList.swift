@@ -51,7 +51,6 @@ struct TaskList: View {
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
             .navigationBarItems(
-                leading: settingButton,
                 trailing: searchButton
             )
             VStack {
@@ -88,27 +87,9 @@ struct TaskList: View {
         }
     }
 
-    private var settingButton: some View {
-        Button(action: {
-            self.modalState.showingEditModal = false
-            self.modalState.showingSearchModal = false
-            self.modalState.showingSettingMenuModal = true
-        }) {
-            Image(systemName: "gear")
-                .frame(width: 40, height: 40)
-                .imageScale(.large)
-                .clipShape(Circle())
-        }.sheet(isPresented: self.$modalState.showingSettingMenuModal, onDismiss: {
-            self.modalState.showingSettingMenuModal = false
-        }) {
-            SettingMenuView().environment(\.managedObjectContext, self.viewContext)
-        }
-    }
-
     private var searchButton: some View {
         Button(action: {
             self.modalState.showingEditModal = false
-            self.modalState.showingSettingMenuModal = false
             self.modalState.showingSearchModal = true
         }) {
             Image(systemName: "magnifyingglass")
