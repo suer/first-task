@@ -21,20 +21,20 @@ struct TagView: View {
                             Text(tag.name ?? "")
                             Spacer()
                             Button(action: {
+                                self.editingTag = tag
                                 self.showingActionSheet = true
                             }) {
                                 Image(systemName: "ellipsis")
                                     .foregroundColor(Color(UIColor.secondaryLabel))
                             }.actionSheet(isPresented: self.$showingActionSheet) {
-                                ActionSheet(title: Text(tag.name ?? ""),
+                                ActionSheet(title: Text(self.editingTag.name ?? ""),
                                     buttons: [
                                         .default(Text("Edit")) {
-                                            self.newTagName = tag.name ?? ""
-                                            self.editingTag = tag
+                                            self.newTagName = self.editingTag.name ?? ""
                                             self.showingEditTagModal = true
                                         },
                                         .destructive(Text("Delete")) {
-                                            Tag.destroy(context: self.viewContext, tag: tag)
+                                            Tag.destroy(context: self.viewContext, tag: self.editingTag)
                                         },
                                         .cancel(Text("Cancel"))
                                 ])
