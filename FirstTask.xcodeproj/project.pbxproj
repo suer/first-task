@@ -10,6 +10,7 @@
 		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
 		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
 		1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1D2507ABAE00D74BA7 /* Date.swift */; };
+		193704A1252C0539004FF6A5 /* Project+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704A0252C0539004FF6A5 /* Project+Extensions.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
 		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
@@ -65,6 +66,7 @@
 		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1D2507ABAE00D74BA7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		193704A0252C0539004FF6A5 /* Project+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Extensions.swift"; sourceTree = "<group>"; };
 		19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTextFieldSheetModal.swift; sourceTree = "<group>"; };
 		1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		19578B6724FB065C0041B165 /* TagBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBubble.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		804467CA24DF99F800011164 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				193704A0252C0539004FF6A5 /* Project+Extensions.swift */,
 				8021776F24EFF0A30076A24C /* Tag+Extensions.swift */,
 				804467D324E0260A00011164 /* Task+Extensions.swift */,
 			);
@@ -431,6 +434,7 @@
 				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
 				80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */,
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
+				193704A1252C0539004FF6A5 /* Project+Extensions.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */,
 				1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */,
