@@ -141,6 +141,7 @@ extension Task {
 
     func save(context: NSManagedObjectContext) {
         do {
+            self.updatedAt = Date()
             try context.save()
         } catch {
             // do nothing

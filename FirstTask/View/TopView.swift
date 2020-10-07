@@ -6,10 +6,16 @@ struct TopView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
     ) var tags: FetchedResults<Tag>
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
+        predicate: NSPredicate(format: "completedAt == nil")
+    ) var projects: FetchedResults<Project>
 
     @State var showingSettingMenuModal = false
     @State var showingAddTaskModal = false
     @State var newTaskTitle: String = ""
+    @State var showingProjectAddModal = false
+    @State var addingProject: Project = Project()
 
     var body: some View {
         NavigationView {
@@ -23,10 +29,24 @@ struct TopView: View {
                     }
 
                     Section(header: Text("Projects")) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Add Project")
+                        ForEach(self.projects, id: \.id) { project in
+                            ProjectRow(icon: "flag", name: project.title ?? "") { _ in
+                                true // XXX has the project
+                            }
                         }
+
+                        Button(action: {
+                            self.addingProject = Project.make(context: self.viewContext)
+                            self.showingProjectAddModal.toggle()
+                        }) {
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("Add Project")
+                            }
+                        }.sheet(isPresented: self.$showingProjectAddModal) {
+                            ProjectAddView(project: self.addingProject)
+                                .environment(\.managedObjectContext, self.viewContext)
+                        }.buttonStyle(PlainButtonStyle())
                     }
 
                     Section(header: Text("Tags")) {
