@@ -3,6 +3,7 @@ import MobileCoreServices
 
 struct TaskList: View {
     @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.presentationMode) var presentation
     @EnvironmentObject var appSettings: AppSettings
 
     @FetchRequest(
@@ -17,6 +18,7 @@ struct TaskList: View {
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
     @State var editingTask: Task = Task()
+    @State var showingProjectActionSheet = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -113,12 +115,23 @@ struct TaskList: View {
 
     private var projectButton: some View {
         Button(action: {
-
+            self.showingProjectActionSheet = true
         }) {
             Image(systemName: "ellipsis")
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
+        }.actionSheet(isPresented: self.$showingProjectActionSheet) {
+            ActionSheet(title: Text(self.project!.title ?? ""),
+                buttons: [
+                    .default(Text("Edit")) {
+                    },
+                    .destructive(Text("Delete")) {
+                        self.presentation.wrappedValue.dismiss()
+                        Project.destroy(context: self.viewContext, project: self.project!)
+                    },
+                    .cancel(Text("Cancel"))
+            ])
         }
     }
 }
