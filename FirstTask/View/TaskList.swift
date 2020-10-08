@@ -137,6 +137,9 @@ struct TaskList: View {
         }.sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
                 .environment(\.managedObjectContext, self.viewContext)
+                .onDisappear {
+                    self.navigationBarTitle = self.project!.wrappedTitle
+                }
         }
     }
 }
