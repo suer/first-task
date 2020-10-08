@@ -12,16 +12,22 @@ struct ProjectRow: View {
     var icon = ""
     var name = ""
     var filter: (Task) -> Bool
+    var project: Project?
 
     init(icon: String, name: String, filter: @escaping (Task) -> Bool) {
+        self.init(icon: icon, name: name, project: nil, filter: filter)
+    }
+
+    init(icon: String, name: String, project: Project?, filter: @escaping (Task) -> Bool) {
         self.filter = filter
         self.icon = icon
         self.name = name
+        self.project = project
     }
 
     var body: some View {
         HStack {
-            NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task)}) ) {
+            NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task)}, project: self.project) ) {
                 Image(systemName: icon)
                 Text(self.name)
                 Spacer()

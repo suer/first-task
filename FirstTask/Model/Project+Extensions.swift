@@ -55,4 +55,13 @@ extension Project {
             // do nothing
         }
     }
+
+    static func destroy(context: NSManagedObjectContext, project: Project) {
+        do {
+            context.delete(project)
+            try context.save()
+        } catch {
+            // do nothing
+        }
+    }
 }

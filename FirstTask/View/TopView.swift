@@ -30,7 +30,7 @@ struct TopView: View {
 
                     Section(header: Text("Projects")) {
                         ForEach(self.projects, id: \.id) { project in
-                            ProjectRow(icon: "flag", name: project.title ?? "") { _ in
+                            ProjectRow(icon: "flag", name: project.title ?? "", project: project) { _ in
                                 true // XXX has the project
                             }
                         }
