@@ -7,25 +7,10 @@ struct ProjectAddView: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                IMETextField(title: "Input title", text: $project.wrappedTitle)
-                Section(header: Text("Start Date")) {
-                     Toggle("Set Start Date", isOn: $project.useStartDate)
-                     if $project.useStartDate.wrappedValue {
-                         DatePicker("", selection: $project.wrappedStartDate, displayedComponents: .date)
-                     }
-                }
-                Section(header: Text("Due Date")) {
-                    Toggle("Set Due Date", isOn: $project.useDueDate)
-                    if $project.useDueDate.wrappedValue {
-                        DatePicker("", selection: $project.wrappedDueDate, displayedComponents: .date)
-                    }
-                }
-            }
+            ProjectFormView(project: project)
             .navigationBarTitle("New Project")
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }
-
     }
 
     private var saveButton: some View {
