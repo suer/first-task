@@ -19,6 +19,7 @@ struct TaskList: View {
     @State var editingTask: Task = Task()
 
     var filter: (Task) -> Bool = { _ in true }
+    var project: Project?
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -51,7 +52,12 @@ struct TaskList: View {
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
             .navigationBarItems(
-                trailing: searchButton
+                trailing: HStack {
+                    searchButton
+                    if self.project != nil {
+                        projectButton
+                    }
+                }
             )
             VStack {
                 Spacer()
@@ -102,6 +108,17 @@ struct TaskList: View {
             SearchView(filteringTagName: self.$filteringTagName)
                 .environment(\.managedObjectContext, self.viewContext)
                 .environmentObject(AppSettings())
+        }
+    }
+
+    private var projectButton: some View {
+        Button(action: {
+
+        }) {
+            Image(systemName: "ellipsis")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .clipShape(Circle())
         }
     }
 }
