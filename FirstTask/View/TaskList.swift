@@ -19,6 +19,7 @@ struct TaskList: View {
     @State var navigationBarTitle = "Tasks"
     @State var editingTask: Task = Task()
     @State var showingProjectActionSheet = false
+    @State var showingProjectEditModal = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -125,6 +126,7 @@ struct TaskList: View {
             ActionSheet(title: Text(self.project!.title ?? ""),
                 buttons: [
                     .default(Text("Edit")) {
+                        self.showingProjectEditModal = true
                     },
                     .destructive(Text("Delete")) {
                         self.presentation.wrappedValue.dismiss()
@@ -132,6 +134,12 @@ struct TaskList: View {
                     },
                     .cancel(Text("Cancel"))
             ])
+        }.sheet(isPresented: self.$showingProjectEditModal) {
+            ProjectEditView(project: self.project!)
+                .environment(\.managedObjectContext, self.viewContext)
+                .onDisappear {
+                    self.navigationBarTitle = self.project!.wrappedTitle
+                }
         }
     }
 }

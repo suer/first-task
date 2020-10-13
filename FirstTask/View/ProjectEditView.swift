@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ProjectAddView: View {
+struct ProjectEditView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     @State var project: Project = Project()
@@ -8,7 +8,7 @@ struct ProjectAddView: View {
     var body: some View {
         NavigationView {
             ProjectFormView(project: project)
-            .navigationBarTitle("New Project")
+            .navigationBarTitle("Edit Project")
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }
     }
@@ -24,7 +24,6 @@ struct ProjectAddView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            self.viewContext.delete(self.project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Cancel")
@@ -32,9 +31,9 @@ struct ProjectAddView: View {
     }
 }
 
-struct ProjectAddView_Previews: PreviewProvider {
+struct ProjectEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectAddView(project: Project.make(context: CoreDataSupport.context))
+        ProjectEditView()
             .environment(\.managedObjectContext, CoreDataSupport.context)
     }
 }
