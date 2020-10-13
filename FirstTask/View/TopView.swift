@@ -21,8 +21,8 @@ struct TopView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ProjectRow(icon: "tray", name: "Inbox") { _ in
-                        true // XXX has no projects
+                    ProjectRow(icon: "tray", name: "Inbox") { task in
+                        task.project == nil
                     }
                     ProjectRow(icon: "star", name: "Today") { task in
                         task.hasTagByKind(tagKind: "today")
@@ -30,8 +30,11 @@ struct TopView: View {
 
                     Section(header: Text("Projects")) {
                         ForEach(self.projects, id: \.id) { project in
-                            ProjectRow(icon: "flag", name: project.title ?? "", project: project) { _ in
-                                true // XXX has the project
+                            ProjectRow(icon: "flag", name: project.title ?? "", project: project) { task in
+                                if let p = task.project {
+                                    return p == project
+                                }
+                                return false
                             }
                         }
 
