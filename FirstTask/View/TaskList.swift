@@ -21,6 +21,7 @@ struct TaskList: View {
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
     @State var showingTaskActionSheet = false
+    @State var showingProjectMoveModal = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -62,6 +63,14 @@ struct TaskList: View {
                 }
                 task?.project = self.project
                 self.appSettings.showAddTaskModal = false
+            }
+
+            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
+                ProjectSelectView(project: self.project) { project in
+                    self.editingTask.project = project
+                }
+                .padding()
+                .frame(height: 360)
             }
         }
     }
@@ -107,6 +116,9 @@ struct TaskList: View {
                                         // XXX: editing with filtered view
                                         self.editing = self.filteringTagName.isEmpty
                                     }
+                                },
+                                .default(Text("Move")) {
+                                    self.showingProjectMoveModal = true
                                 },
                                 .destructive(Text("Delete")) {
                                     Task.destroy(context: self.viewContext, task: self.editingTask)
