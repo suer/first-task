@@ -20,6 +20,7 @@ struct TaskList: View {
     @State var editingTask: Task = Task()
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
+    @State var showingTaskActionSheet = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -34,23 +35,37 @@ struct TaskList: View {
                         editingTask = task
                         self.modalState.showingEditModal.toggle()
                     }
+                    .onLongPressGesture {
+                        if !self.editing {
+                            editingTask = task
+                            self.showingTaskActionSheet.toggle()
+                        }
+                    }
                     .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
                         editingTask.save(context: self.viewContext)
                     }) {
                         TaskEditView(task: editingTask)
                             .environment(\.managedObjectContext, self.viewContext)
                     }
+                    .actionSheet(isPresented: self.$showingTaskActionSheet) {
+                        ActionSheet(title: Text(task.title ?? ""),
+                                    buttons: [
+                                        .default(Text("Reorder")) {
+                                            withAnimation {
+                                                // XXX: editing with filtered view
+                                                self.editing = self.filteringTagName.isEmpty
+                                            }
+                                        },
+                                        .destructive(Text("Delete")) {
+                                            Task.destroy(context: self.viewContext, task: self.editingTask)
+                                        },
+                                        .cancel(Text("Cancel"))
+                                    ])
+                    }
                 }
                 .onDelete(perform: removeRow)
                 .onMove(perform: move)
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
-                .onLongPressGesture {
-                    withAnimation {
-                        // XXX: editing with filtered view
-                        self.editing = self.filteringTagName.isEmpty
-                    }
-                }
-
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
