@@ -77,6 +77,7 @@ struct TaskList: View {
                 if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
                     task?.addToTags(tag)
                 }
+                task?.project = self.project
                 self.appSettings.showAddTaskModal = false
             }
         }

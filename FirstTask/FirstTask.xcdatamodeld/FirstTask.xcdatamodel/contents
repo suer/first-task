@@ -8,6 +8,7 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="project" inverseEntity="Task"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="kind" optional="YES" attributeType="String"/>
@@ -24,11 +25,12 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="tasks" inverseEntity="Project"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tasks" inverseEntity="Tag"/>
     </entity>
     <elements>
-        <element name="Project" positionX="-54" positionY="63" width="128" height="148"/>
+        <element name="Project" positionX="-54" positionY="63" width="128" height="163"/>
         <element name="Tag" positionX="-63" positionY="54" width="128" height="88"/>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="208"/>
     </elements>
 </model>
