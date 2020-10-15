@@ -18,6 +18,7 @@ struct TaskList: View {
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
     @State var editingTask: Task = Task()
+    @State var showingEditModal = false
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
     @State var showingTaskActionSheet = false
@@ -94,14 +95,14 @@ struct TaskList: View {
             .contentShape(Rectangle()) // can tap Spacer
             .onTapGesture {
                 self.editingTask = task
-                self.modalState.showingEditModal.toggle()
+                self.showingEditModal.toggle()
             }
             .onLongPressGesture {
                 guard !self.editing else { return }
                 self.editingTask = task
                 self.showingTaskActionSheet.toggle()
             }
-            .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
+            .sheet(isPresented: self.$showingEditModal, onDismiss: {
                 self.editingTask.save(context: self.viewContext)
             }) {
                 TaskEditView(task: self.editingTask)
@@ -129,7 +130,7 @@ struct TaskList: View {
 
     private var searchButton: some View {
         Button(action: {
-            self.modalState.showingEditModal = false
+            self.showingEditModal = false
             self.modalState.showingSearchModal = true
         }) {
             Image(systemName: "magnifyingglass")
