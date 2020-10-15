@@ -3,7 +3,7 @@ import SwiftUI
 struct ProjectEditView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
-    @State var project: Project = Project()
+    @ObservedObject var project: Project = Project()
 
     var body: some View {
         NavigationView {
