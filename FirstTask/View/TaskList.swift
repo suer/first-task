@@ -93,19 +93,18 @@ struct TaskList: View {
         TaskRow(task: task)
             .contentShape(Rectangle()) // can tap Spacer
             .onTapGesture {
-                editingTask = task
+                self.editingTask = task
                 self.modalState.showingEditModal.toggle()
             }
             .onLongPressGesture {
-                if !self.editing {
-                    editingTask = task
-                    self.showingTaskActionSheet.toggle()
-                }
+                guard !self.editing else { return }
+                self.editingTask = task
+                self.showingTaskActionSheet.toggle()
             }
             .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
-                editingTask.save(context: self.viewContext)
+                self.editingTask.save(context: self.viewContext)
             }) {
-                TaskEditView(task: editingTask)
+                TaskEditView(task: self.editingTask)
                     .environment(\.managedObjectContext, self.viewContext)
             }
             .actionSheet(isPresented: self.$showingTaskActionSheet) {
