@@ -17,8 +17,7 @@ struct TaskList: View {
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
-    @State var editingTask: Task = Task()
-    @State var showingEditModal = false
+    @State var editingTask: Task?
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
     @State var showingTaskActionSheet = false
@@ -68,7 +67,7 @@ struct TaskList: View {
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
                 ProjectSelectView(project: self.project) { project in
-                    self.editingTask.project = project
+                    self.editingTask.map({ task in task.project = project })
                 }
                 .padding()
                 .frame(height: 360)
@@ -95,21 +94,20 @@ struct TaskList: View {
             .contentShape(Rectangle()) // can tap Spacer
             .onTapGesture {
                 self.editingTask = task
-                self.showingEditModal.toggle()
             }
             .onLongPressGesture {
                 guard !self.editing else { return }
                 self.editingTask = task
                 self.showingTaskActionSheet.toggle()
             }
-            .sheet(isPresented: self.$showingEditModal, onDismiss: {
-                self.editingTask.save(context: self.viewContext)
-            }) {
-                TaskEditView(task: self.editingTask)
+            .sheet(item: self.$editingTask, onDismiss: {
+                self.editingTask.map({ task in task.save(context: self.viewContext) })
+            }) { task in
+                TaskEditView(task: task)
                     .environment(\.managedObjectContext, self.viewContext)
             }
             .actionSheet(isPresented: self.$showingTaskActionSheet) {
-                ActionSheet(title: Text(self.editingTask.title ?? ""),
+                ActionSheet(title: Text(self.editingTask!.title ?? ""),
                             buttons: [
                                 .default(Text("Reorder")) {
                                     withAnimation {
@@ -121,7 +119,7 @@ struct TaskList: View {
                                     self.showingProjectMoveModal = true
                                 },
                                 .destructive(Text("Delete")) {
-                                    Task.destroy(context: self.viewContext, task: self.editingTask)
+                                    Task.destroy(context: self.viewContext, task: self.editingTask!)
                                 },
                                 .cancel(Text("Cancel"))
                             ])
@@ -130,7 +128,6 @@ struct TaskList: View {
 
     private var searchButton: some View {
         Button(action: {
-            self.showingEditModal = false
             self.modalState.showingSearchModal = true
         }) {
             Image(systemName: "magnifyingglass")
