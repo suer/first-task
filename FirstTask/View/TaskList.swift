@@ -20,6 +20,8 @@ struct TaskList: View {
     @State var editingTask: Task = Task()
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
+    @State var showingTaskActionSheet = false
+    @State var showingProjectMoveModal = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -28,29 +30,11 @@ struct TaskList: View {
         ZStack(alignment: .bottom) {
             List {
                 ForEach(tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }) { task in
-                    TaskRow(task: task)
-                    .contentShape(Rectangle()) // can tap Spacer
-                    .onTapGesture {
-                        editingTask = task
-                        self.modalState.showingEditModal.toggle()
-                    }
-                    .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
-                        editingTask.save(context: self.viewContext)
-                    }) {
-                        TaskEditView(task: editingTask)
-                            .environment(\.managedObjectContext, self.viewContext)
-                    }
+                    taskRow(task: task)
                 }
                 .onDelete(perform: removeRow)
                 .onMove(perform: move)
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
-                .onLongPressGesture {
-                    withAnimation {
-                        // XXX: editing with filtered view
-                        self.editing = self.filteringTagName.isEmpty
-                    }
-                }
-
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
@@ -80,6 +64,14 @@ struct TaskList: View {
                 task?.project = self.project
                 self.appSettings.showAddTaskModal = false
             }
+
+            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
+                ProjectSelectView(project: self.project) { project in
+                    self.editingTask.project = project
+                }
+                .padding()
+                .frame(height: 360)
+            }
         }
     }
 
@@ -95,6 +87,45 @@ struct TaskList: View {
         withAnimation {
             self.editing = false
         }
+    }
+
+    func taskRow(task: Task) -> some View {
+        TaskRow(task: task)
+            .contentShape(Rectangle()) // can tap Spacer
+            .onTapGesture {
+                editingTask = task
+                self.modalState.showingEditModal.toggle()
+            }
+            .onLongPressGesture {
+                if !self.editing {
+                    editingTask = task
+                    self.showingTaskActionSheet.toggle()
+                }
+            }
+            .sheet(isPresented: self.$modalState.showingEditModal, onDismiss: {
+                editingTask.save(context: self.viewContext)
+            }) {
+                TaskEditView(task: editingTask)
+                    .environment(\.managedObjectContext, self.viewContext)
+            }
+            .actionSheet(isPresented: self.$showingTaskActionSheet) {
+                ActionSheet(title: Text(self.editingTask.title ?? ""),
+                            buttons: [
+                                .default(Text("Reorder")) {
+                                    withAnimation {
+                                        // XXX: editing with filtered view
+                                        self.editing = self.filteringTagName.isEmpty
+                                    }
+                                },
+                                .default(Text("Move")) {
+                                    self.showingProjectMoveModal = true
+                                },
+                                .destructive(Text("Delete")) {
+                                    Task.destroy(context: self.viewContext, task: self.editingTask)
+                                },
+                                .cancel(Text("Cancel"))
+                            ])
+            }
     }
 
     private var searchButton: some View {
