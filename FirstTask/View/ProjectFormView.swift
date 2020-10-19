@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProjectFormView: View {
-    @State var project: Project = Project()
+    @ObservedObject var project: Project
 
     var body: some View {
         Form {
@@ -24,6 +24,6 @@ struct ProjectFormView: View {
 
 struct ProjectFormView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectFormView()
+        ProjectFormView(project: Project())
     }
 }
