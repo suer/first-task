@@ -3,7 +3,8 @@ import SwiftUI
 struct ProjectSelectView: View {
     @Environment(\.presentationMode) var presentation
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
+        predicate: NSPredicate(format: "completedAt == nil")
     ) var projects: FetchedResults<Project>
     var project: Project?
     var action: (Project?) -> Void

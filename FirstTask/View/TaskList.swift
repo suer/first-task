@@ -157,6 +157,10 @@ struct TaskList: View {
                     .default(Text("Edit")) {
                         self.showingProjectEditModal = true
                     },
+                    .default(Text("Complete")) {
+                        self.presentation.wrappedValue.dismiss()
+                        self.project!.toggleDone(context: self.viewContext)
+                    },
                     .destructive(Text("Delete")) {
                         self.presentation.wrappedValue.dismiss()
                         Project.destroy(context: self.viewContext, project: self.project!)

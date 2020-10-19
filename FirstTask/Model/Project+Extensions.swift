@@ -47,6 +47,11 @@ extension Project {
         }
     }
 
+    func toggleDone(context: NSManagedObjectContext) {
+        self.completedAt = self.completedAt == nil ? Date() : nil
+        self.save(context: context)
+    }
+
     func save(context: NSManagedObjectContext) {
         do {
             self.updatedAt = Date()
