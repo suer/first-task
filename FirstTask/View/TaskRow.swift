@@ -1,4 +1,5 @@
 import SwiftUI
+import AudioToolbox
 
 struct TaskRow: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -16,6 +17,7 @@ struct TaskRow: View {
                         .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
             ).onTapGesture {
+                self.vibrate()
                 self.task.toggleDone(context: self.viewContext)
             }
             VStack {
@@ -33,6 +35,10 @@ struct TaskRow: View {
                 }
             }
         }
+    }
+
+    func vibrate() {
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 }
 
