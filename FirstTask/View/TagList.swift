@@ -40,6 +40,7 @@ struct TagList: View {
             BottomTextFieldSheetModal(isShown: self.$showAddTagModal, text: self.$newTagName) {
                 _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
                 self.showAddTagModal = false
+                UIApplication.shared.closeKeyboard()
             }
         }
     }

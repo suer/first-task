@@ -62,6 +62,7 @@ struct TaskList: View {
                 }
                 task?.project = self.project
                 self.appSettings.showAddTaskModal = false
+                UIApplication.shared.closeKeyboard()
             }
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {

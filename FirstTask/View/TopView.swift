@@ -79,6 +79,7 @@ struct TopView: View {
                 BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
                     _ = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
                     self.showingAddTaskModal = false
+                    UIApplication.shared.closeKeyboard()
                 }
             }
         }

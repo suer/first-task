@@ -26,7 +26,6 @@ struct BottomTextFieldSheetModal: View {
                     Button(action: {
                         self.action()
                         self.$text.wrappedValue = ""
-                        UIApplication.shared.closeKeyboard()
                     }) {
                         Image(systemName: "arrow.up")
                             .frame(width: 40, height: 40)
