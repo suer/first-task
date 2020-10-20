@@ -25,10 +25,14 @@ struct TaskList: View {
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
 
+    var filteredTasks: [Task] {
+        tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             List {
-                ForEach(tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }) { task in
+                ForEach(self.filteredTasks) { task in
                     taskRow(task: task)
                 }
                 .onDelete(perform: removeRow)
@@ -75,12 +79,12 @@ struct TaskList: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Task.destroy(context: self.viewContext, task: tasks[i])
+            Task.destroy(context: self.viewContext, task: self.filteredTasks[i])
         }
     }
 
     func move(from source: IndexSet, to destination: Int) {
-        Task.reorder(context: self.viewContext, tasks: tasks.map { $0 }, source: source, destination: destination)
+        Task.reorder(context: self.viewContext, tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
 
         withAnimation {
             self.editing = false
