@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import BackgroundTasks
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.handleAppProcessing(task: task)
             }
         }
+
+        FirebaseApp.configure()
 
         return true
     }
