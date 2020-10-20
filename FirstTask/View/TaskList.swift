@@ -1,5 +1,4 @@
 import SwiftUI
-import MobileCoreServices
 
 struct TaskList: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -184,11 +183,5 @@ struct TaskList_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, CoreDataSupport.context)
                 .environmentObject(AppSettings())
         }
-    }
-}
-
-extension UIApplication {
-    func closeKeyboard() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

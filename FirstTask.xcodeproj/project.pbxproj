@@ -22,6 +22,7 @@
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
 		19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */; };
 		19E6F1A32502FB78004561C8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6F1A22502FB78004561C8 /* SearchView.swift */; };
+		19F265C0253E60E70075D89F /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F265BF253E60E70075D89F /* UIApplication.swift */; };
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
 		19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6B24E57021002B02CF /* IMETextField.swift */; };
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
@@ -82,6 +83,7 @@
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
 		19E6F1A22502FB78004561C8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		19F265BF253E60E70075D89F /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		19F5BA6B24E57021002B02CF /* IMETextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMETextField.swift; sourceTree = "<group>"; };
 		19F8F4B924F218CC00F352EA /* SettingMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				1905DA1D2507ABAE00D74BA7 /* Date.swift */,
+				19F265BF253E60E70075D89F /* UIApplication.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F265C0253E60E70075D89F /* UIApplication.swift in Sources */,
 				197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */,
 				1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */,
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
