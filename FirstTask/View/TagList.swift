@@ -17,7 +17,10 @@ struct TagList: View {
                     HStack {
                         Image(systemName: self.task.allTags.contains(tag) ? "checkmark.circle.fill" : "circle")
                         Text(tag.name ?? "")
-                    }.onTapGesture {
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
                         if self.task.allTags.contains(tag) {
                             self.task.removeFromTags(tag)
                         } else {
