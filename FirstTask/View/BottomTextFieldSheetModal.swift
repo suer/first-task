@@ -16,16 +16,14 @@ struct BottomTextFieldSheetModal: View {
             GeometryReader { geometry in
                 HStack {
                     FocusableTextField(text: self.$text, onCommit: { _ in
-                        self.action()
-                        self.$text.wrappedValue = ""
+                        self.onCommit()
                     }, isFirstResponder: true)
                         .frame(width: geometry.size.width - 40, height: 50)
                         .keyboardType(.default)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
 
                     Button(action: {
-                        self.action()
-                        self.$text.wrappedValue = ""
+                        self.onCommit()
                     }) {
                         Image(systemName: "arrow.up")
                             .frame(width: 40, height: 40)
@@ -39,5 +37,11 @@ struct BottomTextFieldSheetModal: View {
             .padding()
             .frame(height: 80)
         }
+    }
+
+    private func onCommit() {
+        guard self.$text.wrappedValue != "" else { return }
+        self.action()
+        self.$text.wrappedValue = ""
     }
 }
