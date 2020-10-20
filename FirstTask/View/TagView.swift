@@ -57,10 +57,12 @@ struct TagView: View {
             BottomTextFieldSheetModal(isShown: self.$showingAddTagModal, text: self.$newTagName) {
                 _ = Tag.create(context: self.viewContext, name: self.newTagName)
                 self.showingAddTagModal = false
+                UIApplication.shared.closeKeyboard()
             }
             BottomTextFieldSheetModal(isShown: self.$showingEditTagModal, text: self.$newTagName) {
                 self.editingTag.name = self.newTagName
                 self.showingEditTagModal = false
+                UIApplication.shared.closeKeyboard()
             }
         }
     }
