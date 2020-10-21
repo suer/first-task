@@ -45,7 +45,8 @@ struct TopView: View {
                             HStack {
                                 Image(systemName: "plus")
                                 Text("Add Project")
-                            }
+                                Spacer()
+                            }.contentShape(Rectangle())
                         }.sheet(isPresented: self.$showingProjectAddModal) {
                             ProjectAddView(project: self.addingProject)
                                 .environment(\.managedObjectContext, self.viewContext)

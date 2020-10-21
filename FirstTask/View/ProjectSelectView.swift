@@ -19,7 +19,10 @@ struct ProjectSelectView: View {
             HStack {
                 Image(systemName: self.project == nil ? "checkmark.circle.fill" : "circle")
                 Text("No project")
-            }.onTapGesture {
+                Spacer()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
                 self.action(nil)
                 self.presentation.wrappedValue.dismiss()
             }
@@ -27,7 +30,10 @@ struct ProjectSelectView: View {
                 HStack {
                     Image(systemName: self.project == project ? "checkmark.circle.fill" : "circle")
                     Text(project.title ?? "")
-                }.onTapGesture {
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
                     self.action(project)
                     self.presentation.wrappedValue.dismiss()
                 }
