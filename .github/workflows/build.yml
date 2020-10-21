@@ -1,0 +1,20 @@
+name: Build
+
+on: pull_request
+
+jobs:
+ build:
+
+   runs-on: macos-latest
+
+   steps:
+   - uses: actions/checkout@v2
+
+   - name: Select Xcode version
+     run: sudo xcode-select -s '/Applications/Xcode_12.app/Contents/Developer'
+
+   - name: Show Xcode version
+     run: xcodebuild -version
+
+   - name: Build
+     run: fastlane build_for_simulator

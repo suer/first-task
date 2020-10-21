@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane ios dg
 ```
 Submit a new Beta Build to DeployGate
+### ios build_for_simulator
+```
+fastlane ios build_for_simulator
+```
+
 
 ----
 
