@@ -15,5 +15,15 @@ platform :ios do
       path: 'FirstTask.xcodeproj',
       teamid: '')
   end
+
+  desc "Build for simulator"
+  lane :build_for_simulator do
+    xcbuild(
+      project: "FirstTask.xcodeproj",
+      scheme: "FirstTask",
+      configuration: "Debug",
+      xcargs: "-sdk iphonesimulator"
+    )
+  end
 end
 
