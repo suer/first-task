@@ -39,6 +39,23 @@ struct TaskList: View {
                 .onMove(perform: move)
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
+            .actionSheet(isPresented: self.$showingProjectActionSheet) {
+                ActionSheet(title: Text(self.project!.title ?? ""),
+                    buttons: [
+                        .default(Text("Edit")) {
+                            self.showingProjectEditModal = true
+                        },
+                        .default(Text("Complete")) {
+                            self.presentation.wrappedValue.dismiss()
+                            self.project!.toggleDone(context: self.viewContext)
+                        },
+                        .destructive(Text("Delete")) {
+                            self.presentation.wrappedValue.dismiss()
+                            Project.destroy(context: self.viewContext, project: self.project!)
+                        },
+                        .cancel(Text("Cancel"))
+                ])
+            }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationBarTitle(navigationBarTitle)
             .navigationBarItems(
@@ -49,6 +66,7 @@ struct TaskList: View {
                     }
                 }
             )
+
             VStack {
                 Spacer()
                 HStack {
@@ -153,22 +171,6 @@ struct TaskList: View {
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.actionSheet(isPresented: self.$showingProjectActionSheet) {
-            ActionSheet(title: Text(self.project!.title ?? ""),
-                buttons: [
-                    .default(Text("Edit")) {
-                        self.showingProjectEditModal = true
-                    },
-                    .default(Text("Complete")) {
-                        self.presentation.wrappedValue.dismiss()
-                        self.project!.toggleDone(context: self.viewContext)
-                    },
-                    .destructive(Text("Delete")) {
-                        self.presentation.wrappedValue.dismiss()
-                        Project.destroy(context: self.viewContext, project: self.project!)
-                    },
-                    .cancel(Text("Cancel"))
-            ])
         }.sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
                 .environment(\.managedObjectContext, self.viewContext)
