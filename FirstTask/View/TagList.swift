@@ -28,7 +28,7 @@ struct TagList: View {
                         }
                     }
                 }
-            }
+            }.navigationBarTitle("Tags", displayMode: .inline)
 
             VStack {
                 Spacer()
