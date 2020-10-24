@@ -316,6 +316,7 @@
 				8044678C24DF97CC00011164 /* Sources */,
 				8044678D24DF97CC00011164 /* Frameworks */,
 				8044678E24DF97CC00011164 /* Resources */,
+				19DEE5932543C34E0079459E /* ShellScript */,
 				19F5BA6D24E69270002B02CF /* ShellScript */,
 				8061E5D42543065C00CCBDFF /* ShellScript */,
 				80CCDF58253F165A0026D041 /* ShellScript */,
@@ -443,6 +444,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19DEE5932543C34E0079459E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\n  if which license-plist >/dev/null; then\n    license-plist --output-path $PRODUCT_NAME/Settings.bundle\n  else\n    echo \"warning: license-plist not installed, run 'brew install mono0926/license-plist/license-plist'\"\n  fi\nfi\n";
+		};
 		19F5BA6D24E69270002B02CF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
