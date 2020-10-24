@@ -66,19 +66,20 @@ struct TopView: View {
                 .navigationBarItems(
                     leading: settingButton
                 )
-
-                VStack {
-                    Spacer()
-                    HStack {
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    VStack {
                         Spacer()
-                        FabButton {
-                            self.showingAddTaskModal = true
-                        }
+                        HStack {
+                            Spacer()
+                            FabButton {
+                                self.showingAddTaskModal = true
+                            }
+                        }.padding(10)
                     }.padding(10)
-                }.padding(10)
 
-                BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
-                    _ = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+                    BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
+                        _ = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+                    }
                 }
             }
         }

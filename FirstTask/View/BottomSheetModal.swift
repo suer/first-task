@@ -30,7 +30,7 @@ struct BottomSheetModal<Content: View>: View {
 
     private var modal: some View {
         self.content()
-            .frame(width: UIScreen.main.bounds.width, alignment: .top)
+            .frame(width: .infinity, alignment: .top)
             .background(Color(UIColor.systemBackground))
             .keyboardAwarePadding()
     }
