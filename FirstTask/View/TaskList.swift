@@ -17,9 +17,9 @@ struct TaskList: View {
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
     @State var editingTask: Task?
+    @State var movingTask: Task?
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
-    @State var showingTaskActionSheet = false
     @State var showingProjectMoveModal = false
 
     var filter: (Task) -> Bool = { _ in true }
@@ -87,7 +87,8 @@ struct TaskList: View {
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
                 ProjectSelectView(project: self.project) { project in
-                    self.editingTask.map({ task in task.project = project })
+                    self.movingTask.map({ task in task.project = project })
+                    self.showingProjectMoveModal = false
                 }
                 .padding()
                 .frame(height: 360)
@@ -115,34 +116,35 @@ struct TaskList: View {
             .onTapGesture {
                 self.editingTask = task
             }
-            .onLongPressGesture {
-                guard !self.editing else { return }
-                self.editingTask = task
-                self.showingTaskActionSheet.toggle()
+            .contextMenu {
+                Button(action: {
+                    withAnimation {
+                        // XXX: editing with filtered view
+                        self.editing = self.filteringTagName.isEmpty
+                    }
+                }) {
+                    Text("Reorder")
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+                Button(action: {
+                    self.movingTask = task
+                    self.showingProjectMoveModal = true
+                }) {
+                    Text("Move")
+                    Image(systemName: "arrow.turn.up.right")
+                }
+                Button(action: {
+                    Task.destroy(context: self.viewContext, task: task)
+                }) {
+                    Text("Delete")
+                    Image(systemName: "trash")
+                }
             }
             .sheet(item: self.$editingTask, onDismiss: {
                 self.editingTask.map({ task in task.save(context: self.viewContext) })
             }) { task in
                 TaskEditView(task: task)
                     .environment(\.managedObjectContext, self.viewContext)
-            }
-            .actionSheet(isPresented: self.$showingTaskActionSheet) {
-                ActionSheet(title: Text(self.editingTask!.title ?? ""),
-                            buttons: [
-                                .default(Text("Reorder")) {
-                                    withAnimation {
-                                        // XXX: editing with filtered view
-                                        self.editing = self.filteringTagName.isEmpty
-                                    }
-                                },
-                                .default(Text("Move")) {
-                                    self.showingProjectMoveModal = true
-                                },
-                                .destructive(Text("Delete")) {
-                                    Task.destroy(context: self.viewContext, task: self.editingTask!)
-                                },
-                                .cancel(Text("Cancel"))
-                            ])
             }
     }
 
