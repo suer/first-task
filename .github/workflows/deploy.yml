@@ -35,4 +35,4 @@ jobs:
        DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
        CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-     run: bundle exec fastlane dg
+     run: fastlane dg
