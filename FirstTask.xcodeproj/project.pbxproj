@@ -461,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\n  if which license-plist >/dev/null; then\n    license-plist --output-path $PRODUCT_NAME/Settings.bundle\n  else\n    echo \"warning: license-plist not installed, run 'brew install mono0926/license-plist/license-plist'\"\n  fi\nfi\n";
+			shellScript = "if which license-plist >/dev/null; then\n  license-plist --output-path $PRODUCT_NAME/Settings.bundle\nelse\n  echo \"warning: license-plist not installed, run 'brew install mono0926/license-plist/license-plist'\"\nfi\n";
 		};
 		19F5BA6D24E69270002B02CF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
