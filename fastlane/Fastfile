@@ -48,7 +48,7 @@ platform :ios do
   desc "Build for simulator"
   lane :build_for_simulator do
     xcbuild(
-      project: "FirstTask.xcodeproj",
+      workspace: "FirstTask.xcworkspace",
       scheme: "FirstTask",
       configuration: "Debug",
       xcargs: "-sdk iphonesimulator"

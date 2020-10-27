@@ -2,6 +2,9 @@ name: Build
 
 on: pull_request
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_12.1.app/Contents/Developer
+
 jobs:
  build:
 
@@ -13,11 +16,32 @@ jobs:
    - name: Setup LicensePlist
      run: curl -fsSL https://raw.githubusercontent.com/mono0926/LicensePlist/master/install.sh | sh
 
-   - name: Select Xcode version
-     run: sudo xcode-select -s '/Applications/Xcode_12.app/Contents/Developer'
-
    - name: Show Xcode version
      run: xcodebuild -version
 
+   - name: Cache Gems
+     uses: actions/cache@v2
+     with:
+       path: vendor/bundle
+       key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+       restore-keys: |
+         ${{ runner.os }}-gems-
+
+   - name: Install Bundled Gems
+     run: |
+       bundle config path vendor/bundle
+       bundle install --jobs 4 --retry 3
+
+   - name: Cache Pods
+     uses: actions/cache@v2
+     with:
+       path: Pods
+       key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+       restore-keys: |
+         ${{ runner.os }}-pods-
+
+   - name: Install Pods
+     run: bundle exec pod install
+
    - name: Build
-     run: fastlane build_for_simulator
+     run: bundle exec fastlane build_for_simulator
