@@ -6,6 +6,8 @@ target 'FirstTask' do
   use_frameworks!
 
   # Pods for FirstTask
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
 
   target 'FirstTaskTests' do
     inherit! :search_paths
@@ -16,4 +18,9 @@ target 'FirstTask' do
     # Pods for testing
   end
 
+  post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
 end
