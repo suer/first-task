@@ -356,8 +356,8 @@
 				6D07376C4E636157E5E40272 /* [CP] Check Pods Manifest.lock */,
 				8044678C24DF97CC00011164 /* Sources */,
 				8044678D24DF97CC00011164 /* Frameworks */,
+				19DEE5932543C34E0079459E /* Run Script (LicensePlist) */,
 				8044678E24DF97CC00011164 /* Resources */,
-				19DEE5932543C34E0079459E /* ShellScript */,
 				19F5BA6D24E69270002B02CF /* ShellScript */,
 				8061E5D42543065C00CCBDFF /* ShellScript */,
 				80CCDF58253F165A0026D041 /* ShellScript */,
@@ -483,7 +483,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19DEE5932543C34E0079459E /* ShellScript */ = {
+		19DEE5932543C34E0079459E /* Run Script (LicensePlist) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -492,6 +492,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script (LicensePlist)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
