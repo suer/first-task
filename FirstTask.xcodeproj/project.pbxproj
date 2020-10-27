@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,7 +28,6 @@
 		19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6B24E57021002B02CF /* IMETextField.swift */; };
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
 		19F8F4BC24F2216900F352EA /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4BB24F2216900F352EA /* TagView.swift */; };
-		8018185D253D82590023A9B9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8018185C253D82590023A9B9 /* FirebaseCrashlytics */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
 		8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776F24EFF0A30076A24C /* Tag+Extensions.swift */; };
 		8044679424DF97CC00011164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044679324DF97CC00011164 /* AppDelegate.swift */; };
@@ -127,7 +126,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8018185D253D82590023A9B9 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +327,6 @@
 			);
 			name = FirstTask;
 			packageProductDependencies = (
-				8018185C253D82590023A9B9 /* FirebaseCrashlytics */,
 			);
 			productName = FirstTask;
 			productReference = 8044679024DF97CC00011164 /* FirstTask.app */;
@@ -404,7 +401,6 @@
 			);
 			mainGroup = 8044678724DF97CC00011164;
 			packageReferences = (
-				8018185B253D82590023A9B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 8044679124DF97CC00011164 /* Products */;
 			projectDirPath = "";
@@ -880,25 +876,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		8018185B253D82590023A9B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				branch = "6.34-spm-beta";
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		8018185C253D82590023A9B9 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8018185B253D82590023A9B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */ = {
