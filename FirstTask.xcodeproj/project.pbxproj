@@ -358,9 +358,9 @@
 				8044678D24DF97CC00011164 /* Frameworks */,
 				19DEE5932543C34E0079459E /* Run Script (LicensePlist) */,
 				8044678E24DF97CC00011164 /* Resources */,
-				19F5BA6D24E69270002B02CF /* ShellScript */,
-				8061E5D42543065C00CCBDFF /* ShellScript */,
-				80CCDF58253F165A0026D041 /* ShellScript */,
+				19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */,
+				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
+				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				2E432D6A74ABA5763072FA81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -501,7 +501,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which license-plist >/dev/null; then\n  license-plist --output-path $PRODUCT_NAME/Settings.bundle\nelse\n  echo \"warning: license-plist not installed, run 'brew install mono0926/license-plist/license-plist'\"\nfi\n";
 		};
-		19F5BA6D24E69270002B02CF /* ShellScript */ = {
+		19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -510,6 +510,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script (swiftlint)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -557,7 +558,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8061E5D42543065C00CCBDFF /* ShellScript */ = {
+		8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,6 +567,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script (Copy GoogleService-Info.plist)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -574,7 +576,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" == \"Release\" ]; then\n  cp \"${PROJECT_DIR}/${PROJECT_NAME}/Configs/GoogleService-Info-Release.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nelse\n  cp \"${PROJECT_DIR}/${PROJECT_NAME}/Configs/GoogleService-Info-Debug.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n\n";
 		};
-		80CCDF58253F165A0026D041 /* ShellScript */ = {
+		80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -585,6 +587,7 @@
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "Run Script (FirebaseCrashlytics)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
