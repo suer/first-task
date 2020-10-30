@@ -25,7 +25,7 @@ Submit a new Beta Build to DeployGate
 ```
 fastlane ios build_for_simulator
 ```
-
+Build for simulator
 
 ----
 
