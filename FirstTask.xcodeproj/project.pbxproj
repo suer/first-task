@@ -24,7 +24,6 @@
 		19E6F1A32502FB78004561C8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6F1A22502FB78004561C8 /* SearchView.swift */; };
 		19F265C0253E60E70075D89F /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F265BF253E60E70075D89F /* UIApplication.swift */; };
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
-		19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6B24E57021002B02CF /* IMETextField.swift */; };
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
 		19F8F4BC24F2216900F352EA /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4BB24F2216900F352EA /* TagView.swift */; };
 		305606F7A9BA1C926716A756 /* Pods_FirstTaskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C990F6D4FA2BFEC9067745FD /* Pods_FirstTaskTests.framework */; };
@@ -91,7 +90,6 @@
 		19E6F1A22502FB78004561C8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		19F265BF253E60E70075D89F /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
-		19F5BA6B24E57021002B02CF /* IMETextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMETextField.swift; sourceTree = "<group>"; };
 		19F8F4B924F218CC00F352EA /* SettingMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuView.swift; sourceTree = "<group>"; };
 		19F8F4BB24F2216900F352EA /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2C0A88EF7B7C2E5C4FC66F4D /* Pods-FirstTask-FirstTaskUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstTask-FirstTaskUITests.debug.xcconfig"; path = "Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
-				19F5BA6B24E57021002B02CF /* IMETextField.swift */,
 				1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */,
 			);
 			path = UIKit;
@@ -665,7 +662,6 @@
 				197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */,
 				1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */,
 				8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */,
-				19F5BA6C24E57021002B02CF /* IMETextField.swift in Sources */,
 				80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */,
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				193704A1252C0539004FF6A5 /* Project+Extensions.swift in Sources */,

@@ -8,7 +8,7 @@ struct TaskEditView: View {
     var body: some View {
         NavigationView {
             Form {
-                IMETextField(title: "Input title", text: $task.wrappedTitle)
+                TextField("Input title", text: $task.wrappedTitle)
                 Section(header: Text("Memo")) {
                     TextEditor(text: $task.wrappedMemo)
                 }

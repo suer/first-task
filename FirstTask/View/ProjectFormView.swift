@@ -5,7 +5,7 @@ struct ProjectFormView: View {
 
     var body: some View {
         Form {
-            IMETextField(title: "Input title", text: $project.wrappedTitle)
+            TextField("Input title", text: $project.wrappedTitle)
             Section(header: Text("Start Date")) {
                 Toggle("Set Start Date", isOn: $project.useStartDate)
                 if $project.useStartDate.wrappedValue {
