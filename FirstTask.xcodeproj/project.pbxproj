@@ -18,7 +18,6 @@
 		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */; };
-		19C2489424E916D2001D04A3 /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C2489324E916D2001D04A3 /* MultilineTextField.swift */; };
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
 		19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */; };
 		19DEE5A12543C7E00079459E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19DEE5A02543C7E00079459E /* Settings.bundle */; };
@@ -86,7 +85,6 @@
 		197EA4CE2529A24C00317E53 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectView.swift; sourceTree = "<group>"; };
-		19C2489324E916D2001D04A3 /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
 		19DEE5A02543C7E00079459E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				804467CF24DFD7A900011164 /* FocusableTextField.swift */,
 				19F5BA6B24E57021002B02CF /* IMETextField.swift */,
 				1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */,
-				19C2489324E916D2001D04A3 /* MultilineTextField.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -699,7 +696,6 @@
 				197EA4CF2529A24C00317E53 /* TopView.swift in Sources */,
 				8044679624DF97CC00011164 /* SceneDelegate.swift in Sources */,
 				19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */,
-				19C2489424E916D2001D04A3 /* MultilineTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
