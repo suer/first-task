@@ -39,7 +39,7 @@ platform :ios do
     deploygate(
       api_token: ENV['DEPLOYGATE_API_KEY'],
       user: ENV['DEPLOYGATE_USER'],
-      message: "Build #{lane_context[SharedValues::BUILD_NUMBER]}")
+      message: ENV['DEPLOYGATE_MESSAGE'] || 'Build')
     update_project_team(
       path: 'FirstTask.xcodeproj',
       teamid: '')

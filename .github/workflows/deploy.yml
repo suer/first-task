@@ -59,4 +59,5 @@ jobs:
        DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
        CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+       DEPLOYGATE_MESSAGE: ${{ github.sha }}
      run: bundle exec fastlane dg
