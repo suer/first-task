@@ -8,6 +8,8 @@ target 'FirstTask' do
   # Pods for FirstTask
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
 
   target 'FirstTaskTests' do
     inherit! :search_paths

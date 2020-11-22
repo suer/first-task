@@ -3,6 +3,9 @@ import SwiftUI
 struct SettingMenuView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject private var sessionState = SessionState()
+
+    @State var showingFirebaseUIView = false
 
     var body: some View {
         NavigationView {
@@ -13,6 +16,29 @@ struct SettingMenuView: View {
                             Image(systemName: "tag")
                             Text("Tags")
                         }
+                    }
+                    if !sessionState.isSignedIn {
+                        Button(action: {
+                            self.showingFirebaseUIView.toggle()
+                        }) {
+                            HStack {
+                                Image(systemName: "person")
+                                Text("Sign in with Google")
+                                Spacer()
+                            }.contentShape(Rectangle())
+                        }.sheet(isPresented: $showingFirebaseUIView) {
+                            FirebaseUIView()
+                        }.buttonStyle(PlainButtonStyle())
+                    } else {
+                        Button(action: {
+                            try? sessionState.signOut()
+                        }) {
+                            HStack {
+                                Image(systemName: "person")
+                                Text("Sign out from \(sessionState.email)")
+                                Spacer()
+                            }.contentShape(Rectangle())
+                        }.buttonStyle(PlainButtonStyle())
                     }
                 }
             }

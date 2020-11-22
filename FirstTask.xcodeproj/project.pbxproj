@@ -18,6 +18,7 @@
 		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */; };
+		19D1298A256A45B400BB7732 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D12989256A45B400BB7732 /* SessionState.swift */; };
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
 		19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */; };
 		19DEE5A12543C7E00079459E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19DEE5A02543C7E00079459E /* Settings.bundle */; };
@@ -45,6 +46,7 @@
 		804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D124DFD80A00011164 /* BottomSheetModal.swift */; };
 		804467D424E0260A00011164 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D324E0260A00011164 /* Task+Extensions.swift */; };
 		804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D524E02F0400011164 /* CoreDataSupport.swift */; };
+		8048A0FD256A1E0D0078873F /* FirebaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */; };
 		80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */; };
 		8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089D1CD24E6BDAC00988D74 /* AppSettings.swift */; };
 		80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EF0E0E2511B554004D0C1C /* ModalState.swift */; };
@@ -84,6 +86,7 @@
 		197EA4CE2529A24C00317E53 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectView.swift; sourceTree = "<group>"; };
+		19D12989256A45B400BB7732 /* SessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
 		19DEE5A02543C7E00079459E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		804467D324E0260A00011164 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		804467D524E02F0400011164 /* CoreDataSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSupport.swift; sourceTree = "<group>"; };
 		8047ABB425455441000D0EC8 /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
+		8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUIView.swift; sourceTree = "<group>"; };
 		8061E5CC2543056100CCBDFF /* GoogleService-Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info-Debug.plist"; sourceTree = "<group>"; };
 		80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTagsOperation.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
+				8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */,
 				193704AE252D46BD004FF6A5 /* ProjectAddView.swift */,
 				19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */,
 				19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */,
@@ -323,6 +328,7 @@
 			children = (
 				8089D1CD24E6BDAC00988D74 /* AppSettings.swift */,
 				80EF0E0E2511B554004D0C1C /* ModalState.swift */,
+				19D12989256A45B400BB7732 /* SessionState.swift */,
 			);
 			path = ObservableObject;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				2E432D6A74ABA5763072FA81 /* [CP] Embed Pods Frameworks */,
+				41E7152B98C1DAA3479E6054 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -394,6 +401,7 @@
 				804467B124DF97D000011164 /* Frameworks */,
 				804467B224DF97D000011164 /* Resources */,
 				97BFF7E908EEB44DA2E83D0E /* [CP] Embed Pods Frameworks */,
+				AB9ECE9C481C6F0772219806 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -530,6 +538,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		41E7152B98C1DAA3479E6054 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6D07376C4E636157E5E40272 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,6 +632,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AB9ECE9C481C6F0772219806 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D5514D02FEEE010FD6C8B7E0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -676,6 +718,7 @@
 				804467C724DF98DF00011164 /* TaskList.swift in Sources */,
 				1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */,
 				8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */,
+				8048A0FD256A1E0D0078873F /* FirebaseUIView.swift in Sources */,
 				8021776E24EFEFC50076A24C /* TagList.swift in Sources */,
 				804467CE24DFA33600011164 /* FabButton.swift in Sources */,
 				804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */,
@@ -687,6 +730,7 @@
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,
 				804467D424E0260A00011164 /* Task+Extensions.swift in Sources */,
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
+				19D1298A256A45B400BB7732 /* SessionState.swift in Sources */,
 				19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */,
 				804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */,
 				197EA4CF2529A24C00317E53 /* TopView.swift in Sources */,
