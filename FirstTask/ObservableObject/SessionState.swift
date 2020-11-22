@@ -1,4 +1,6 @@
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class SessionState: ObservableObject {
     @Published var isSignedIn: Bool = false
@@ -8,6 +10,13 @@ class SessionState: ObservableObject {
         handle = Auth.auth().addStateDidChangeListener { (_, user) in
             if user != nil {
                 print("Sign-in")
+                if let user = user {
+                    Firestore.firestore().collection("users")
+                        .document(user.uid).setData([
+                            "email": user.email ?? "",
+                            "photoURL": user.photoURL?.absoluteString ?? ""
+                        ])
+                }
                 self.isSignedIn = true
             } else {
                 print("Sign-out")

@@ -10,6 +10,8 @@ target 'FirstTask' do
   pod 'Firebase/Analytics'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift', '7.1.0-beta'
 
   target 'FirstTaskTests' do
     inherit! :search_paths
