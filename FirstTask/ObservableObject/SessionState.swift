@@ -11,11 +11,10 @@ class SessionState: ObservableObject {
             if user != nil {
                 print("Sign-in")
                 if let user = user {
-                    Firestore.firestore().collection("users")
-                        .document(user.uid).setData([
-                            "email": user.email ?? "",
-                            "photoURL": user.photoURL?.absoluteString ?? ""
-                        ])
+                    let u = User(id: user.uid)
+                    u[\.email] = user.email ?? ""
+                    u[\.photoURL] = user.photoURL?.absoluteString ?? ""
+                    u.save()
                 }
                 self.isSignedIn = true
             } else {

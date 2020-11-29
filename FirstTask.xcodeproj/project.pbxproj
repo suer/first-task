@@ -28,6 +28,7 @@
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
 		19F8F4BC24F2216900F352EA /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4BB24F2216900F352EA /* TagView.swift */; };
 		305606F7A9BA1C926716A756 /* Pods_FirstTaskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C990F6D4FA2BFEC9067745FD /* Pods_FirstTaskTests.framework */; };
+		801BBD4925737A5F00B7D66E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801BBD4825737A5F00B7D66E /* User.swift */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
 		8021777024EFF0A30076A24C /* Tag+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776F24EFF0A30076A24C /* Tag+Extensions.swift */; };
 		8044679424DF97CC00011164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044679324DF97CC00011164 /* AppDelegate.swift */; };
@@ -97,6 +98,7 @@
 		19F8F4BB24F2216900F352EA /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2C0A88EF7B7C2E5C4FC66F4D /* Pods-FirstTask-FirstTaskUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstTask-FirstTaskUITests.debug.xcconfig"; path = "Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65826FD8C4D0C6D7A4F7D095 /* Pods-FirstTaskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstTaskTests.debug.xcconfig"; path = "Target Support Files/Pods-FirstTaskTests/Pods-FirstTaskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		801BBD4825737A5F00B7D66E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8021776D24EFEFC50076A24C /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		8021776F24EFF0A30076A24C /* Tag+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Extensions.swift"; sourceTree = "<group>"; };
 		8044679024DF97CC00011164 /* FirstTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +227,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		801BBD4725737A4400B7D66E /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				801BBD4825737A5F00B7D66E /* User.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		8044678724DF97CC00011164 = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +264,7 @@
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				8061E5C5254304EE00CCBDFF /* Configs */,
 				804467D524E02F0400011164 /* CoreDataSupport.swift */,
+				801BBD4725737A4400B7D66E /* Firestore */,
 				1905DA1C2507AB8C00D74BA7 /* Extension */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				804467A424DF97D000011164 /* Info.plist */,
@@ -712,6 +723,7 @@
 				1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */,
 				198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */,
 				193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */,
+				801BBD4925737A5F00B7D66E /* User.swift in Sources */,
 				8044679424DF97CC00011164 /* AppDelegate.swift in Sources */,
 				19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */,
 				8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */,
