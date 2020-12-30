@@ -1,5 +1,6 @@
 import SwiftUI
-import CoreData
+import FirebaseAuth
+import Ballcap
 
 struct TagView: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -51,7 +52,26 @@ struct TagView: View {
                     }
                     Spacer()
                 }
-            }.navigationBarTitle("Tags", displayMode: .inline)
+            }
+            .navigationBarTitle("Tags", displayMode: .inline)
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                user
+                    .collection(path: .tags)
+                    .order(by: "name")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else {
+                          return
+                        }
+
+                        self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                            if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
+                                return tag
+                            }
+                            return Tag() // TODO
+                        }
+                    }
+            }
             BottomTextFieldSheetModal(isShown: self.$showingAddTagModal, text: self.$newTagName) {
                 _ = Tag.create(context: self.viewContext, name: self.newTagName)
                 self.showingAddTagModal = false

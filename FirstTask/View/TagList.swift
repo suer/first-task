@@ -1,5 +1,7 @@
 import SwiftUI
 import MobileCoreServices
+import FirebaseAuth
+import Ballcap
 
 struct TagList: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -30,7 +32,26 @@ struct TagList: View {
 //                        }
                     }
                 }
-            }.navigationBarTitle("Tags", displayMode: .inline)
+            }
+            .navigationBarTitle("Tags", displayMode: .inline)
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                user
+                    .collection(path: .tags)
+                    .order(by: "name")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else {
+                          return
+                        }
+
+                        self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                            if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
+                                return tag
+                            }
+                            return Tag() // TODO
+                        }
+                    }
+            }
 
             VStack {
                 Spacer()
