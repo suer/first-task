@@ -1,4 +1,6 @@
 import SwiftUI
+import FirebaseAuth
+import Ballcap
 
 struct TaskList: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -27,7 +29,9 @@ struct TaskList: View {
     var project: Project?
 
     var filteredTasks: [Task] {
-        tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }
+        // TODO
+//        tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }
+        tasks
     }
 
     var body: some View {
@@ -67,7 +71,25 @@ struct TaskList: View {
                     }
                 }
             )
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                user
+                    .collection(path: .tasks)
+                    .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+                    .order(by: "displayOrder")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else {
+                          return
+                        }
 
+                        self.tasks = documents.map { queryDocumentSnapshot -> Task in
+                            if let task: Task = try? Task(snapshot: queryDocumentSnapshot) {
+                                return task
+                            }
+                            return Task() // TODO
+                        }
+                    }
+            }
             VStack {
                 Spacer()
                 HStack {
