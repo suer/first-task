@@ -1,4 +1,6 @@
 import SwiftUI
+import FirebaseAuth
+import Ballcap
 
 struct TopView: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -25,7 +27,6 @@ struct TopView: View {
             ZStack(alignment: .bottom) {
                 List {
                     ProjectRow(icon: "tray", name: "Inbox") { task in
-//                        task.project == nil
                         task[\.projectId] == ""
                     }
                     ProjectRow(icon: "star", name: "Today") { task in
@@ -33,14 +34,11 @@ struct TopView: View {
                     }
 
                     Section(header: Text("Projects")) {
-//                        ForEach(self.projects, id: \.id) { project in
-//                            ProjectRow(icon: "flag", name: project[\.title], project: project) { task in
-//                                if let p = task.project {
-//                                    return p == project
-//                                }
-//                                return false
-//                            }
-//                        }
+                        ForEach(self.projects) { project in
+                            ProjectRow(icon: "flag", name: project[\.title], project: project) { task in
+                                return task[\.projectId] == project.documentReference.documentID
+                            }
+                        }
 
                         Button(action: {
                             self.addingProject = Project.make(context: self.viewContext)
@@ -70,6 +68,39 @@ struct TopView: View {
                 .navigationBarItems(
                     leading: settingButton
                 )
+                .onAppear {
+                    let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                    user
+                        .collection(path: .tags)
+                        .order(by: "name")
+                        .addSnapshotListener { querySnapshot, _ in
+                            guard let documents = querySnapshot?.documents else {
+                              return
+                            }
+
+                            self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                                if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
+                                    return tag
+                                }
+                                return Tag() // TODO
+                            }
+                        }
+                    user
+                        .collection(path: .projects)
+                        .order(by: "title")
+                        .addSnapshotListener { querySnapshot, _ in
+                            guard let documents = querySnapshot?.documents else {
+                              return
+                            }
+
+                            self.projects = documents.map { queryDocumentSnapshot -> Project in
+                                if let project: Project = try? Project(snapshot: queryDocumentSnapshot) {
+                                    return project
+                                }
+                                return Project() // TODO
+                            }
+                        }
+                }
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     VStack {
                         Spacer()

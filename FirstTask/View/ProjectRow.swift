@@ -1,14 +1,11 @@
 import SwiftUI
+import FirebaseAuth
+import Ballcap
 
 struct ProjectRow: View {
     @Environment(\.managedObjectContext) var viewContext
 
-//    @FetchRequest(
-//        entity: Task.entity(),
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-//        predicate: NSPredicate(format: "completedAt == nil")
-//    ) var tasks: FetchedResults<Task>
-    @State var tasks: [Task] = []
+    @State var taskCount: Int = 0
 
     var icon = ""
     var name = ""
@@ -32,7 +29,22 @@ struct ProjectRow: View {
                 Image(systemName: icon)
                 Text(self.name)
                 Spacer()
-                Text("\(self.tasks.filter { self.filter($0) }.count)")
+                Text("\(self.taskCount)")
+            }
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                // TODO: today row
+                // TODO: complatedAt
+                user
+                    .collection(path: .tasks)
+                    .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else {
+                            return
+                        }
+
+                        self.taskCount = documents.count
+                    }
             }
         }
     }

@@ -17,7 +17,7 @@ class Project: Object, DataRepresentable, DataListenable, ObservableObject, Iden
         var updatedAt: ServerTimestamp?
         var startDate: ServerTimestamp?
         var dueDate: ServerTimestamp?
-        var displayOrder: Int = 0
+//        var displayOrder: Int = 0
     }
 }
 
