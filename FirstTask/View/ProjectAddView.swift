@@ -24,7 +24,7 @@ struct ProjectAddView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            self.viewContext.delete(self.project)
+//            self.viewContext.delete(self.project) // TODO
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Cancel")

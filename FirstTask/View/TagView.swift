@@ -3,9 +3,10 @@ import CoreData
 
 struct TagView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(
-       sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
+//    @FetchRequest(
+//       sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+//    ) var tags: FetchedResults<Tag>
+    @State var tags: [Tag] = [] // TODO
     @State var showingActionSheet: Bool = false
     @State var showingAddTagModal = false
     @State var showingEditTagModal = false
@@ -17,7 +18,7 @@ struct TagView: View {
             List {
                 ForEach(tags, id: \.self) { tag in
                     HStack {
-                        Text(tag.name ?? "")
+                        Text(tag[\.name])
                         Spacer()
                         Button(action: {
                             self.editingTag = tag
@@ -26,10 +27,10 @@ struct TagView: View {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(UIColor.secondaryLabel))
                         }.actionSheet(isPresented: self.$showingActionSheet) {
-                            ActionSheet(title: Text(self.editingTag.name ?? ""),
+                            ActionSheet(title: Text(self.editingTag[\.name]),
                                 buttons: [
                                     .default(Text("Edit")) {
-                                        self.newTagName = self.editingTag.name ?? ""
+                                        self.newTagName = self.editingTag[\.name]
                                         self.showingEditTagModal = true
                                     },
                                     .destructive(Text("Delete")) {
@@ -57,7 +58,7 @@ struct TagView: View {
                 UIApplication.shared.closeKeyboard()
             }
             BottomTextFieldSheetModal(isShown: self.$showingEditTagModal, text: self.$newTagName) {
-                self.editingTag.name = self.newTagName
+                self.editingTag[\.name] = self.newTagName
                 self.showingEditTagModal = false
                 UIApplication.shared.closeKeyboard()
             }

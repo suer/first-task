@@ -3,13 +3,16 @@ import SwiftUI
 struct TopView: View {
     @Environment(\.managedObjectContext) var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
-        predicate: NSPredicate(format: "completedAt == nil")
-    ) var projects: FetchedResults<Project>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+//    ) var tags: FetchedResults<Tag>
+    @State var tags: [Tag] = [] // TODO
+
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
+//        predicate: NSPredicate(format: "completedAt == nil")
+//    ) var projects: FetchedResults<Project>
+    @State var projects: [Project] = [] // TODO
 
     @State var showingSettingMenuModal = false
     @State var showingAddTaskModal = false
@@ -22,21 +25,22 @@ struct TopView: View {
             ZStack(alignment: .bottom) {
                 List {
                     ProjectRow(icon: "tray", name: "Inbox") { task in
-                        task.project == nil
+//                        task.project == nil
+                        task[\.projectId] == ""
                     }
                     ProjectRow(icon: "star", name: "Today") { task in
                         task.hasTagByKind(tagKind: "today")
                     }
 
                     Section(header: Text("Projects")) {
-                        ForEach(self.projects, id: \.id) { project in
-                            ProjectRow(icon: "flag", name: project.title ?? "", project: project) { task in
-                                if let p = task.project {
-                                    return p == project
-                                }
-                                return false
-                            }
-                        }
+//                        ForEach(self.projects, id: \.id) { project in
+//                            ProjectRow(icon: "flag", name: project[\.title], project: project) { task in
+//                                if let p = task.project {
+//                                    return p == project
+//                                }
+//                                return false
+//                            }
+//                        }
 
                         Button(action: {
                             self.addingProject = Project.make(context: self.viewContext)
@@ -54,9 +58,9 @@ struct TopView: View {
                     }
 
                     Section(header: Text("Tags")) {
-                        ForEach(tags.filter { $0.kind != "today" }) { tag in
-                            ProjectRow(icon: "tag", name: tag.name ?? "") { task in
-                                task.hasTag(tagName: tag.name ?? "")
+                        ForEach(tags.filter { $0[\.kind] != "today" }) { tag in
+                            ProjectRow(icon: "tag", name: tag[\.name]) { task in
+                                task.hasTag(tagName: tag[\.name])
                             }
                         }
                     }

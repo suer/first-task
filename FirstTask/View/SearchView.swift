@@ -4,9 +4,10 @@ struct SearchView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+//    ) var tags: FetchedResults<Tag>
+    @State var tags: [Tag] = []
 
     @Binding var filteringTagName: String
 
@@ -29,12 +30,12 @@ struct SearchView: View {
 
                     ForEach(tags) { tag in
                         Button(action: {
-                            self.filteringTagName = tag.name ?? ""
+                            self.filteringTagName = tag[\.name]
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
                             HStack {
                                 Image(systemName: "tag")
-                                Text(tag.name ?? "")
+                                Text(tag[\.name])
                             }
                         }
                         .accentColor(Color(UIColor.label))

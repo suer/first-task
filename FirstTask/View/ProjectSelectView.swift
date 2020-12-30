@@ -2,10 +2,11 @@ import SwiftUI
 
 struct ProjectSelectView: View {
     @Environment(\.presentationMode) var presentation
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
-        predicate: NSPredicate(format: "completedAt == nil")
-    ) var projects: FetchedResults<Project>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
+//        predicate: NSPredicate(format: "completedAt == nil")
+//    ) var projects: FetchedResults<Project>
+    @State var projects: [Project] = [] // TODO
     var project: Project?
     var action: (Project?) -> Void
 
@@ -29,7 +30,7 @@ struct ProjectSelectView: View {
             ForEach(self.projects) { project in
                 HStack {
                     Image(systemName: self.project == project ? "checkmark.circle.fill" : "circle")
-                    Text(project.title ?? "")
+                    Text(project[\.title])
                     Spacer()
                 }
                 .contentShape(Rectangle())
@@ -45,8 +46,8 @@ struct ProjectSelectView: View {
 struct ProjectSelectView_Previews: PreviewProvider {
     static var previews: some View {
         let context = CoreDataSupport.context
-        let project = Project(context: context)
-        project.title = "ピクニックの準備をする"
+        let project = Project()
+        project[\.title] = "ピクニックの準備をする"
         return ProjectSelectView(project: project) { _ in }
     }
 }

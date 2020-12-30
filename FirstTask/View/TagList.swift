@@ -3,9 +3,10 @@ import MobileCoreServices
 
 struct TagList: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
+//    ) var tags: FetchedResults<Tag>
+    @State var tags: [Tag] = []
     @ObservedObject var task: Task
     @State var showAddTagModal = false
     @State var newTagName = ""
@@ -16,16 +17,17 @@ struct TagList: View {
                 ForEach(tags) { tag in
                     HStack {
                         Image(systemName: self.task.allTags.contains(tag) ? "checkmark.circle.fill" : "circle")
-                        Text(tag.name ?? "")
+                        Text(tag[\.name])
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        if self.task.allTags.contains(tag) {
-                            self.task.removeFromTags(tag)
-                        } else {
-                            self.task.addToTags(tag)
-                        }
+                        // TODO
+//                        if self.task.allTags.contains(tag) {
+//                            self.task.removeFromTags(tag)
+//                        } else {
+//                            self.task.addToTags(tag)
+//                        }
                     }
                 }
             }.navigationBarTitle("Tags", displayMode: .inline)
@@ -56,7 +58,7 @@ struct TagList_Previews: PreviewProvider {
         let tag = Tag.create(context: context, name: "重要")
         _ = Tag.create(context: context, name: "買い物")
         let task = Task.make(context: context, id: UUID(), title: "test")
-        task.addToTags(tag!)
+//        task.addToTags(tag!)
         return TagList(task: task).environment(\.managedObjectContext, context)
     }
 }

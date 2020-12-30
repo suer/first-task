@@ -5,11 +5,12 @@ struct TaskList: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var appSettings: AppSettings
 
-    @FetchRequest(
-        entity: Task.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-        predicate: NSPredicate(format: "completedAt == nil")
-    ) var tasks: FetchedResults<Task>
+//    @FetchRequest(
+//        entity: Task.entity(),
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
+//        predicate: NSPredicate(format: "completedAt == nil")
+//    ) var tasks: FetchedResults<Task>
+    @State var tasks: [Task] = []
 
     @ObservedObject var modalState = ModalState()
     @State var editing: Bool = false
@@ -40,7 +41,7 @@ struct TaskList: View {
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
             .actionSheet(isPresented: self.$showingProjectActionSheet) {
-                ActionSheet(title: Text(self.project!.title ?? ""),
+                ActionSheet(title: Text(self.project![\.title]),
                     buttons: [
                         .default(Text("Edit")) {
                             self.showingProjectEditModal = true
@@ -77,22 +78,22 @@ struct TaskList: View {
                 }.padding(10)
             }.padding(10)
 
-            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
-                if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
-                    task?.addToTags(tag)
-                }
-                task?.project = self.project
-            }
-
-            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
-                ProjectSelectView(project: self.project) { project in
-                    self.movingTask.map({ task in task.project = project })
-                    self.showingProjectMoveModal = false
-                }
-                .padding()
-                .frame(height: 360)
-            }
+//            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+//                let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
+//                if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
+//                    task?.addToTags(tag)
+//                }
+//                task?.project = self.project
+//            }
+//
+//            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
+//                ProjectSelectView(project: self.project) { project in
+//                    self.movingTask.map({ task in task.project = project })
+//                    self.showingProjectMoveModal = false
+//                }
+//                .padding()
+//                .frame(height: 360)
+//            }
         }
     }
 
@@ -177,7 +178,7 @@ struct TaskList: View {
             ProjectEditView(project: self.project!)
                 .environment(\.managedObjectContext, self.viewContext)
                 .onDisappear {
-                    self.navigationBarTitle = self.project!.wrappedTitle
+//                    self.navigationBarTitle = self.project!.wrappedTitle
                 }
         }
     }

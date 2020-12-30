@@ -3,11 +3,12 @@ import SwiftUI
 struct ProjectRow: View {
     @Environment(\.managedObjectContext) var viewContext
 
-    @FetchRequest(
-        entity: Task.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-        predicate: NSPredicate(format: "completedAt == nil")
-    ) var tasks: FetchedResults<Task>
+//    @FetchRequest(
+//        entity: Task.entity(),
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
+//        predicate: NSPredicate(format: "completedAt == nil")
+//    ) var tasks: FetchedResults<Task>
+    @State var tasks: [Task] = []
 
     var icon = ""
     var name = ""

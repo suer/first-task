@@ -20,7 +20,8 @@ class AddTodayTag {
                 tasks.forEach {
                     if let task = $0 as? Task {
                         if !task.allTags.contains(todayTag) {
-                            task.addToTags(todayTag)
+                            // TODO
+//                            task.addToTags(todayTag)
                         }
                     }
                 }
