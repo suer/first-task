@@ -61,4 +61,10 @@ extension Task {
         Firestore.firestore().document(originalPath).delete()
     }
 
+    func hasTag(tagId: String) -> Bool {
+        if tagId.isEmpty {
+            return true
+        }
+        return self[\.tagIds].contains(tagId)
+    }
 }

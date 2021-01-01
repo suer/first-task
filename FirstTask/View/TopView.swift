@@ -58,7 +58,7 @@ struct TopView: View {
                     Section(header: Text("Tags")) {
                         ForEach(tags.filter { $0[\.kind] != "today" }) { tag in
                             ProjectRow(icon: "tag", name: tag[\.name]) { task in
-                                task.hasTag(tagName: tag[\.name])
+                                task.hasTag(tagId: tag.id)
                             }
                         }
                     }

@@ -48,14 +48,6 @@ extension Task {
         return 0
     }
 
-    func hasTag(tagName: String) -> Bool {
-//        if tagName.isEmpty {
-//            return true
-//        }
-//        return allTags.contains(where: { $0.name == tagName })
-        return false
-    }
-
     func hasTagByKind(tagKind: String) -> Bool {
 //        if tagKind.isEmpty {
 //            return true
