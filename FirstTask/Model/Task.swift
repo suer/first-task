@@ -49,6 +49,39 @@ extension Task {
         task.delete()
     }
 
+    static func countTodayTasks(done: @escaping (Int) -> Void) {
+        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+
+        user
+            .collection(path: .tags)
+            .whereField("kind", isEqualTo: "today")
+            .getDocuments(completion: { snapshot, err in
+                guard err == nil else { return }
+
+                let todayTag = try? Tag(snapshot: snapshot!.documents[0])
+                if let todayTag = todayTag {
+                    user
+                        .collection(path: .tasks)
+                        .getDocuments(completion: { snapshot, err in
+                            guard err == nil else { return }
+
+                            var count = 0
+
+                            for s in snapshot!.documents {
+                                let task = try? Task(snapshot: s)
+                                if let task = task {
+                                    if task[\.tagIds].contains(todayTag.id) {
+                                        count += 1
+                                    }
+                                }
+                            }
+
+                            done(count)
+                        })
+                }
+            })
+    }
+
     func toggleDone() {
         let originalPath = self.documentReference.path
         var newPath = ""

@@ -36,18 +36,6 @@ extension Task {
         return 0
     }
 
-    static func countTodayTasks(context: NSManagedObjectContext) -> Int {
-//        let request = NSFetchRequest<NSFetchRequestResult>()
-//        request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
-//        request.predicate = NSPredicate(format: "completedAt == nil AND ANY tags.kind = 'today'")
-//        do {
-//            return try context.count(for: request)
-//        } catch {
-//            return 0
-//        }
-        return 0
-    }
-
     static func reorder(context: NSManagedObjectContext, tasks: [Task], source: IndexSet, destination: Int) {
 //        var reordered = tasks
 //        reordered.move(fromOffsets: source, toOffset: destination)
