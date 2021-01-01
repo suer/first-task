@@ -35,7 +35,7 @@ struct TagView: View {
                                         self.showingEditTagModal = true
                                     },
                                     .destructive(Text("Delete")) {
-                                        Tag.destroy(context: self.viewContext, tag: self.editingTag)
+                                        Tag.destroy(tag: self.editingTag)
                                     },
                                     .cancel(Text("Cancel"))
                             ])
@@ -73,7 +73,7 @@ struct TagView: View {
                     }
             }
             BottomTextFieldSheetModal(isShown: self.$showingAddTagModal, text: self.$newTagName) {
-                _ = Tag.create(context: self.viewContext, name: self.newTagName)
+                _ = Tag.create(name: self.newTagName)
                 self.showingAddTagModal = false
                 UIApplication.shared.closeKeyboard()
             }
@@ -87,7 +87,7 @@ struct TagView: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Tag.destroy(context: self.viewContext, tag: tags[i])
+            Tag.destroy(tag: tags[i])
         }
     }
 }

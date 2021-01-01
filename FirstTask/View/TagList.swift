@@ -64,7 +64,7 @@ struct TagList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: self.$showAddTagModal, text: self.$newTagName) {
-                _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
+                _ = Tag.create(name: self.newTagName, task: self.task)
                 self.showAddTagModal = false
                 UIApplication.shared.closeKeyboard()
             }
@@ -75,9 +75,8 @@ struct TagList: View {
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
         let context = CoreDataSupport.context
-        Tag.destroyAll(context: context)
-        let tag = Tag.create(context: context, name: "重要")
-        _ = Tag.create(context: context, name: "買い物")
+        let tag = Tag.create(name: "重要")
+        _ = Tag.create(name: "買い物")
         let task = Task.make(context: context, id: UUID(), title: "test")
 //        task.addToTags(tag!)
         return TagList(task: task).environment(\.managedObjectContext, context)

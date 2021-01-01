@@ -15,3 +15,26 @@ class Tag: Object, DataRepresentable, DataListenable, ObservableObject, Identifi
         var name: String = ""
     }
 }
+
+extension Tag {
+
+    static func create(name: String, kind: String? = nil, task: Task? = nil) -> Tag? {
+        let tag = Tag()
+        tag[\.name] = name
+        tag[\.kind] = kind ?? ""
+
+        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+
+        let batch = Batch()
+        user.tags.append(tag)
+        batch.save(user.tags, to: user.collection(path: .tags))
+        batch.commit()
+
+        return tag
+    }
+
+    static func destroy(tag: Tag) {
+        tag.delete()
+    }
+
+}

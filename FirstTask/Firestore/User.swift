@@ -10,6 +10,8 @@ class User: Object, DataRepresentable & HierarchicalStructurable, DataListenable
     @Published var data: Model?
     var listener: ListenerRegistration?
 
+    var tags: [Tag] = []
+
     struct Model: Codable, Modelable {
         var email: String = ""
         var photoURL: String = ""
