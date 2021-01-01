@@ -121,7 +121,7 @@ struct TaskList: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Task.destroy(context: self.viewContext, task: self.filteredTasks[i])
+            Task.destroy(task: self.filteredTasks[i])
         }
     }
 
@@ -157,14 +157,14 @@ struct TaskList: View {
                     Image(systemName: "arrow.turn.up.right")
                 }
                 Button(action: {
-                    Task.destroy(context: self.viewContext, task: task)
+                    Task.destroy(task: task)
                 }) {
                     Text("Delete")
                     Image(systemName: "trash")
                 }
             }
             .sheet(item: self.$editingTask, onDismiss: {
-                self.editingTask.map({ task in task.save(context: self.viewContext) })
+                self.editingTask.map({ task in task.save() })
             }) { task in
                 TaskEditView(task: task)
                     .environment(\.managedObjectContext, self.viewContext)

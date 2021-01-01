@@ -18,7 +18,7 @@ struct TaskRow: View {
                         .frame(width: 20, height: 20)
             ).onTapGesture {
                 self.vibrate()
-                self.task.toggleDone(context: self.viewContext)
+                self.task.toggleDone()
             }
             VStack {
                 HStack {
@@ -44,6 +44,6 @@ struct TaskRow: View {
 
 struct TaskRow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRow(task: Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う"))
+        TaskRow(task: Task.make(title: "ミルクを買う"))
     }
 }

@@ -75,9 +75,9 @@ struct TagList: View {
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
         let context = CoreDataSupport.context
-        let tag = Tag.create(name: "重要")
+        _ = Tag.create(name: "重要")
         _ = Tag.create(name: "買い物")
-        let task = Task.make(context: context, id: UUID(), title: "test")
+        let task = Task.make(title: "test")
 //        task.addToTags(tag!)
         return TagList(task: task).environment(\.managedObjectContext, context)
     }

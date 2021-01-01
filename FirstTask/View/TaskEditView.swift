@@ -57,7 +57,7 @@ struct TaskEditView: View {
 
 struct TaskEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let task = Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う")
+        let task = Task.make(title: "ミルクを買う")
         task[\.memo] = "住まいは田舎がいい、森と日溜まりでひと寝入り、飛ぶ鳥、稲と日照り、まだ独りもいいが、家内はいます"
         return TaskEditView(task: task)
     }

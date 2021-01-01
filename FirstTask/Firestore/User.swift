@@ -11,6 +11,7 @@ class User: Object, DataRepresentable & HierarchicalStructurable, DataListenable
     var listener: ListenerRegistration?
 
     var tags: [Tag] = []
+    var tasks: [Task] = []
 
     struct Model: Codable, Modelable {
         var email: String = ""

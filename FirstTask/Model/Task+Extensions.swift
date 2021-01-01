@@ -9,41 +9,6 @@ extension Task {
         []
     }
 
-    static func make(context: NSManagedObjectContext, id: UUID, title: String, completedAt: Date = Date()) -> Task {
-//        let task = Task(context: context)
-//        task.id = id
-//        task.title = title
-//        task.completedAt = completedAt
-//        return task
-        return Task()
-    }
-
-    static func create(context: NSManagedObjectContext, title: String) -> Task? {
-//        let task = Task(context: context)
-//        task.id = UUID()
-//        task.title = title
-//        let now = Date()
-//        task.createdAt = now
-//        task.updatedAt = now
-//        task.displayOrder = maxDisplayOrder(context: context) + 1
-//        do {
-//            try context.save()
-//            return task
-//        } catch {
-//            return nil
-//        }
-        return nil
-    }
-
-    static func destroy(context: NSManagedObjectContext, task: Task) {
-//        do {
-//            context.delete(task)
-//            try context.save()
-//        } catch {
-//            // do nothing
-//        }
-    }
-
     static func maxDisplayOrder(context: NSManagedObjectContext) -> Int64 {
 //        let context = context
 //
@@ -83,48 +48,6 @@ extension Task {
         return 0
     }
 
-//    public var wrappedTitle: String {
-//        get { title ?? "" }
-//        set { title = newValue }
-//    }
-//
-//    public var wrappedMemo: String {
-//        get { memo ?? "" }
-//        set { memo = newValue }
-//    }
-//
-//    public var wrappedStartDate: Date {
-//        get { startDate ?? .distantPast }
-//        set { startDate = newValue }
-//    }
-//
-//    public var useStartDate: Bool {
-//        get { startDate != nil }
-//        set {
-//            if newValue {
-//                startDate = Date()
-//            } else {
-//                startDate = nil
-//            }
-//        }
-//    }
-//
-//    public var wrappedDueDate: Date {
-//        get { dueDate ?? .distantPast }
-//        set { dueDate = newValue }
-//    }
-//
-//    public var useDueDate: Bool {
-//        get { dueDate != nil }
-//        set {
-//            if newValue {
-//                dueDate = Date()
-//            } else {
-//                dueDate = nil
-//            }
-//        }
-//    }
-
     func hasTag(tagName: String) -> Bool {
 //        if tagName.isEmpty {
 //            return true
@@ -139,20 +62,6 @@ extension Task {
 //        }
 //        return allTags.contains(where: { $0.kind == tagKind })
         return false
-    }
-
-    func toggleDone(context: NSManagedObjectContext) {
-//        self.completedAt = self.completedAt == nil ? Date() : nil
-//        self.save(context: context)
-    }
-
-    func save(context: NSManagedObjectContext) {
-//        do {
-//            self.updatedAt = Date()
-//            try context.save()
-//        } catch {
-//            // do nothing
-//        }
     }
 
     static func reorder(context: NSManagedObjectContext, tasks: [Task], source: IndexSet, destination: Int) {
