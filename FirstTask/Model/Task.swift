@@ -82,6 +82,21 @@ extension Task {
             })
     }
 
+    static func reorder(tasks: [Task], source: IndexSet, destination: Int) {
+        var reordered = tasks
+        reordered.move(fromOffsets: source, toOffset: destination)
+
+        for index in stride(from: reordered.count - 1, through: 0, by: -1) {
+            reordered[index][\.displayOrder] = index
+        }
+
+        let batch = Batch()
+        for task in reordered {
+            batch.update(task)
+        }
+        batch.commit()
+    }
+
     func toggleDone() {
         let originalPath = self.documentReference.path
         var newPath = ""

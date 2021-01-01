@@ -36,19 +36,4 @@ extension Task {
         return 0
     }
 
-    static func reorder(context: NSManagedObjectContext, tasks: [Task], source: IndexSet, destination: Int) {
-//        var reordered = tasks
-//        reordered.move(fromOffsets: source, toOffset: destination)
-//
-//        for index in stride(from: reordered.count - 1, through: 0, by: -1) {
-//            reordered[index].displayOrder = Int64(index)
-//        }
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            // do nothing
-//        }
-    }
-
 }

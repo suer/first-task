@@ -126,7 +126,7 @@ struct TaskList: View {
     }
 
     func move(from source: IndexSet, to destination: Int) {
-        Task.reorder(context: self.viewContext, tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
+        Task.reorder(tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
 
         withAnimation {
             self.editing = false
