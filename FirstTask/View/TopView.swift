@@ -30,7 +30,7 @@ struct TopView: View {
                         task[\.projectId] == ""
                     }
                     ProjectRow(icon: "star", name: "Today") { task in
-                        task.hasTagByKind(tagKind: "today")
+                        task.hasTag(tagId: todayTagId)
                     }
 
                     Section(header: Text("Projects")) {
@@ -133,6 +133,10 @@ struct TopView: View {
         }) {
             SettingMenuView().environment(\.managedObjectContext, self.viewContext)
         }
+    }
+
+    private var todayTagId: String {
+        self.tags.first { $0[\.kind] == "today" }?.id ?? ""
     }
 }
 

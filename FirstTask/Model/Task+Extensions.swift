@@ -48,14 +48,6 @@ extension Task {
         return 0
     }
 
-    func hasTagByKind(tagKind: String) -> Bool {
-//        if tagKind.isEmpty {
-//            return true
-//        }
-//        return allTags.contains(where: { $0.kind == tagKind })
-        return false
-    }
-
     static func reorder(context: NSManagedObjectContext, tasks: [Task], source: IndexSet, destination: Int) {
 //        var reordered = tasks
 //        reordered.move(fromOffsets: source, toOffset: destination)
