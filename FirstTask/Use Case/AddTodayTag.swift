@@ -29,8 +29,8 @@ class AddTodayTag {
                                 if let task = task {
                                     if !task[\.tagIds].contains(todayTag.id) {
                                         task[\.tagIds] = .arrayUnion([todayTag.id])
+                                        batch.update(task)
                                     }
-                                    batch.update(task)
                                 }
                             }
                             batch.commit()

@@ -15,7 +15,7 @@ struct ProjectEditView: View {
 
     private var saveButton: some View {
         Button(action: {
-            self.project.save(context: self.viewContext)
+            self.project.save()
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")

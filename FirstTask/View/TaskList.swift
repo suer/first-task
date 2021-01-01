@@ -52,11 +52,11 @@ struct TaskList: View {
                         },
                         .default(Text("Complete")) {
                             self.presentation.wrappedValue.dismiss()
-                            self.project!.toggleDone(context: self.viewContext)
+                            self.project!.toggleDone()
                         },
                         .destructive(Text("Delete")) {
                             self.presentation.wrappedValue.dismiss()
-                            Project.destroy(context: self.viewContext, project: self.project!)
+                            Project.destroy(project: self.project!)
                         },
                         .cancel(Text("Cancel"))
                 ])

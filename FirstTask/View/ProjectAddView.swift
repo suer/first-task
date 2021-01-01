@@ -15,7 +15,7 @@ struct ProjectAddView: View {
 
     private var saveButton: some View {
         Button(action: {
-            self.project.save(context: self.viewContext)
+            self.project.save()
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")
@@ -34,7 +34,7 @@ struct ProjectAddView: View {
 
 struct ProjectAddView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectAddView(project: Project.make(context: CoreDataSupport.context))
+        ProjectAddView(project: Project())
             .environment(\.managedObjectContext, CoreDataSupport.context)
     }
 }

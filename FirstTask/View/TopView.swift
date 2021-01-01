@@ -41,7 +41,7 @@ struct TopView: View {
                         }
 
                         Button(action: {
-                            self.addingProject = Project.make(context: self.viewContext)
+                            self.addingProject = Project()
                             self.showingProjectAddModal.toggle()
                         }) {
                             HStack {

@@ -45,7 +45,6 @@ struct ProjectSelectView: View {
 
 struct ProjectSelectView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = CoreDataSupport.context
         let project = Project()
         project[\.title] = "ピクニックの準備をする"
         return ProjectSelectView(project: project) { _ in }
