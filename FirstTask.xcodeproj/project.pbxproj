@@ -46,7 +46,6 @@
 		804467CE24DFA33600011164 /* FabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CD24DFA33600011164 /* FabButton.swift */; };
 		804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CF24DFD7A900011164 /* FocusableTextField.swift */; };
 		804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D124DFD80A00011164 /* BottomSheetModal.swift */; };
-		804467D424E0260A00011164 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D324E0260A00011164 /* Task+Extensions.swift */; };
 		804467D624E02F0400011164 /* CoreDataSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D524E02F0400011164 /* CoreDataSupport.swift */; };
 		8048A0FD256A1E0D0078873F /* FirebaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */; };
 		80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */; };
@@ -123,7 +122,6 @@
 		804467CD24DFA33600011164 /* FabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabButton.swift; sourceTree = "<group>"; };
 		804467CF24DFD7A900011164 /* FocusableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableTextField.swift; sourceTree = "<group>"; };
 		804467D124DFD80A00011164 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
-		804467D324E0260A00011164 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		804467D524E02F0400011164 /* CoreDataSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSupport.swift; sourceTree = "<group>"; };
 		8047ABB425455441000D0EC8 /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUIView.swift; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 		804467CA24DF99F800011164 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				804467D324E0260A00011164 /* Task+Extensions.swift */,
 				802C2F19259C619D00389927 /* Project.swift */,
 				802C2F1E259C62CF00389927 /* Task.swift */,
 				802C2F23259C63E700389927 /* Tag.swift */,
@@ -742,7 +739,6 @@
 				804467C924DF98F100011164 /* TaskRow.swift in Sources */,
 				80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */,
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,
-				804467D424E0260A00011164 /* Task+Extensions.swift in Sources */,
 				8044679B24DF97CC00011164 /* ContentView.swift in Sources */,
 				802C2F24259C63E700389927 /* Tag.swift in Sources */,
 				19D1298A256A45B400BB7732 /* SessionState.swift in Sources */,

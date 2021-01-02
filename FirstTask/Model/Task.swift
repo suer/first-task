@@ -26,6 +26,14 @@ class Task: Object, DataRepresentable, DataListenable, ObservableObject, Identif
 
 extension Task {
 
+    func allTags(tags: [Tag]) -> [Tag] {
+        return tags.filter { tag in
+            self[\.tagIds].contains { tagId in
+                tag.documentReference.documentID == tagId
+            }
+        }
+    }
+
     static func make(title: String) -> Task {
         let task = Task()
         task[\.title] = title

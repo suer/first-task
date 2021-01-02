@@ -3,6 +3,7 @@ import AudioToolbox
 
 struct TaskRow: View {
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
 
     var body: some View {
@@ -25,9 +26,9 @@ struct TaskRow: View {
                     Text(task[\.title])
                     Spacer()
                 }
-                if task.allTags.count > 0 {
+                if task.allTags(tags: appSettings.tags).count > 0 {
                     HStack {
-                        ForEach(task.allTags) { tag in
+                        ForEach(task.allTags(tags: appSettings.tags)) { tag in
                             TagBubble(tag: tag)
                         }
                         Spacer()

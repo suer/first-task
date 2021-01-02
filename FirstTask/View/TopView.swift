@@ -4,11 +4,12 @@ import Ballcap
 
 struct TopView: View {
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var appSettings: AppSettings
 
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
 //    ) var tags: FetchedResults<Tag>
-    @State var tags: [Tag] = [] // TODO
+//    @State var tags: [Tag] = [] // TODO
 
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
@@ -56,7 +57,7 @@ struct TopView: View {
                     }
 
                     Section(header: Text("Tags")) {
-                        ForEach(tags.filter { $0[\.kind] != "today" }) { tag in
+                        ForEach(appSettings.tags.filter { $0[\.kind] != "today" }) { tag in
                             ProjectRow(icon: "tag", name: tag[\.name]) { task in
                                 task.hasTag(tagId: tag.id)
                             }
@@ -78,7 +79,7 @@ struct TopView: View {
                               return
                             }
 
-                            self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                            self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag in
                                 if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
                                     return tag
                                 }
@@ -136,7 +137,7 @@ struct TopView: View {
     }
 
     private var todayTagId: String {
-        self.tags.first { $0[\.kind] == "today" }?.id ?? ""
+        self.appSettings.tags.first { $0[\.kind] == "today" }?.id ?? ""
     }
 }
 

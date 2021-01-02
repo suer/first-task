@@ -3,6 +3,7 @@ import SwiftUI
 struct TaskEditView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
 
     var body: some View {
@@ -29,8 +30,8 @@ struct TaskEditView: View {
                     List {
                         NavigationLink(destination: TagList(task: self.task).environment(\.managedObjectContext, self.viewContext)) {
                             Group {
-                                if task.allTags.count > 0 {
-                                    ForEach(task.allTags) { tag in
+                                if task.allTags(tags: appSettings.tags).count > 0 {
+                                    ForEach(task.allTags(tags: appSettings.tags)) { tag in
                                         TagBubble(tag: tag)
                                     }
                                     Spacer()

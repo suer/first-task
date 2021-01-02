@@ -18,7 +18,7 @@ struct TagList: View {
             List {
                 ForEach(tags) { tag in
                     HStack {
-                        Image(systemName: self.task.allTags.contains(tag) ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: self.task.allTags(tags: tags).contains(tag) ? "checkmark.circle.fill" : "circle")
                         Text(tag[\.name])
                         Spacer()
                     }
