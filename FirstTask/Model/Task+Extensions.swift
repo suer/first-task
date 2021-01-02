@@ -9,31 +9,4 @@ extension Task {
         []
     }
 
-    static func maxDisplayOrder(context: NSManagedObjectContext) -> Int64 {
-//        let context = context
-//
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-//        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
-//
-//        let expressionDescription = NSExpressionDescription()
-//        expressionDescription.name = "maxDisplayOrder"
-//        expressionDescription.expression = NSExpression(forFunction: "max:", arguments: [NSExpression(forKeyPath: "displayOrder")])
-//        expressionDescription.expressionResultType = NSAttributeType.integer64AttributeType
-//
-//        fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
-//        fetchRequest.propertiesToFetch = [expressionDescription]
-//
-//        do {
-//            let results = try context.fetch(fetchRequest)
-//            if let max = (results.first as AnyObject).value(forKey: "maxDisplayOrder") as? Int64 {
-//                return max
-//            } else {
-//                return 0
-//            }
-//        } catch {
-//            return 0
-//        }
-        return 0
-    }
-
 }
