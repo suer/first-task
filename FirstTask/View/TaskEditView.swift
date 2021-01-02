@@ -8,10 +8,10 @@ struct TaskEditView: View {
     var body: some View {
         NavigationView {
             Form {
-//                TextField("Input title", text: $task.wrappedTitle)
-//                Section(header: Text("Memo")) {
-//                    TextEditor(text: $task.wrappedMemo)
-//                }
+                TextField("Input title", text: $task[\.title])
+                Section(header: Text("Memo")) {
+                    TextEditor(text: $task[\.memo])
+                }
 //                Section(header: Text("Start Date")) {
 //                     Toggle("Set Start Date", isOn: $task.useStartDate)
 //                     if $task.useStartDate.wrappedValue {
