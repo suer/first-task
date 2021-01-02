@@ -5,10 +5,11 @@ import Ballcap
 
 struct TagList: View {
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var appSettings: AppSettings
+
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
 //    ) var tags: FetchedResults<Tag>
-    @State var tags: [Tag] = []
     @ObservedObject var task: Task
     @State var showAddTagModal = false
     @State var newTagName = ""
@@ -16,20 +17,23 @@ struct TagList: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             List {
-                ForEach(tags) { tag in
+                ForEach(appSettings.tags) { tag in
                     HStack {
-                        Image(systemName: self.task.allTags(tags: tags).contains(tag) ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: self.task.allTags(tags: appSettings.tags).contains(tag) ? "checkmark.circle.fill" : "circle")
                         Text(tag[\.name])
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        // TODO
-//                        if self.task.allTags.contains(tag) {
-//                            self.task.removeFromTags(tag)
-//                        } else {
-//                            self.task.addToTags(tag)
-//                        }
+                        let batch = Batch()
+                        if self.task.allTags(tags: appSettings.tags).contains(tag) {
+                            let tagIds = self.task[\.tagIds].filter { tagId in tagId != tag.id }
+                            self.task[\.tagIds] = .value(tagIds)
+                        } else {
+                            self.task[\.tagIds] = .value(self.task[\.tagIds] + [tag.id])
+                        }
+                        batch.update(self.task)
+                        batch.commit()
                     }
                 }
             }
@@ -44,7 +48,7 @@ struct TagList: View {
                           return
                         }
 
-                        self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                        self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag in
                             if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
                                 return tag
                             }
