@@ -4,10 +4,8 @@ import Ballcap
 
 struct TagView: View {
     @Environment(\.managedObjectContext) var viewContext
-//    @FetchRequest(
-//       sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-//    ) var tags: FetchedResults<Tag>
-    @State var tags: [Tag] = [] // TODO
+    @EnvironmentObject var appSettings: AppSettings
+
     @State var showingActionSheet: Bool = false
     @State var showingAddTagModal = false
     @State var showingEditTagModal = false
@@ -17,7 +15,7 @@ struct TagView: View {
     var body: some View {
         ZStack {
             List {
-                ForEach(tags, id: \.self) { tag in
+                ForEach(appSettings.tags, id: \.self) { tag in
                     HStack {
                         Text(tag[\.name])
                         Spacer()
@@ -64,7 +62,7 @@ struct TagView: View {
                           return
                         }
 
-                        self.tags = documents.map { queryDocumentSnapshot -> Tag in
+                        self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag in
                             if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
                                 return tag
                             }
@@ -78,7 +76,10 @@ struct TagView: View {
                 UIApplication.shared.closeKeyboard()
             }
             BottomTextFieldSheetModal(isShown: self.$showingEditTagModal, text: self.$newTagName) {
+                let batch = Batch()
                 self.editingTag[\.name] = self.newTagName
+                batch.update(self.editingTag)
+                batch.commit()
                 self.showingEditTagModal = false
                 UIApplication.shared.closeKeyboard()
             }
@@ -87,7 +88,7 @@ struct TagView: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Tag.destroy(tag: tags[i])
+            Tag.destroy(tag: appSettings.tags[i])
         }
     }
 }
