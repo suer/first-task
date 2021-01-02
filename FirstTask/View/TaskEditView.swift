@@ -13,18 +13,18 @@ struct TaskEditView: View {
                 Section(header: Text("Memo")) {
                     TextEditor(text: $task[\.memo])
                 }
-//                Section(header: Text("Start Date")) {
-//                     Toggle("Set Start Date", isOn: $task.useStartDate)
-//                     if $task.useStartDate.wrappedValue {
-//                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
-//                     }
-//                }
-//                Section(header: Text("Due Date")) {
-//                    Toggle("Set Due Date", isOn: $task.useDueDate)
-//                    if $task.useDueDate.wrappedValue {
-//                        DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
-//                    }
-//                }
+                Section(header: Text("Start Date")) {
+                     Toggle("Set Start Date", isOn: $task.useStartDate)
+                     if $task.useStartDate.wrappedValue {
+                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
+                     }
+                }
+                Section(header: Text("Due Date")) {
+                    Toggle("Set Due Date", isOn: $task.useDueDate)
+                    if $task.useDueDate.wrappedValue {
+                        DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
+                    }
+                }
 
                 Section(header: Text("Tags")) {
                     List {

@@ -16,11 +16,43 @@ class Task: Object, DataRepresentable, DataListenable, ObservableObject, Identif
         var completedAt: ServerTimestamp?
         var createdAt: ServerTimestamp?
         var updatedAt: ServerTimestamp?
-        var startDate: ServerTimestamp?
-        var dueDate: ServerTimestamp?
+        var startDate: Timestamp?
+        var dueDate: Timestamp?
         var displayOrder: Int = 0
         var tagIds: OperableArray<String> = .value([])
         var projectId: String = ""
+    }
+
+    public var wrappedStartDate: Date {
+        get { self[\.startDate]?.dateValue() ?? .distantPast }
+        set { self[\.startDate] = Timestamp(date: newValue) }
+    }
+
+    public var useStartDate: Bool {
+        get { self[\.startDate] != nil }
+        set {
+            if newValue {
+                self[\.startDate] = Timestamp()
+            } else {
+                self[\.startDate] = nil
+            }
+        }
+    }
+
+    public var wrappedDueDate: Date {
+        get { self[\.dueDate]?.dateValue() ?? .distantPast }
+        set { self[\.dueDate] = Timestamp(date: newValue) }
+    }
+
+    public var useDueDate: Bool {
+        get { self[\.dueDate] != nil }
+        set {
+            if newValue {
+                self[\.dueDate] = Timestamp()
+            } else {
+                self[\.dueDate] = nil
+            }
+        }
     }
 }
 

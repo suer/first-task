@@ -6,18 +6,18 @@ struct ProjectFormView: View {
     var body: some View {
         Form {
             TextField("Input title", text: $project[\.title])
-//            Section(header: Text("Start Date")) {
-//                Toggle("Set Start Date", isOn: $project.useStartDate)
-//                if $project.useStartDate.wrappedValue {
-//                    DatePicker("", selection: $project.wrappedStartDate, displayedComponents: .date)
-//                }
-//            }
-//            Section(header: Text("Due Date")) {
-//                Toggle("Set Due Date", isOn: $project.useDueDate)
-//                if $project.useDueDate.wrappedValue {
-//                    DatePicker("", selection: $project.wrappedDueDate, displayedComponents: .date)
-//                }
-//            }
+            Section(header: Text("Start Date")) {
+                Toggle("Set Start Date", isOn: $project.useStartDate)
+                if $project.useStartDate.wrappedValue {
+                    DatePicker("", selection: $project.wrappedStartDate, displayedComponents: .date)
+                }
+            }
+            Section(header: Text("Due Date")) {
+                Toggle("Set Due Date", isOn: $project.useDueDate)
+                if $project.useDueDate.wrappedValue {
+                    DatePicker("", selection: $project.wrappedDueDate, displayedComponents: .date)
+                }
+            }
         }
     }
 }
