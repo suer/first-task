@@ -15,7 +15,7 @@ struct ProjectAddView: View {
 
     private var saveButton: some View {
         Button(action: {
-            self.project.save()
+            _ = Project.create(project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")
@@ -24,7 +24,7 @@ struct ProjectAddView: View {
 
     private var cancelButton: some View {
         Button(action: {
-//            self.viewContext.delete(self.project) // TODO
+            Project.destroy(project: project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Cancel")

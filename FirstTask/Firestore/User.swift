@@ -12,6 +12,7 @@ class User: Object, DataRepresentable & HierarchicalStructurable, DataListenable
 
     var tags: [Tag] = []
     var tasks: [Task] = []
+    var projects: [Project] = []
 
     struct Model: Codable, Modelable {
         var email: String = ""

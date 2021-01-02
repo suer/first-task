@@ -27,6 +27,17 @@ extension Project {
         project.delete()
     }
 
+    static func create(_ project: Project) -> Project {
+        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+
+        let batch = Batch()
+        user.projects.append(project)
+        batch.save(user.projects, to: user.collection(path: .projects))
+        batch.commit()
+
+        return project
+    }
+
     func toggleDone() {
         let originalPath = self.documentReference.path
         var newPath = ""
