@@ -1,12 +1,10 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SearchView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
 
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-//    ) var tags: FetchedResults<Tag>
     @State var tags: [Tag] = []
 
     @Binding var filteringTagName: String
@@ -43,6 +41,17 @@ struct SearchView: View {
                 }
             }
             .navigationBarTitle("Search")
+        }.onAppear {
+            User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                .collection(path: .tags)
+                .order(by: "name")
+                .addSnapshotListener { querySnapshot, _ in
+                    guard let documents = querySnapshot?.documents else { return }
+
+                    self.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                        return try? Tag(snapshot: queryDocumentSnapshot)
+                    }.compactMap { $0 }
+                }
         }
     }
 }

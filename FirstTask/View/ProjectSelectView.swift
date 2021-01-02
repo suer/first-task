@@ -1,12 +1,9 @@
 import SwiftUI
+import FirebaseAuth
 
 struct ProjectSelectView: View {
     @Environment(\.presentationMode) var presentation
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
-//        predicate: NSPredicate(format: "completedAt == nil")
-//    ) var projects: FetchedResults<Project>
-    @State var projects: [Project] = [] // TODO
+    @State var projects: [Project] = []
     var project: Project?
     var action: (Project?) -> Void
 
@@ -39,6 +36,17 @@ struct ProjectSelectView: View {
                     self.presentation.wrappedValue.dismiss()
                 }
             }
+        }.onAppear {
+            User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                .collection(path: .projects)
+                .order(by: "title")
+                .addSnapshotListener { querySnapshot, _ in
+                    guard let documents = querySnapshot?.documents else { return }
+
+                    self.projects = documents.map { queryDocumentSnapshot -> Project? in
+                        return try? Project(snapshot: queryDocumentSnapshot)
+                    }.compactMap { $0 }
+                }
         }
     }
 }
