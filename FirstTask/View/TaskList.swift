@@ -24,9 +24,7 @@ struct TaskList: View {
     var project: Project?
 
     var filteredTasks: [Task] {
-        // TODO
-//        tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }
-        tasks
+        tasks.filter { filter($0) && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName) }
     }
 
     var body: some View {

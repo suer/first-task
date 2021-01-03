@@ -66,6 +66,11 @@ extension Task {
         }
     }
 
+    func hasTagByName(tags: [Tag], name: String) -> Bool {
+        guard !name.isEmpty else { return true }
+        return self.allTags(tags: tags).contains { $0[\.name] == name }
+    }
+
     static func make(title: String) -> Task {
         let task = Task()
         task[\.title] = title
