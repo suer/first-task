@@ -96,14 +96,17 @@ struct TaskList: View {
                                 tagId: tag?.id ?? "")
             }
 
-//            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
-//                ProjectSelectView(project: self.project) { project in
-//                    self.movingTask.map({ task in task.project = project })
-//                    self.showingProjectMoveModal = false
-//                }
-//                .padding()
-//                .frame(height: 360)
-//            }
+            BottomSheetModal(isShown: self.$showingProjectMoveModal) {
+                ProjectSelectView(project: self.project) { project in
+                    self.movingTask.map { task in
+                        task[\.projectId] = project?.id ?? ""
+                        task.save()
+                    }
+                    self.showingProjectMoveModal = false
+                }
+                .padding()
+                .frame(height: 360)
+            }
         }
     }
 
