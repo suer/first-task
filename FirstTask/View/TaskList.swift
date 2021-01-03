@@ -7,11 +7,6 @@ struct TaskList: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var appSettings: AppSettings
 
-//    @FetchRequest(
-//        entity: Task.entity(),
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-//        predicate: NSPredicate(format: "completedAt == nil")
-//    ) var tasks: FetchedResults<Task>
     @State var tasks: [Task] = []
 
     @ObservedObject var modalState = ModalState()
@@ -78,16 +73,11 @@ struct TaskList: View {
                     .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
                     .order(by: "displayOrder")
                     .addSnapshotListener { querySnapshot, _ in
-                        guard let documents = querySnapshot?.documents else {
-                          return
-                        }
+                        guard let documents = querySnapshot?.documents else { return }
 
-                        self.tasks = documents.map { queryDocumentSnapshot -> Task in
-                            if let task: Task = try? Task(snapshot: queryDocumentSnapshot) {
-                                return task
-                            }
-                            return Task() // TODO
-                        }
+                        self.tasks = documents.map { queryDocumentSnapshot -> Task? in
+                            return try? Task(snapshot: queryDocumentSnapshot)
+                        }.compactMap { $0 }
                     }
             }
             VStack {

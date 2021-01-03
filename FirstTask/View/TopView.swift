@@ -6,16 +6,7 @@ struct TopView: View {
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var appSettings: AppSettings
 
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-//    ) var tags: FetchedResults<Tag>
-//    @State var tags: [Tag] = [] // TODO
-
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Project.title, ascending: true)],
-//        predicate: NSPredicate(format: "completedAt == nil")
-//    ) var projects: FetchedResults<Project>
-    @State var projects: [Project] = [] // TODO
+    @State var projects: [Project] = []
 
     @State var showingSettingMenuModal = false
     @State var showingAddTaskModal = false
@@ -75,31 +66,21 @@ struct TopView: View {
                         .collection(path: .tags)
                         .order(by: "name")
                         .addSnapshotListener { querySnapshot, _ in
-                            guard let documents = querySnapshot?.documents else {
-                              return
-                            }
+                            guard let documents = querySnapshot?.documents else { return }
 
-                            self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag in
-                                if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
-                                    return tag
-                                }
-                                return Tag() // TODO
-                            }
+                            self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                                return try? Tag(snapshot: queryDocumentSnapshot)
+                            }.compactMap { $0 }
                         }
                     user
                         .collection(path: .projects)
                         .order(by: "title")
                         .addSnapshotListener { querySnapshot, _ in
-                            guard let documents = querySnapshot?.documents else {
-                              return
-                            }
+                            guard let documents = querySnapshot?.documents else { return }
 
-                            self.projects = documents.map { queryDocumentSnapshot -> Project in
-                                if let project: Project = try? Project(snapshot: queryDocumentSnapshot) {
-                                    return project
-                                }
-                                return Project() // TODO
-                            }
+                            self.projects = documents.map { queryDocumentSnapshot -> Project? in
+                                return try? Project(snapshot: queryDocumentSnapshot)
+                            }.compactMap { $0 }
                         }
                 }
                 if UIDevice.current.userInterfaceIdiom != .pad {

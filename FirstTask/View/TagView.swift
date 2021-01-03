@@ -58,16 +58,11 @@ struct TagView: View {
                     .collection(path: .tags)
                     .order(by: "name")
                     .addSnapshotListener { querySnapshot, _ in
-                        guard let documents = querySnapshot?.documents else {
-                          return
-                        }
+                        guard let documents = querySnapshot?.documents else { return }
 
-                        self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag in
-                            if let tag: Tag = try? Tag(snapshot: queryDocumentSnapshot) {
-                                return tag
-                            }
-                            return Tag() // TODO
-                        }
+                        self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                            return try? Tag(snapshot: queryDocumentSnapshot)
+                        }.compactMap { $0 }
                     }
             }
             BottomTextFieldSheetModal(isShown: self.$showingAddTagModal, text: self.$newTagName) {
