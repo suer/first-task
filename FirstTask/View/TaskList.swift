@@ -191,7 +191,7 @@ struct TaskList: View {
             ProjectEditView(project: self.project!)
                 .environment(\.managedObjectContext, self.viewContext)
                 .onDisappear {
-//                    self.navigationBarTitle = self.project!.wrappedTitle
+                    self.navigationBarTitle = self.project?[\.title] ?? self.navigationBarTitle
                 }
         }
     }
