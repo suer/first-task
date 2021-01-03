@@ -1,15 +1,16 @@
-import CoreData
+import FirebaseAuth
 
 class CreateTodayTag {
-    let context: NSManagedObjectContext
-
-    init(context: NSManagedObjectContext) {
-        self.context = context
-    }
-
     func call() {
-        if Tag.findByKind(context: context, kind: "today") == nil {
-            _ = Tag.create(context: context, name: "Today", kind: "today")
-        }
+        guard Auth.auth().currentUser != nil else { return }
+
+        User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+            .collection(path: .tags)
+            .whereField("kind", isEqualTo: "today")
+            .getDocuments(completion: { snapshot, err in
+                if err == nil && snapshot!.isEmpty {
+                    _ = Tag.create(name: "Today", kind: "today")
+                }
+            })
     }
 }

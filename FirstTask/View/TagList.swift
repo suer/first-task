@@ -1,11 +1,10 @@
 import SwiftUI
-import MobileCoreServices
+import FirebaseAuth
+import Ballcap
 
 struct TagList: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
+    @EnvironmentObject var appSettings: AppSettings
+
     @ObservedObject var task: Task
     @State var showAddTagModal = false
     @State var newTagName = ""
@@ -13,22 +12,40 @@ struct TagList: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             List {
-                ForEach(tags) { tag in
+                ForEach(appSettings.tags) { tag in
                     HStack {
-                        Image(systemName: self.task.allTags.contains(tag) ? "checkmark.circle.fill" : "circle")
-                        Text(tag.name ?? "")
+                        Image(systemName: self.task.allTags(tags: appSettings.tags).contains(tag) ? "checkmark.circle.fill" : "circle")
+                        Text(tag[\.name])
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        if self.task.allTags.contains(tag) {
-                            self.task.removeFromTags(tag)
+                        let batch = Batch()
+                        if self.task.allTags(tags: appSettings.tags).contains(tag) {
+                            let tagIds = self.task[\.tagIds].filter { tagId in tagId != tag.id }
+                            self.task[\.tagIds] = .value(tagIds)
                         } else {
-                            self.task.addToTags(tag)
+                            self.task[\.tagIds] = .value(self.task[\.tagIds] + [tag.id])
                         }
+                        batch.update(self.task)
+                        batch.commit()
                     }
                 }
-            }.navigationBarTitle("Tags", displayMode: .inline)
+            }
+            .navigationBarTitle("Tags", displayMode: .inline)
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                user
+                    .collection(path: .tags)
+                    .order(by: "name")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else { return }
+
+                        self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                            return try? Tag(snapshot: queryDocumentSnapshot)
+                        }.compactMap { $0 }
+                    }
+            }
 
             VStack {
                 Spacer()
@@ -41,7 +58,7 @@ struct TagList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: self.$showAddTagModal, text: self.$newTagName) {
-                _ = Tag.create(context: self.viewContext, name: self.newTagName, task: self.task)
+                _ = Tag.create(name: self.newTagName, task: self.task)
                 self.showAddTagModal = false
                 UIApplication.shared.closeKeyboard()
             }
@@ -51,12 +68,9 @@ struct TagList: View {
 
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
-        let context = CoreDataSupport.context
-        Tag.destroyAll(context: context)
-        let tag = Tag.create(context: context, name: "重要")
-        _ = Tag.create(context: context, name: "買い物")
-        let task = Task.make(context: context, id: UUID(), title: "test")
-        task.addToTags(tag!)
-        return TagList(task: task).environment(\.managedObjectContext, context)
+        _ = Tag.create(name: "重要")
+        _ = Tag.create(name: "買い物")
+        let task = Task.make(title: "test")
+        return TagList(task: task)
     }
 }

@@ -1,15 +1,12 @@
 import SwiftUI
+import FirebaseAuth
+import Ballcap
 
 struct TaskList: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var appSettings: AppSettings
 
-    @FetchRequest(
-        entity: Task.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Task.displayOrder, ascending: true)],
-        predicate: NSPredicate(format: "completedAt == nil")
-    ) var tasks: FetchedResults<Task>
+    @State var tasks: [Task] = []
 
     @ObservedObject var modalState = ModalState()
     @State var editing: Bool = false
@@ -26,7 +23,7 @@ struct TaskList: View {
     var project: Project?
 
     var filteredTasks: [Task] {
-        tasks.filter { filter($0) && $0.hasTag(tagName: self.filteringTagName) }
+        tasks.filter { filter($0) && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName) }
     }
 
     var body: some View {
@@ -40,18 +37,18 @@ struct TaskList: View {
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
             .actionSheet(isPresented: self.$showingProjectActionSheet) {
-                ActionSheet(title: Text(self.project!.title ?? ""),
+                ActionSheet(title: Text(self.project![\.title]),
                     buttons: [
                         .default(Text("Edit")) {
                             self.showingProjectEditModal = true
                         },
                         .default(Text("Complete")) {
                             self.presentation.wrappedValue.dismiss()
-                            self.project!.toggleDone(context: self.viewContext)
+                            self.project!.toggleDone()
                         },
                         .destructive(Text("Delete")) {
                             self.presentation.wrappedValue.dismiss()
-                            Project.destroy(context: self.viewContext, project: self.project!)
+                            Project.destroy(project: self.project!)
                         },
                         .cancel(Text("Cancel"))
                 ])
@@ -66,7 +63,20 @@ struct TaskList: View {
                     }
                 }
             )
+            .onAppear {
+                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                user
+                    .collection(path: .tasks)
+                    .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+                    .order(by: "displayOrder")
+                    .addSnapshotListener { querySnapshot, _ in
+                        guard let documents = querySnapshot?.documents else { return }
 
+                        self.tasks = documents.map { queryDocumentSnapshot -> Task? in
+                            return try? Task(snapshot: queryDocumentSnapshot)
+                        }.compactMap { $0 }
+                    }
+            }
             VStack {
                 Spacer()
                 HStack {
@@ -78,16 +88,19 @@ struct TaskList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                let task = Task.create(context: self.viewContext, title: self.$newTaskTitle.wrappedValue)
-                if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
-                    task?.addToTags(tag)
-                }
-                task?.project = self.project
+                let tag = self.appSettings.tags.first { $0[\.name] == self.filteringTagName }
+
+                _ = Task.create(title: self.$newTaskTitle.wrappedValue,
+                                projectId: self.project?.id ?? "",
+                                tagId: tag?.id ?? "")
             }
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
                 ProjectSelectView(project: self.project) { project in
-                    self.movingTask.map({ task in task.project = project })
+                    self.movingTask.map { task in
+                        task[\.projectId] = project?.id ?? ""
+                        task.save()
+                    }
                     self.showingProjectMoveModal = false
                 }
                 .padding()
@@ -98,12 +111,12 @@ struct TaskList: View {
 
     func removeRow(offsets: IndexSet) {
         offsets.forEach { i in
-            Task.destroy(context: self.viewContext, task: self.filteredTasks[i])
+            Task.destroy(task: self.filteredTasks[i])
         }
     }
 
     func move(from source: IndexSet, to destination: Int) {
-        Task.reorder(context: self.viewContext, tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
+        Task.reorder(tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
 
         withAnimation {
             self.editing = false
@@ -134,17 +147,16 @@ struct TaskList: View {
                     Image(systemName: "arrow.turn.up.right")
                 }
                 Button(action: {
-                    Task.destroy(context: self.viewContext, task: task)
+                    Task.destroy(task: task)
                 }) {
                     Text("Delete")
                     Image(systemName: "trash")
                 }
             }
             .sheet(item: self.$editingTask, onDismiss: {
-                self.editingTask.map({ task in task.save(context: self.viewContext) })
+                self.editingTask.map({ task in task.save() })
             }) { task in
                 TaskEditView(task: task)
-                    .environment(\.managedObjectContext, self.viewContext)
             }
     }
 
@@ -160,7 +172,6 @@ struct TaskList: View {
             self.modalState.showingSearchModal = false
         }) {
             SearchView(filteringTagName: self.$filteringTagName)
-                .environment(\.managedObjectContext, self.viewContext)
                 .environmentObject(AppSettings())
         }
     }
@@ -175,9 +186,8 @@ struct TaskList: View {
                 .clipShape(Circle())
         }.sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
-                .environment(\.managedObjectContext, self.viewContext)
                 .onDisappear {
-                    self.navigationBarTitle = self.project!.wrappedTitle
+                    self.navigationBarTitle = self.project?[\.title] ?? self.navigationBarTitle
                 }
         }
     }
@@ -187,7 +197,6 @@ struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             TaskList()
-                .environment(\.managedObjectContext, CoreDataSupport.context)
                 .environmentObject(AppSettings())
         }
     }

@@ -1,7 +1,7 @@
 import Ballcap
 import Firebase
 
-class User: Object, DataRepresentable, DataListenable, ObservableObject, Identifiable {
+class User: Object, DataRepresentable & HierarchicalStructurable, DataListenable, ObservableObject, Identifiable {
     // swiftlint:disable type_name
     typealias ID = String
     // swiftlint:enable type_name
@@ -10,8 +10,18 @@ class User: Object, DataRepresentable, DataListenable, ObservableObject, Identif
     @Published var data: Model?
     var listener: ListenerRegistration?
 
+    var tags: [Tag] = []
+    var tasks: [Task] = []
+    var projects: [Project] = []
+
     struct Model: Codable, Modelable {
         var email: String = ""
         var photoURL: String = ""
+    }
+
+    enum CollectionKeys: String {
+        case tasks
+        case tags
+        case projects
     }
 }

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SettingMenuView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject private var sessionState = SessionState()
 
@@ -11,7 +10,7 @@ struct SettingMenuView: View {
         NavigationView {
             Form {
                 Section {
-                    NavigationLink(destination: TagView().environment(\.managedObjectContext, self.viewContext)) {
+                    NavigationLink(destination: TagView()) {
                         HStack {
                             Image(systemName: "tag")
                             Text("Tags")

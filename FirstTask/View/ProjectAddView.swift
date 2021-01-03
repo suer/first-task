@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ProjectAddView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     @State var project: Project = Project()
 
@@ -15,7 +14,7 @@ struct ProjectAddView: View {
 
     private var saveButton: some View {
         Button(action: {
-            self.project.save(context: self.viewContext)
+            _ = Project.create(project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Save")
@@ -24,7 +23,7 @@ struct ProjectAddView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            self.viewContext.delete(self.project)
+            Project.destroy(project: project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Cancel")
@@ -34,7 +33,6 @@ struct ProjectAddView: View {
 
 struct ProjectAddView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectAddView(project: Project.make(context: CoreDataSupport.context))
-            .environment(\.managedObjectContext, CoreDataSupport.context)
+        ProjectAddView(project: Project())
     }
 }

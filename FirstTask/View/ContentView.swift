@@ -9,8 +9,8 @@ struct ContentView: View {
                 .current()
                 .requestAuthorization(options: [.badge]) { _, _ in }
 
-            CreateTodayTag(context: self.context).call()
-            AddTodayTag(context: self.context).call()
+            CreateTodayTag().call()
+            AddTodayTag().call()
         })
     }
 }
@@ -18,7 +18,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, CoreDataSupport.context)
             .environmentObject(AppSettings())
     }
 }

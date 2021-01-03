@@ -1,16 +1,16 @@
 import SwiftUI
 
 struct TaskEditView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
 
     var body: some View {
         NavigationView {
             Form {
-                TextField("Input title", text: $task.wrappedTitle)
+                TextField("Input title", text: $task[\.title])
                 Section(header: Text("Memo")) {
-                    TextEditor(text: $task.wrappedMemo)
+                    TextEditor(text: $task[\.memo])
                 }
                 Section(header: Text("Start Date")) {
                      Toggle("Set Start Date", isOn: $task.useStartDate)
@@ -27,10 +27,10 @@ struct TaskEditView: View {
 
                 Section(header: Text("Tags")) {
                     List {
-                        NavigationLink(destination: TagList(task: self.task).environment(\.managedObjectContext, self.viewContext)) {
+                        NavigationLink(destination: TagList(task: self.task)) {
                             Group {
-                                if task.allTags.count > 0 {
-                                    ForEach(task.allTags) { tag in
+                                if task.allTags(tags: appSettings.tags).count > 0 {
+                                    ForEach(task.allTags(tags: appSettings.tags)) { tag in
                                         TagBubble(tag: tag)
                                     }
                                     Spacer()
@@ -51,14 +51,16 @@ struct TaskEditView: View {
                         .foregroundColor(Color(UIColor(named: "Accent")!))
                         .clipShape(Circle())
                 })
+        }.onDisappear {
+            task.save()
         }
     }
 }
 
 struct TaskEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let task = Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う")
-        task.memo = "住まいは田舎がいい、森と日溜まりでひと寝入り、飛ぶ鳥、稲と日照り、まだ独りもいいが、家内はいます"
+        let task = Task.make(title: "ミルクを買う")
+        task[\.memo] = "住まいは田舎がいい、森と日溜まりでひと寝入り、飛ぶ鳥、稲と日照り、まだ独りもいいが、家内はいます"
         return TaskEditView(task: task)
     }
 }

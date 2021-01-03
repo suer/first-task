@@ -1,32 +1,41 @@
-import CoreData
+import Ballcap
+import FirebaseAuth
 
 class AddTodayTag {
-    let context: NSManagedObjectContext
-
-    init(context: NSManagedObjectContext) {
-        self.context = context
-    }
-
     func call() {
         let today = Date()
 
-        if let todayTag = Tag.findByKind(context: context, kind: "today") {
-            let request = NSFetchRequest<NSFetchRequestResult>()
-            request.entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
-            request.predicate = NSPredicate(format: "completedAt == nil AND startDate >= %@ AND startDate <= %@",
-                                            today.startOfDay as NSDate, today.endOfDay as NSDate)
-            do {
-                let tasks = try context.fetch(request)
-                tasks.forEach {
-                    if let task = $0 as? Task {
-                        if !task.allTags.contains(todayTag) {
-                            task.addToTags(todayTag)
-                        }
-                    }
+        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+
+        user
+            .collection(path: .tags)
+            .whereField("kind", isEqualTo: "today")
+            .getDocuments(completion: { snapshot, err in
+                guard err == nil else { return }
+                guard !snapshot!.isEmpty else { return }
+
+                let todayTag = try? Tag(snapshot: snapshot!.documents[0])
+                if let todayTag = todayTag {
+                    user
+                        .collection(path: .tasks)
+                        .whereField("startDate", isGreaterThanOrEqualTo: today.startOfDay)
+                        .whereField("startDate", isLessThanOrEqualTo: today.endOfDay)
+                        .getDocuments(completion: { snapshot, err in
+                            guard err == nil else { return }
+
+                            let batch = Batch()
+                            for s in snapshot!.documents {
+                                let task = try? Task(snapshot: s)
+                                if let task = task {
+                                    if !task[\.tagIds].contains(todayTag.id) {
+                                        task[\.tagIds] = .arrayUnion([todayTag.id])
+                                        batch.update(task)
+                                    }
+                                }
+                            }
+                            batch.commit()
+                        })
                 }
-            } catch {
-                // do nothing
-            }
-        }
+            })
     }
 }

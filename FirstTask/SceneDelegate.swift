@@ -19,13 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        // Get the managed object context from the shared persistent container.
-        let context = CoreDataSupport.context
-
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, context)
-            .environmentObject(appSettings)
+        let contentView = ContentView().environmentObject(appSettings)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -72,11 +68,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
 
-        // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-
         // badge
-        UIApplication.shared.applicationIconBadgeNumber = Int(Task.countTodayTasks(context: CoreDataSupport.context))
+        Task.countTodayTasks { UIApplication.shared.applicationIconBadgeNumber = $0 }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.scheduleAppProcessing()

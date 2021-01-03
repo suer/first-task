@@ -1,12 +1,10 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SearchView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-    ) var tags: FetchedResults<Tag>
+    @State var tags: [Tag] = []
 
     @Binding var filteringTagName: String
 
@@ -29,12 +27,12 @@ struct SearchView: View {
 
                     ForEach(tags) { tag in
                         Button(action: {
-                            self.filteringTagName = tag.name ?? ""
+                            self.filteringTagName = tag[\.name]
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
                             HStack {
                                 Image(systemName: "tag")
-                                Text(tag.name ?? "")
+                                Text(tag[\.name])
                             }
                         }
                         .accentColor(Color(UIColor.label))
@@ -42,14 +40,24 @@ struct SearchView: View {
                 }
             }
             .navigationBarTitle("Search")
+        }.onAppear {
+            User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+                .collection(path: .tags)
+                .order(by: "name")
+                .addSnapshotListener { querySnapshot, _ in
+                    guard let documents = querySnapshot?.documents else { return }
+
+                    self.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                        return try? Tag(snapshot: queryDocumentSnapshot)
+                    }.compactMap { $0 }
+                }
         }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = CoreDataSupport.context
-        _ = Tag.create(context: context, name: "買い物")
-        return SearchView(filteringTagName: .constant("")).environment(\.managedObjectContext, context)
+        _ = Tag.create(name: "買い物")
+        return SearchView(filteringTagName: .constant(""))
     }
 }

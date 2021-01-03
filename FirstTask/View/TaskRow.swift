@@ -2,13 +2,13 @@ import SwiftUI
 import AudioToolbox
 
 struct TaskRow: View {
-    @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
 
     var body: some View {
         HStack {
             Circle()
-                .fill(Color(task.completedAt != nil
+                .fill(Color(task[\.completedAt] != nil
                     ? UIColor.label
                     : UIColor.systemBackground))
                 .frame(width: 20, height: 20)
@@ -18,16 +18,16 @@ struct TaskRow: View {
                         .frame(width: 20, height: 20)
             ).onTapGesture {
                 self.vibrate()
-                self.task.toggleDone(context: self.viewContext)
+                self.task.toggleDone()
             }
             VStack {
                 HStack {
-                    Text(task.title ?? "")
+                    Text(task[\.title])
                     Spacer()
                 }
-                if task.allTags.count > 0 {
+                if task.allTags(tags: appSettings.tags).count > 0 {
                     HStack {
-                        ForEach(task.allTags) { tag in
+                        ForEach(task.allTags(tags: appSettings.tags)) { tag in
                             TagBubble(tag: tag)
                         }
                         Spacer()
@@ -44,6 +44,6 @@ struct TaskRow: View {
 
 struct TaskRow_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRow(task: Task.make(context: CoreDataSupport.context, id: UUID(), title: "ミルクを買う"))
+        TaskRow(task: Task.make(title: "ミルクを買う"))
     }
 }
