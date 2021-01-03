@@ -89,10 +89,11 @@ struct TaskList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                _ = Task.create(title: self.$newTaskTitle.wrappedValue, projectId: self.project?.id ?? "")
-//                if let tag = Tag.findByName(context: self.viewContext, name: self.filteringTagName) {
-//                    task?.addToTags(tag)
-//                })
+                let tag = self.appSettings.tags.first { $0[\.name] == self.filteringTagName }
+
+                _ = Task.create(title: self.$newTaskTitle.wrappedValue,
+                                projectId: self.project?.id ?? "",
+                                tagId: tag?.id ?? "")
             }
 
 //            BottomSheetModal(isShown: self.$showingProjectMoveModal) {

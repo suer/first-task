@@ -71,15 +71,18 @@ extension Task {
         return self.allTags(tags: tags).contains { $0[\.name] == name }
     }
 
-    static func make(title: String, projectId: String = "") -> Task {
+    static func make(title: String, projectId: String = "", tagId: String = "") -> Task {
         let task = Task()
         task[\.title] = title
         task[\.projectId] = projectId
+        if !tagId.isEmpty {
+            task[\.tagIds] = .value([tagId])
+        }
         return task
     }
 
-    static func create(title: String, projectId: String = "") -> Task {
-        let task = make(title: title, projectId: projectId)
+    static func create(title: String, projectId: String = "", tagId: String = "") -> Task {
+        let task = make(title: title, projectId: projectId, tagId: tagId)
 
         let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
 
