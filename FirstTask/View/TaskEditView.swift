@@ -52,6 +52,8 @@ struct TaskEditView: View {
                         .foregroundColor(Color(UIColor(named: "Accent")!))
                         .clipShape(Circle())
                 })
+        }.onDisappear {
+            task.save()
         }
     }
 }
