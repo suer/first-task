@@ -7,6 +7,7 @@ struct TopView: View {
     @EnvironmentObject var appSettings: AppSettings
 
     @State var projects: [Project] = []
+    @State var tasks: [Task] = []
 
     @State var showingSettingMenuModal = false
     @State var showingAddTaskModal = false
@@ -18,16 +19,16 @@ struct TopView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ProjectRow(icon: "tray", name: "Inbox") { task in
+                    ProjectRow(tasks: self.$tasks, icon: "tray", name: "Inbox") { task in
                         task[\.projectId] == ""
                     }
-                    ProjectRow(icon: "star", name: "Today") { task in
+                    ProjectRow(tasks: self.$tasks, icon: "star", name: "Today") { task in
                         task.hasTag(tagId: todayTagId)
                     }
 
                     Section(header: Text("Projects")) {
                         ForEach(self.projects) { project in
-                            ProjectRow(icon: "flag", name: project[\.title], project: project) { task in
+                            ProjectRow(tasks: self.$tasks, icon: "flag", name: project[\.title], project: project) { task in
                                 return task[\.projectId] == project.documentReference.documentID
                             }
                         }
@@ -49,7 +50,7 @@ struct TopView: View {
 
                     Section(header: Text("Tags")) {
                         ForEach(appSettings.tags.filter { $0[\.kind] != "today" }) { tag in
-                            ProjectRow(icon: "tag", name: tag[\.name]) { task in
+                            ProjectRow(tasks: self.$tasks, icon: "tag", name: tag[\.name]) { task in
                                 task.hasTag(tagId: tag.id)
                             }
                         }
@@ -80,6 +81,15 @@ struct TopView: View {
 
                             self.projects = documents.map { queryDocumentSnapshot -> Project? in
                                 return try? Project(snapshot: queryDocumentSnapshot)
+                            }.compactMap { $0 }
+                        }
+                    user
+                        .collection(path: .tasks)
+                        .addSnapshotListener { querySnapshot, _ in
+                            guard let documents = querySnapshot?.documents else { return }
+
+                            self.tasks = documents.map { queryDocumentSnapshot -> Task? in
+                                return try? Task(snapshot: queryDocumentSnapshot)
                             }.compactMap { $0 }
                         }
                 }
