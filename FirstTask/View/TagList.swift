@@ -1,10 +1,8 @@
 import SwiftUI
-import MobileCoreServices
 import FirebaseAuth
 import Ballcap
 
 struct TagList: View {
-    @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var appSettings: AppSettings
 
     @ObservedObject var task: Task
@@ -70,11 +68,9 @@ struct TagList: View {
 
 struct TagList_Previews: PreviewProvider {
     static var previews: some View {
-        let context = CoreDataSupport.context
         _ = Tag.create(name: "重要")
         _ = Tag.create(name: "買い物")
         let task = Task.make(title: "test")
-//        task.addToTags(tag!)
-        return TagList(task: task).environment(\.managedObjectContext, context)
+        return TagList(task: task)
     }
 }

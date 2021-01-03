@@ -3,7 +3,6 @@ import FirebaseAuth
 import Ballcap
 
 struct TopView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var appSettings: AppSettings
 
     @State var projects: [Project] = []
@@ -44,7 +43,6 @@ struct TopView: View {
                             }.contentShape(Rectangle())
                         }.sheet(isPresented: self.$showingProjectAddModal) {
                             ProjectAddView(project: self.addingProject)
-                                .environment(\.managedObjectContext, self.viewContext)
                         }.buttonStyle(PlainButtonStyle())
                     }
 
@@ -123,7 +121,7 @@ struct TopView: View {
         }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
             self.showingSettingMenuModal = false
         }) {
-            SettingMenuView().environment(\.managedObjectContext, self.viewContext)
+            SettingMenuView()
         }
     }
 
@@ -135,6 +133,5 @@ struct TopView: View {
 struct TopView_Previews: PreviewProvider {
     static var previews: some View {
         TopView()
-            .environment(\.managedObjectContext, CoreDataSupport.context)
     }
 }

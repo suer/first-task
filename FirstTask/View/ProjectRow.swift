@@ -3,8 +3,6 @@ import FirebaseAuth
 import Ballcap
 
 struct ProjectRow: View {
-    @Environment(\.managedObjectContext) var viewContext
-
     @Binding var tasks: [Task]
 
     var icon = ""

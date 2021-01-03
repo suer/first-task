@@ -3,7 +3,6 @@ import FirebaseAuth
 import Ballcap
 
 struct TaskList: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var appSettings: AppSettings
 
@@ -158,7 +157,6 @@ struct TaskList: View {
                 self.editingTask.map({ task in task.save() })
             }) { task in
                 TaskEditView(task: task)
-                    .environment(\.managedObjectContext, self.viewContext)
             }
     }
 
@@ -174,7 +172,6 @@ struct TaskList: View {
             self.modalState.showingSearchModal = false
         }) {
             SearchView(filteringTagName: self.$filteringTagName)
-                .environment(\.managedObjectContext, self.viewContext)
                 .environmentObject(AppSettings())
         }
     }
@@ -189,7 +186,6 @@ struct TaskList: View {
                 .clipShape(Circle())
         }.sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
-                .environment(\.managedObjectContext, self.viewContext)
                 .onDisappear {
                     self.navigationBarTitle = self.project?[\.title] ?? self.navigationBarTitle
                 }
@@ -201,7 +197,6 @@ struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             TaskList()
-                .environment(\.managedObjectContext, CoreDataSupport.context)
                 .environmentObject(AppSettings())
         }
     }

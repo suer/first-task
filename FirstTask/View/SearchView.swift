@@ -2,7 +2,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct SearchView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
 
     @State var tags: [Tag] = []
@@ -58,8 +57,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = CoreDataSupport.context
         _ = Tag.create(name: "買い物")
-        return SearchView(filteringTagName: .constant("")).environment(\.managedObjectContext, context)
+        return SearchView(filteringTagName: .constant(""))
     }
 }

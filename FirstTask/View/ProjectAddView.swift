@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ProjectAddView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     @State var project: Project = Project()
 
@@ -35,6 +34,5 @@ struct ProjectAddView: View {
 struct ProjectAddView_Previews: PreviewProvider {
     static var previews: some View {
         ProjectAddView(project: Project())
-            .environment(\.managedObjectContext, CoreDataSupport.context)
     }
 }

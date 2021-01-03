@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct TaskEditView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
@@ -28,7 +27,7 @@ struct TaskEditView: View {
 
                 Section(header: Text("Tags")) {
                     List {
-                        NavigationLink(destination: TagList(task: self.task).environment(\.managedObjectContext, self.viewContext)) {
+                        NavigationLink(destination: TagList(task: self.task)) {
                             Group {
                                 if task.allTags(tags: appSettings.tags).count > 0 {
                                     ForEach(task.allTags(tags: appSettings.tags)) { tag in

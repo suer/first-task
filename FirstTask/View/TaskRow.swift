@@ -2,7 +2,6 @@ import SwiftUI
 import AudioToolbox
 
 struct TaskRow: View {
-    @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
 

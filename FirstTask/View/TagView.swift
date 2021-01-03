@@ -3,7 +3,6 @@ import FirebaseAuth
 import Ballcap
 
 struct TagView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var appSettings: AppSettings
 
     @State var showingActionSheet: Bool = false
@@ -90,6 +89,6 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView().environment(\.managedObjectContext, CoreDataSupport.context)
+        TagView()
     }
 }
