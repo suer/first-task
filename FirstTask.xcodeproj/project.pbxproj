@@ -509,7 +509,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which license-plist >/dev/null; then\n  license-plist --output-path $PRODUCT_NAME/Settings.bundle\nelse\n  echo \"warning: license-plist not installed, run 'brew install mono0926/license-plist/license-plist'\"\nfi\n";
+			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --output-path $PRODUCT_NAME/Settings.bundle\n";
 		};
 		19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */ = {
 			isa = PBXShellScriptBuildPhase;

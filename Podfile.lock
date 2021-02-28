@@ -370,6 +370,7 @@ PODS:
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
   - leveldb-library (1.22)
+  - LicensePlist (3.0.5)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -385,6 +386,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift (= 7.1.0-beta)
   - FirebaseUI/Auth
   - FirebaseUI/Google
+  - LicensePlist
 
 SPEC REPOS:
   trunk:
@@ -412,6 +414,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
+    - LicensePlist
     - nanopb
     - PromisesObjC
 
@@ -440,9 +443,10 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  LicensePlist: 11c638fa9dc22ddb5771cdf910242ae1ba2684da
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
 
-PODFILE CHECKSUM: 92556068ee2d0aad6e7cc74fe1de8ac01a63e651
+PODFILE CHECKSUM: 38ab9dd0b7274e2523bef2140315dd962676af80
 
 COCOAPODS: 1.10.0

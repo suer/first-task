@@ -13,9 +13,6 @@ jobs:
    steps:
    - uses: actions/checkout@v2
 
-   - name: Setup LicensePlist
-     run: curl -fsSL https://raw.githubusercontent.com/mono0926/LicensePlist/master/install.sh | sh
-
    - name: Show Xcode version
      run: xcodebuild -version
 

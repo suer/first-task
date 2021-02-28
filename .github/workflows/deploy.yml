@@ -15,9 +15,6 @@ jobs:
    steps:
    - uses: actions/checkout@v2
 
-   - name: Setup LicensePlist
-     run: curl -fsSL https://raw.githubusercontent.com/mono0926/LicensePlist/master/install.sh | sh
-
    - name: Setup p12 certificate file
      run: |
        echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
