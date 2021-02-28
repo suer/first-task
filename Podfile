@@ -13,6 +13,7 @@ target 'FirstTask' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift', '7.1.0-beta'
   pod 'Ballcap'
+  pod 'LicensePlist'
 
   target 'FirstTaskTests' do
     inherit! :search_paths
