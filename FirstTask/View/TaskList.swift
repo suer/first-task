@@ -92,7 +92,8 @@ struct TaskList: View {
 
                 _ = Task.create(title: self.$newTaskTitle.wrappedValue,
                                 projectId: self.project?.id ?? "",
-                                tagId: tag?.id ?? "")
+                                tagId: tag?.id ?? "",
+                                tasks: self.tasks)
             }
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {

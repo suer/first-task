@@ -81,8 +81,13 @@ extension Task {
         return task
     }
 
-    static func create(title: String, projectId: String = "", tagId: String = "") -> Task {
+    static func create(title: String, projectId: String = "", tagId: String = "", tasks: [Task]) -> Task {
         let task = make(title: title, projectId: projectId, tagId: tagId)
+        if let lastTask = tasks.last {
+            task[\.displayOrder] = lastTask[\.displayOrder] + 1
+        } else {
+            task[\.displayOrder] = 0
+        }
 
         let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
 

@@ -103,7 +103,7 @@ struct TopView: View {
                     }.padding(10)
 
                     BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
-                        _ = Task.create(title: self.$newTaskTitle.wrappedValue)
+                        _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
                     }
                 }
             }
