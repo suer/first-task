@@ -26,7 +26,7 @@ jobs:
        base64 --decode distribution.mobileprovision.txt > distribution.mobileprovision
 
    - name: Cache Gems
-     uses: actions/cache@v2.1.7
+     uses: actions/cache@v3.0.1
      with:
        path: vendor/bundle
        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -39,7 +39,7 @@ jobs:
        bundle install --jobs 4 --retry 3
 
    - name: Cache Pods
-     uses: actions/cache@v2.1.7
+     uses: actions/cache@v3.0.1
      with:
        path: Pods
        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
