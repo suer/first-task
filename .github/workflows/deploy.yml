@@ -1,8 +1,9 @@
 name: Deploy
 
 on:
- push:
-   branches: [ master ]
+  workflow_dispatch:
+    branches:
+      - master
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.4.1.app/Contents/Developer
