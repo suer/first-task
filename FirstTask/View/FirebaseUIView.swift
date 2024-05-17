@@ -1,11 +1,11 @@
 import SwiftUI
-import FirebaseUI
+import FirebaseGoogleAuthUI
 
 struct FirebaseUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UINavigationController {
         let authUI = FUIAuth.defaultAuthUI()!
         let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth()
+            FUIGoogleAuth(authUI: authUI)
         ]
         authUI.providers = providers
 
