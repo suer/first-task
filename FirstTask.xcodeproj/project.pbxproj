@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -370,7 +370,6 @@
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				2E432D6A74ABA5763072FA81 /* [CP] Embed Pods Frameworks */,
-				41E7152B98C1DAA3479E6054 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -409,7 +408,6 @@
 				804467B124DF97D000011164 /* Frameworks */,
 				804467B224DF97D000011164 /* Resources */,
 				97BFF7E908EEB44DA2E83D0E /* [CP] Embed Pods Frameworks */,
-				AB9ECE9C481C6F0772219806 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -546,23 +544,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		41E7152B98C1DAA3479E6054 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask/Pods-FirstTask-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6D07376C4E636157E5E40272 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -638,23 +619,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB9ECE9C481C6F0772219806 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstTask-FirstTaskUITests/Pods-FirstTask-FirstTaskUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D5514D02FEEE010FD6C8B7E0 /* [CP] Check Pods Manifest.lock */ = {
