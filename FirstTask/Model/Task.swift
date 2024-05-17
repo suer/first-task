@@ -13,9 +13,9 @@ class Task: Object, DataRepresentable, DataListenable, ObservableObject, Identif
     struct Model: Codable, Modelable {
         var title: String = ""
         var memo: String = ""
-        var completedAt: ServerTimestamp?
-        var createdAt: ServerTimestamp?
-        var updatedAt: ServerTimestamp?
+        var completedAt: Ballcap.ServerTimestamp?
+        var createdAt: Ballcap.ServerTimestamp?
+        var updatedAt: Ballcap.ServerTimestamp?
         var startDate: Timestamp?
         var dueDate: Timestamp?
         var displayOrder: Int = 0

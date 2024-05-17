@@ -12,9 +12,9 @@ class Project: Object, DataRepresentable, DataListenable, ObservableObject, Iden
 
     struct Model: Codable, Modelable {
         var title: String = ""
-        var complatedAt: ServerTimestamp?
-        var createdAt: ServerTimestamp?
-        var updatedAt: ServerTimestamp?
+        var complatedAt: Ballcap.ServerTimestamp?
+        var createdAt: Ballcap.ServerTimestamp?
+        var updatedAt: Ballcap.ServerTimestamp?
         var startDate: Timestamp?
         var dueDate: Timestamp?
 //        var displayOrder: Int = 0
