@@ -16,12 +16,12 @@ jobs:
    - name: Setup p12 certificate file
      run: |
        echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
-       base64 --decode distribution.p12.txt > distribution.p12
+       base64 --decode < distribution.p12.txt > distribution.p12
 
    - name: Setup provisioning profile
      run: |
        echo "${{ secrets.PROVISIONING_PROFILE }}" > distribution.mobileprovision.txt
-       base64 --decode distribution.mobileprovision.txt > distribution.mobileprovision
+       base64 --decode < distribution.mobileprovision.txt > distribution.mobileprovision
 
    - name: Cache Gems
      uses: actions/cache@v4
