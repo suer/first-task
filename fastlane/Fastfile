@@ -47,12 +47,14 @@ platform :ios do
 
   desc "Build for simulator"
   lane :build_for_simulator do
-    xcbuild(
+    gym(
       workspace: "FirstTask.xcworkspace",
       scheme: "FirstTask",
-      configuration: "Debug",
-      xcargs: "-sdk iphonesimulator"
+      sdk: "iphonesimulator",
+      archive_path: "./FirstTask.xcarchive",
+      skip_package_ipa: true,
+      skip_codesigning: true,
+      destination: "generic/platform=iOS Simulator"
     )
   end
 end
-
