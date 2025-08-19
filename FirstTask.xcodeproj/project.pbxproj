@@ -15,6 +15,7 @@
 		191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116D2E54A36A008B1BD0 /* FirebaseAuthUI */; };
 		191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116F2E54A36A008B1BD0 /* FirebaseGoogleAuthUI */; };
 		191A11732E54A3A5008B1BD0 /* Ballcap in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11722E54A3A5008B1BD0 /* Ballcap */; };
+		191A11752E54A5F5008B1BD0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11742E54A5F5008B1BD0 /* FirebaseFirestore */; };
 		193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704AE252D46BD004FF6A5 /* ProjectAddView.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
@@ -149,6 +150,7 @@
 				191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */,
 				F74A44CD8D16ABAD6874C241 /* Pods_FirstTask.framework in Frameworks */,
 				191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */,
+				191A11752E54A5F5008B1BD0 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1069,6 +1071,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 191A11712E54A3A5008B1BD0 /* XCRemoteSwiftPackageReference "Ballcap-iOS" */;
 			productName = Ballcap;
+		};
+		191A11742E54A5F5008B1BD0 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 
