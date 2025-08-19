@@ -36,7 +36,7 @@ struct TaskList: View {
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
             .actionSheet(isPresented: self.$showingProjectActionSheet) {
-                ActionSheet(title: Text(self.project![\.title]),
+                ActionSheet(title: Text(self.project!.title),
                     buttons: [
                         .default(Text("Edit")) {
                             self.showingProjectEditModal = true
@@ -87,7 +87,7 @@ struct TaskList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                let tag = self.appSettings.tags.first { $0[\.name] == self.filteringTagName }
+                let tag = self.appSettings.tags.first { $0.name == self.filteringTagName }
 
                 _ = Task.create(title: self.$newTaskTitle.wrappedValue,
                                 projectId: self.project?.id ?? "",
@@ -98,7 +98,7 @@ struct TaskList: View {
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
                 ProjectSelectView(project: self.project) { project in
                     self.movingTask.map { task in
-                        task[\.projectId] = project?.id ?? ""
+                        task.projectId = project?.id ?? ""
                         task.save()
                     }
                     self.showingProjectMoveModal = false
@@ -187,7 +187,7 @@ struct TaskList: View {
         }.sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
                 .onDisappear {
-                    self.navigationBarTitle = self.project?[\.title] ?? self.navigationBarTitle
+                    self.navigationBarTitle = self.project?.title ?? self.navigationBarTitle
                 }
         }
     }

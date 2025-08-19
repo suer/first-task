@@ -8,9 +8,9 @@ struct TaskEditView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Input title", text: $task[\.title])
+                TextField("Input title", text: $task.title)
                 Section(header: Text("Memo")) {
-                    TextEditor(text: $task[\.memo])
+                    TextEditor(text: $task.memo)
                 }
                 Section(header: Text("Start Date")) {
                      Toggle("Set Start Date", isOn: $task.useStartDate)
@@ -60,7 +60,7 @@ struct TaskEditView: View {
 struct TaskEditView_Previews: PreviewProvider {
     static var previews: some View {
         let task = Task.make(title: "ミルクを買う")
-        task[\.memo] = "住まいは田舎がいい、森と日溜まりでひと寝入り、飛ぶ鳥、稲と日照り、まだ独りもいいが、家内はいます"
+        task.memo = "住まいは田舎がいい、森と日溜まりでひと寝入り、飛ぶ鳥、稲と日照り、まだ独りもいいが、家内はいます"
         return TaskEditView(task: task)
     }
 }

@@ -27,12 +27,12 @@ struct SearchView: View {
 
                     ForEach(tags) { tag in
                         Button(action: {
-                            self.filteringTagName = tag[\.name]
+                            self.filteringTagName = tag.name
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
                             HStack {
                                 Image(systemName: "tag")
-                                Text(tag[\.name])
+                                Text(tag.name)
                             }
                         }
                         .accentColor(Color(UIColor.label))

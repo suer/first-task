@@ -11,9 +11,13 @@ class SessionState: ObservableObject {
                 print("Sign-in")
                 if let user = user {
                     let u = User(id: user.uid)
-                    u[\.email] = user.email ?? ""
-                    u[\.photoURL] = user.photoURL?.absoluteString ?? ""
-                    u.save()
+                    u.email = user.email ?? ""
+                    u.photoURL = user.photoURL?.absoluteString ?? ""
+                    do {
+                        try u.documentReference.setData(from: u, merge: true)
+                    } catch {
+                        print("Error saving user: \(error)")
+                    }
                 }
                 self.isSignedIn = true
             } else {

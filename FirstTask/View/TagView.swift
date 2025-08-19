@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseAuth
-import Ballcap
+import Firebase
+import FirebaseFirestore
 
 struct TagView: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -16,7 +17,7 @@ struct TagView: View {
             List {
                 ForEach(appSettings.tags, id: \.self) { tag in
                     HStack {
-                        Text(tag[\.name])
+                        Text(tag.name)
                         Spacer()
                         Button(action: {
                             self.editingTag = tag
@@ -25,10 +26,10 @@ struct TagView: View {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(UIColor.secondaryLabel))
                         }.actionSheet(isPresented: self.$showingActionSheet) {
-                            ActionSheet(title: Text(self.editingTag[\.name]),
+                            ActionSheet(title: Text(self.editingTag.name),
                                 buttons: [
                                     .default(Text("Edit")) {
-                                        self.newTagName = self.editingTag[\.name]
+                                        self.newTagName = self.editingTag.name
                                         self.showingEditTagModal = true
                                     },
                                     .destructive(Text("Delete")) {
@@ -70,10 +71,8 @@ struct TagView: View {
                 UIApplication.shared.closeKeyboard()
             }
             BottomTextFieldSheetModal(isShown: self.$showingEditTagModal, text: self.$newTagName) {
-                let batch = Batch()
-                self.editingTag[\.name] = self.newTagName
-                batch.update(self.editingTag)
-                batch.commit()
+                self.editingTag.name = self.newTagName
+                self.editingTag.save()
                 self.showingEditTagModal = false
                 UIApplication.shared.closeKeyboard()
             }

@@ -4,7 +4,7 @@ struct TagBubble: View {
     @ObservedObject var tag: Tag
 
     var body: some View {
-        Text(tag[\.name])
+        Text(tag.name)
             .foregroundColor(Color(UIColor(named: "TagForeground")!))
             .font(.system(size: 11))
             .padding(4)
@@ -19,7 +19,7 @@ struct TagBubble: View {
 struct TagBubble_Previews: PreviewProvider {
     static var previews: some View {
         let tag = Tag()
-        tag[\.name] = "重要"
+        tag.name = "重要"
         return TagBubble(tag: tag)
     }
 }

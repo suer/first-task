@@ -27,7 +27,7 @@ struct ProjectSelectView: View {
             ForEach(self.projects) { project in
                 HStack {
                     Image(systemName: self.project == project ? "checkmark.circle.fill" : "circle")
-                    Text(project[\.title])
+                    Text(project.title)
                     Spacer()
                 }
                 .contentShape(Rectangle())
@@ -54,7 +54,7 @@ struct ProjectSelectView: View {
 struct ProjectSelectView_Previews: PreviewProvider {
     static var previews: some View {
         let project = Project()
-        project[\.title] = "ピクニックの準備をする"
+        project.title = "ピクニックの準備をする"
         return ProjectSelectView(project: project) { _ in }
     }
 }
