@@ -1,6 +1,5 @@
 import SwiftUI
 import FirebaseAuth
-import Ballcap
 
 struct TopView: View {
     @EnvironmentObject var appSettings: AppSettings

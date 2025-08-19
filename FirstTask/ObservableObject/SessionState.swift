@@ -1,6 +1,5 @@
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class SessionState: ObservableObject {
     @Published var isSignedIn: Bool = false

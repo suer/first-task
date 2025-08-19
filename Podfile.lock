@@ -1236,8 +1236,6 @@ DEPENDENCIES:
   - Ballcap (from `https://github.com/1amageek/Ballcap-iOS.git`, tag `2.1.0`)
   - Firebase/Analytics
   - Firebase/Crashlytics
-  - Firebase/Firestore
-  - FirebaseFirestoreSwift
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - LicensePlist
@@ -1332,6 +1330,6 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: 733263d0933b3cd4cb314f37b43afc2e2c635492
+PODFILE CHECKSUM: 11641606fdfb17780f1af3f7327e3c5f67b01f93
 
 COCOAPODS: 1.16.2

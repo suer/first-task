@@ -1,6 +1,4 @@
 import SwiftUI
-import FirebaseAuth
-import Ballcap
 
 struct ProjectRow: View {
     @Binding var tasks: [Task]
