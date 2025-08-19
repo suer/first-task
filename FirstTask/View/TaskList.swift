@@ -1,6 +1,5 @@
 import SwiftUI
 import FirebaseAuth
-import Ballcap
 
 struct TaskList: View {
     @Environment(\.presentationMode) var presentation
