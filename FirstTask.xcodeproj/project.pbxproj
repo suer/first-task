@@ -12,6 +12,8 @@
 		1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1D2507ABAE00D74BA7 /* Date.swift */; };
 		191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11682E54A303008B1BD0 /* FirebaseAnalytics */; };
 		191A116B2E54A303008B1BD0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116A2E54A303008B1BD0 /* FirebaseCrashlytics */; };
+		191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116D2E54A36A008B1BD0 /* FirebaseAuthUI */; };
+		191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116F2E54A36A008B1BD0 /* FirebaseGoogleAuthUI */; };
 		193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704AE252D46BD004FF6A5 /* ProjectAddView.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		1952D8B024E6CF850008C975 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1952D8AF24E6CF850008C975 /* KeyboardAwareModifier.swift */; };
@@ -140,9 +142,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */,
 				191A116B2E54A303008B1BD0 /* FirebaseCrashlytics in Frameworks */,
 				191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */,
 				F74A44CD8D16ABAD6874C241 /* Pods_FirstTask.framework in Frameworks */,
+				191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +459,7 @@
 			mainGroup = 8044678724DF97CC00011164;
 			packageReferences = (
 				191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
 			);
 			productRefGroup = 8044679124DF97CC00011164 /* Products */;
 			projectDirPath = "";
@@ -1018,6 +1023,14 @@
 				version = 10.29.0;
 			};
 		};
+		191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS.git";
+			requirement = {
+				kind = exactVersion;
+				version = 14.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1030,6 +1043,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		191A116D2E54A36A008B1BD0 /* FirebaseAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseAuthUI;
+		};
+		191A116F2E54A36A008B1BD0 /* FirebaseGoogleAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseGoogleAuthUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
