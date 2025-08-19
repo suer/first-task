@@ -6,7 +6,6 @@ target 'FirstTask' do
   use_frameworks!
 
   # Pods for FirstTask
-  pod 'LicensePlist'
 
   target 'FirstTaskTests' do
     inherit! :search_paths
