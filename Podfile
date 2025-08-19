@@ -6,11 +6,6 @@ target 'FirstTask' do
   use_frameworks!
 
   # Pods for FirstTask
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
-  pod 'FirebaseUI/Auth'
-  pod 'FirebaseUI/Google'
-  pod 'Ballcap', git: 'https://github.com/1amageek/Ballcap-iOS.git', tag: '2.1.0'
   pod 'LicensePlist'
 
   target 'FirstTaskTests' do
