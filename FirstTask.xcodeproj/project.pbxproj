@@ -465,6 +465,7 @@
 				191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
 				191A11712E54A3A5008B1BD0 /* XCRemoteSwiftPackageReference "Ballcap-iOS" */,
+				19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */,
 			);
 			productRefGroup = 8044679124DF97CC00011164 /* Products */;
 			projectDirPath = "";
@@ -1042,6 +1043,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 2.1.0;
+			};
+		};
+		19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mono0926/LicensePlist.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.27.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
