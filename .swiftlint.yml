@@ -1,5 +1,4 @@
 excluded:
-  - Pods
   - vendor
 
 disabled_rules:
