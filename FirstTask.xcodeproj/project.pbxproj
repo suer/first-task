@@ -227,7 +227,6 @@
 				804467AC24DF97D000011164 /* FirstTaskTests */,
 				804467B724DF97D000011164 /* FirstTaskUITests */,
 				8044679124DF97CC00011164 /* Products */,
-				94059543F33C62CC808E2C16 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -325,13 +324,6 @@
 				19D12989256A45B400BB7732 /* SessionState.swift */,
 			);
 			path = ObservableObject;
-			sourceTree = "<group>";
-		};
-		94059543F33C62CC808E2C16 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,7 +587,7 @@
 /* Begin PBXTargetDependency section */
 		19E2F9A42E55D33000B40D4E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 19E2F9A32E55D33000B40D4E /* plugin:LicensePlistBuildTool */;
+			productRef = 19E2F9A32E55D33000B40D4E /* LicensePlistBuildTool */;
 		};
 		804467AB24DF97D000011164 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -965,7 +957,7 @@
 			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		19E2F9A32E55D33000B40D4E /* plugin:LicensePlistBuildTool */ = {
+		19E2F9A32E55D33000B40D4E /* LicensePlistBuildTool */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */;
 			productName = "plugin:LicensePlistBuildTool";
