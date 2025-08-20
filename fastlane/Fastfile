@@ -48,7 +48,7 @@ platform :ios do
   desc "Build for simulator"
   lane :build_for_simulator do
     gym(
-      workspace: "FirstTask.xcworkspace",
+      project: "FirstTask.xcodeproj",
       scheme: "FirstTask",
       sdk: "iphonesimulator",
       archive_path: "./FirstTask.xcarchive",
