@@ -25,6 +25,11 @@ jobs:
        key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
        restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
 
+   # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
+   - name: Skip package plugin fingerprint validation
+     run: |
+       defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+
    - name: Cache Gems
      uses: actions/cache@v4
      with:
