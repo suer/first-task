@@ -376,7 +376,6 @@
 				6D07376C4E636157E5E40272 /* [CP] Check Pods Manifest.lock */,
 				8044678C24DF97CC00011164 /* Sources */,
 				8044678D24DF97CC00011164 /* Frameworks */,
-				19DEE5932543C34E0079459E /* Run Script (LicensePlist) */,
 				8044678E24DF97CC00011164 /* Resources */,
 				19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */,
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
@@ -507,24 +506,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19DEE5932543C34E0079459E /* Run Script (LicensePlist) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script (LicensePlist)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --output-path $PRODUCT_NAME/Settings.bundle\n";
-		};
 		19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
