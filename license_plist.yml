@@ -1,5 +1,5 @@
 options:
   xcodeprojPath: "*.xcodeproj"
-  prefix: Acknowledgements
-  singlePage: true
+  prefix: com.mono0926.LicensePlist
+  singlePage: false
 
