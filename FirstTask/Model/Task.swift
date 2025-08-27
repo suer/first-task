@@ -1,56 +1,119 @@
-import Ballcap
 import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
-class Task: Object, DataRepresentable, DataListenable, ObservableObject, Identifiable {
-    // swiftlint:disable type_name
-    typealias ID = String
-    // swiftlint:enable type_name
-
-    override class var name: String { "tasks" }
-    @Published var data: Model?
+class Task: ObservableObject, Identifiable, Codable {
+    @Published var id: String = UUID().uuidString
+    @Published var title: String = ""
+    @Published var memo: String = ""
+    @Published var completedAt: ServerTimestamp<Date>?
+    @Published var createdAt: ServerTimestamp<Date>?
+    @Published var updatedAt: ServerTimestamp<Date>?
+    @Published var startDate: Timestamp?
+    @Published var dueDate: Timestamp?
+    @Published var displayOrder: Int = 0
+    @Published var tagIds: [String] = []
+    @Published var projectId: String = ""
     var listener: ListenerRegistration?
 
-    struct Model: Codable, Modelable {
-        var title: String = ""
-        var memo: String = ""
-        var completedAt: Ballcap.ServerTimestamp?
-        var createdAt: Ballcap.ServerTimestamp?
-        var updatedAt: Ballcap.ServerTimestamp?
-        var startDate: Timestamp?
-        var dueDate: Timestamp?
-        var displayOrder: Int = 0
-        var tagIds: OperableArray<String> = .value([])
-        var projectId: String = ""
+    private var _documentReference: DocumentReference?
+
+    init() {}
+
+    enum CodingKeys: CodingKey {
+        case id, title, memo, completedAt, createdAt, updatedAt, startDate, dueDate, displayOrder, tagIds, projectId
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        memo = try container.decode(String.self, forKey: .memo)
+        completedAt = try container.decodeIfPresent(ServerTimestamp<Date>.self, forKey: .completedAt)
+        createdAt = try container.decodeIfPresent(ServerTimestamp<Date>.self, forKey: .createdAt)
+        updatedAt = try container.decodeIfPresent(ServerTimestamp<Date>.self, forKey: .updatedAt)
+        startDate = try container.decodeIfPresent(Timestamp.self, forKey: .startDate)
+        dueDate = try container.decodeIfPresent(Timestamp.self, forKey: .dueDate)
+        displayOrder = try container.decode(Int.self, forKey: .displayOrder)
+        tagIds = try container.decode([String].self, forKey: .tagIds)
+        projectId = try container.decode(String.self, forKey: .projectId)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(memo, forKey: .memo)
+        try container.encodeIfPresent(completedAt, forKey: .completedAt)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
+        try container.encodeIfPresent(startDate, forKey: .startDate)
+        try container.encodeIfPresent(dueDate, forKey: .dueDate)
+        try container.encode(displayOrder, forKey: .displayOrder)
+        try container.encode(tagIds, forKey: .tagIds)
+        try container.encode(projectId, forKey: .projectId)
+    }
+
+    var documentReference: DocumentReference {
+        if let ref = _documentReference {
+            return ref
+        }
+        guard let userId = Auth.auth().currentUser?.uid else {
+            fatalError("User not authenticated")
+        }
+        let ref = Firestore.firestore().collection("users").document(userId).collection("tasks").document(id)
+        _documentReference = ref
+        return ref
+    }
+
+    convenience init(snapshot: DocumentSnapshot) throws {
+        self.init()
+        guard let data = snapshot.data() else {
+            throw NSError(domain: "TaskError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data in snapshot"])
+        }
+
+        id = snapshot.documentID
+        title = data["title"] as? String ?? ""
+        memo = data["memo"] as? String ?? ""
+        completedAt = data["completedAt"] as? ServerTimestamp<Date>
+        createdAt = data["createdAt"] as? ServerTimestamp<Date>
+        updatedAt = data["updatedAt"] as? ServerTimestamp<Date>
+        startDate = data["startDate"] as? Timestamp
+        dueDate = data["dueDate"] as? Timestamp
+        displayOrder = data["displayOrder"] as? Int ?? 0
+        tagIds = data["tagIds"] as? [String] ?? []
+        projectId = data["projectId"] as? String ?? ""
+        _documentReference = snapshot.reference
     }
 
     public var wrappedStartDate: Date {
-        get { self[\.startDate]?.dateValue() ?? .distantPast }
-        set { self[\.startDate] = Timestamp(date: newValue) }
+        get { startDate?.dateValue() ?? .distantPast }
+        set { startDate = Timestamp(date: newValue) }
     }
 
     public var useStartDate: Bool {
-        get { self[\.startDate] != nil }
+        get { startDate != nil }
         set {
             if newValue {
-                self[\.startDate] = Timestamp()
+                startDate = Timestamp()
             } else {
-                self[\.startDate] = nil
+                startDate = nil
             }
         }
     }
 
     public var wrappedDueDate: Date {
-        get { self[\.dueDate]?.dateValue() ?? .distantPast }
-        set { self[\.dueDate] = Timestamp(date: newValue) }
+        get { dueDate?.dateValue() ?? .distantPast }
+        set { dueDate = Timestamp(date: newValue) }
     }
 
     public var useDueDate: Bool {
-        get { self[\.dueDate] != nil }
+        get { dueDate != nil }
         set {
             if newValue {
-                self[\.dueDate] = Timestamp()
+                dueDate = Timestamp()
             } else {
-                self[\.dueDate] = nil
+                dueDate = nil
             }
         }
     }
@@ -60,23 +123,21 @@ extension Task {
 
     func allTags(tags: [Tag]) -> [Tag] {
         return tags.filter { tag in
-            self[\.tagIds].contains { tagId in
-                tag.documentReference.documentID == tagId
-            }
+            tagIds.contains(tag.id)
         }
     }
 
     func hasTagByName(tags: [Tag], name: String) -> Bool {
         guard !name.isEmpty else { return true }
-        return self.allTags(tags: tags).contains { $0[\.name] == name }
+        return self.allTags(tags: tags).contains { $0.name == name }
     }
 
     static func make(title: String, projectId: String = "", tagId: String = "") -> Task {
         let task = Task()
-        task[\.title] = title
-        task[\.projectId] = projectId
+        task.title = title
+        task.projectId = projectId
         if !tagId.isEmpty {
-            task[\.tagIds] = .value([tagId])
+            task.tagIds = [tagId]
         }
         return task
     }
@@ -84,23 +145,29 @@ extension Task {
     static func create(title: String, projectId: String = "", tagId: String = "", tasks: [Task]) -> Task {
         let task = make(title: title, projectId: projectId, tagId: tagId)
         if let lastTask = tasks.last {
-            task[\.displayOrder] = lastTask[\.displayOrder] + 1
+            task.displayOrder = lastTask.displayOrder + 1
         } else {
-            task[\.displayOrder] = 0
+            task.displayOrder = 0
         }
 
-        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
-
-        let batch = Batch()
-        user.tasks.append(task)
-        batch.save(user.tasks, to: user.collection(path: .tasks))
-        batch.commit()
+        let now = Date()
+        task.createdAt = ServerTimestamp(wrappedValue: now)
+        task.updatedAt = ServerTimestamp(wrappedValue: now)
+        do {
+            try task.documentReference.setData(from: task)
+        } catch {
+            print("Error creating task: \(error)")
+        }
 
         return task
     }
 
     static func destroy(task: Task) {
-        task.delete()
+        task.documentReference.delete { error in
+            if let error = error {
+                print("Error deleting task: \(error)")
+            }
+        }
     }
 
     static func countTodayTasks(done: @escaping (Int) -> Void) {
@@ -124,7 +191,7 @@ extension Task {
                             for s in snapshot!.documents {
                                 let task = try? Task(snapshot: s)
                                 if let task = task {
-                                    if task[\.tagIds].contains(todayTag.id) {
+                                    if task.tagIds.contains(todayTag.id) {
                                         count += 1
                                     }
                                 }
@@ -140,15 +207,23 @@ extension Task {
         var reordered = tasks
         reordered.move(fromOffsets: source, toOffset: destination)
 
-        for index in stride(from: reordered.count - 1, through: 0, by: -1) {
-            reordered[index][\.displayOrder] = index
+        let batch = Firestore.firestore().batch()
+
+        for (index, task) in reordered.enumerated() {
+            task.displayOrder = index
+            task.updatedAt = ServerTimestamp(wrappedValue: Date())
+            do {
+                try batch.setData(from: task, forDocument: task.documentReference, merge: true)
+            } catch {
+                print("Error updating task: \(error)")
+            }
         }
 
-        let batch = Batch()
-        for task in reordered {
-            batch.update(task)
+        batch.commit { error in
+            if let error = error {
+                print("Error committing batch: \(error)")
+            }
         }
-        batch.commit()
     }
 
     func toggleDone() {
@@ -159,14 +234,30 @@ extension Task {
         } else {
             newPath = originalPath.replacingOccurrences(of: "/tasks/", with: "/completed-tasks/")
         }
-        self.save(reference: Firestore.firestore().document(newPath))
-        Firestore.firestore().document(originalPath).delete()
+
+        let newRef = Firestore.firestore().document(newPath)
+        do {
+            try newRef.setData(from: self)
+            self.documentReference.delete()
+            self._documentReference = newRef
+        } catch {
+            print("Error toggling task completion: \(error)")
+        }
     }
 
     func hasTag(tagId: String) -> Bool {
         if tagId.isEmpty {
             return true
         }
-        return self[\.tagIds].contains(tagId)
+        return tagIds.contains(tagId)
+    }
+
+    func save() {
+        updatedAt = ServerTimestamp(wrappedValue: Date())
+        do {
+            try documentReference.setData(from: self, merge: true)
+        } catch {
+            print("Error saving task: \(error)")
+        }
     }
 }

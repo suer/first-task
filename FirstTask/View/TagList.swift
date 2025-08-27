@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseAuth
-import Ballcap
+import Firebase
+import FirebaseFirestore
 
 struct TagList: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -15,20 +16,17 @@ struct TagList: View {
                 ForEach(appSettings.tags) { tag in
                     HStack {
                         Image(systemName: self.task.allTags(tags: appSettings.tags).contains(tag) ? "checkmark.circle.fill" : "circle")
-                        Text(tag[\.name])
+                        Text(tag.name)
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        let batch = Batch()
                         if self.task.allTags(tags: appSettings.tags).contains(tag) {
-                            let tagIds = self.task[\.tagIds].filter { tagId in tagId != tag.id }
-                            self.task[\.tagIds] = .value(tagIds)
+                            self.task.tagIds = self.task.tagIds.filter { tagId in tagId != tag.id }
                         } else {
-                            self.task[\.tagIds] = .value(self.task[\.tagIds] + [tag.id])
+                            self.task.tagIds.append(tag.id)
                         }
-                        batch.update(self.task)
-                        batch.commit()
+                        self.task.save()
                     }
                 }
             }

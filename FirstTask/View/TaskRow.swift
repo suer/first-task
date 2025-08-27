@@ -8,7 +8,7 @@ struct TaskRow: View {
     var body: some View {
         HStack {
             Circle()
-                .fill(Color(task[\.completedAt] != nil
+                .fill(Color(task.completedAt != nil
                     ? UIColor.label
                     : UIColor.systemBackground))
                 .frame(width: 20, height: 20)
@@ -22,7 +22,7 @@ struct TaskRow: View {
             }
             VStack {
                 HStack {
-                    Text(task[\.title])
+                    Text(task.title)
                     Spacer()
                 }
                 if task.allTags(tags: appSettings.tags).count > 0 {
