@@ -1,6 +1,5 @@
 import Firebase
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class User: ObservableObject, Identifiable, Codable {
     let id: String

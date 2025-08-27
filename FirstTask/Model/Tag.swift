@@ -1,6 +1,5 @@
 import Firebase
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 import FirebaseAuth
 
 class Tag: ObservableObject, Identifiable, Codable, Hashable {
