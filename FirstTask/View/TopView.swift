@@ -12,6 +12,7 @@ struct TopView: View {
     @State var newTaskTitle: String = ""
     @State var showingProjectAddModal = false
     @State var addingProject: Project = Project()
+    @State var showingFabButton = false
 
     var body: some View {
         NavigationView {
@@ -59,38 +60,9 @@ struct TopView: View {
                     leading: settingButton
                 )
                 .onAppear {
-                    let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
-                    user
-                        .collection(path: .tags)
-                        .order(by: "name")
-                        .addSnapshotListener { querySnapshot, _ in
-                            guard let documents = querySnapshot?.documents else { return }
-
-                            self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
-                                return try? Tag(snapshot: queryDocumentSnapshot)
-                            }.compactMap { $0 }
-                        }
-                    user
-                        .collection(path: .projects)
-                        .order(by: "title")
-                        .addSnapshotListener { querySnapshot, _ in
-                            guard let documents = querySnapshot?.documents else { return }
-
-                            self.projects = documents.map { queryDocumentSnapshot -> Project? in
-                                return try? Project(snapshot: queryDocumentSnapshot)
-                            }.compactMap { $0 }
-                        }
-                    user
-                        .collection(path: .tasks)
-                        .addSnapshotListener { querySnapshot, _ in
-                            guard let documents = querySnapshot?.documents else { return }
-
-                            self.tasks = documents.map { queryDocumentSnapshot -> Task? in
-                                return try? Task(snapshot: queryDocumentSnapshot)
-                            }.compactMap { $0 }
-                        }
+                    reloadView()
                 }
-                if UIDevice.current.userInterfaceIdiom != .pad {
+                if UIDevice.current.userInterfaceIdiom != .pad && self.showingFabButton {
                     VStack {
                         Spacer()
                         HStack {
@@ -119,6 +91,7 @@ struct TopView: View {
                 .clipShape(Circle())
         }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
             self.showingSettingMenuModal = false
+            reloadView()
         }) {
             SettingMenuView()
         }
@@ -126,6 +99,48 @@ struct TopView: View {
 
     private var todayTagId: String {
         self.appSettings.tags.first { $0.kind == "today" }?.id ?? ""
+    }
+
+    private func reloadView() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            self.appSettings.tags = []
+            self.projects = []
+            self.tasks = []
+            self.showingFabButton = false
+            return
+        }
+
+        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+        user
+            .collection(path: .tags)
+            .order(by: "name")
+            .addSnapshotListener { querySnapshot, _ in
+                guard let documents = querySnapshot?.documents else { return }
+
+                self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
+                    return try? Tag(snapshot: queryDocumentSnapshot)
+                }.compactMap { $0 }
+            }
+        user
+            .collection(path: .projects)
+            .order(by: "title")
+            .addSnapshotListener { querySnapshot, _ in
+                guard let documents = querySnapshot?.documents else { return }
+
+                self.projects = documents.map { queryDocumentSnapshot -> Project? in
+                    return try? Project(snapshot: queryDocumentSnapshot)
+                }.compactMap { $0 }
+            }
+        user
+            .collection(path: .tasks)
+            .addSnapshotListener { querySnapshot, _ in
+                guard let documents = querySnapshot?.documents else { return }
+
+                self.tasks = documents.map { queryDocumentSnapshot -> Task? in
+                    return try? Task(snapshot: queryDocumentSnapshot)
+                }.compactMap { $0 }
+            }
+        self.showingFabButton = true
     }
 }
 
