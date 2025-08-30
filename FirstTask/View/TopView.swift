@@ -110,7 +110,7 @@ struct TopView: View {
             return
         }
 
-        let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+        let user = User(id: uid)
         user
             .collection(path: .tags)
             .order(by: "name")
