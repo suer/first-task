@@ -20,6 +20,7 @@ struct TaskList: View {
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
+    var taskListType: TaskListType
 
     var filteredTasks: [Task] {
         tasks.filter { filter($0) && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName) }
@@ -53,7 +54,7 @@ struct TaskList: View {
                 ])
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-            .navigationBarTitle(navigationBarTitle)
+            .navigationBarTitle(title)
             .navigationBarItems(
                 trailing: HStack {
                     searchButton
@@ -191,12 +192,19 @@ struct TaskList: View {
                 }
         }
     }
+
+    private var title: String {
+        guard let subtitle = self.taskListType.subtitle() else {
+            return navigationBarTitle
+        }
+        return "\(navigationBarTitle) - \(subtitle)"
+    }
 }
 
 struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TaskList()
+            TaskList(taskListType: .project)
                 .environmentObject(AppSettings())
         }
     }

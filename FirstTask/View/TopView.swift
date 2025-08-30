@@ -18,16 +18,16 @@ struct TopView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ProjectRow(tasks: self.$tasks, icon: "tray", name: "Inbox") { task in
+                    ProjectRow(tasks: self.$tasks, name: "Inbox", taskListType: .inbox) { task in
                         task.projectId == ""
                     }
-                    ProjectRow(tasks: self.$tasks, icon: "star", name: "Today") { task in
+                    ProjectRow(tasks: self.$tasks, name: "Today", taskListType: .today) { task in
                         task.hasTag(tagId: todayTagId)
                     }
 
                     Section(header: Text("Projects")) {
                         ForEach(self.projects) { project in
-                            ProjectRow(tasks: self.$tasks, icon: "flag", name: project.title, project: project) { task in
+                            ProjectRow(tasks: self.$tasks, name: project.title, project: project, taskListType: .project) { task in
                                 return task.projectId == project.documentReference.documentID
                             }
                         }
@@ -48,7 +48,7 @@ struct TopView: View {
 
                     Section(header: Text("Tags")) {
                         ForEach(appSettings.tags.filter { $0.kind != "today" }) { tag in
-                            ProjectRow(tasks: self.$tasks, icon: "tag", name: tag.name) { task in
+                            ProjectRow(tasks: self.$tasks, name: tag.name, taskListType: .tag) { task in
                                 task.hasTag(tagId: tag.id)
                             }
                         }
