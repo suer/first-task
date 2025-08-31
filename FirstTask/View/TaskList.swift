@@ -88,7 +88,11 @@ struct TaskList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                let tag = self.appSettings.tags.first { $0.name == self.filteringTagName }
+                let tag: Tag? = if self.taskListType == .tag {
+                    self.appSettings.tags.first { $0.name == navigationBarTitle }
+                } else {
+                    nil
+                }
 
                 _ = Task.create(title: self.$newTaskTitle.wrappedValue,
                                 projectId: self.project?.id ?? "",
