@@ -30,6 +30,10 @@ jobs:
      run: |
        defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 
+   - name: Setup GoogleService-Info.plist
+     run: |
+       cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
+
    - name: Cache Gems
      uses: actions/cache@v4
      with:

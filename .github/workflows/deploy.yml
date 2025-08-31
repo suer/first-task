@@ -29,6 +29,11 @@ jobs:
        echo "${{ secrets.PROVISIONING_PROFILE }}" > distribution.mobileprovision.txt
        base64 --decode < distribution.mobileprovision.txt > distribution.mobileprovision
 
+   - name: Setup GoogleService-Info.plist
+     run: |
+       echo "${{ secrets.GOOGLE_SERVICE_INFO_RELEASE_PLIST }}" > GoogleService-Info-Release.plist.txt
+       base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
+
    - name: Cache Gems
      uses: actions/cache@v4
      with:
