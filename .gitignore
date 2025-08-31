@@ -4,6 +4,7 @@ xcshareddata/
 *.app.dSYM.zip
 *.ipa
 fastlane/report.xml
+/FirstTask/Configs/GoogleService-Info-Release.plist
 /FirstTask/Settings.bundle/com.mono0926.LicensePlist/
 /FirstTask/Settings.bundle/com.mono0926.LicensePlist.plist
 /FirstTask/Settings.bundle/com.mono0926.LicensePlist.latest_result.txt
