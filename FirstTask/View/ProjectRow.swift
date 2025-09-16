@@ -17,8 +17,8 @@ struct ProjectRow: View {
             NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task)}, project: self.project, taskListType: taskListType) ) {
                 Image(systemName: taskListType.icon())
                 Text(self.name)
-                Spacer()
                 Text("\(self.taskCount)")
+                Spacer()
             }
         }
     }
