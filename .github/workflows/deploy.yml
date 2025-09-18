@@ -49,6 +49,7 @@ jobs:
 
    - name: Build and deploy to DeployGate
      env:
+       BUILD_NUMBER: ${{ github.run_number }}
        TEAM_ID: ${{ secrets.TEAM_ID }}
        DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
        DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
