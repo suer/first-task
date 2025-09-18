@@ -27,6 +27,9 @@ platform :ios do
       bundle_identifier: "org.codefirst.FirstTask",
       profile_name: "FirstTask Deploygate Adhoc deployment"
     )
+    increment_build_number(
+      build_number: ENV["BUILD_NUMBER"]
+    )
     update_project_team(
       path: 'FirstTask.xcodeproj',
       teamid: ENV['TEAM_ID'])
