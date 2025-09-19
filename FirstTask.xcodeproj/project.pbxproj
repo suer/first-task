@@ -915,7 +915,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.29.0;
+				version = 11.15.0;
 			};
 		};
 		191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
@@ -923,7 +923,7 @@
 			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 14.2.2;
+				version = 14.2.6;
 			};
 		};
 		19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
