@@ -923,7 +923,7 @@
 			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 14.2.2;
+				version = 14.2.6;
 			};
 		};
 		19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
