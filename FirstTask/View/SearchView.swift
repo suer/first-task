@@ -39,7 +39,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationBarTitle("Search")
+            .navigationTitle("Search")
         }.onAppear {
             User(id: Auth.auth().currentUser?.uid ?? "NotFound")
                 .collection(path: .tags)

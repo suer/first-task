@@ -54,15 +54,17 @@ struct TaskList: View {
                 ])
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-            .navigationBarTitle(title)
-            .navigationBarItems(
-                trailing: HStack {
-                    searchButton
-                    if self.project != nil {
-                        projectButton
+            .navigationTitle(title)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        searchButton
+                        if self.project != nil {
+                            projectButton
+                        }
                     }
                 }
-            )
+            }
             .onAppear {
                 let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
                 user

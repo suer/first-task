@@ -7,8 +7,15 @@ struct ProjectAddView: View {
     var body: some View {
         NavigationView {
             ProjectFormView(project: project)
-            .navigationBarTitle("New Project")
-            .navigationBarItems(leading: cancelButton, trailing: saveButton)
+            .navigationTitle("New Project")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    cancelButton
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    saveButton
+                }
+            }
         }
     }
 
