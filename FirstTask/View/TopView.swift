@@ -55,10 +55,12 @@ struct TopView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                .navigationBarTitle("FirstTask")
-                .navigationBarItems(
-                    leading: settingButton
-                )
+                .navigationTitle("FirstTask")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        settingButton
+                    }
+                }
                 .onAppear {
                     reloadView()
                 }
