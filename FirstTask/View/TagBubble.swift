@@ -9,6 +9,7 @@ struct TagBubble: View {
             .font(.system(size: 11))
             .padding(4)
             .background(Color(UIColor(named: "TagBackground")!))
+            .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(UIColor(named: "TagBorder")!), lineWidth: 1)
