@@ -36,22 +36,22 @@ struct TaskList: View {
                 .onMove(perform: move)
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
-            .actionSheet(isPresented: self.$showingProjectActionSheet) {
-                ActionSheet(title: Text(self.project!.title),
-                    buttons: [
-                        .default(Text("Edit")) {
-                            self.showingProjectEditModal = true
-                        },
-                        .default(Text("Complete")) {
-                            self.presentation.wrappedValue.dismiss()
-                            self.project!.toggleDone()
-                        },
-                        .destructive(Text("Delete")) {
-                            self.presentation.wrappedValue.dismiss()
-                            Project.destroy(project: self.project!)
-                        },
-                        .cancel(Text("Cancel"))
-                ])
+            .confirmationDialog(
+                self.project!.title,
+                isPresented: self.$showingProjectActionSheet,
+                titleVisibility: .visible
+            ) {
+                Button("Edit") {
+                    self.showingProjectEditModal = true
+                }
+                Button("Complete") {
+                    self.presentation.wrappedValue.dismiss()
+                    self.project!.toggleDone()
+                }
+                Button("Delete", role: .destructive) {
+                    self.presentation.wrappedValue.dismiss()
+                    Project.destroy(project: self.project!)
+                }
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationTitle(title)

@@ -25,18 +25,18 @@ struct TagView: View {
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(UIColor.secondaryLabel))
-                        }.actionSheet(isPresented: self.$showingActionSheet) {
-                            ActionSheet(title: Text(self.editingTag.name),
-                                buttons: [
-                                    .default(Text("Edit")) {
-                                        self.newTagName = self.editingTag.name
-                                        self.showingEditTagModal = true
-                                    },
-                                    .destructive(Text("Delete")) {
-                                        Tag.destroy(tag: self.editingTag)
-                                    },
-                                    .cancel(Text("Cancel"))
-                            ])
+                        }.confirmationDialog(
+                            self.editingTag.name,
+                            isPresented: self.$showingActionSheet,
+                            titleVisibility: .visible
+                        ) {
+                            Button("Edit") {
+                                self.newTagName = self.editingTag.name
+                                self.showingEditTagModal = true
+                            }
+                            Button("Delete", role: .destructive) {
+                                Tag.destroy(tag: self.editingTag)
+                            }
                         }
                     }
                 }
