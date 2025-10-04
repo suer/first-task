@@ -11,7 +11,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Tags")) {
+                Section {
                     Button(action: {
                         self.filteringTagName = ""
                         self.presentationMode.wrappedValue.dismiss()
@@ -24,7 +24,8 @@ struct SearchView: View {
                         }
                     }
                     .accentColor(Color(UIColor.label))
-
+                }
+                Section(header: Text("Tags")) {
                     ForEach(tags) { tag in
                         Button(action: {
                             self.filteringTagName = tag.name
