@@ -5,17 +5,25 @@ struct SettingMenuView: View {
     @ObservedObject private var sessionState = SessionState()
 
     @State var showingFirebaseUIView = false
+    @State private var showTagView = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
-                    NavigationLink(destination: TagView()) {
+                    Button(action: {
+                        showTagView = true
+                    }) {
                         HStack {
                             Image(systemName: "tag")
                             Text("Tags")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.body.weight(.semibold))
+                                .foregroundColor(Color(UIColor.tertiaryLabel))
                         }
                     }
+                    .buttonStyle(.plain)
                     if !sessionState.isSignedIn {
                         Button(action: {
                             self.showingFirebaseUIView.toggle()
@@ -43,6 +51,9 @@ struct SettingMenuView: View {
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $showTagView) {
+                TagView()
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
