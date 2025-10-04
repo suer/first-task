@@ -12,25 +12,21 @@ struct BottomSheetModal<Content: View>: View {
                 modal
             }
         }
+        .animation(.spring(), value: isShown)
     }
 
     private var background: some View {
         Color.black
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: .infinity,
-                alignment: .center)
             .opacity(0.65)
-            .animation(.spring())
-            .gesture(TapGesture().onEnded { self.isShown = false })
+            .onTapGesture { self.isShown = false }
     }
 
     private var modal: some View {
         self.content()
+            .padding(.bottom)
             .frame(maxWidth: .infinity, alignment: .top)
             .background(Color(UIColor.systemBackground))
             .keyboardAwarePadding()
+            .transition(.move(edge: .bottom))
     }
 }
