@@ -25,12 +25,20 @@ struct BottomTextFieldSheetModal: View {
                     Button(action: {
                         self.onCommit()
                     }) {
-                        Image(systemName: "arrow.up")
+                        let accentColor = Color(UIColor(named: "Accent")!)
+                        let button = Label("Add", systemImage: "arrow.up")
+                            .labelStyle(.iconOnly)
                             .frame(width: 40, height: 40)
                             .imageScale(.large)
-                            .background(Color(UIColor(named: "Accent")!))
+                            .background(accentColor)
                             .foregroundColor(.white)
                             .clipShape(Circle())
+                        if #available(iOS 26.0, *) {
+                            button
+                                .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
+                        } else {
+                            button
+                        }
                     }
                 }
             }
