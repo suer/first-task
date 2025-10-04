@@ -12,7 +12,6 @@ struct BottomSheetModal<Content: View>: View {
                 modal
             }
         }
-        .edgesIgnoringSafeArea(.all)
     }
 
     private var background: some View {
