@@ -37,7 +37,7 @@ struct TaskList: View {
                 .onTapGesture { } // work around to scroll list with onLongPressGesture
             }
             .confirmationDialog(
-                self.project!.title,
+                self.project?.title ?? "Task",
                 isPresented: self.$showingProjectActionSheet,
                 titleVisibility: .visible
             ) {
