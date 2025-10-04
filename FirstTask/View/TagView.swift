@@ -25,18 +25,6 @@ struct TagView: View {
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(UIColor.secondaryLabel))
-                        }.confirmationDialog(
-                            self.editingTag.name,
-                            isPresented: self.$showingActionSheet,
-                            titleVisibility: .visible
-                        ) {
-                            Button("Edit") {
-                                self.newTagName = self.editingTag.name
-                                self.showingEditTagModal = true
-                            }
-                            Button("Delete", role: .destructive) {
-                                Tag.destroy(tag: self.editingTag)
-                            }
                         }
                     }
                 }
@@ -49,6 +37,18 @@ struct TagView: View {
                         Text("Add new tag")
                     }
                     Spacer()
+                }
+            }.confirmationDialog(
+                self.editingTag.name,
+                isPresented: self.$showingActionSheet,
+                titleVisibility: .visible
+            ) {
+                Button("Edit") {
+                    self.newTagName = self.editingTag.name
+                    self.showingEditTagModal = true
+                }
+                Button("Delete", role: .destructive) {
+                    Tag.destroy(tag: self.editingTag)
                 }
             }
             .navigationTitle("Tags")
