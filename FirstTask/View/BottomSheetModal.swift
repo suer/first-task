@@ -8,25 +8,16 @@ struct BottomSheetModal<Content: View>: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             if isShown {
-                background
-                modal
+                Color.black.opacity(0.65)
+                    .ignoresSafeArea()
+                    .onTapGesture { self.isShown = false }
+
+                self.content()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor.systemBackground))
+                    .transition(.move(edge: .bottom))
             }
         }
         .animation(.spring(), value: isShown)
-    }
-
-    private var background: some View {
-        Color.black
-            .opacity(0.65)
-            .onTapGesture { self.isShown = false }
-    }
-
-    private var modal: some View {
-        self.content()
-            .padding(.bottom)
-            .frame(maxWidth: .infinity, alignment: .top)
-            .background(Color(UIColor.systemBackground))
-            .keyboardAwarePadding()
-            .transition(.move(edge: .bottom))
     }
 }
