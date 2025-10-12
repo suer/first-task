@@ -75,6 +75,8 @@ struct TaskList: View {
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
                 let tag: Tag? = if self.taskListType == .tag {
                     self.appSettings.tags.first { $0.name == navigationBarTitle }
+                } else if self.taskListType == .today {
+                    self.appSettings.tags.first { $0.kind == "today" }
                 } else {
                     nil
                 }
