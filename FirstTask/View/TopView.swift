@@ -16,6 +16,7 @@ struct TopView: View {
 
     @ObservedObject private var sessionState = SessionState()
     @State var showingFirebaseUIView = false
+    @State private var showingSignOutConfirm = false
 
     var body: some View {
         NavigationView {
@@ -122,13 +123,23 @@ struct TopView: View {
                 }
             } else {
                 Button(action: {
-                    try? self.sessionState.signOut()
-                    self.reloadView()
+                    self.showingSignOutConfirm = true
                 }) {
                     Image(systemName: "person.badge.minus")
                         .frame(width: 40, height: 40)
                         .imageScale(.large)
                         .clipShape(Circle())
+                }
+                .alert(isPresented: $showingSignOutConfirm) {
+                    Alert(
+                        title: Text("Sign Out"),
+                        message: Text("Are you sure you want to sign out?"),
+                        primaryButton: .destructive(Text("Sign Out")) {
+                            try? self.sessionState.signOut()
+                            self.reloadView()
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
         }
