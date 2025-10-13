@@ -10,11 +10,13 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
+			<string>PSTitleValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>-</string>
 			<key>Title</key>
-			<string>Licenses</string>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist</string>
+			<string>Version</string>
+			<key>Key</key>
+			<string>version</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -22,9 +24,17 @@
 			<key>DefaultValue</key>
 			<string>-</string>
 			<key>Title</key>
-			<string>Version</string>
+			<string>Build</string>
 			<key>Key</key>
-			<string>sbVersion</string>
+			<string>build</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Licenses</string>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

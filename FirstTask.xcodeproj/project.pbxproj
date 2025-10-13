@@ -336,6 +336,7 @@
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				804433622E5602BB00011164 /* Copy Acknowledgements */,
+				19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */,
 			);
 			buildRules = (
 			);
@@ -460,6 +461,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (Update Settings.bundle)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERSION_NUMBER=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$INFOPLIST_FILE\")\n/usr/libexec/PlistBuddy ${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}/Settings.bundle/Root.plist -c \"set PreferenceSpecifiers:1:DefaultValue $VERSION_NUMBER\"\n\nBUILD_NUMBER=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n/usr/libexec/PlistBuddy ${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}/Settings.bundle/Root.plist -c \"Set :PreferenceSpecifiers:2:DefaultValue $BUILD_NUMBER\"\n";
+		};
 		19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
