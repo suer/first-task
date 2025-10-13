@@ -14,6 +14,9 @@ struct TopView: View {
     @State var addingProject: Project = Project()
     @State var showingFabButton = false
 
+    @ObservedObject private var sessionState = SessionState()
+    @State var showingFirebaseUIView = false
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
@@ -57,6 +60,9 @@ struct TopView: View {
                 .listStyle(GroupedListStyle())
                 .navigationTitle("FirstTask")
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        loginButton
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         settingButton
                     }
@@ -96,6 +102,35 @@ struct TopView: View {
             reloadView()
         }) {
             SettingMenuView()
+        }
+    }
+
+    private var loginButton: some View {
+        Group {
+            if !sessionState.isSignedIn {
+                Button(action: {
+                    self.showingFirebaseUIView.toggle()
+                }) {
+                    Image(systemName: "person")
+                        .frame(width: 40, height: 40)
+                        .imageScale(.large)
+                        .clipShape(Circle())
+                }.sheet(isPresented: $showingFirebaseUIView, onDismiss: {
+                    reloadView()
+                }) {
+                    FirebaseUIView()
+                }
+            } else {
+                Button(action: {
+                    try? self.sessionState.signOut()
+                    self.reloadView()
+                }) {
+                    Image(systemName: "person.badge.minus")
+                        .frame(width: 40, height: 40)
+                        .imageScale(.large)
+                        .clipShape(Circle())
+                }
+            }
         }
     }
 
