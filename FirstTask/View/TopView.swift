@@ -57,7 +57,7 @@ struct TopView: View {
                 .listStyle(GroupedListStyle())
                 .navigationTitle("FirstTask")
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         settingButton
                     }
                 }
