@@ -87,6 +87,9 @@ struct TopView: View {
                     }
                 }
             }
+            .onChange(of: sessionState.isSignedIn) {
+                reloadView()
+            }
         }
     }
 
@@ -116,9 +119,7 @@ struct TopView: View {
                         .frame(width: 40, height: 40)
                         .imageScale(.large)
                         .clipShape(Circle())
-                }.sheet(isPresented: $showingFirebaseUIView, onDismiss: {
-                    reloadView()
-                }) {
+                }.sheet(isPresented: $showingFirebaseUIView) {
                     FirebaseUIView()
                 }
             } else {
