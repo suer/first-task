@@ -341,7 +341,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				19E2F9A42E55D33000B40D4E /* PBXTargetDependency */,
 			);
 			name = FirstTask;
 			productName = FirstTask;
@@ -417,9 +416,6 @@
 			);
 			mainGroup = 8044678724DF97CC00011164;
 			packageReferences = (
-				191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
-				19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */,
 			);
 			productRefGroup = 8044679124DF97CC00011164 /* Products */;
 			projectDirPath = "";
@@ -618,10 +614,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		19E2F9A42E55D33000B40D4E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 19E2F9A32E55D33000B40D4E /* LicensePlistBuildTool */;
-		};
 		804467AB24DF97D000011164 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8044678F24DF97CC00011164 /* FirstTask */;
@@ -939,14 +931,6 @@
 				version = 15.1.0;
 			};
 		};
-		19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mono0926/LicensePlist.git";
-			requirement = {
-				kind = exactVersion;
-				version = 3.27.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -974,11 +958,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		19E2F9A32E55D33000B40D4E /* LicensePlistBuildTool */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 19E2F9A22E54AEAB00B40D4E /* XCRemoteSwiftPackageReference "LicensePlist" */;
-			productName = "plugin:LicensePlistBuildTool";
 		};
 /* End XCSwiftPackageProductDependency section */
 
