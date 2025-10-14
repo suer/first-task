@@ -6,15 +6,18 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
+      timezone: "Asia/Tokyo"
 
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "friday"
+      timezone: "Asia/Tokyo"
 
   - package-ecosystem: "swift"
     directory: "/FirstTaskDependencies"
     schedule:
       interval: "weekly"
       day: "friday"
+      timezone: "Asia/Tokyo"
