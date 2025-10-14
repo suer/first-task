@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		191A11752E54A5F5008B1BD0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11742E54A5F5008B1BD0 /* FirebaseFirestore */; };
 		193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704AE252D46BD004FF6A5 /* ProjectAddView.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
+		194AD5112E9DD13100B4B5DA /* FirstTaskDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 194AD5102E9DD13100B4B5DA /* FirstTaskDependencies */; };
 		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
 		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
@@ -131,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */,
+				194AD5112E9DD13100B4B5DA /* FirstTaskDependencies in Frameworks */,
 				191A116B2E54A303008B1BD0 /* FirebaseCrashlytics in Frameworks */,
 				191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */,
 				191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */,
@@ -416,6 +418,7 @@
 			);
 			mainGroup = 8044678724DF97CC00011164;
 			packageReferences = (
+				194AD50F2E9DD13100B4B5DA /* XCLocalSwiftPackageReference "FirstTaskDependencies" */,
 			);
 			productRefGroup = 8044679124DF97CC00011164 /* Products */;
 			projectDirPath = "";
@@ -914,6 +917,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		194AD50F2E9DD13100B4B5DA /* XCLocalSwiftPackageReference "FirstTaskDependencies" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FirstTaskDependencies;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -958,6 +968,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		194AD5102E9DD13100B4B5DA /* FirstTaskDependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirstTaskDependencies;
 		};
 /* End XCSwiftPackageProductDependency section */
 
