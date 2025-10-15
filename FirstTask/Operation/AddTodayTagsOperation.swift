@@ -1,6 +1,6 @@
 import Foundation
 
-class AddTodayTagsOperaiton: Operation {
+class AddTodayTagsOperaiton: Operation, @unchecked Sendable {
     override func start() {
         AddTodayTag().call()
     }
