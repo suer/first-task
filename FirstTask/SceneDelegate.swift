@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import UserNotifications
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -69,7 +70,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // badge
-        Task.countTodayTasks { UIApplication.shared.applicationIconBadgeNumber = $0 }
+        Task.countTodayTasks { count in
+            UNUserNotificationCenter.current().setBadgeCount(count)
+        }
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.scheduleAppProcessing()
