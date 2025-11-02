@@ -53,7 +53,7 @@
     "OmitExplicitReturns" : false,
     "OneCasePerLine" : true,
     "OneVariableDeclarationPerLine" : true,
-    "OnlyOneTrailingClosureArgument" : true,
+    "OnlyOneTrailingClosureArgument" : false,
     "OrderedImports" : true,
     "ReplaceForEachWithForLoop" : true,
     "ReturnVoidInsteadOfEmptyTuple" : true,
