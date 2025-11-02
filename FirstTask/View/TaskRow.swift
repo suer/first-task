@@ -1,5 +1,5 @@
-import SwiftUI
 import AudioToolbox
+import SwiftUI
 
 struct TaskRow: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -8,18 +8,21 @@ struct TaskRow: View {
     var body: some View {
         HStack {
             Circle()
-                .fill(Color(task.completedAt != nil
-                    ? UIColor.label
-                    : UIColor.systemBackground))
+                .fill(
+                    Color(
+                        task.completedAt != nil
+                            ? UIColor.label
+                            : UIColor.systemBackground)
+                )
                 .frame(width: 20, height: 20)
                 .overlay(
                     Circle()
                         .stroke(Color(UIColor.label))
                         .frame(width: 20, height: 20)
-            ).onTapGesture {
-                self.vibrate()
-                self.task.toggleDone()
-            }
+                ).onTapGesture {
+                    self.vibrate()
+                    self.task.toggleDone()
+                }
             VStack {
                 HStack {
                     Text(task.title)

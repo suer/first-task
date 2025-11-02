@@ -15,12 +15,15 @@ struct BottomTextFieldSheetModal: View {
         BottomSheetModal(isShown: self.$isShown) {
             GeometryReader { geometry in
                 HStack {
-                    FocusableTextField(text: self.$text, onCommit: { _ in
-                        self.onCommit()
-                    }, isFirstResponder: true)
-                        .frame(width: geometry.size.width - 40, height: 50)
-                        .keyboardType(.default)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    FocusableTextField(
+                        text: self.$text,
+                        onCommit: { _ in
+                            self.onCommit()
+                        }, isFirstResponder: true
+                    )
+                    .frame(width: geometry.size.width - 40, height: 50)
+                    .keyboardType(.default)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
 
                     Button(action: {
                         self.onCommit()

@@ -1,7 +1,7 @@
-import SwiftUI
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
 
 struct TagView: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -81,7 +81,7 @@ struct TagView: View {
     }
 
     func removeRow(offsets: IndexSet) {
-        offsets.forEach { i in
+        for i in offsets {
             Tag.destroy(tag: appSettings.tags[i])
         }
     }

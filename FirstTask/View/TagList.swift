@@ -1,7 +1,7 @@
-import SwiftUI
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
 
 struct TagList: View {
     @EnvironmentObject var appSettings: AppSettings

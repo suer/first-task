@@ -53,5 +53,9 @@ jobs:
        bundle config path vendor/bundle
        bundle install --jobs 4 --retry 3
 
+   - name: Run swift-format
+     run: |
+       swift format lint --parallel --recursive --strict $(find . -maxdepth 1 -type d -name 'FirstTask*' ! -name '*.xcodeproj')
+
    - name: Build
      run: bundle exec fastlane build_for_simulator

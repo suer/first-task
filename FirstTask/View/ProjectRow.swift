@@ -14,7 +14,7 @@ struct ProjectRow: View {
 
     var body: some View {
         HStack {
-            NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task)}, project: self.project, taskListType: taskListType) ) {
+            NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task) }, project: self.project, taskListType: taskListType)) {
                 Image(systemName: taskListType.icon())
                 Text(self.name)
                 Text("\(self.taskCount)")

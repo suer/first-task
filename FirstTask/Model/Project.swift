@@ -1,6 +1,6 @@
 import Firebase
-import FirebaseFirestore
 import FirebaseAuth
+import FirebaseFirestore
 
 class Project: ObservableObject, Identifiable, Codable, Equatable {
     @Published var id: String = UUID().uuidString

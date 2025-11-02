@@ -1,5 +1,5 @@
-import SwiftUI
 import FirebaseGoogleAuthUI
+import SwiftUI
 
 struct FirebaseUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UINavigationController {

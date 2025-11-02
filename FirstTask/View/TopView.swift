@@ -1,5 +1,5 @@
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct TopView: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -101,10 +101,13 @@ struct TopView: View {
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(isPresented: self.$showingSettingMenuModal, onDismiss: {
-            self.showingSettingMenuModal = false
-            reloadView()
-        }) {
+        }.sheet(
+            isPresented: self.$showingSettingMenuModal,
+            onDismiss: {
+                self.showingSettingMenuModal = false
+                reloadView()
+            }
+        ) {
             SettingMenuView()
         }
     }

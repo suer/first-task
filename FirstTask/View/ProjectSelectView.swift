@@ -1,5 +1,5 @@
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct ProjectSelectView: View {
     @Environment(\.presentationMode) var presentation
