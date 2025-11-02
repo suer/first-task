@@ -104,7 +104,7 @@ struct TaskList: View {
     }
 
     func removeRow(offsets: IndexSet) {
-        offsets.forEach { i in
+        for i in offsets {
             Task.destroy(task: self.filteredTasks[i])
         }
     }

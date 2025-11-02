@@ -81,7 +81,7 @@ struct TagView: View {
     }
 
     func removeRow(offsets: IndexSet) {
-        offsets.forEach { i in
+        for i in offsets {
             Tag.destroy(tag: appSettings.tags[i])
         }
     }
