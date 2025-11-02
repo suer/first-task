@@ -13,10 +13,10 @@ struct TaskEditView: View {
                     TextEditor(text: $task.memo)
                 }
                 Section(header: Text("Start Date")) {
-                     Toggle("Set Start Date", isOn: $task.useStartDate)
-                     if $task.useStartDate.wrappedValue {
-                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
-                     }
+                    Toggle("Set Start Date", isOn: $task.useStartDate)
+                    if $task.useStartDate.wrappedValue {
+                        DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
+                    }
                 }
                 Section(header: Text("Due Date")) {
                     Toggle("Set Due Date", isOn: $task.useDueDate)

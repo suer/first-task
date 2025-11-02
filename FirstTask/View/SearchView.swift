@@ -1,5 +1,5 @@
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct SearchView: View {
     @Environment(\.presentationMode) var presentationMode

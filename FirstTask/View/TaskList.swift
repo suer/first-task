@@ -1,5 +1,5 @@
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct TaskList: View {
     @Environment(\.presentationMode) var presentation
@@ -34,7 +34,7 @@ struct TaskList: View {
                 }
                 .onDelete(perform: removeRow)
                 .onMove(perform: move)
-                .onTapGesture { } // work around to scroll list with onLongPressGesture
+                .onTapGesture {}  // work around to scroll list with onLongPressGesture
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             .navigationTitle(title)
@@ -73,18 +73,20 @@ struct TaskList: View {
             }.padding(10)
 
             BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                let tag: Tag? = if self.taskListType == .tag {
-                    self.appSettings.tags.first { $0.name == navigationBarTitle }
-                } else if self.taskListType == .today {
-                    self.appSettings.tags.first { $0.kind == "today" }
-                } else {
-                    nil
-                }
+                let tag: Tag? =
+                    if self.taskListType == .tag {
+                        self.appSettings.tags.first { $0.name == navigationBarTitle }
+                    } else if self.taskListType == .today {
+                        self.appSettings.tags.first { $0.kind == "today" }
+                    } else {
+                        nil
+                    }
 
-                _ = Task.create(title: self.$newTaskTitle.wrappedValue,
-                                projectId: self.project?.id ?? "",
-                                tagId: tag?.id ?? "",
-                                tasks: self.tasks)
+                _ = Task.create(
+                    title: self.$newTaskTitle.wrappedValue,
+                    projectId: self.project?.id ?? "",
+                    tagId: tag?.id ?? "",
+                    tasks: self.tasks)
             }
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
@@ -117,7 +119,7 @@ struct TaskList: View {
 
     func taskRow(task: Task) -> some View {
         TaskRow(task: task)
-            .contentShape(Rectangle()) // can tap Spacer
+            .contentShape(Rectangle())  // can tap Spacer
             .onTapGesture {
                 self.editingTask = task
             }
@@ -145,9 +147,12 @@ struct TaskList: View {
                     Image(systemName: "trash")
                 }
             }
-            .sheet(item: self.$editingTask, onDismiss: {
-                self.editingTask.map({ task in task.save() })
-            }) { task in
+            .sheet(
+                item: self.$editingTask,
+                onDismiss: {
+                    self.editingTask.map({ task in task.save() })
+                }
+            ) { task in
                 TaskEditView(task: task)
             }
     }
@@ -160,9 +165,12 @@ struct TaskList: View {
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(isPresented: self.$modalState.showingSearchModal, onDismiss: {
-            self.modalState.showingSearchModal = false
-        }) {
+        }.sheet(
+            isPresented: self.$modalState.showingSearchModal,
+            onDismiss: {
+                self.modalState.showingSearchModal = false
+            }
+        ) {
             SearchView(filteringTagName: self.$filteringTagName)
                 .environmentObject(AppSettings())
         }

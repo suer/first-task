@@ -1,6 +1,6 @@
 import Firebase
-import FirebaseFirestore
 import FirebaseAuth
+import FirebaseFirestore
 
 class AddTodayTag {
     func call() {

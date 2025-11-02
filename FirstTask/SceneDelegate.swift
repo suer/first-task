@@ -6,8 +6,8 @@
 //  Copyright © 2020 codefirst. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 import UserNotifications
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

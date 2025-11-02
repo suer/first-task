@@ -7,15 +7,15 @@ struct ProjectEditView: View {
     var body: some View {
         NavigationView {
             ProjectFormView(project: project)
-            .navigationTitle("Edit Project")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    cancelButton
+                .navigationTitle("Edit Project")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        saveButton
+                    }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    saveButton
-                }
-            }
         }
     }
 

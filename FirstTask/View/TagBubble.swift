@@ -13,7 +13,7 @@ struct TagBubble: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(UIColor(named: "TagBorder")!), lineWidth: 1)
-        )
+            )
     }
 }
 

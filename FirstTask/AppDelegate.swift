@@ -6,10 +6,10 @@
 //  Copyright © 2020 codefirst. All rights reserved.
 //
 
-import UIKit
-import CoreData
 import BackgroundTasks
+import CoreData
 import Firebase
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
