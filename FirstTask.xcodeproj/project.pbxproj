@@ -43,7 +43,6 @@
 		8044679B24DF97CC00011164 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044679A24DF97CC00011164 /* ContentView.swift */; };
 		8044679D24DF97D000011164 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8044679C24DF97D000011164 /* Assets.xcassets */; };
 		804467A024DF97D000011164 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8044679F24DF97D000011164 /* Preview Assets.xcassets */; };
-		804467A324DF97D000011164 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 804467A124DF97D000011164 /* LaunchScreen.storyboard */; };
 		804467B924DF97D000011164 /* FirstTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467B824DF97D000011164 /* FirstTaskUITests.swift */; };
 		804467C724DF98DF00011164 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C624DF98DF00011164 /* TaskList.swift */; };
 		804467C924DF98F100011164 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467C824DF98F100011164 /* TaskRow.swift */; };
@@ -106,7 +105,6 @@
 		8044679A24DF97CC00011164 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8044679C24DF97D000011164 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8044679F24DF97D000011164 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		804467A224DF97D000011164 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		804467A424DF97D000011164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		804467A924DF97D000011164 /* FirstTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		804467AF24DF97D000011164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				801BBD4725737A4400B7D66E /* Firestore */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				804467A424DF97D000011164 /* Info.plist */,
-				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
 				804467CA24DF99F800011164 /* Model */,
 				80EF0E0D2511B52C004D0C1C /* ObservableObject */,
 				80775DFD250907A6007ED383 /* Operation */,
@@ -437,7 +434,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				19DEE5A12543C7E00079459E /* Settings.bundle in Resources */,
-				804467A324DF97D000011164 /* LaunchScreen.storyboard in Resources */,
 				804467A024DF97D000011164 /* Preview Assets.xcassets in Resources */,
 				8044679D24DF97D000011164 /* Assets.xcassets in Resources */,
 			);
@@ -628,17 +624,6 @@
 			targetProxy = 804467B524DF97D000011164 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		804467A124DF97D000011164 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				804467A224DF97D000011164 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		804467BB24DF97D000011164 /* Debug */ = {
