@@ -60,4 +60,11 @@ platform :ios do
       destination: "generic/platform=iOS Simulator"
     )
   end
+
+  desc "Run tests"
+  lane :test do
+    scan(
+      scheme: "FirstTask"
+    )
+  end
 end
