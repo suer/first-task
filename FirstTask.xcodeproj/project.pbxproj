@@ -22,6 +22,7 @@
 		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */; };
+		19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */; };
 		19D1298A256A45B400BB7732 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D12989256A45B400BB7732 /* SessionState.swift */; };
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
 		19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */; };
@@ -84,6 +85,7 @@
 		197EA4CE2529A24C00317E53 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectView.swift; sourceTree = "<group>"; };
+		19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		19D12989256A45B400BB7732 /* SessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		804467AC24DF97D000011164 /* FirstTaskTests */ = {
 			isa = PBXGroup;
 			children = (
+				19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */,
 				804467AD24DF97D000011164 /* FirstTaskTests.swift */,
 				804467AF24DF97D000011164 /* Info.plist */,
 			);
@@ -603,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				804467AE24DF97D000011164 /* FirstTaskTests.swift in Sources */,
+				19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
