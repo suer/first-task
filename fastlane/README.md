@@ -31,6 +31,14 @@ Submit a new Beta Build to DeployGate
 
 Build for simulator
 
+### ios test
+
+```sh
+[bundle exec] fastlane ios test
+```
+
+Run tests
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
