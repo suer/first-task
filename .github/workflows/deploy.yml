@@ -70,4 +70,5 @@ jobs:
        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
        CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
        DEPLOYGATE_MESSAGE: ${{ github.sha }}
+       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
      run: bundle exec fastlane dg
