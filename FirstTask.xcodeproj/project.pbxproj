@@ -178,7 +178,6 @@
 		19A3EB2124FD09C50071C40B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				805BAEF42E62E10E001D46D3 /* TaskListType.swift */,
 				804467D124DFD80A00011164 /* BottomSheetModal.swift */,
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
@@ -196,6 +195,7 @@
 				19F8F4BB24F2216900F352EA /* TagView.swift */,
 				19F5BA6724E5521A002B02CF /* TaskEditView.swift */,
 				804467C624DF98DF00011164 /* TaskList.swift */,
+				805BAEF42E62E10E001D46D3 /* TaskListType.swift */,
 				804467C824DF98F100011164 /* TaskRow.swift */,
 				197EA4CE2529A24C00317E53 /* TopView.swift */,
 				19A3EB2224FD0A0B0071C40B /* UIKit */,
@@ -245,8 +245,8 @@
 				8044679324DF97CC00011164 /* AppDelegate.swift */,
 				8044679C24DF97D000011164 /* Assets.xcassets */,
 				8061E5C5254304EE00CCBDFF /* Configs */,
-				801BBD4725737A4400B7D66E /* Firestore */,
 				1905DA1C2507AB8C00D74BA7 /* Extension */,
+				801BBD4725737A4400B7D66E /* Firestore */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				804467A424DF97D000011164 /* Info.plist */,
 				804467A124DF97D000011164 /* LaunchScreen.storyboard */,
@@ -292,8 +292,8 @@
 			isa = PBXGroup;
 			children = (
 				802C2F19259C619D00389927 /* Project.swift */,
-				802C2F1E259C62CF00389927 /* Task.swift */,
 				802C2F23259C63E700389927 /* Tag.swift */,
+				802C2F1E259C62CF00389927 /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
