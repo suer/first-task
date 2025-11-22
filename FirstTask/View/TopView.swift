@@ -80,15 +80,14 @@ struct TopView: View {
                             }
                         }.padding(10)
                     }.padding(10)
+
+                    BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+                        _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
+                    }
                 }
             }
             .onChange(of: sessionState.isSignedIn) {
                 reloadView()
-            }
-        }
-        .sheet(isPresented: $appSettings.showAddTaskModal) {
-            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
             }
         }
     }
