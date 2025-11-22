@@ -112,11 +112,14 @@ struct TaskList: View {
                 .frame(height: 360)
             }
         }
-        .sheet(isPresented: isEditing, onDismiss: {
-            if let id = self.editingTaskID, let task = self.tasks.first(where: { $0.id == id }) {
-                task.save()
+        .sheet(
+            isPresented: isEditing,
+            onDismiss: {
+                if let id = self.editingTaskID, let task = self.tasks.first(where: { $0.id == id }) {
+                    task.save()
+                }
             }
-        }) {
+        ) {
             if let id = self.editingTaskID, let task = self.tasks.first(where: { $0.id == id }) {
                 TaskEditView(task: task)
             } else {
