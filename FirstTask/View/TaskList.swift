@@ -12,7 +12,7 @@ struct TaskList: View {
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
     @State var navigationBarTitle = "Tasks"
-    @State var editingTask: Task?
+    @State var editingTaskID: String?
     @State var movingTask: Task?
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
@@ -24,6 +24,17 @@ struct TaskList: View {
 
     var filteredTasks: [Task] {
         tasks.filter { filter($0) && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName) }
+    }
+
+    private var isEditing: Binding<Bool> {
+        Binding(
+            get: { self.editingTaskID != nil },
+            set: { isShowing in
+                if !isShowing {
+                    self.editingTaskID = nil
+                }
+            }
+        )
     }
 
     var body: some View {
@@ -101,6 +112,17 @@ struct TaskList: View {
                 .frame(height: 360)
             }
         }
+        .sheet(isPresented: isEditing, onDismiss: {
+            if let id = self.editingTaskID, let task = self.tasks.first(where: { $0.id == id }) {
+                task.save()
+            }
+        }) {
+            if let id = self.editingTaskID, let task = self.tasks.first(where: { $0.id == id }) {
+                TaskEditView(task: task)
+            } else {
+                ProgressView()
+            }
+        }
     }
 
     func removeRow(offsets: IndexSet) {
@@ -121,7 +143,7 @@ struct TaskList: View {
         TaskRow(task: task)
             .contentShape(Rectangle())  // can tap Spacer
             .onTapGesture {
-                self.editingTask = task
+                self.editingTaskID = task.id
             }
             .contextMenu {
                 Button(action: {
@@ -146,14 +168,6 @@ struct TaskList: View {
                     Text("Delete")
                     Image(systemName: "trash")
                 }
-            }
-            .sheet(
-                item: self.$editingTask,
-                onDismiss: {
-                    self.editingTask.map({ task in task.save() })
-                }
-            ) { task in
-                TaskEditView(task: task)
             }
     }
 
