@@ -8,7 +8,6 @@ struct TopView: View {
     @State var tasks: [Task] = []
 
     @State var showingSettingMenuModal = false
-    @State var showingAddTaskModal = false
     @State var newTaskTitle: String = ""
     @State var showingProjectAddModal = false
     @State var addingProject: Project = Project()
@@ -77,18 +76,19 @@ struct TopView: View {
                         HStack {
                             Spacer()
                             FabButton {
-                                self.showingAddTaskModal = true
+                                self.appSettings.showAddTaskModal = true
                             }
                         }.padding(10)
                     }.padding(10)
-
-                    BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
-                        _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
-                    }
                 }
             }
             .onChange(of: sessionState.isSignedIn) {
                 reloadView()
+            }
+        }
+        .sheet(isPresented: $appSettings.showAddTaskModal) {
+            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+                _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
             }
         }
     }
