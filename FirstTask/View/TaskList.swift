@@ -48,7 +48,8 @@ struct TaskList: View {
                 .onTapGesture {}  // work around to scroll list with onLongPressGesture
             }
             .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-            .navigationTitle(title)
+            .navigationTitle(self.navigationBarTitle)
+            .navigationSubtitleForiOS26(self.taskListType.subtitle())
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
@@ -224,12 +225,16 @@ struct TaskList: View {
             }
         }
     }
+}
 
-    private var title: String {
-        guard let subtitle = self.taskListType.subtitle() else {
-            return navigationBarTitle
+extension View {
+    @ViewBuilder
+    fileprivate func navigationSubtitleForiOS26(_ subtitle: String?) -> some View {
+        if let subtitle = subtitle, #available(iOS 26.0, *) {
+            self.navigationSubtitle(subtitle)
+        } else {
+            self
         }
-        return "\(navigationBarTitle) - \(subtitle)"
     }
 }
 
