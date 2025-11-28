@@ -226,7 +226,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  abbrev (~> 0.1.2)
   fastlane (~> 2.229.1)
 
 BUNDLED WITH
