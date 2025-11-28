@@ -1,5 +1,5 @@
 {
-  "originHash" : "7f43dc9e7bd3e623e439bbde791b55b8d5d97f1e90bbfa37706f6e52f53a9a6b",
+  "originHash" : "4e0cc94f689b8aed6bab692db411994f4496f981c4f25ac985ac5954a967ca82",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -168,8 +168,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mono0926/LicensePlist.git",
       "state" : {
-        "revision" : "ab1692c16f4ce50fc134a8f51179f3310d41c5ef",
-        "version" : "3.27.1"
+        "revision" : "d66dd02655edf264aa0647897decab7f82a869ea",
+        "version" : "3.27.2"
       }
     },
     {
