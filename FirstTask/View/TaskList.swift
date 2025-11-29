@@ -17,6 +17,7 @@ struct TaskList: View {
     @State var showingProjectActionSheet = false
     @State var showingProjectEditModal = false
     @State var showingProjectMoveModal = false
+    @State var showingCompleteConfirmation = false
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -216,13 +217,27 @@ struct TaskList: View {
                 self.showingProjectEditModal = true
             }
             Button("Complete") {
-                self.presentation.wrappedValue.dismiss()
-                self.project!.toggleDone()
+                self.showingCompleteConfirmation = true
             }
             Button("Delete", role: .destructive) {
                 self.presentation.wrappedValue.dismiss()
                 Project.destroy(project: self.project!)
             }
+        }
+        .confirmationDialog(
+            "Confirm Completion",
+            isPresented: self.$showingCompleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Complete", role: .destructive) {
+                self.presentation.wrappedValue.dismiss()
+                self.project!.toggleDone()
+            }
+            Button("Cancel") {
+                // Do nothing
+            }
+        } message: {
+            Text("Complete all tasks and the project included in this project?")
         }
     }
 }
