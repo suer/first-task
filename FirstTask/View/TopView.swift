@@ -128,10 +128,28 @@ struct TopView: View {
                 Button(action: {
                     self.showingSignOutConfirm = true
                 }) {
-                    Image(systemName: "person.badge.minus")
-                        .frame(width: 40, height: 40)
-                        .imageScale(.large)
-                        .clipShape(Circle())
+                    if sessionState.photoURL.isEmpty {
+                        Image(systemName: "person")
+                            .frame(width: 32, height: 32)
+                            .imageScale(.large)
+                            .clipShape(Circle())
+                    } else {
+                        AsyncImage(url: URL(string: sessionState.photoURL)) { phase in
+                            switch phase {
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 32, height: 32)
+                                    .clipShape(Circle())
+                            default:
+                                Image(systemName: "person")
+                                    .frame(width: 32, height: 32)
+                                    .imageScale(.large)
+                                    .clipShape(Circle())
+                            }
+                        }
+                    }
                 }
                 .alert(isPresented: $showingSignOutConfirm) {
                     Alert(
