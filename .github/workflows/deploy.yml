@@ -11,64 +11,64 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
- build:
-   runs-on: macos-26
-   timeout-minutes: 20
-   steps:
-   - uses: actions/checkout@v6
+  build:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
 
-   - name: Set Xcode version
-     run: sudo xcode-select -s /Applications/Xcode_26.0.app
+      - name: Set Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
 
-   # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
-   - name: Skip package plugin fingerprint validation
-     run: |
-       defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+      # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
+      - name: Skip package plugin fingerprint validation
+        run: |
+          defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 
-   - name: Setup p12 certificate file
-     run: |
-       echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
-       base64 --decode < distribution.p12.txt > distribution.p12
+      - name: Setup p12 certificate file
+        run: |
+          echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
+          base64 --decode < distribution.p12.txt > distribution.p12
 
-   - name: Setup provisioning profile
-     run: |
-       echo "${{ secrets.PROVISIONING_PROFILE }}" > distribution.mobileprovision.txt
-       base64 --decode < distribution.mobileprovision.txt > distribution.mobileprovision
+      - name: Setup provisioning profile
+        run: |
+          echo "${{ secrets.PROVISIONING_PROFILE }}" > distribution.mobileprovision.txt
+          base64 --decode < distribution.mobileprovision.txt > distribution.mobileprovision
 
-   - name: Setup GoogleService-Info.plist
-     run: |
-       echo "${{ secrets.GOOGLE_SERVICE_INFO_RELEASE_PLIST }}" > GoogleService-Info-Release.plist.txt
-       base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
+      - name: Setup GoogleService-Info.plist
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICE_INFO_RELEASE_PLIST }}" > GoogleService-Info-Release.plist.txt
+          base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
 
-   - name: Cache Gems
-     uses: actions/cache@v4
-     with:
-       path: vendor/bundle
-       key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-       restore-keys: |
-         ${{ runner.os }}-gems-
+      - name: Cache Gems
+        uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
-   - name: Cache SwiftPM packages
-     uses: actions/cache@v4
-     with:
-       path: FirstTaskDependencies/.build
-       key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-       restore-keys: |
-         ${{ runner.os }}-spm-
+      - name: Cache SwiftPM packages
+        uses: actions/cache@v4
+        with:
+          path: FirstTaskDependencies/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
-   - name: Install Bundled Gems
-     run: |
-       bundle config path vendor/bundle
-       bundle install --jobs 4 --retry 3
+      - name: Install Bundled Gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
 
-   - name: Build and deploy to DeployGate
-     env:
-       BUILD_NUMBER: ${{ github.run_number }}
-       TEAM_ID: ${{ secrets.TEAM_ID }}
-       DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
-       DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
-       KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-       CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-       DEPLOYGATE_MESSAGE: ${{ github.sha }}
-       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
-     run: bundle exec fastlane dg
+      - name: Build and deploy to DeployGate
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
+          DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          DEPLOYGATE_MESSAGE: ${{ github.sha }}
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+        run: bundle exec fastlane dg
