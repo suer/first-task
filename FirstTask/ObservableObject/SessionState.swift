@@ -3,6 +3,7 @@ import FirebaseFirestore
 
 class SessionState: ObservableObject {
     @Published var isSignedIn: Bool = false
+    @Published var photoURL: String = ""
     private var handle: AuthStateDidChangeListenerHandle!
 
     init() {
@@ -18,11 +19,13 @@ class SessionState: ObservableObject {
                     } catch {
                         print("Error saving user: \(error)")
                     }
+                    self.photoURL = user.photoURL?.absoluteString ?? ""
                 }
                 self.isSignedIn = true
             } else {
                 print("Sign-out")
                 self.isSignedIn = false
+                self.photoURL = ""
             }
         }
     }
