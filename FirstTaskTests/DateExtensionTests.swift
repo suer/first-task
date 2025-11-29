@@ -1,50 +1,54 @@
-import XCTest
+import Foundation
+import Testing
 
 @testable import FirstTask
 
-class DateExtensionTests: XCTestCase {
+struct DateExtensionTests {
 
-    var calendar: Calendar!
-    var date: Date!
-
-    override func setUp() {
-        super.setUp()
-        calendar = Calendar(identifier: .gregorian)
+    func setupTestDate() -> (Calendar, Date) {
+        var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         let components = DateComponents(year: 2023, month: 1, day: 1, hour: 12, minute: 30, second: 45)
-        date = calendar.date(from: components)!
+        let date = calendar.date(from: components)!
+        return (calendar, date)
     }
 
+    @Test
     func testStartOfDay() {
+        let (calendar, date) = setupTestDate()
         let startOfDay = date.startOfDay(with: calendar)
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startOfDay)
-        XCTAssertEqual(components.year, 2023)
-        XCTAssertEqual(components.month, 1)
-        XCTAssertEqual(components.day, 1)
-        XCTAssertEqual(components.hour, 0)
-        XCTAssertEqual(components.minute, 0)
-        XCTAssertEqual(components.second, 0)
+        #expect(components.year == 2023)
+        #expect(components.month == 1)
+        #expect(components.day == 1)
+        #expect(components.hour == 0)
+        #expect(components.minute == 0)
+        #expect(components.second == 0)
     }
 
+    @Test
     func testEndOfDay() {
+        let (calendar, date) = setupTestDate()
         let endOfDay = date.endOfDay(with: calendar)
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: endOfDay)
-        XCTAssertEqual(components.year, 2023)
-        XCTAssertEqual(components.month, 1)
-        XCTAssertEqual(components.day, 1)
-        XCTAssertEqual(components.hour, 23)
-        XCTAssertEqual(components.minute, 59)
-        XCTAssertEqual(components.second, 59)
+        #expect(components.year == 2023)
+        #expect(components.month == 1)
+        #expect(components.day == 1)
+        #expect(components.hour == 23)
+        #expect(components.minute == 59)
+        #expect(components.second == 59)
     }
 
+    @Test
     func testStartOfNextDay() {
+        let (calendar, date) = setupTestDate()
         let startOfNextDay = date.startOfNextDay(with: calendar)
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startOfNextDay)
-        XCTAssertEqual(components.year, 2023)
-        XCTAssertEqual(components.month, 1)
-        XCTAssertEqual(components.day, 2)
-        XCTAssertEqual(components.hour, 0)
-        XCTAssertEqual(components.minute, 0)
-        XCTAssertEqual(components.second, 0)
+        #expect(components.year == 2023)
+        #expect(components.month == 1)
+        #expect(components.day == 2)
+        #expect(components.hour == 0)
+        #expect(components.minute == 0)
+        #expect(components.second == 0)
     }
 }
