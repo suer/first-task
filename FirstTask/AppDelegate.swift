@@ -2,16 +2,13 @@
 //  AppDelegate.swift
 //  FirstTask
 //
-//  Created by SuetsuguRyo on 2020/08/09.
-//  Copyright © 2020 codefirst. All rights reserved.
-//
 
-import BackgroundTasks
+@preconcurrency import BackgroundTasks
 import CoreData
 import Firebase
 import UIKit
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
