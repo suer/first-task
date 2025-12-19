@@ -45,7 +45,7 @@ jobs:
           base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
 
       - name: Cache Gems
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -53,7 +53,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Cache SwiftPM packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: FirstTaskDependencies/.build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
