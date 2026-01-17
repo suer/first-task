@@ -62,6 +62,8 @@ jobs:
         with:
           key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
           restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
 
       # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
       - name: Skip package plugin fingerprint validation
@@ -120,6 +122,8 @@ jobs:
         with:
           key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
           restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
 
       # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
       - name: Skip package plugin fingerprint validation
