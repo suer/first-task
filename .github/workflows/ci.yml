@@ -155,7 +155,55 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
+      # https://github.com/actions/runner-images/issues/12777
+      - name: Workaround for hanging simulator
+        id: boot_simulator
+        timeout-minutes: 12
+        run: |
+          brew install coreutils -q
+
+          echo "Listing simulator devices:"
+          DEVICE_ID=$(xcrun simctl list devices available -j | jq -r '
+            .devices
+            | to_entries
+            | map(select(.key | contains("com.apple.CoreSimulator.SimRuntime.iOS")))
+            | max_by(.key)
+            | .value
+            | .[]
+            | select(.name | startswith("iPhone"))
+            | .udid
+          ' | head -n 1)
+          echo "device_id=$DEVICE_ID" >> "$GITHUB_OUTPUT"
+          echo "--------------------------------"
+          echo "👀 Updating dyld_shared_cache:"
+          xcrun simctl runtime dyld_shared_cache update --all
+          echo "--------------------------------"
+          echo "👀 Booting simulator: with ID: $DEVICE_ID"
+
+          i=1
+          max=5
+          while [ $i -le $max ]; do
+            echo "👀 Launching Simulator (Attempt $i/$max)"
+            # Brewfile installs coreutils which includes gtimeout
+            if gtimeout -s SIGKILL 2m xcrun simctl bootstatus "$DEVICE_ID" -b; then
+              echo "✅ Simulator booted successfully"
+              break
+            else
+              echo "❌ Simulator boot timed out. Shutting down..."
+              xcrun simctl shutdown "$DEVICE_ID" || true # prevents "Unable to shutdown device in current state: Shutdown" error
+
+              echo "🔁 Retrying in 5s..."
+              i=$((i + 1))
+              sleep 5
+            fi
+          done
+
+          if [ $i -gt $max ]; then
+            echo "::error::Failed to boot simulator after $max attempts."
+            exit 1
+          fi
+
       - name: Test
-        run: bundle exec fastlane scan
+        run: bundle exec fastlane scan --destination "id=${{ steps.boot_simulator.outputs.device_id }}" --only_testing FirstTaskTests
         env:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
