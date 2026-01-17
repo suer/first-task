@@ -28,8 +28,20 @@ jobs:
         run: |
           swift format lint --parallel --recursive --strict $(find . -maxdepth 1 -type d -name 'FirstTask*' ! -name '*.xcodeproj')
 
+  swiftlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: GitHub Action for SwiftLint with --strict
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+
   build:
-    needs: [swiftformat]
+    needs: [swiftformat, swiftlint]
     runs-on: macos-26
     timeout-minutes: 20
     steps:
