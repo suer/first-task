@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        FirebaseApp.configure()
+        if NSClassFromString("XCTest") == nil {
+            FirebaseApp.configure()
+        }
 
         return true
     }

@@ -2,9 +2,9 @@ import FirebaseAuth
 
 class CreateTodayTag {
     func call() {
-        guard Auth.auth().currentUser != nil else { return }
+        guard let userId = Auth.safeAuth()?.currentUser?.uid else { return }
 
-        User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+        User(id: userId ?? "NotFound")
             .collection(path: .tags)
             .whereField("kind", isEqualTo: "today")
             .getDocuments(completion: { snapshot, err in

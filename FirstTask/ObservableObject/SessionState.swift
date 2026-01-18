@@ -7,7 +7,9 @@ class SessionState: ObservableObject {
     private var handle: AuthStateDidChangeListenerHandle!
 
     init() {
-        handle = Auth.auth().addStateDidChangeListener { (_, user) in
+        guard let auth = Auth.safeAuth() else { return }
+
+        handle = auth.addStateDidChangeListener { (_, user) in
             if user != nil {
                 print("Sign-in")
                 if let user = user {
