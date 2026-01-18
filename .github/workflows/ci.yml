@@ -51,10 +51,8 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_26.2.app
 
       - name: Show Xcode version
-        id: xcode_version
         run: |
           xcodebuild -version
-          echo "VERSION=$(xcodebuild -version | head -n 1 | sed 's/ /-/g')" >> $GITHUB_OUTPUT
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -62,8 +60,10 @@ jobs:
 
       - uses: irgaly/xcode-cache@v1
         with:
-          key: xcode-cache-deriveddata-${{ steps.xcode_version.outputs.VERSION }}-${{ github.workflow }}-${{ github.sha }}
-          restore-keys: xcode-cache-deriveddata-${{ steps.xcode_version.outputs.VERSION }}-${{ github.workflow }}-
+          key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
 
       # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
       - name: Skip package plugin fingerprint validation
@@ -97,5 +97,113 @@ jobs:
 
       - name: Build
         run: bundle exec fastlane build_for_simulator
+        env:
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+
+  test:
+    needs: [swiftformat, swiftlint]
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_26.2.app
+
+      - name: Show Xcode version
+        run: |
+          xcodebuild -version
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: irgaly/xcode-cache@v1
+        with:
+          key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
+
+      # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
+      - name: Skip package plugin fingerprint validation
+        run: |
+          defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+
+      - name: Setup GoogleService-Info.plist
+        run: |
+          cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
+
+      - name: Cache Gems
+        uses: actions/cache@v5
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Cache SwiftPM packages
+        uses: actions/cache@v5
+        with:
+          path: FirstTaskDependencies/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Install Bundled Gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      # https://github.com/actions/runner-images/issues/12777
+      - name: Workaround for hanging simulator
+        id: boot_simulator
+        timeout-minutes: 12
+        run: |
+          brew install coreutils -q
+
+          echo "Listing simulator devices:"
+          DEVICE_ID=$(xcrun simctl list devices available -j | jq -r '
+            .devices
+            | to_entries
+            | map(select(.key | contains("com.apple.CoreSimulator.SimRuntime.iOS")))
+            | max_by(.key)
+            | .value
+            | .[]
+            | select(.name | startswith("iPhone"))
+            | .udid
+          ' | head -n 1)
+          echo "device_id=$DEVICE_ID" >> "$GITHUB_OUTPUT"
+          echo "--------------------------------"
+          echo "👀 Updating dyld_shared_cache:"
+          xcrun simctl runtime dyld_shared_cache update --all
+          echo "--------------------------------"
+          echo "👀 Booting simulator: with ID: $DEVICE_ID"
+
+          i=1
+          max=5
+          while [ $i -le $max ]; do
+            echo "👀 Launching Simulator (Attempt $i/$max)"
+            # Brewfile installs coreutils which includes gtimeout
+            if gtimeout -s SIGKILL 2m xcrun simctl bootstatus "$DEVICE_ID" -b; then
+              echo "✅ Simulator booted successfully"
+              break
+            else
+              echo "❌ Simulator boot timed out. Shutting down..."
+              xcrun simctl shutdown "$DEVICE_ID" || true # prevents "Unable to shutdown device in current state: Shutdown" error
+
+              echo "🔁 Retrying in 5s..."
+              i=$((i + 1))
+              sleep 5
+            fi
+          done
+
+          if [ $i -gt $max ]; then
+            echo "::error::Failed to boot simulator after $max attempts."
+            exit 1
+          fi
+
+      - name: Test
+        run: bundle exec fastlane scan --destination "id=${{ steps.boot_simulator.outputs.device_id }}" --only_testing FirstTaskUITests
         env:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
