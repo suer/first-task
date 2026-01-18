@@ -171,7 +171,7 @@ struct TopView: View {
     }
 
     private func reloadView() {
-        guard let uid = Auth.auth().currentUser?.uid else {
+        guard let uid = Auth.safeAuth()?.currentUser?.uid else {
             self.appSettings.tags = []
             self.projects = []
             self.tasks = []
