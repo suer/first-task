@@ -26,7 +26,7 @@ jobs:
 
       - name: Run swift-format
         run: |
-          swift format lint --parallel --recursive --strict $(find . -maxdepth 1 -type d -name 'FirstTask*' ! -name '*.xcodeproj')
+          find . -maxdepth 1 -type d -name 'FirstTask*' ! -name '*.xcodeproj' -exec swift format lint --parallel --recursive --strict {} +
 
   swiftlint:
     runs-on: ubuntu-latest
