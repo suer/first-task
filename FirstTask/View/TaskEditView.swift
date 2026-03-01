@@ -10,7 +10,8 @@ struct TaskEditView: View {
             Form {
                 TextField("Input title", text: $task.title)
                 Section(header: Text("Memo")) {
-                    TextEditor(text: $task.memo)
+                    TextField("Memo", text: $task.memo, axis: .vertical)
+                        .lineLimit(1...5)
                 }
                 Section(header: Text("Start Date")) {
                     Toggle("Set Start Date", isOn: $task.useStartDate)
