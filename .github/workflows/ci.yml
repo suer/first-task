@@ -99,6 +99,7 @@ jobs:
         run: bundle exec fastlane build_for_simulator
         env:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+          FASTLANE_SKIP_UPDATE_CHECK: true
 
   test:
     needs: [swiftformat, swiftlint]
@@ -207,3 +208,4 @@ jobs:
         run: bundle exec fastlane scan --destination "id=${{ steps.boot_simulator.outputs.device_id }}"
         env:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+          FASTLANE_SKIP_UPDATE_CHECK: true
