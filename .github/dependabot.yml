@@ -16,7 +16,9 @@ updates:
       timezone: "Asia/Tokyo"
 
   - package-ecosystem: "swift"
-    directory: "/FirstTaskDependencies"
+    directories:
+      - "/FirstTaskDependencies"
+      - "/FirstTaskTools"
     schedule:
       interval: "weekly"
       day: "friday"

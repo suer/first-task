@@ -494,7 +494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools swiftlint --config .swiftlint.yml\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
 		};
 		804433622E5602BB00011164 /* Copy Acknowledgements */ = {
 			isa = PBXShellScriptBuildPhase;
