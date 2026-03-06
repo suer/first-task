@@ -337,6 +337,7 @@
 				19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */,
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
+				192383FB2F5AFA240084A600 /* Run Script (LicensePlist) */,
 				804433622E5602BB00011164 /* Copy Acknowledgements */,
 				19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */,
 			);
@@ -459,6 +460,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		192383FB2F5AFA240084A600 /* Run Script (LicensePlist) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (LicensePlist)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools license-plist --output-path FirstTask/Settings.bundle --suppress-opening-directory\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
+		};
 		19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
