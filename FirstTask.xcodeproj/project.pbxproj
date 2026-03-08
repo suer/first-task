@@ -338,7 +338,6 @@
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				192383FB2F5AFA240084A600 /* Run Script (LicensePlist) */,
-				804433622E5602BB00011164 /* Copy Acknowledgements */,
 				19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */,
 			);
 			buildRules = (
@@ -476,7 +475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools license-plist --output-path FirstTask/Settings.bundle --suppress-opening-directory\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
+			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools license-plist\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
 		};
 		19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -514,21 +513,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools swiftlint --config .swiftlint.yml\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
-		};
-		804433622E5602BB00011164 /* Copy Acknowledgements */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Acknowledgements";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Settings.bundle/\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"\n";
 		};
 		8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */ = {
 			isa = PBXShellScriptBuildPhase;
