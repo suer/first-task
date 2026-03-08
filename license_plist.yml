@@ -1,5 +1,8 @@
 options:
-  xcodeprojPath: "*.xcodeproj"
+  failIfMissingLicense: false
+  outputPath: "FirstTask/Settings.bundle"
+  packagePaths:
+    - FirstTask/Dependencies/Package.swift
   prefix: com.mono0926.LicensePlist
   singlePage: false
-
+  suppressOpeningDirectory: true
