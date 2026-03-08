@@ -80,7 +80,9 @@ jobs:
       - name: Cache SwiftPM packages
         uses: actions/cache@v5
         with:
-          path: FirstTaskDependencies/.build
+          path: |
+            FirstTaskDependencies/.build
+            FirstTaskTools/.build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
@@ -137,7 +139,9 @@ jobs:
       - name: Cache SwiftPM packages
         uses: actions/cache@v5
         with:
-          path: FirstTaskDependencies/.build
+          path: |
+            FirstTaskDependencies/.build
+            FirstTaskTools/.build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
