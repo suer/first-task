@@ -24,11 +24,6 @@ jobs:
         with:
           bundler-cache: true
 
-      # Avoid the error: “LicensePlistBuildTool” must be enabled before it can be used
-      - name: Skip package plugin fingerprint validation
-        run: |
-          defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
-
       - name: Setup p12 certificate file
         run: |
           echo "${{ secrets.CERTIFICATE }}" > distribution.p12.txt
