@@ -13,7 +13,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint.git", exact: "0.58.2"),
+        .package(url: "https://github.com/realm/SwiftLint.git", exact: "0.59.1"),
         .package(url: "https://github.com/mono0926/LicensePlist.git", exact: "3.27.2"),
     ],
     targets: [
