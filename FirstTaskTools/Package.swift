@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "FirstTaskTools",
     platforms: [
-        .macOS(.v14)
+        .macOS(.v10_14)
     ],
     products: [
         .library(
