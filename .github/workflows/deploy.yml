@@ -39,14 +39,6 @@ jobs:
           echo "${{ secrets.GOOGLE_SERVICE_INFO_RELEASE_PLIST }}" > GoogleService-Info-Release.plist.txt
           base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
 
-      - name: Cache Gems
-        uses: actions/cache@v5
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
       - name: Cache SwiftPM packages
         uses: actions/cache@v5
         with:
@@ -56,11 +48,6 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-
-      - name: Install Bundled Gems
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
 
       - name: Build and deploy to DeployGate
         env:
