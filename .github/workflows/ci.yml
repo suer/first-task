@@ -2,6 +2,10 @@ name: CI
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
   push:
     branches:
       - master
@@ -42,6 +46,7 @@ jobs:
 
   build:
     needs: [swiftformat, swiftlint]
+    if: github.event.pull_request.draft == false
     runs-on: macos-26
     timeout-minutes: 20
     steps:
@@ -84,6 +89,7 @@ jobs:
 
   test:
     needs: [swiftformat, swiftlint]
+    if: github.event.pull_request.draft == false
     runs-on: macos-26
     timeout-minutes: 30
     steps:
