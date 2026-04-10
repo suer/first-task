@@ -30,7 +30,7 @@ struct TagList: View {
                     }
                 }
             }
-            .navigationTitle("Tags")
+            .navigationTitle(.tags)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")

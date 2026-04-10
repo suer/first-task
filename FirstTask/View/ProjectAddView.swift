@@ -7,7 +7,7 @@ struct ProjectAddView: View {
     var body: some View {
         NavigationView {
             ProjectFormView(project: project)
-                .navigationTitle("New Project")
+                .navigationTitle(.newProject)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         cancelButton
@@ -24,7 +24,7 @@ struct ProjectAddView: View {
             _ = Project.create(project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Text("Save")
+            Text(.save)
         }
     }
 
@@ -33,7 +33,7 @@ struct ProjectAddView: View {
             Project.destroy(project: project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Text("Cancel")
+            Text(.cancel)
         }
     }
 }

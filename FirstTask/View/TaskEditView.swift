@@ -8,25 +8,25 @@ struct TaskEditView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Input title", text: $task.title)
-                Section(header: Text("Memo")) {
-                    TextField("Memo", text: $task.memo, axis: .vertical)
+                TextField(String(localized: .inputTitle), text: $task.title)
+                Section(header: Text(.memo)) {
+                    TextField(.memo, text: $task.memo, axis: .vertical)
                         .lineLimit(1...5)
                 }
-                Section(header: Text("Start Date")) {
-                    Toggle("Set Start Date", isOn: $task.useStartDate)
+                Section(header: Text(.startDate)) {
+                    Toggle(.setStartDate, isOn: $task.useStartDate)
                     if $task.useStartDate.wrappedValue {
                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
                     }
                 }
-                Section(header: Text("Due Date")) {
-                    Toggle("Set Due Date", isOn: $task.useDueDate)
+                Section(header: Text(.dueDate)) {
+                    Toggle(.setDueDate, isOn: $task.useDueDate)
                     if $task.useDueDate.wrappedValue {
                         DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
                     }
                 }
 
-                Section(header: Text("Tags")) {
+                Section(header: Text(.tags)) {
                     List {
                         NavigationLink(destination: TagList(task: self.task)) {
                             Group {
@@ -36,13 +36,13 @@ struct TaskEditView: View {
                                     }
                                     Spacer()
                                 } else {
-                                    Text("Tags")
+                                    Text(.tags)
                                 }
                             }
                         }
                     }
                 }
-            }.navigationTitle("Edit Task")
+            }.navigationTitle(.editTask)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {

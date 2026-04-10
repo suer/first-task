@@ -19,13 +19,13 @@ struct SearchView: View {
                         HStack {
                             Spacer()
                             Image(systemName: "clear.fill")
-                            Text("Reset")
+                            Text(.reset)
                             Spacer()
                         }
                     }
                     .accentColor(Color(UIColor.label))
                 }
-                Section(header: Text("Tags")) {
+                Section(header: Text(.tags)) {
                     ForEach(tags) { tag in
                         Button(action: {
                             self.filteringTagName = tag.name
@@ -40,7 +40,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationTitle("Search")
+            .navigationTitle(.search)
         }.onAppear {
             User(id: Auth.auth().currentUser?.uid ?? "NotFound")
                 .collection(path: .tags)

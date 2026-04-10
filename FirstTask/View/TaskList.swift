@@ -157,20 +157,20 @@ struct TaskList: View {
                         self.editing = self.filteringTagName.isEmpty
                     }
                 }) {
-                    Text("Reorder")
+                    Text(.reorder)
                     Image(systemName: "arrow.up.arrow.down")
                 }
                 Button(action: {
                     self.movingTask = task
                     self.showingProjectMoveModal = true
                 }) {
-                    Text("Move")
+                    Text(.move)
                     Image(systemName: "arrow.turn.up.right")
                 }
                 Button(action: {
                     Task.destroy(task: task)
                 }) {
-                    Text("Delete")
+                    Text(.delete)
                     Image(systemName: "trash")
                 }
             }
@@ -213,31 +213,31 @@ struct TaskList: View {
             isPresented: self.$showingProjectActionSheet,
             titleVisibility: .visible
         ) {
-            Button("Edit") {
+            Button(.edit) {
                 self.showingProjectEditModal = true
             }
-            Button("Complete") {
+            Button(.complete) {
                 self.showingCompleteConfirmation = true
             }
-            Button("Delete", role: .destructive) {
+            Button(.delete, role: .destructive) {
                 self.presentation.wrappedValue.dismiss()
                 Project.destroy(project: self.project!)
             }
         }
         .confirmationDialog(
-            "Confirm Completion",
+            .confirmCompletion,
             isPresented: self.$showingCompleteConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Complete", role: .destructive) {
+            Button(.complete, role: .destructive) {
                 self.presentation.wrappedValue.dismiss()
                 self.project!.toggleDone()
             }
-            Button("Cancel") {
+            Button(.cancel) {
                 // Do nothing
             }
         } message: {
-            Text("Complete all tasks and the project included in this project?")
+            Text(.completeAllTasksAndTheProjectIncludedInThisProject)
         }
     }
 }

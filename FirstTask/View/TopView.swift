@@ -21,14 +21,14 @@ struct TopView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 List {
-                    ProjectRow(tasks: self.$tasks, name: "Inbox", taskListType: .inbox) { task in
+                    ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
                         task.projectId == ""
                     }
-                    ProjectRow(tasks: self.$tasks, name: "Today", taskListType: .today) { task in
+                    ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
                         task.hasTag(tagId: todayTagId)
                     }
 
-                    Section(header: Text("Projects")) {
+                    Section(header: Text(.projects)) {
                         ForEach(self.projects) { project in
                             ProjectRow(tasks: self.$tasks, name: project.title, project: project, taskListType: .project) { task in
                                 return task.projectId == project.documentReference.documentID
@@ -41,7 +41,7 @@ struct TopView: View {
                         }) {
                             HStack {
                                 Image(systemName: "plus")
-                                Text("Add Project")
+                                Text(.addProject)
                                 Spacer()
                             }.contentShape(Rectangle())
                         }.sheet(isPresented: self.$showingProjectAddModal) {
@@ -49,7 +49,7 @@ struct TopView: View {
                         }.buttonStyle(PlainButtonStyle())
                     }
 
-                    Section(header: Text("Tags")) {
+                    Section(header: Text(.tags)) {
                         ForEach(appSettings.tags.filter { $0.kind != "today" }) { tag in
                             ProjectRow(tasks: self.$tasks, name: tag.name, taskListType: .tag) { task in
                                 task.hasTag(tagId: tag.id)
@@ -58,7 +58,7 @@ struct TopView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                .navigationTitle("FirstTask")
+                .navigationTitle(.firstTask)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         loginButton
@@ -153,9 +153,9 @@ struct TopView: View {
                 }
                 .alert(isPresented: $showingSignOutConfirm) {
                     Alert(
-                        title: Text("Sign Out"),
-                        message: Text("Are you sure you want to sign out?"),
-                        primaryButton: .destructive(Text("Sign Out")) {
+                        title: Text(.signOut),
+                        message: Text(.areYouSureYouWantToSignOut),
+                        primaryButton: .destructive(Text(.signOut)) {
                             try? self.sessionState.signOut()
                             self.reloadView()
                         },
