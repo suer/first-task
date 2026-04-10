@@ -14,7 +14,7 @@ struct BottomSheetModal<Content: View>: View {
 
                 self.content()
                     .frame(maxWidth: .infinity)
-                    .background(Color(UIColor.systemBackground))
+                    .background(Color(.systemBackground))
                     .transition(.move(edge: .bottom))
             }
         }

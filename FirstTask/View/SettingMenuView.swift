@@ -18,7 +18,7 @@ struct SettingMenuView: View {
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .font(.body.weight(.semibold))
-                                .foregroundColor(Color(UIColor.tertiaryLabel))
+                                .foregroundColor(Color(.tertiaryLabel))
                         }
                     }
                     .buttonStyle(.plain)
@@ -37,7 +37,7 @@ struct SettingMenuView: View {
                         Image(systemName: "xmark")
                             .frame(width: 40, height: 40)
                             .imageScale(.large)
-                            .foregroundColor(Color(UIColor(named: "Accent")!))
+                            .foregroundColor(Color(.accent))
                             .clipShape(Circle())
                     }
                 }

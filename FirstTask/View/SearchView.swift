@@ -23,7 +23,7 @@ struct SearchView: View {
                             Spacer()
                         }
                     }
-                    .accentColor(Color(UIColor.label))
+                    .accentColor(Color(.label))
                 }
                 Section(header: Text(.tags)) {
                     ForEach(tags) { tag in
@@ -36,7 +36,7 @@ struct SearchView: View {
                                 Text(tag.name)
                             }
                         }
-                        .accentColor(Color(UIColor.label))
+                        .accentColor(Color(.label))
                     }
                 }
             }
