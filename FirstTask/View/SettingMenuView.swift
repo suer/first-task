@@ -14,7 +14,7 @@ struct SettingMenuView: View {
                     }) {
                         HStack {
                             Image(systemName: "tag")
-                            Text("Tags")
+                            Text(.tags)
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .font(.body.weight(.semibold))
@@ -24,7 +24,7 @@ struct SettingMenuView: View {
                     .buttonStyle(.plain)
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(.settings)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showTagView) {
                 TagView()

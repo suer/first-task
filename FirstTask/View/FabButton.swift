@@ -8,7 +8,7 @@ struct FabButton: View {
         let button = Button(action: {
             action?()
         }) {
-            Label("Add", systemImage: "plus")
+            Label(.add, systemImage: "plus")
                 .labelStyle(.iconOnly)
                 .frame(width: 50, height: 50)
                 .imageScale(.large)

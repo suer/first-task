@@ -34,7 +34,7 @@ struct TagView: View {
                     Button(action: {
                         self.showingAddTagModal.toggle()
                     }) {
-                        Text("Add new tag")
+                        Text(.addNewTag)
                     }
                     Spacer()
                 }
@@ -43,15 +43,15 @@ struct TagView: View {
                 isPresented: self.$showingActionSheet,
                 titleVisibility: .visible
             ) {
-                Button("Edit") {
+                Button(.edit) {
                     self.newTagName = self.editingTag.name
                     self.showingEditTagModal = true
                 }
-                Button("Delete", role: .destructive) {
+                Button(.delete, role: .destructive) {
                     Tag.destroy(tag: self.editingTag)
                 }
             }
-            .navigationTitle("Tags")
+            .navigationTitle(.tags)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")

@@ -29,7 +29,7 @@ struct BottomTextFieldSheetModal: View {
                         self.onCommit()
                     }) {
                         let accentColor = Color(UIColor(named: "Accent")!)
-                        let button = Label("Add", systemImage: "arrow.up")
+                        let button = Label(.add, systemImage: "arrow.up")
                             .labelStyle(.iconOnly)
                             .frame(width: 40, height: 40)
                             .imageScale(.large)

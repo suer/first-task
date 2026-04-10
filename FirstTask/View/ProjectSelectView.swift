@@ -16,7 +16,7 @@ struct ProjectSelectView: View {
         List {
             HStack {
                 Image(systemName: self.project == nil ? "checkmark.circle.fill" : "circle")
-                Text("No project")
+                Text(.noProject)
                 Spacer()
             }
             .contentShape(Rectangle())
