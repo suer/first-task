@@ -17,7 +17,7 @@ struct TaskRow: View {
                 .frame(width: 20, height: 20)
                 .overlay(
                     Circle()
-                        .stroke(Color(UIColor.label))
+                        .stroke(Color(.label))
                         .frame(width: 20, height: 20)
                 ).onTapGesture {
                     self.vibrate()

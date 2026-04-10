@@ -51,7 +51,7 @@ struct TaskEditView: View {
                             Image(systemName: "xmark")
                                 .frame(width: 40, height: 40)
                                 .imageScale(.large)
-                                .foregroundColor(Color(UIColor(named: "Accent")!))
+                                .foregroundColor(Color(.accent))
                                 .clipShape(Circle())
                         }
                     }

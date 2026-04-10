@@ -24,7 +24,7 @@ struct TagView: View {
                             self.showingActionSheet = true
                         }) {
                             Image(systemName: "ellipsis")
-                                .foregroundColor(Color(UIColor.secondaryLabel))
+                                .foregroundColor(Color(.secondaryLabel))
                         }
                     }
                 }

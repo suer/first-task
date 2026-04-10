@@ -4,7 +4,7 @@ struct FabButton: View {
     var action: (() -> Void)?
 
     var body: some View {
-        let accentColor = Color(UIColor(named: "Accent")!)
+        let accentColor = Color(.accent)
         let button = Button(action: {
             action?()
         }) {
