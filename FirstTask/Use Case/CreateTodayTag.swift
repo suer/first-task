@@ -4,7 +4,7 @@ class CreateTodayTag {
     func call() {
         guard let userId = Auth.safeAuth()?.currentUser?.uid else { return }
 
-        User(id: userId ?? "NotFound")
+        User(id: userId)
             .collection(path: .tags)
             .whereField("kind", isEqualTo: "today")
             .getDocuments(completion: { snapshot, err in

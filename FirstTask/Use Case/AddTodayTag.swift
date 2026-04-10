@@ -7,7 +7,7 @@ class AddTodayTag {
         let today = Date()
 
         guard let userId = Auth.safeAuth()?.currentUser?.uid else { return }
-        let user = User(id: userId ?? "NotFound")
+        let user = User(id: userId)
 
         user
             .collection(path: .tags)
