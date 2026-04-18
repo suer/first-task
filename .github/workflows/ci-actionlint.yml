@@ -10,9 +10,7 @@ on:
     paths:
       - '.github/workflows/*.yml'
 
-permissions:
-  contents: read
-  pull-requests: write
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,6 +20,9 @@ jobs:
   actionlint:
     runs-on: ubuntu-latest
     timeout-minutes: 3
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v6
       - name: Check workflow files

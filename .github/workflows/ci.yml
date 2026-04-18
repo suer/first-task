@@ -10,8 +10,7 @@ on:
     branches:
       - master
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,6 +20,8 @@ jobs:
   swiftformat:
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v6
@@ -35,6 +36,8 @@ jobs:
   swiftlint:
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v6
@@ -49,6 +52,8 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: macos-26
     timeout-minutes: 20
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
 
@@ -92,6 +97,8 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: macos-26
     timeout-minutes: 30
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
 
