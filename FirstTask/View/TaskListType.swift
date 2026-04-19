@@ -16,8 +16,8 @@ enum TaskListType {
     func subtitle() -> String? {
         return switch self {
         case .inbox, .today: nil
-        case .project: "Project"
-        case .tag: "Tag"
+        case .project: String(localized: .projects)
+        case .tag: String(localized: .tags)
         }
     }
 }
