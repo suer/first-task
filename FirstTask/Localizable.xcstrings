@@ -18,6 +18,12 @@
             "state" : "translated",
             "value" : "Add"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加する"
+          }
         }
       }
     },
@@ -30,6 +36,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add new tag"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タグを追加する"
           }
         }
       }
@@ -44,6 +56,12 @@
             "state" : "translated",
             "value" : "Add Project"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロジェクトを追加する"
+          }
         }
       }
     },
@@ -56,6 +74,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Are you sure you want to sign out?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本当にサインアウトしますか？"
           }
         }
       }
@@ -70,6 +94,12 @@
             "state" : "translated",
             "value" : "Cancel"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
         }
       }
     },
@@ -82,6 +112,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Complete"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完了する"
           }
         }
       }
@@ -96,6 +132,12 @@
             "state" : "translated",
             "value" : "Complete all tasks and the project included in this project?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このプロジェクトに含まれるすべてのタスクを完了しますか？"
+          }
         }
       }
     },
@@ -108,6 +150,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm Completion"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完了の確認"
           }
         }
       }
@@ -122,6 +170,12 @@
             "state" : "translated",
             "value" : "Delete"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除する"
+          }
         }
       }
     },
@@ -135,6 +189,12 @@
             "state" : "translated",
             "value" : "Due Date"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "締切日"
+          }
         }
       }
     },
@@ -145,6 +205,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "編集する"
           }
         }
       }
@@ -159,6 +225,12 @@
             "state" : "translated",
             "value" : "Edit Project"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロジェクトの編集"
+          }
         }
       }
     },
@@ -171,6 +243,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit Task"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクの編集"
           }
         }
       }
@@ -197,6 +275,12 @@
             "state" : "translated",
             "value" : "Inbox"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インボックス"
+          }
         }
       }
     },
@@ -209,6 +293,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input title"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前"
           }
         }
       }
@@ -223,6 +313,12 @@
             "state" : "translated",
             "value" : "Memo"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メモ"
+          }
         }
       }
     },
@@ -235,6 +331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Move"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動する"
           }
         }
       }
@@ -249,6 +351,12 @@
             "state" : "translated",
             "value" : "New Project"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しいプロジェクト"
+          }
         }
       }
     },
@@ -261,6 +369,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No project"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロジェクトなし"
           }
         }
       }
@@ -275,6 +389,12 @@
             "state" : "translated",
             "value" : "Projects"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロジェクト"
+          }
         }
       }
     },
@@ -287,6 +407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reorder"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "並べ替える"
           }
         }
       }
@@ -301,6 +427,12 @@
             "state" : "translated",
             "value" : "Reset"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "リセット"
+          }
         }
       }
     },
@@ -313,6 +445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
           }
         }
       }
@@ -327,6 +465,12 @@
             "state" : "translated",
             "value" : "Search"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "検索"
+          }
         }
       }
     },
@@ -339,6 +483,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Set Due Date"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "締切日を設定する"
           }
         }
       }
@@ -353,6 +503,12 @@
             "state" : "translated",
             "value" : "Set Start Date"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始日を設定する"
+          }
         }
       }
     },
@@ -365,6 +521,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         }
       }
@@ -379,6 +541,12 @@
             "state" : "translated",
             "value" : "Sign Out"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サインアウト"
+          }
         }
       }
     },
@@ -391,6 +559,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start Date"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始日"
           }
         }
       }
@@ -405,6 +579,12 @@
             "state" : "translated",
             "value" : "Tags"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タグ"
+          }
         }
       }
     },
@@ -416,6 +596,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Today"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日"
           }
         }
       }
