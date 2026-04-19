@@ -167,9 +167,12 @@ struct TaskList: View {
                     Text(.move)
                     Image(systemName: "arrow.turn.up.right")
                 }
-                Button(action: {
-                    Task.destroy(task: task)
-                }) {
+                Button(
+                    role: .destructive,
+                    action: {
+                        Task.destroy(task: task)
+                    }
+                ) {
                     Text(.delete)
                     Image(systemName: "trash")
                 }
