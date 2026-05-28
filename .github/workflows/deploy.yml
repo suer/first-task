@@ -26,6 +26,8 @@ jobs:
           bundler-cache: true
 
       - uses: jdx/mise-action@v4
+        env:
+          MISE_DISABLE_TOOLS: ruby
 
       - name: Setup p12 certificate file
         run: |
@@ -70,4 +72,5 @@ jobs:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
           FASTLANE_SKIP_UPDATE_CHECK: true
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISE_DISABLE_TOOLS: ruby
         run: mise run deploy
