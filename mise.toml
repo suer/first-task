@@ -1,0 +1,31 @@
+[tasks.format]
+description = "Format Swift source files in-place"
+run = "swift format --parallel --in-place --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+
+[tasks.lint]
+description = "Lint Swift source files with strict mode"
+run = "swift format lint --strict --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+
+[tasks.swiftlint]
+description = "Run SwiftLint with strict mode"
+run = "swiftlint --strict"
+
+[tasks.build]
+description = "Build the app for iOS Simulator"
+run = "bundle exec fastlane build_for_simulator"
+
+[tasks.test]
+description = "Run unit tests (optionally specify --destination to target a specific simulator)"
+run = """
+#!/usr/bin/env bash
+dest='{{option(name="destination", default="")}}'
+if [ -n "$dest" ]; then
+  bundle exec fastlane scan --scheme FirstTask --destination "$dest"
+else
+  bundle exec fastlane test
+fi
+"""
+
+[tasks.deploy]
+description = "Build and distribute the app to DeployGate"
+run = "bundle exec fastlane dg"

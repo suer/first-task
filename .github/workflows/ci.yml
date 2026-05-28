@@ -26,12 +26,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: jdx/mise-action@v4
+
       - name: Show Swift version
         run: swift --version
 
       - name: Run swift-format
-        run: |
-          find . -maxdepth 1 -type d -name 'FirstTask*' ! -name '*.xcodeproj' -exec swift format lint --parallel --recursive --strict {} +
+        run: mise run lint
 
   swiftlint:
     runs-on: ubuntu-latest
@@ -64,6 +65,8 @@ jobs:
         with:
           bundler-cache: true
 
+      - uses: jdx/mise-action@v4
+
       - uses: irgaly/xcode-cache@v1
         with:
           key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
@@ -86,7 +89,7 @@ jobs:
             ${{ runner.os }}-spm-
 
       - name: Build
-        run: bundle exec fastlane build_for_simulator
+        run: mise run build
         env:
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
           FASTLANE_SKIP_UPDATE_CHECK: true
@@ -108,6 +111,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - uses: jdx/mise-action@v4
 
       - uses: irgaly/xcode-cache@v1
         with:
@@ -179,7 +184,7 @@ jobs:
           fi
 
       - name: Test
-        run: bundle exec fastlane scan --destination "id=$DEVICE_ID"
+        run: mise run test --destination "id=$DEVICE_ID"
         env:
           DEVICE_ID: ${{ steps.boot_simulator.outputs.device_id }}
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
