@@ -1,3 +1,7 @@
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+ruby.compile=false
+
 [tasks.format]
 description = "Format Swift source files in-place"
 run = "swift format --parallel --in-place --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
