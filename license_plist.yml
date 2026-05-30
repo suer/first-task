@@ -3,6 +3,7 @@ options:
   outputPath: "FirstTask/Settings.bundle"
   packagePaths:
     - FirstTaskDependencies/Package.swift
+  xcodeprojPath: "" # Package.swift is used, so this is not needed.
   prefix: com.mono0926.LicensePlist
   singlePage: false
   suppressOpeningDirectory: true
