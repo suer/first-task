@@ -521,7 +521,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -d \"FirstTaskTools\" ]; then\n  env -u SDKROOT swift run --package-path FirstTaskTools swiftlint --config .swiftlint.yml\nelse\n  echo \"warning: FirstTaskTools directory not found.\"\nfi\n";
+			shellScript = "xcrun --sdk macosx swift run -c release --package-path FirstTaskTools swiftlint --config .swiftlint.yml\n";
 		};
 		8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */ = {
 			isa = PBXShellScriptBuildPhase;
