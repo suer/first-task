@@ -4,22 +4,28 @@ ruby.compile=false
 
 [tasks.format]
 description = "Format Swift source files in-place"
-run = "swift format --parallel --in-place --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+run = "swift format --in-place --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
 
 [tasks.lint]
 description = "Lint Swift source files with strict mode"
-run = "swift format lint --strict --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
 
 [tasks.swiftlint]
 description = "Run SwiftLint with strict mode"
 run = "swiftlint --strict"
 
+[tasks.bundle-install]
+description = "Install Ruby dependencies"
+run = "bundle install"
+
 [tasks.build]
 description = "Build the app for iOS Simulator"
+depends = ["bundle-install"]
 run = "bundle exec fastlane build_for_simulator"
 
 [tasks.test]
 description = "Run unit tests (optionally specify --destination to target a specific simulator)"
+depends = ["bundle-install"]
 run = """
 #!/usr/bin/env bash
 dest='{{option(name="destination", default="")}}'
@@ -32,4 +38,5 @@ fi
 
 [tasks.deploy]
 description = "Build and distribute the app to DeployGate"
+depends = ["bundle-install"]
 run = "bundle exec fastlane dg"
