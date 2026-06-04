@@ -561,7 +561,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+			shellScript = "if [ -e FirstTaskDependencies/.build/checkouts/firebase-ios-sdk/Crashlytics/run ]; then\n  FirstTaskDependencies/.build/checkouts/firebase-ios-sdk/Crashlytics/run\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
