@@ -39,6 +39,10 @@ platform :ios do
         method: 'ad-hoc'
       }
     )
+    upload_symbols_to_crashlytics(
+      gsp_path: 'FirstTask/Configs/GoogleService-Info-Release.plist',
+      binary_path: 'FirstTaskDependencies/.build/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols'
+    )
     deploygate(
       api_token: ENV['DEPLOYGATE_API_KEY'],
       user: ENV['DEPLOYGATE_USER'],
