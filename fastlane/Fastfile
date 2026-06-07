@@ -37,12 +37,11 @@ platform :ios do
       scheme: 'FirstTask',
       export_options: {
         method: 'ad-hoc'
-      },
-      cloned_source_packages_path: "FirstTaskDependencies/.build/"
+      }
     )
     upload_symbols_to_crashlytics(
       gsp_path: 'FirstTask/Configs/GoogleService-Info-Release.plist',
-      binary_path: 'FirstTaskDependencies/.build/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols'
+      binary_path: 'FirstTaskTools/.build/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols'
     )
     firebase_app_distribution(
       groups: ENV['APP_DISTRIBUTION_GROUP'],
@@ -61,16 +60,14 @@ platform :ios do
       archive_path: "./FirstTask.xcarchive",
       skip_package_ipa: true,
       skip_codesigning: true,
-      destination: "generic/platform=iOS Simulator",
-      cloned_source_packages_path: "FirstTaskDependencies/.build/"
+      destination: "generic/platform=iOS Simulator"
     )
   end
 
   desc "Run tests"
   lane :test do
     scan(
-      scheme: "FirstTask",
-      cloned_source_packages_path: "FirstTaskDependencies/.build/"
+      scheme: "FirstTask"
     )
   end
 end
