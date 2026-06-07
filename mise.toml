@@ -37,6 +37,6 @@ fi
 """
 
 [tasks.deploy]
-description = "Build and distribute the app to DeployGate"
+description = "Build and distribute the app to App Distribution"
 depends = ["bundle-install"]
-run = "bundle exec fastlane dg"
+run = "bundle exec fastlane beta"

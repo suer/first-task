@@ -17,15 +17,15 @@ platform :ios do
     install_provisioning_profile(path: "distribution.mobileprovision")
   end
 
-  desc "Submit a new Beta Build to DeployGate"
-  lane :dg do
+  desc "Submit a new Beta Build to App Distribution"
+  lane :beta do
     import_certificates_and_provisioning_profile
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "FirstTask.xcodeproj",
       code_sign_identity: "Apple Distribution",
       bundle_identifier: "org.codefirst.FirstTask",
-      profile_name: "FirstTask Deploygate Adhoc deployment"
+      profile_name: "FirstTask App Distribution Adhoc deployment"
     )
     increment_build_number(
       build_number: ENV["BUILD_NUMBER"]
@@ -44,10 +44,9 @@ platform :ios do
       gsp_path: 'FirstTask/Configs/GoogleService-Info-Release.plist',
       binary_path: 'FirstTaskDependencies/.build/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols'
     )
-    deploygate(
-      api_token: ENV['DEPLOYGATE_API_KEY'],
-      user: ENV['DEPLOYGATE_USER'],
-      message: ENV['DEPLOYGATE_MESSAGE'] || 'Build')
+    firebase_app_distribution(
+      groups: ENV['APP_DISTRIBUTION_GROUP'],
+      release_notes: ENV['APP_DISTRIBUTION_MESSAGE'] || 'Build')
     update_project_team(
       path: 'FirstTask.xcodeproj',
       teamid: '')

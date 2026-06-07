@@ -45,10 +45,15 @@ jobs:
 
       - name: Setup GoogleService-Info.plist
         run: |
-          echo "$GOOGLE_SERVICE_INFO_RELEASE_PLIST" > GoogleService-Info-Release.plist.txt
-          base64 --decode < GoogleService-Info-Release.plist.txt > FirstTask/Configs/GoogleService-Info-Release.plist
+          echo "$GOOGLE_SERVICE_INFO_RELEASE_PLIST" > FirstTask/Configs/GoogleService-Info-Release.plist
         env:
           GOOGLE_SERVICE_INFO_RELEASE_PLIST: ${{ secrets.GOOGLE_SERVICE_INFO_RELEASE_PLIST }}
+
+      - name: Setup Service Account Private Key
+        run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" > service_account_private_key.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Cache SwiftPM packages
         uses: actions/cache@v5
@@ -60,15 +65,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
-      - name: Build and deploy to DeployGate
+      - name: Build and deploy to App Distribution
         env:
           BUILD_NUMBER: ${{ github.run_number }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
-          DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
-          DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-          DEPLOYGATE_MESSAGE: ${{ github.sha }}
+          APP_DISTRIBUTION_GROUP: ${{ secrets.APP_DISTRIBUTION_GROUP }}
+          APP_DISTRIBUTION_MESSAGE: ${{ github.sha }}
+          GOOGLE_APPLICATION_CREDENTIALS: service_account_private_key.json
           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
           FASTLANE_SKIP_UPDATE_CHECK: true
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
