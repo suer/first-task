@@ -19,12 +19,12 @@ Build
 
 ### Deploy
 
-You need a [DeployGate](https://deploygate.com/) account.
+You need a [Firebase](https://firebase.google.com/) account.
 
 ```sh
 $ bundle install
 $ TEAM_ID=xxx \
-  DEPLOYGATE_API_KEY=xxx \
-  DEPLOYGATE_USER=xxx \
-  bundle exec fastlane dg
+  APP_DISTRIBUTION_GROUP=xxx \
+  APP_DISTRIBUTION_MESSAGE=xxx \
+  bundle exec fastlane beta
 ```
