@@ -1,5 +1,5 @@
 {
-  "originHash" : "6da2f83562966bbb86ce2874466c384f1362f39bf5a7f4615853f826fc309273",
+  "originHash" : "653675a389f1166fef21b8904c63e567ad511b7a69564a17c6971ef421e6a53a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -222,8 +222,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
-        "revision" : "51c8c237beea1baa9cac64ef83cec68c6790506c",
-        "version" : "604.0.0-prerelease-2026-04-21"
+        "revision" : "fc2eb919465fd4fc9e1629e52e24d1242954f309",
+        "version" : "605.0.0-prerelease-2026-06-08"
       }
     },
     {
@@ -231,8 +231,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/SwiftLint.git",
       "state" : {
-        "revision" : "70a5f3225d940d4573d3d2ffcf85b07ab2a6c5de",
-        "version" : "0.63.3"
+        "revision" : "c12f1f860a489c1574b1f295f8a5070652caf331",
+        "version" : "0.64.1"
       }
     },
     {
