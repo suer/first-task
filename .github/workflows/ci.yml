@@ -85,7 +85,7 @@ jobs:
           cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
 
       - name: Cache SwiftPM packages
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             FirstTaskDependencies/.build
@@ -135,7 +135,7 @@ jobs:
           cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
 
       - name: Cache SwiftPM packages
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             FirstTaskDependencies/.build
