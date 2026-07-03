@@ -13,7 +13,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint.git", exact: "0.64.1"),
+        .package(url: "https://github.com/realm/SwiftLint.git", exact: "0.65.0"),
         .package(url: "https://github.com/mono0926/LicensePlist.git", exact: "3.27.9"),
         // for Crashlytics/upload-symbols binary
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", exact: "12.15.0"),
