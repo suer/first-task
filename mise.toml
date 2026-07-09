@@ -26,9 +26,10 @@ run = "bundle exec fastlane build_for_simulator"
 [tasks.test]
 description = "Run unit tests (optionally specify --destination to target a specific simulator)"
 depends = ["bundle-install"]
+usage = 'flag "--destination <destination>" help="Target simulator destination" default=""'
 run = """
 #!/usr/bin/env bash
-dest='{{option(name="destination", default="")}}'
+dest="$usage_destination"
 if [ -n "$dest" ]; then
   bundle exec fastlane scan --scheme FirstTask --destination "$dest"
 else
