@@ -21,12 +21,14 @@ run = "bundle install"
 [tasks.build]
 description = "Build the app for iOS Simulator"
 depends = ["bundle-install"]
+env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
 run = "bundle exec fastlane build_for_simulator"
 
 [tasks.test]
 description = "Run unit tests (optionally specify --destination to target a specific simulator)"
 depends = ["bundle-install"]
 usage = 'flag "--destination <destination>" help="Target simulator destination" default=""'
+env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
 run = """
 #!/usr/bin/env bash
 dest="$usage_destination"
@@ -40,4 +42,5 @@ fi
 [tasks.deploy]
 description = "Build and distribute the app to App Distribution"
 depends = ["bundle-install"]
+env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
 run = "bundle exec fastlane beta"

@@ -74,8 +74,6 @@ jobs:
           APP_DISTRIBUTION_GROUP: ${{ secrets.APP_DISTRIBUTION_GROUP }}
           APP_DISTRIBUTION_MESSAGE: ${{ github.sha }}
           GOOGLE_APPLICATION_CREDENTIALS: service_account_private_key.json
-          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
-          FASTLANE_SKIP_UPDATE_CHECK: true
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_DISABLE_TOOLS: ruby
         run: mise run deploy
