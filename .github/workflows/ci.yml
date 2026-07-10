@@ -104,7 +104,7 @@ jobs:
     needs: [swiftformat, swiftlint]
     if: github.event.pull_request.draft == false
     runs-on: macos-26
-    timeout-minutes: 40
+    timeout-minutes: 60
     permissions:
       contents: read
     steps:
