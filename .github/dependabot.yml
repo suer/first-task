@@ -23,3 +23,8 @@ updates:
       interval: "weekly"
       day: "friday"
       timezone: "Asia/Tokyo"
+    groups:
+      cross-directory:
+        patterns:
+          - "*"
+        group-by: "dependency-name"
