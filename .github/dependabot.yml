@@ -18,7 +18,6 @@ updates:
   - package-ecosystem: "swift"
     directories:
       - "/FirstTaskDependencies"
-      - "/FirstTaskTools"
     schedule:
       interval: "weekly"
       day: "friday"

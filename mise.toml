@@ -5,14 +5,15 @@ ruby.compile=false
 [tools]
 swiftlint = "latest"
 license-plist = "latest"
+jq = "latest"
 
 [tasks.format]
 description = "Format Swift source files in-place"
-run = "swift format --in-place --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+run = "swift format --in-place --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTests FirstTaskUITests"
 
 [tasks.lint]
 description = "Lint Swift source files with strict mode"
-run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"
+run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTests FirstTaskUITests"
 
 [tasks.swiftlint]
 description = "Run SwiftLint with strict mode"
@@ -47,8 +48,25 @@ else
 fi
 """
 
+[tasks.download-upload-symbols]
+description = "Download upload-symbols binary for Crashlytics"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+dest="vendor/upload-symbols"
+if [ -f "$dest" ]; then
+  echo "upload-symbols already exists at $dest, skipping download"
+  exit 0
+fi
+version=$(jq -r '.pins[] | select(.identity == "firebase-ios-sdk") | .state.version' FirstTaskDependencies/Package.resolved)
+mkdir -p vendor
+curl -fSL -o "$dest" "https://github.com/firebase/firebase-ios-sdk/raw/refs/tags/${version}/Crashlytics/upload-symbols"
+chmod +x "$dest"
+echo "Downloaded upload-symbols ${version} to ${dest}"
+"""
+
 [tasks.deploy]
 description = "Build and distribute the app to App Distribution"
-depends = ["bundle-install"]
+depends = ["bundle-install", "download-upload-symbols"]
 env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
 run = "bundle exec fastlane beta"

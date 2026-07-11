@@ -60,7 +60,6 @@ jobs:
         with:
           path: |
             FirstTaskDependencies/.build
-            FirstTaskTools/.build
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
