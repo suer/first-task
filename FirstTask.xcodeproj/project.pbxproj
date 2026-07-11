@@ -521,7 +521,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcrun --sdk macosx swift run -c release --package-path FirstTaskTools swiftlint --config .swiftlint.yml\n";
+			shellScript = "MISE_BIN=\"\"\nif command -v mise >/dev/null 2>&1; then\n  MISE_BIN=\"$(command -v mise)\"\nelse\n  for candidate in \"$HOME/.local/bin/mise\" \"/opt/homebrew/bin/mise\" \"/usr/local/bin/mise\"; do\n    if [ -x \"$candidate\" ]; then\n      MISE_BIN=\"$candidate\"\n      break\n    fi\n  done\nfi\n\nif [ -z \"$MISE_BIN\" ]; then\n  echo \"error: mise command not found. Install mise (https://mise.jdx.dev/installing-mise.html) and try again.\" >&2\n  exit 1\nfi\n\ncd \"$SRCROOT\"\n\"$MISE_BIN\" run swiftlint\n";
 		};
 		8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */ = {
 			isa = PBXShellScriptBuildPhase;

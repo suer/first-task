@@ -2,6 +2,9 @@
 idiomatic_version_file_enable_tools = ["ruby"]
 ruby.compile=false
 
+[tools]
+swiftlint = "latest"
+
 [tasks.format]
 description = "Format Swift source files in-place"
 run = "swift format --in-place --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTools FirstTaskTests FirstTaskUITests"

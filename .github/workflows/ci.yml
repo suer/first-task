@@ -47,10 +47,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: GitHub Action for SwiftLint with --strict
-        uses: norio-nomura/action-swiftlint@3.2.1
-        with:
-          args: --strict
+      - uses: jdx/mise-action@v4
+        env:
+          MISE_DISABLE_TOOLS: ruby
+
+      - name: Run SwiftLint
+        run: mise run swiftlint
+        env:
+          MISE_DISABLE_TOOLS: ruby
 
   build:
     needs: [swiftformat, swiftlint]
