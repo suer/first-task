@@ -116,38 +116,11 @@ jobs:
       - name: Set Xcode version
         uses: ./.github/actions/setup-xcode
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - uses: jdx/mise-action@v4
-        env:
-          MISE_DISABLE_TOOLS: ruby
-
-      - uses: irgaly/xcode-cache@v1
-        with:
-          key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
-          restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
-          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
-          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
-
-      - name: Setup GoogleService-Info.plist
-        run: |
-          cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
-
-      - name: Cache SwiftPM packages
-        uses: actions/cache@v6
-        with:
-          path: |
-            FirstTaskDependencies/.build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
-
       # https://github.com/actions/runner-images/issues/12777
       - name: Workaround for hanging simulator
         id: boot_simulator
         timeout-minutes: 12
+        background: true
         run: |
           brew install coreutils -q
 
@@ -191,6 +164,36 @@ jobs:
             echo "::error::Failed to boot simulator after $max attempts."
             exit 1
           fi
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - uses: jdx/mise-action@v4
+        env:
+          MISE_DISABLE_TOOLS: ruby
+
+      - uses: irgaly/xcode-cache@v1
+        with:
+          key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
+
+      - name: Setup GoogleService-Info.plist
+        run: |
+          cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
+
+      - name: Cache SwiftPM packages
+        uses: actions/cache@v6
+        with:
+          path: |
+            FirstTaskDependencies/.build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - wait: [boot_simulator]
 
       - name: Test
         run: mise run test --destination "id=$DEVICE_ID"
