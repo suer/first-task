@@ -42,7 +42,7 @@ run = """
 #!/usr/bin/env bash
 dest="$usage_destination"
 if [ -n "$dest" ]; then
-  bundle exec fastlane scan --scheme FirstTask --destination "$dest"
+  bundle exec fastlane scan --scheme FirstTask --destination "$dest" --skip_package_dependencies_resolution true
 else
   bundle exec fastlane test
 fi

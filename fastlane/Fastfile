@@ -67,7 +67,8 @@ platform :ios do
   desc "Run tests"
   lane :test do
     scan(
-      scheme: "FirstTask"
+      scheme: "FirstTask",
+      skip_package_dependencies_resolution: true
     )
   end
 end
