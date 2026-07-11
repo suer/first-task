@@ -31,3 +31,6 @@ jobs:
           reporter: github-pr-review
           fail_level: warning
           filter_mode: nofilter
+          # TODO: Remove once actionlint supports parallel steps syntax (background, wait).
+          # https://github.com/rhysd/actionlint — check releases after v1.7.12.
+          actionlint_flags: -ignore "unexpected key \"background\"" -ignore "step must run script"
