@@ -13,9 +13,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/mono0926/LicensePlist.git", exact: "3.27.9"),
         // for Crashlytics/upload-symbols binary
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", exact: "12.16.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", exact: "12.16.0")
 
     ],
     targets: [
