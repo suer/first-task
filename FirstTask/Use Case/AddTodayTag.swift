@@ -8,9 +8,10 @@ class AddTodayTag {
 
         guard let userId = Auth.safeAuth()?.currentUser?.uid else { return }
         let user = User(id: userId)
+        let tagsCollection = user.collection(path: .tags)
+        let tasksCollection = user.collection(path: .tasks)
 
-        user
-            .collection(path: .tags)
+        tagsCollection
             .whereField("kind", isEqualTo: "today")
             .getDocuments(completion: { snapshot, err in
                 guard err == nil else { return }
@@ -18,8 +19,8 @@ class AddTodayTag {
 
                 let todayTag = try? Tag(snapshot: snapshot!.documents[0])
                 if let todayTag = todayTag {
-                    user
-                        .collection(path: .tasks)
+                    let todayTagId = todayTag.id
+                    tasksCollection
                         .whereField("startDate", isGreaterThanOrEqualTo: today.startOfDay)
                         .whereField("startDate", isLessThanOrEqualTo: today.endOfDay)
                         .getDocuments(completion: { snapshot, err in
@@ -29,8 +30,8 @@ class AddTodayTag {
                             for s in snapshot!.documents {
                                 let task = try? Task(snapshot: s)
                                 if let task = task {
-                                    if !task.tagIds.contains(todayTag.id) {
-                                        task.tagIds.append(todayTag.id)
+                                    if !task.tagIds.contains(todayTagId) {
+                                        task.tagIds.append(todayTagId)
                                         do {
                                             try batch.setData(from: task, forDocument: task.documentReference, merge: true)
                                         } catch {

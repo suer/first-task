@@ -170,19 +170,20 @@ extension Task {
         }
     }
 
-    static func countTodayTasks(done: @escaping (Int) -> Void) {
+    static func countTodayTasks(done: @escaping @Sendable (Int) -> Void) {
         let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+        let tagsCollection = user.collection(path: .tags)
+        let tasksCollection = user.collection(path: .tasks)
 
-        user
-            .collection(path: .tags)
+        tagsCollection
             .whereField("kind", isEqualTo: "today")
             .getDocuments(completion: { snapshot, err in
                 guard err == nil else { return }
 
                 let todayTag = try? Tag(snapshot: snapshot!.documents[0])
                 if let todayTag = todayTag {
-                    user
-                        .collection(path: .tasks)
+                    let todayTagId = todayTag.id
+                    tasksCollection
                         .getDocuments(completion: { snapshot, err in
                             guard err == nil else { return }
 
@@ -191,7 +192,7 @@ extension Task {
                             for s in snapshot!.documents {
                                 let task = try? Task(snapshot: s)
                                 if let task = task {
-                                    if task.tagIds.contains(todayTag.id) {
+                                    if task.tagIds.contains(todayTagId) {
                                         count += 1
                                     }
                                 }
