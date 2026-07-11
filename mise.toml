@@ -4,6 +4,7 @@ ruby.compile=false
 
 [tools]
 swiftlint = "latest"
+license-plist = "latest"
 
 [tasks.format]
 description = "Format Swift source files in-place"
@@ -16,6 +17,10 @@ run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskDepe
 [tasks.swiftlint]
 description = "Run SwiftLint with strict mode"
 run = "swiftlint --strict"
+
+[tasks.license-plist]
+description = "Generate OSS license list with LicensePlist"
+run = "license-plist"
 
 [tasks.bundle-install]
 description = "Install Ruby dependencies"
