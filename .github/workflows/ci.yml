@@ -88,15 +88,6 @@ jobs:
         run: |
           cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
 
-      - name: Cache SwiftPM packages
-        uses: actions/cache@v6
-        with:
-          path: |
-            FirstTaskDependencies/.build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
-
       - name: Build
         run: mise run build
         env:
@@ -134,15 +125,6 @@ jobs:
       - name: Setup GoogleService-Info.plist
         run: |
           cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
-
-      - name: Cache SwiftPM packages
-        uses: actions/cache@v6
-        with:
-          path: |
-            FirstTaskDependencies/.build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
 
       # https://github.com/actions/runner-images/issues/12777
       - name: Workaround for hanging simulator

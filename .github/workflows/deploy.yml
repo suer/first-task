@@ -55,15 +55,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
-      - name: Cache SwiftPM packages
-        uses: actions/cache@v6
-        with:
-          path: |
-            FirstTaskDependencies/.build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
-
       - name: Build and deploy to App Distribution
         env:
           BUILD_NUMBER: ${{ github.run_number }}
