@@ -19,6 +19,7 @@ struct ProjectRow: View {
                 Text(self.name)
                 Spacer()
                 Text("\(self.taskCount)")
+                    .foregroundColor(.secondary)
             }
         }
     }
