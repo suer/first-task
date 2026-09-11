@@ -258,7 +258,7 @@ extension View {
 
 struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             TaskList(taskListType: .project)
                 .environmentObject(AppSettings())
         }

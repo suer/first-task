@@ -6,7 +6,7 @@ struct TaskEditView: View {
     @ObservedObject var task: Task
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField(String(localized: .inputTitle), text: $task.title)
                 Section(header: Text(.memo)) {

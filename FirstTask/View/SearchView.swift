@@ -9,7 +9,7 @@ struct SearchView: View {
     @Binding var filteringTagName: String
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     Button(action: {
