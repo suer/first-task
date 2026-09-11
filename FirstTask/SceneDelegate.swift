@@ -6,6 +6,7 @@
 //  Copyright © 2020 codefirst. All rights reserved.
 //
 
+import GoogleSignIn
 import SwiftUI
 import UIKit
 import UserNotifications
@@ -31,6 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+
+    func scene(_ scene: UIScene, openURLContexts urlContexts: Set<UIOpenURLContext>) {
+        guard let url = urlContexts.first?.url else { return }
+
+        GIDSignIn.sharedInstance.handle(url)
     }
 
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
 		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
+		ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */; };
 		1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1D2507ABAE00D74BA7 /* Date.swift */; };
 		191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11682E54A303008B1BD0 /* FirebaseAnalytics */; };
 		191A116B2E54A303008B1BD0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116A2E54A303008B1BD0 /* FirebaseCrashlytics */; };
-		191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116D2E54A36A008B1BD0 /* FirebaseAuthUI */; };
-		191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 191A116F2E54A36A008B1BD0 /* FirebaseGoogleAuthUI */; };
 		191A11752E54A5F5008B1BD0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 191A11742E54A5F5008B1BD0 /* FirebaseFirestore */; };
 		193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704AE252D46BD004FF6A5 /* ProjectAddView.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
@@ -51,7 +50,6 @@
 		804467CE24DFA33600011164 /* FabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CD24DFA33600011164 /* FabButton.swift */; };
 		804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467CF24DFD7A900011164 /* FocusableTextField.swift */; };
 		804467D224DFD80A00011164 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804467D124DFD80A00011164 /* BottomSheetModal.swift */; };
-		8048A0FD256A1E0D0078873F /* FirebaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */; };
 		805BAEF52E62E111001D46D3 /* TaskListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805BAEF42E62E10E001D46D3 /* TaskListType.swift */; };
 		80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */; };
 		8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089D1CD24E6BDAC00988D74 /* AppSettings.swift */; };
@@ -78,6 +76,7 @@
 /* Begin PBXFileReference section */
 		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
+		2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		1905DA1D2507ABAE00D74BA7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		192BCE282F6D785700C06A98 /* FirstTaskTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FirstTaskTools; sourceTree = "<group>"; };
 		192BCE292F6D786A00C06A98 /* FirstTaskDependencies */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FirstTaskDependencies; sourceTree = "<group>"; };
@@ -123,7 +122,6 @@
 		804467CF24DFD7A900011164 /* FocusableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableTextField.swift; sourceTree = "<group>"; };
 		804467D124DFD80A00011164 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
 		8047ABB425455441000D0EC8 /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
-		8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUIView.swift; sourceTree = "<group>"; };
 		805BAEF42E62E10E001D46D3 /* TaskListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListType.swift; sourceTree = "<group>"; };
 		80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTagsOperation.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -135,11 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				191A11702E54A36A008B1BD0 /* FirebaseGoogleAuthUI in Frameworks */,
 				194AD5112E9DD13100B4B5DA /* FirstTaskDependencies in Frameworks */,
 				191A116B2E54A303008B1BD0 /* FirebaseCrashlytics in Frameworks */,
 				191A11692E54A303008B1BD0 /* FirebaseAnalytics in Frameworks */,
-				191A116E2E54A36A008B1BD0 /* FirebaseAuthUI in Frameworks */,
 				191A11752E54A5F5008B1BD0 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +162,7 @@
 			children = (
 				1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */,
 				1905DA182507A22700D74BA7 /* CreateTodayTag.swift */,
+				2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */,
 			);
 			path = "Use Case";
 			sourceTree = "<group>";
@@ -187,7 +184,6 @@
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
-				8048A0FC256A1E0D0078873F /* FirebaseUIView.swift */,
 				193704AE252D46BD004FF6A5 /* ProjectAddView.swift */,
 				19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */,
 				19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */,
@@ -577,6 +573,7 @@
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */,
+				ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */,
 				198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */,
 				193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */,
 				801BBD4925737A5F00B7D66E /* User.swift in Sources */,
@@ -587,7 +584,6 @@
 				804467C724DF98DF00011164 /* TaskList.swift in Sources */,
 				1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */,
 				8044679924DF97CC00011164 /* FirstTask.xcdatamodeld in Sources */,
-				8048A0FD256A1E0D0078873F /* FirebaseUIView.swift in Sources */,
 				8021776E24EFEFC50076A24C /* TagList.swift in Sources */,
 				805BAEF52E62E111001D46D3 /* TaskListType.swift in Sources */,
 				804467CE24DFA33600011164 /* FabButton.swift in Sources */,
@@ -936,14 +932,6 @@
 				version = 12.3.0;
 			};
 		};
-		191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS.git";
-			requirement = {
-				kind = exactVersion;
-				version = 15.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -956,16 +944,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 191A11672E54A303008B1BD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		191A116D2E54A36A008B1BD0 /* FirebaseAuthUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
-			productName = FirebaseAuthUI;
-		};
-		191A116F2E54A36A008B1BD0 /* FirebaseGoogleAuthUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 191A116C2E54A36A008B1BD0 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
-			productName = FirebaseGoogleAuthUI;
 		};
 		191A11742E54A5F5008B1BD0 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

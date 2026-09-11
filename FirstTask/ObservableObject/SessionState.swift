@@ -1,5 +1,6 @@
 import FirebaseAuth
 import FirebaseFirestore
+import GoogleSignIn
 
 class SessionState: ObservableObject {
     @Published var isSignedIn: Bool
@@ -46,6 +47,7 @@ class SessionState: ObservableObject {
 
     func signOut() throws {
         try Auth.auth().signOut()
+        GIDSignIn.sharedInstance.signOut()
     }
 
     deinit {
