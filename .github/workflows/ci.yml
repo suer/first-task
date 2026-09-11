@@ -81,8 +81,8 @@ jobs:
         with:
           key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
           restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
-          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
-          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.workflow }}-
 
       - name: Setup GoogleService-Info.plist
         run: |
@@ -119,8 +119,8 @@ jobs:
         with:
           key: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
           restore-keys: xcode-cache-deriveddata-${{ github.job }}-${{ github.workflow }}-
-          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-${{ github.sha }}
-          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.job }}-${{ github.workflow }}-
+          swiftpm-cache-key: xcode-cache-sourcepackages-${{ github.workflow }}-${{ github.sha }}
+          swiftpm-cache-restore-keys: xcode-cache-sourcepackages-${{ github.workflow }}-
 
       - name: Setup GoogleService-Info.plist
         run: |
