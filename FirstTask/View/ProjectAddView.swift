@@ -5,7 +5,7 @@ struct ProjectAddView: View {
     @State var project: Project = Project()
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ProjectFormView(project: project)
                 .navigationTitle(.newProject)
                 .toolbar {

@@ -5,7 +5,7 @@ struct ProjectEditView: View {
     @ObservedObject var project: Project = Project()
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ProjectFormView(project: project)
                 .navigationTitle(.editProject)
                 .toolbar {

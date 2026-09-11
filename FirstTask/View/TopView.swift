@@ -18,7 +18,7 @@ struct TopView: View {
     @State private var showingSignOutConfirm = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack(alignment: .bottom) {
                 if sessionState.isSignedIn {
                     List {
