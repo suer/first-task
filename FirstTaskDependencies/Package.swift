@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", exact: "12.17.0"),
-        .package(url: "https://github.com/firebase/FirebaseUI-iOS.git", exact: "15.1.0"),
+        .package(url: "https://github.com/google/GoogleSignIn-iOS.git", exact: "10.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,10 +26,10 @@ let package = Package(
             name: "FirstTaskDependencies",
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseAuthUI", package: "FirebaseUI-iOS"),
-                .product(name: "FirebaseGoogleAuthUI", package: "FirebaseUI-iOS"),
+                .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
             ]
         )
     ]

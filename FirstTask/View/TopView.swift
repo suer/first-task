@@ -14,7 +14,6 @@ struct TopView: View {
     @State var showingFabButton = false
 
     @StateObject private var sessionState = SessionState()
-    @State var showingFirebaseUIView = false
     @State private var showingSignOutConfirm = false
 
     var body: some View {
@@ -82,7 +81,7 @@ struct TopView: View {
                         Text(.signInToSeeYourTasks)
                     } actions: {
                         Button(.signIn) {
-                            self.showingFirebaseUIView.toggle()
+                            self.signInWithGoogle()
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -96,9 +95,6 @@ struct TopView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     settingButton
                 }
-            }
-            .sheet(isPresented: $showingFirebaseUIView) {
-                FirebaseUIView()
             }
             .onAppear {
                 reloadView()
@@ -133,7 +129,7 @@ struct TopView: View {
         Group {
             if !sessionState.isSignedIn {
                 Button(action: {
-                    self.showingFirebaseUIView.toggle()
+                    self.signInWithGoogle()
                 }) {
                     Image(systemName: "person")
                         .frame(width: 40, height: 40)
@@ -184,6 +180,16 @@ struct TopView: View {
 
     private var todayTagId: String {
         self.appSettings.tags.first { $0.kind == "today" }?.id ?? ""
+    }
+
+    private func signInWithGoogle() {
+        guard let rootViewController = UIApplication.shared.rootViewController else { return }
+
+        SignInWithGoogle().call(presenting: rootViewController) { error in
+            if let error = error {
+                print("Error signing in with Google: \(error)")
+            }
+        }
     }
 
     private func reloadView() {
