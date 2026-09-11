@@ -7,7 +7,7 @@ struct TaskList: View {
 
     @State var tasks: [Task] = []
 
-    @ObservedObject var modalState = ModalState()
+    @StateObject var modalState = ModalState()
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
