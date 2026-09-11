@@ -13,78 +13,95 @@ struct TopView: View {
     @State var addingProject: Project = Project()
     @State var showingFabButton = false
 
-    @ObservedObject private var sessionState = SessionState()
+    @StateObject private var sessionState = SessionState()
     @State var showingFirebaseUIView = false
     @State private var showingSignOutConfirm = false
 
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                List {
-                    ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
-                        task.projectId == ""
-                    }
-                    ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
-                        task.hasTag(tagId: todayTagId)
-                    }
-
-                    Section(header: Text(.projects)) {
-                        ForEach(self.projects) { project in
-                            ProjectRow(tasks: self.$tasks, name: project.title, project: project, taskListType: .project) { task in
-                                return task.projectId == project.documentReference.documentID
-                            }
+                if sessionState.isSignedIn {
+                    List {
+                        ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
+                            task.projectId == ""
+                        }
+                        ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
+                            task.hasTag(tagId: todayTagId)
                         }
 
-                        Button(action: {
-                            self.addingProject = Project()
-                            self.showingProjectAddModal.toggle()
-                        }) {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text(.addProject)
-                                Spacer()
-                            }.contentShape(Rectangle())
-                        }.sheet(isPresented: self.$showingProjectAddModal) {
-                            ProjectAddView(project: self.addingProject)
-                        }.buttonStyle(PlainButtonStyle())
-                    }
+                        Section(header: Text(.projects)) {
+                            ForEach(self.projects) { project in
+                                ProjectRow(tasks: self.$tasks, name: project.title, project: project, taskListType: .project) { task in
+                                    return task.projectId == project.documentReference.documentID
+                                }
+                            }
 
-                    Section(header: Text(.tags)) {
-                        ForEach(appSettings.tags.filter { $0.kind != "today" }) { tag in
-                            ProjectRow(tasks: self.$tasks, name: tag.name, taskListType: .tag) { task in
-                                task.hasTag(tagId: tag.id)
+                            Button(action: {
+                                self.addingProject = Project()
+                                self.showingProjectAddModal.toggle()
+                            }) {
+                                HStack {
+                                    Image(systemName: "plus")
+                                    Text(.addProject)
+                                    Spacer()
+                                }.contentShape(Rectangle())
+                            }.sheet(isPresented: self.$showingProjectAddModal) {
+                                ProjectAddView(project: self.addingProject)
+                            }.buttonStyle(PlainButtonStyle())
+                        }
+
+                        Section(header: Text(.tags)) {
+                            ForEach(appSettings.tags.filter { $0.kind != "today" }) { tag in
+                                ProjectRow(tasks: self.$tasks, name: tag.name, taskListType: .tag) { task in
+                                    task.hasTag(tagId: tag.id)
+                                }
                             }
                         }
                     }
-                }
-                .listStyle(GroupedListStyle())
-                .navigationTitle(.firstTask)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        loginButton
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        settingButton
-                    }
-                }
-                .onAppear {
-                    reloadView()
-                }
-                if UIDevice.current.userInterfaceIdiom != .pad && self.showingFabButton {
-                    VStack {
-                        Spacer()
-                        HStack {
+                    .listStyle(GroupedListStyle())
+
+                    if UIDevice.current.userInterfaceIdiom != .pad && self.showingFabButton {
+                        VStack {
                             Spacer()
-                            FabButton {
-                                self.appSettings.showAddTaskModal = true
-                            }
+                            HStack {
+                                Spacer()
+                                FabButton {
+                                    self.appSettings.showAddTaskModal = true
+                                }
+                            }.padding(10)
                         }.padding(10)
-                    }.padding(10)
 
-                    BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
-                        _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
+                        BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+                            _ = Task.create(title: self.$newTaskTitle.wrappedValue, tasks: self.tasks)
+                        }
+                    }
+                } else {
+                    ContentUnavailableView {
+                        Label(.notSignedIn, systemImage: "person.crop.circle.badge.questionmark")
+                    } description: {
+                        Text(.signInToSeeYourTasks)
+                    } actions: {
+                        Button(.signIn) {
+                            self.showingFirebaseUIView.toggle()
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
                 }
+            }
+            .navigationTitle(.firstTask)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    loginButton
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    settingButton
+                }
+            }
+            .sheet(isPresented: $showingFirebaseUIView) {
+                FirebaseUIView()
+            }
+            .onAppear {
+                reloadView()
             }
             .onChange(of: sessionState.isSignedIn) {
                 reloadView()
@@ -109,6 +126,7 @@ struct TopView: View {
         ) {
             SettingMenuView()
         }
+        .disabled(!sessionState.isSignedIn)
     }
 
     private var loginButton: some View {
@@ -121,8 +139,6 @@ struct TopView: View {
                         .frame(width: 40, height: 40)
                         .imageScale(.large)
                         .clipShape(Circle())
-                }.sheet(isPresented: $showingFirebaseUIView) {
-                    FirebaseUIView()
                 }
             } else {
                 Button(action: {
