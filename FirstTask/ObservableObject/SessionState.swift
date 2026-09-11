@@ -2,12 +2,16 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class SessionState: ObservableObject {
-    @Published var isSignedIn: Bool = false
-    @Published var photoURL: String = ""
+    @Published var isSignedIn: Bool
+    @Published var photoURL: String
     private var handle: AuthStateDidChangeListenerHandle!
 
     init() {
-        guard let auth = Auth.safeAuth() else { return }
+        let auth = Auth.safeAuth()
+        self.isSignedIn = auth?.currentUser != nil
+        self.photoURL = auth?.currentUser?.photoURL?.absoluteString ?? ""
+
+        guard let auth = auth else { return }
 
         handle = auth.addStateDidChangeListener { (_, user) in
             if user != nil {
