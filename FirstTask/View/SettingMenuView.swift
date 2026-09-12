@@ -37,7 +37,7 @@ struct SettingMenuView: View {
                         Image(systemName: "xmark")
                             .frame(width: 40, height: 40)
                             .imageScale(.large)
-                            .foregroundColor(Color(.accent))
+                            .foregroundColor(.secondary)
                             .clipShape(Circle())
                     }
                 }
