@@ -32,7 +32,14 @@ struct FocusableTextField: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<FocusableTextField>) -> UITextField {
         let textField = UITextField()
         textField.delegate = context.coordinator
-        textField.borderStyle = .roundedRect
+        textField.borderStyle = .none
+        textField.backgroundColor = .systemGray6
+        textField.layer.cornerRadius = 25
+        textField.layer.masksToBounds = true
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        textField.leftViewMode = .always
+        textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        textField.rightViewMode = .always
         textField.returnKeyType = .done
         return textField
     }
