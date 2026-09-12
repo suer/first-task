@@ -27,6 +27,21 @@ run = "license-plist"
 description = "Install Ruby dependencies"
 run = "bundle install"
 
+[tasks.clean]
+description = "Remove this project's DerivedData cache"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+build_dir=$(xcodebuild -showBuildSettings -project FirstTask.xcodeproj -scheme FirstTask -destination 'generic/platform=iOS Simulator' 2>/dev/null | grep -m1 ' BUILD_DIR = ' | sed 's/.*= //')
+if [ -z "$build_dir" ]; then
+  echo "Could not determine DerivedData directory" >&2
+  exit 1
+fi
+derived_data_dir=$(echo "$build_dir" | sed -E 's#(.*/DerivedData/[^/]+)/.*#\\1#')
+echo "Removing $derived_data_dir"
+rm -rf "$derived_data_dir"
+"""
+
 [tasks.build]
 description = "Build the app for iOS Simulator"
 depends = ["bundle-install"]
