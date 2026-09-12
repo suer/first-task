@@ -12,42 +12,50 @@ struct BottomTextFieldSheetModal: View {
     }
 
     var body: some View {
-        BottomSheetModal(isShown: self.$isShown) {
-            GeometryReader { geometry in
-                HStack {
-                    FocusableTextField(
-                        text: self.$text,
-                        onCommit: { _ in
-                            self.onCommit()
-                        }, isFirstResponder: true
-                    )
-                    .frame(width: geometry.size.width - 40, height: 50)
-                    .keyboardType(.default)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+        Color.clear
+            .frame(width: 0, height: 0)
+            .sheet(isPresented: $isShown) {
+                textField
+                    .presentationDetents([.height(88)])
+                    .presentationDragIndicator(.hidden)
+            }
+    }
 
-                    Button(action: {
+    private var textField: some View {
+        GeometryReader { geometry in
+            HStack {
+                FocusableTextField(
+                    text: self.$text,
+                    onCommit: { _ in
                         self.onCommit()
-                    }) {
-                        let accentColor = Color(.accent)
-                        let button = Label(.add, systemImage: "arrow.up")
-                            .labelStyle(.iconOnly)
-                            .frame(width: 40, height: 40)
-                            .imageScale(.large)
-                            .background(accentColor)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                        if #available(iOS 26.0, *) {
-                            button
-                                .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
-                        } else {
-                            button
-                        }
+                    }, isFirstResponder: true
+                )
+                .frame(width: geometry.size.width - 40, height: 50)
+                .keyboardType(.default)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                Button(action: {
+                    self.onCommit()
+                }) {
+                    let accentColor = Color(.accent)
+                    let button = Label(.add, systemImage: "arrow.up")
+                        .labelStyle(.iconOnly)
+                        .frame(width: 40, height: 40)
+                        .imageScale(.large)
+                        .background(accentColor)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                    if #available(iOS 26.0, *) {
+                        button
+                            .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
+                    } else {
+                        button
                     }
                 }
             }
-            .padding()
-            .frame(height: 80)
         }
+        .padding()
+        .frame(height: 80)
     }
 
     private func onCommit() {
