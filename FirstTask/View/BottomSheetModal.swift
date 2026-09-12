@@ -6,18 +6,12 @@ struct BottomSheetModal<Content: View>: View {
     var content: () -> Content
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            if isShown {
-                Color.black.opacity(0.65)
-                    .ignoresSafeArea()
-                    .onTapGesture { self.isShown = false }
-
+        Color.clear
+            .frame(width: 0, height: 0)
+            .sheet(isPresented: $isShown) {
                 self.content()
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemBackground))
-                    .transition(.move(edge: .bottom))
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
-        }
-        .animation(.spring(), value: isShown)
     }
 }
