@@ -33,7 +33,11 @@ struct ProjectAddView: View {
             Project.destroy(project: project)
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Text(.cancel)
+            Image(systemName: "xmark")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .foregroundColor(.secondary)
+                .clipShape(Circle())
         }
     }
 }
