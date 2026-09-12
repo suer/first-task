@@ -4,24 +4,20 @@ struct FabButton: View {
     var action: (() -> Void)?
 
     var body: some View {
-        let accentColor = Color(.accent)
         let button = Button(action: {
             action?()
         }) {
             Label(.add, systemImage: "plus")
                 .labelStyle(.iconOnly)
-                .frame(width: 50, height: 50)
                 .imageScale(.large)
-                .background(accentColor)
-                .foregroundColor(.white)
-                .clipShape(Circle())
+                .frame(width: 50, height: 50)
         }
+        .buttonBorderShape(.circle)
 
         if #available(iOS 26.0, *) {
-            button
-                .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
+            button.buttonStyle(.glassProminent)
         } else {
-            button
+            button.buttonStyle(.borderedProminent)
         }
     }
 }
