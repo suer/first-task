@@ -4,7 +4,7 @@ import GoogleSignIn
 import UIKit
 
 class SignInWithGoogle {
-    func call(presenting viewController: UIViewController, completion: @escaping (Error?) -> Void) {
+    func call(presenting viewController: UIViewController, completion: @escaping @Sendable (Error?) -> Void) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 
         GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
