@@ -32,7 +32,6 @@ struct BottomTextFieldSheetModal: View {
                 )
                 .frame(width: geometry.size.width - 40, height: 50)
                 .keyboardType(.default)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 Button(action: {
                     self.onCommit()
