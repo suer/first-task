@@ -39,6 +39,7 @@ struct ProjectAddView: View {
                 .foregroundColor(.secondary)
                 .clipShape(Circle())
         }
+        .accessibilityLabel(Text(.cancel))
     }
 }
 

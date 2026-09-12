@@ -40,6 +40,7 @@ struct SettingMenuView: View {
                             .foregroundColor(.secondary)
                             .clipShape(Circle())
                     }
+                    .accessibilityLabel(Text(.close))
                 }
             }
         }

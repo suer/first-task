@@ -26,6 +26,7 @@ struct TagView: View {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(.secondaryLabel))
                         }
+                        .accessibilityLabel(Text(.more))
                     }
                 }
                 .onDelete(perform: removeRow)

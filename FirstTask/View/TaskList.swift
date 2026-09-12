@@ -199,7 +199,9 @@ struct TaskList: View {
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(
+        }
+        .accessibilityLabel(Text(.search))
+        .sheet(
             isPresented: self.$modalState.showingSearchModal,
             onDismiss: {
                 self.modalState.showingSearchModal = false
@@ -218,7 +220,9 @@ struct TaskList: View {
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(isPresented: self.$showingProjectEditModal) {
+        }
+        .accessibilityLabel(Text(.more))
+        .sheet(isPresented: self.$showingProjectEditModal) {
             ProjectEditView(project: self.project!)
                 .onDisappear {
                     self.navigationBarTitle = self.project?.title ?? self.navigationBarTitle

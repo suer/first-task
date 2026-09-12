@@ -123,6 +123,7 @@ struct TopView: View {
             SettingMenuView()
         }
         .disabled(!sessionState.isSignedIn)
+        .accessibilityLabel(Text(.settings))
     }
 
     private var loginButton: some View {
@@ -136,6 +137,7 @@ struct TopView: View {
                         .imageScale(.large)
                         .clipShape(Circle())
                 }
+                .accessibilityLabel(Text(.signIn))
             } else {
                 Button(action: {
                     self.showingSignOutConfirm = true
@@ -163,6 +165,7 @@ struct TopView: View {
                         }
                     }
                 }
+                .accessibilityLabel(Text(.account))
                 .alert(isPresented: $showingSignOutConfirm) {
                     Alert(
                         title: Text(.signOut),
