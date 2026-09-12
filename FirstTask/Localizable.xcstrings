@@ -27,6 +27,24 @@
         }
       }
     },
+    "Add a task to get started" : {
+      "comment" : "A description shown when a task list is empty.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a task to get started"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクを追加して始めましょう"
+          }
+        }
+      }
+    },
     "Add new tag" : {
       "comment" : "A button to add a new tag.",
       "extractionState" : "manual",
@@ -375,6 +393,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "プロジェクトなし"
+          }
+        }
+      }
+    },
+    "No Tasks" : {
+      "comment" : "A title shown when a task list is empty.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Tasks"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクがありません"
           }
         }
       }

@@ -6,6 +6,7 @@ struct TaskList: View {
     @EnvironmentObject var appSettings: AppSettings
 
     @State var tasks: [Task] = []
+    @State var isLoadingTasks = true
 
     @StateObject var modalState = ModalState()
     @State var editing: Bool = false
@@ -40,40 +41,24 @@ struct TaskList: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            List {
-                ForEach(self.filteredTasks) { task in
-                    taskRow(task: task)
+            if self.isLoadingTasks {
+                ProgressView()
+            } else if self.filteredTasks.isEmpty {
+                ContentUnavailableView {
+                    Label(.noTasks, systemImage: "checklist")
+                } description: {
+                    Text(.addATaskToGetStarted)
                 }
-                .onDelete(perform: removeRow)
-                .onMove(perform: move)
-                .onTapGesture {}  // work around to scroll list with onLongPressGesture
-            }
-            .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
-            .navigationTitle(self.navigationBarTitle)
-            .navigationSubtitleForiOS26(self.taskListType.subtitle())
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        searchButton
-                        if self.project != nil {
-                            projectButton
-                        }
+            } else {
+                List {
+                    ForEach(self.filteredTasks) { task in
+                        taskRow(task: task)
                     }
+                    .onDelete(perform: removeRow)
+                    .onMove(perform: move)
+                    .onTapGesture {}  // work around to scroll list with onLongPressGesture
                 }
-            }
-            .onAppear {
-                let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
-                user
-                    .collection(path: .tasks)
-                    .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
-                    .order(by: "displayOrder")
-                    .addSnapshotListener { querySnapshot, _ in
-                        guard let documents = querySnapshot?.documents else { return }
-
-                        self.tasks = documents.map { queryDocumentSnapshot -> Task? in
-                            return try? Task(snapshot: queryDocumentSnapshot)
-                        }.compactMap { $0 }
-                    }
+                .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             }
             VStack {
                 Spacer()
@@ -113,6 +98,33 @@ struct TaskList: View {
                 .padding()
                 .frame(height: 360)
             }
+        }
+        .navigationTitle(self.navigationBarTitle)
+        .navigationSubtitleForiOS26(self.taskListType.subtitle())
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    searchButton
+                    if self.project != nil {
+                        projectButton
+                    }
+                }
+            }
+        }
+        .onAppear {
+            let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
+            user
+                .collection(path: .tasks)
+                .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+                .order(by: "displayOrder")
+                .addSnapshotListener { querySnapshot, _ in
+                    guard let documents = querySnapshot?.documents else { return }
+
+                    self.tasks = documents.map { queryDocumentSnapshot -> Task? in
+                        return try? Task(snapshot: queryDocumentSnapshot)
+                    }.compactMap { $0 }
+                    self.isLoadingTasks = false
+                }
         }
         .sheet(
             isPresented: isEditing,
