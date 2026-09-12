@@ -32,7 +32,11 @@ struct ProjectEditView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Text(.cancel)
+            Image(systemName: "xmark")
+                .frame(width: 40, height: 40)
+                .imageScale(.large)
+                .foregroundColor(.secondary)
+                .clipShape(Circle())
         }
     }
 }
