@@ -17,12 +17,14 @@ struct TaskEditView: View {
                     Toggle(.setStartDate, isOn: $task.useStartDate)
                     if $task.useStartDate.wrappedValue {
                         DatePicker("", selection: $task.wrappedStartDate, displayedComponents: .date)
+                            .accessibilityLabel(Text(.startDate))
                     }
                 }
                 Section(header: Text(.dueDate)) {
                     Toggle(.setDueDate, isOn: $task.useDueDate)
                     if $task.useDueDate.wrappedValue {
                         DatePicker("", selection: $task.wrappedDueDate, displayedComponents: .date)
+                            .accessibilityLabel(Text(.dueDate))
                     }
                 }
 
@@ -54,6 +56,7 @@ struct TaskEditView: View {
                                 .foregroundColor(.secondary)
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel(Text(.close))
                     }
                 }
         }.onDisappear {
