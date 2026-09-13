@@ -22,34 +22,33 @@ struct BottomTextFieldSheetModal: View {
     }
 
     private var textField: some View {
-        GeometryReader { geometry in
-            HStack {
-                FocusableTextField(
-                    text: self.$text,
-                    onCommit: { _ in
-                        self.onCommit()
-                    }, isFirstResponder: true
-                )
-                .frame(width: geometry.size.width - 40, height: 50)
-                .keyboardType(.default)
-
-                Button(action: {
+        HStack {
+            FocusableTextField(
+                text: self.$text,
+                onCommit: { _ in
                     self.onCommit()
-                }) {
-                    let accentColor = Color(.accent)
-                    let button = Label(.add, systemImage: "arrow.up")
-                        .labelStyle(.iconOnly)
-                        .frame(width: 40, height: 40)
-                        .imageScale(.large)
-                        .background(accentColor)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                    if #available(iOS 26.0, *) {
-                        button
-                            .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
-                    } else {
-                        button
-                    }
+                }, isFirstResponder: true
+            )
+            .frame(maxWidth: .infinity)
+            .frame(height: 50)
+            .keyboardType(.default)
+
+            Button(action: {
+                self.onCommit()
+            }) {
+                let accentColor = Color(.accent)
+                let button = Label(.add, systemImage: "arrow.up")
+                    .labelStyle(.iconOnly)
+                    .frame(width: 40, height: 40)
+                    .imageScale(.large)
+                    .background(accentColor)
+                    .foregroundColor(.white)
+                    .clipShape(Circle())
+                if #available(iOS 26.0, *) {
+                    button
+                        .glassEffect(.clear.interactive().tint(accentColor.opacity(0.5)))
+                } else {
+                    button
                 }
             }
         }
