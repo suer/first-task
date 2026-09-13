@@ -35,9 +35,9 @@ class Project: ObservableObject, Identifiable, Codable, Equatable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
-        try container.encodeIfPresent(complatedAt, forKey: .complatedAt)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
+        try container.encode(complatedAt, forKey: .complatedAt)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
         try container.encode(startDate, forKey: .startDate)
         try container.encode(dueDate, forKey: .dueDate)
     }
