@@ -20,6 +20,7 @@ struct SettingMenuView: View {
                                 .font(.body.weight(.semibold))
                                 .foregroundColor(Color(.tertiaryLabel))
                         }
+                        .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
                 }
