@@ -30,6 +30,7 @@
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
 		19F8F4BC24F2216900F352EA /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4BB24F2216900F352EA /* TagView.swift */; };
+		A7345F3D664B3EF8C6D460FD /* CompletedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */; };
 		801BBD4925737A5F00B7D66E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801BBD4825737A5F00B7D66E /* User.swift */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
 		802C2F1A259C619D00389927 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C2F19259C619D00389927 /* Project.swift */; };
@@ -94,6 +95,7 @@
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		19F8F4B924F218CC00F352EA /* SettingMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuView.swift; sourceTree = "<group>"; };
 		19F8F4BB24F2216900F352EA /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskList.swift; sourceTree = "<group>"; };
 		801BBD4825737A5F00B7D66E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8021776D24EFEFC50076A24C /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		802C2F19259C619D00389927 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				804467D124DFD80A00011164 /* BottomSheetModal.swift */,
 				19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */,
+				C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */,
 				8044679A24DF97CC00011164 /* ContentView.swift */,
 				804467CD24DFA33600011164 /* FabButton.swift */,
 				193704AE252D46BD004FF6A5 /* ProjectAddView.swift */,
@@ -583,6 +586,7 @@
 				19E6F1A32502FB78004561C8 /* SearchView.swift in Sources */,
 				802C2F1A259C619D00389927 /* Project.swift in Sources */,
 				19F8F4BC24F2216900F352EA /* TagView.swift in Sources */,
+				A7345F3D664B3EF8C6D460FD /* CompletedTaskList.swift in Sources */,
 				804467C924DF98F100011164 /* TaskRow.swift in Sources */,
 				80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */,
 				804467D024DFD7A900011164 /* FocusableTextField.swift in Sources */,

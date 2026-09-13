@@ -37,6 +37,7 @@ class User: ObservableObject, Identifiable, Codable {
         case tasks
         case tags
         case projects
+        case completedTasks = "completed-tasks"
     }
 
     var documentReference: DocumentReference {
