@@ -38,8 +38,8 @@ class Project: ObservableObject, Identifiable, Codable, Equatable {
         try container.encodeIfPresent(complatedAt, forKey: .complatedAt)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
-        try container.encodeIfPresent(startDate, forKey: .startDate)
-        try container.encodeIfPresent(dueDate, forKey: .dueDate)
+        try container.encode(startDate, forKey: .startDate)
+        try container.encode(dueDate, forKey: .dueDate)
     }
 
     var documentReference: DocumentReference {
