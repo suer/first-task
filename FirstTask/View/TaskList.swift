@@ -12,6 +12,7 @@ struct TaskList: View {
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
     @State var filteringTagName = ""
+    @State var filteringTitle = ""
     @State var navigationBarTitle = "Tasks"
     @State var editingTaskID: String?
     @State var movingTask: Task?
@@ -25,7 +26,11 @@ struct TaskList: View {
     var taskListType: TaskListType
 
     var filteredTasks: [Task] {
-        tasks.filter { filter($0) && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName) }
+        tasks.filter {
+            filter($0)
+                && $0.hasTagByName(tags: self.appSettings.tags, name: self.filteringTagName)
+                && (self.filteringTitle.isEmpty || $0.title.localizedCaseInsensitiveContains(self.filteringTitle))
+        }
     }
 
     private var isEditing: Binding<Bool> {
@@ -207,7 +212,7 @@ struct TaskList: View {
                 self.modalState.showingSearchModal = false
             }
         ) {
-            SearchView(filteringTagName: self.$filteringTagName)
+            SearchView(filteringTagName: self.$filteringTagName, filteringTitle: self.$filteringTitle)
                 .environmentObject(AppSettings())
         }
     }
