@@ -76,8 +76,8 @@ class Task: ObservableObject, Identifiable, Codable {
         title = data["title"] as? String ?? ""
         memo = data["memo"] as? String ?? ""
         completedAt = (data["completedAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
-        createdAt = data["createdAt"] as? ServerTimestamp<Date>
-        updatedAt = data["updatedAt"] as? ServerTimestamp<Date>
+        createdAt = (data["createdAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
+        updatedAt = (data["updatedAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
         startDate = data["startDate"] as? Timestamp
         dueDate = data["dueDate"] as? Timestamp
         displayOrder = data["displayOrder"] as? Int ?? 0
