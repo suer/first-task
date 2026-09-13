@@ -62,9 +62,9 @@ class Project: ObservableObject, Identifiable, Codable, Equatable {
 
         id = snapshot.documentID
         title = data["title"] as? String ?? ""
-        complatedAt = data["complatedAt"] as? ServerTimestamp<Date>
-        createdAt = data["createdAt"] as? ServerTimestamp<Date>
-        updatedAt = data["updatedAt"] as? ServerTimestamp<Date>
+        complatedAt = (data["complatedAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
+        createdAt = (data["createdAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
+        updatedAt = (data["updatedAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
         startDate = data["startDate"] as? Timestamp
         dueDate = data["dueDate"] as? Timestamp
         _documentReference = snapshot.reference
@@ -131,9 +131,12 @@ extension Project {
         var newPath = ""
         if self.documentReference.path.contains("/completed-projects/") {
             newPath = originalPath.replacingOccurrences(of: "/completed-projects/", with: "/projects/")
+            complatedAt = nil
         } else {
             newPath = originalPath.replacingOccurrences(of: "/projects/", with: "/completed-projects/")
+            complatedAt = ServerTimestamp(wrappedValue: Date())
         }
+        updatedAt = ServerTimestamp(wrappedValue: Date())
 
         let newRef = Firestore.firestore().document(newPath)
         do {
