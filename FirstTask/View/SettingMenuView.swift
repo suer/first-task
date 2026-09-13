@@ -4,7 +4,6 @@ struct SettingMenuView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State private var showTagView = false
-    @State private var showCompletedTaskList = false
 
     var body: some View {
         NavigationStack {
@@ -24,30 +23,12 @@ struct SettingMenuView: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-
-                    Button(action: {
-                        showCompletedTaskList = true
-                    }) {
-                        HStack {
-                            Image(systemName: "checkmark.circle")
-                            Text(.completedTasks)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.body.weight(.semibold))
-                                .foregroundColor(Color(.tertiaryLabel))
-                        }
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
                 }
             }
             .navigationTitle(.settings)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showTagView) {
                 TagView()
-            }
-            .navigationDestination(isPresented: $showCompletedTaskList) {
-                CompletedTaskList()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

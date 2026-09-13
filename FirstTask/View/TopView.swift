@@ -8,6 +8,7 @@ struct TopView: View {
     @State var tasks: [Task] = []
 
     @State var showingSettingMenuModal = false
+    @State var showingCompletedTaskList = false
     @State var newTaskTitle: String = ""
     @State var showingProjectAddModal = false
     @State var addingProject: Project = Project()
@@ -93,7 +94,7 @@ struct TopView: View {
                     loginButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    settingButton
+                    menuButton
                 }
             }
             .onAppear {
@@ -105,15 +106,25 @@ struct TopView: View {
         }
     }
 
-    private var settingButton: some View {
-        Button(action: {
-            self.showingSettingMenuModal = true
-        }) {
-            Image(systemName: "gear")
+    private var menuButton: some View {
+        Menu {
+            Button(action: {
+                self.showingSettingMenuModal = true
+            }) {
+                Label(.settings, systemImage: "gear")
+            }
+            Button(action: {
+                self.showingCompletedTaskList = true
+            }) {
+                Label(.completedTasks, systemImage: "checkmark.circle")
+            }
+        } label: {
+            Image(systemName: "ellipsis")
                 .frame(width: 40, height: 40)
                 .imageScale(.large)
                 .clipShape(Circle())
-        }.sheet(
+        }
+        .sheet(
             isPresented: self.$showingSettingMenuModal,
             onDismiss: {
                 self.showingSettingMenuModal = false
@@ -122,8 +133,11 @@ struct TopView: View {
         ) {
             SettingMenuView()
         }
+        .navigationDestination(isPresented: self.$showingCompletedTaskList) {
+            CompletedTaskList()
+        }
         .disabled(!sessionState.isSignedIn)
-        .accessibilityLabel(Text(.settings))
+        .accessibilityLabel(Text(.more))
     }
 
     private var loginButton: some View {
