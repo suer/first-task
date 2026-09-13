@@ -228,9 +228,10 @@ extension Task {
     }
 
     func toggleDone() {
-        let originalPath = self.documentReference.path
+        let originalRef = self.documentReference
+        let originalPath = originalRef.path
         var newPath = ""
-        if self.documentReference.path.contains("/completed-tasks/") {
+        if originalPath.contains("/completed-tasks/") {
             newPath = originalPath.replacingOccurrences(of: "/completed-tasks/", with: "/tasks/")
             completedAt = nil
         } else {
@@ -240,9 +241,15 @@ extension Task {
         updatedAt = ServerTimestamp(wrappedValue: Date())
 
         let newRef = Firestore.firestore().document(newPath)
+        let batch = Firestore.firestore().batch()
         do {
-            try newRef.setData(from: self)
-            self.documentReference.delete()
+            try batch.setData(from: self, forDocument: newRef)
+            batch.deleteDocument(originalRef)
+            batch.commit { error in
+                if let error = error {
+                    print("Error toggling task completion: \(error)")
+                }
+            }
             self._documentReference = newRef
         } catch {
             print("Error toggling task completion: \(error)")

@@ -127,9 +127,10 @@ extension Project {
     }
 
     func toggleDone() {
-        let originalPath = self.documentReference.path
+        let originalRef = self.documentReference
+        let originalPath = originalRef.path
         var newPath = ""
-        if self.documentReference.path.contains("/completed-projects/") {
+        if originalPath.contains("/completed-projects/") {
             newPath = originalPath.replacingOccurrences(of: "/completed-projects/", with: "/projects/")
             complatedAt = nil
         } else {
@@ -139,9 +140,15 @@ extension Project {
         updatedAt = ServerTimestamp(wrappedValue: Date())
 
         let newRef = Firestore.firestore().document(newPath)
+        let batch = Firestore.firestore().batch()
         do {
-            try newRef.setData(from: self)
-            self.documentReference.delete()
+            try batch.setData(from: self, forDocument: newRef)
+            batch.deleteDocument(originalRef)
+            batch.commit { error in
+                if let error = error {
+                    print("Error toggling project completion: \(error)")
+                }
+            }
             self._documentReference = newRef
         } catch {
             print("Error toggling project completion: \(error)")
