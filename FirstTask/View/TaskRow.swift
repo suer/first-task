@@ -7,19 +7,11 @@ struct TaskRow: View {
 
     var body: some View {
         HStack {
-            Circle()
-                .fill(
-                    Color(
-                        task.completedAt != nil
-                            ? UIColor.label
-                            : UIColor.systemBackground)
-                )
-                .frame(width: 20, height: 20)
-                .overlay(
-                    Circle()
-                        .stroke(Color(.label))
-                        .frame(width: 20, height: 20)
-                ).onTapGesture {
+            Image(systemName: task.completedAt != nil ? "checkmark.circle" : "circle")
+                .font(.system(size: 20))
+                .fontWeight(.light)
+                .foregroundColor(Color(.label))
+                .onTapGesture {
                     self.vibrate()
                     self.task.toggleDone()
                 }
