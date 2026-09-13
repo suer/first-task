@@ -75,7 +75,7 @@ class Task: ObservableObject, Identifiable, Codable {
         id = snapshot.documentID
         title = data["title"] as? String ?? ""
         memo = data["memo"] as? String ?? ""
-        completedAt = data["completedAt"] as? ServerTimestamp<Date>
+        completedAt = (data["completedAt"] as? Timestamp).map { ServerTimestamp(wrappedValue: $0.dateValue()) }
         createdAt = data["createdAt"] as? ServerTimestamp<Date>
         updatedAt = data["updatedAt"] as? ServerTimestamp<Date>
         startDate = data["startDate"] as? Timestamp
@@ -232,9 +232,12 @@ extension Task {
         var newPath = ""
         if self.documentReference.path.contains("/completed-tasks/") {
             newPath = originalPath.replacingOccurrences(of: "/completed-tasks/", with: "/tasks/")
+            completedAt = nil
         } else {
             newPath = originalPath.replacingOccurrences(of: "/tasks/", with: "/completed-tasks/")
+            completedAt = ServerTimestamp(wrappedValue: Date())
         }
+        updatedAt = ServerTimestamp(wrappedValue: Date())
 
         let newRef = Firestore.firestore().document(newPath)
         do {
