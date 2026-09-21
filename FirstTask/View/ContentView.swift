@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var context
-
     var body: some View {
         TopView().onAppear(perform: {
             UNUserNotificationCenter
