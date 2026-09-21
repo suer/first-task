@@ -32,6 +32,7 @@ struct FocusableTextField: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<FocusableTextField>) -> UITextField {
         let textField = UITextField()
         textField.delegate = context.coordinator
+        textField.placeholder = String(localized: .inputTitle)
         textField.borderStyle = .none
         textField.backgroundColor = .systemGray6
         textField.layer.cornerRadius = 25
