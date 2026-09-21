@@ -59,7 +59,7 @@ jobs:
   build:
     needs: [swiftformat, swiftlint]
     if: github.event.pull_request.draft == false
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 20
     permissions:
       contents: read
@@ -97,7 +97,7 @@ jobs:
   test:
     needs: [swiftformat, swiftlint]
     if: github.event.pull_request.draft == false
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 60
     permissions:
       contents: read
