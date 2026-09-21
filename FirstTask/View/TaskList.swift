@@ -11,6 +11,7 @@ struct TaskList: View {
     @StateObject var modalState = ModalState()
     @State var editing: Bool = false
     @State var newTaskTitle: String = ""
+    @State var showingAddTaskModal = false
     @State var filteringTagName = ""
     @State var filteringTitle = ""
     @State var navigationBarTitle = "Tasks"
@@ -70,12 +71,12 @@ struct TaskList: View {
                 HStack {
                     Spacer()
                     FabButton {
-                        self.appSettings.showAddTaskModal = true
+                        self.showingAddTaskModal = true
                     }
                 }.padding(10)
             }.padding(10)
 
-            BottomTextFieldSheetModal(isShown: $appSettings.showAddTaskModal, text: self.$newTaskTitle) {
+            BottomTextFieldSheetModal(isShown: self.$showingAddTaskModal, text: self.$newTaskTitle) {
                 let tag: Tag? =
                     if self.taskListType == .tag {
                         self.appSettings.tags.first { $0.name == navigationBarTitle }
