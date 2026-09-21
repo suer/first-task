@@ -371,7 +371,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "名前"
+            "value" : "タスク名"
           }
         }
       }
