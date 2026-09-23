@@ -1,5 +1,5 @@
-import AudioToolbox
 import SwiftUI
+import UIKit
 
 struct TaskRow: View {
     @EnvironmentObject var appSettings: AppSettings
@@ -33,7 +33,8 @@ struct TaskRow: View {
     }
 
     func vibrate() {
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
     }
 }
 
