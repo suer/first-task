@@ -37,7 +37,8 @@ platform :ios do
       scheme: 'FirstTask',
       export_options: {
         method: 'ad-hoc'
-      }
+      },
+      disable_package_automatic_updates: true
     )
     upload_symbols_to_crashlytics(
       gsp_path: 'FirstTask/Configs/GoogleService-Info-Release.plist',
@@ -60,14 +61,16 @@ platform :ios do
       archive_path: "./FirstTask.xcarchive",
       skip_package_ipa: true,
       skip_codesigning: true,
-      destination: "generic/platform=iOS Simulator"
+      destination: "generic/platform=iOS Simulator",
+      disable_package_automatic_updates: true
     )
   end
 
   desc "Run tests"
   lane :test do
     scan(
-      scheme: "FirstTask"
+      scheme: "FirstTask",
+      disable_package_automatic_updates: true
     )
   end
 end
