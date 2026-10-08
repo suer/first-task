@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: jdx/mise-action@v4
+      - uses: jdx/mise-action@v5
         env:
           MISE_DISABLE_TOOLS: ruby
 
@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: jdx/mise-action@v4
+      - uses: jdx/mise-action@v5
         env:
           MISE_DISABLE_TOOLS: ruby
 
@@ -73,7 +73,7 @@ jobs:
         with:
           bundler-cache: true
 
-      - uses: jdx/mise-action@v4
+      - uses: jdx/mise-action@v5
         env:
           MISE_DISABLE_TOOLS: ruby
 
@@ -111,7 +111,7 @@ jobs:
         with:
           bundler-cache: true
 
-      - uses: jdx/mise-action@v4
+      - uses: jdx/mise-action@v5
         env:
           MISE_DISABLE_TOOLS: ruby
 
