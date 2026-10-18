@@ -266,7 +266,12 @@ extension Task {
     func save() {
         updatedAt = ServerTimestamp(wrappedValue: Date())
         do {
-            try documentReference.setData(from: self, merge: true)
+            let fields = try Firestore.Encoder().encode(self)
+            documentReference.updateData(fields) { error in
+                if let error = error {
+                    print("Error saving task: \(error)")
+                }
+            }
         } catch {
             print("Error saving task: \(error)")
         }
