@@ -21,6 +21,7 @@
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */; };
 		19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */; };
+		7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */; };
 		19CF0C6C2F1CD0E1002295A1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CF0C6B2F1CD0E1002295A1 /* Auth.swift */; };
 		19D1298A256A45B400BB7732 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D12989256A45B400BB7732 /* SessionState.swift */; };
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
@@ -87,6 +88,7 @@
 		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectView.swift; sourceTree = "<group>"; };
 		19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
+		7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		19CF0C6B2F1CD0E1002295A1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		19D12989256A45B400BB7732 /* SessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */,
+				7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */,
 				804467AF24DF97D000011164 /* Info.plist */,
 			);
 			path = FirstTaskTests;
@@ -611,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */,
+				7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

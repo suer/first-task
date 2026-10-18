@@ -121,6 +121,17 @@ class Task: ObservableObject, Identifiable, Codable {
 
 extension Task {
 
+    struct EditableContent: Equatable {
+        let title: String
+        let memo: String
+        let startDate: Timestamp?
+        let dueDate: Timestamp?
+    }
+
+    var editableContent: EditableContent {
+        EditableContent(title: title, memo: memo, startDate: startDate, dueDate: dueDate)
+    }
+
     func allTags(tags: [Tag]) -> [Tag] {
         return tags.filter { tag in
             tagIds.contains(tag.id)

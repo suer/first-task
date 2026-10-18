@@ -4,6 +4,12 @@ struct TaskEditView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
+    @State private var original: Task.EditableContent
+
+    init(task: Task) {
+        self.task = task
+        _original = State(initialValue: task.editableContent)
+    }
 
     var body: some View {
         NavigationStack {
@@ -60,7 +66,9 @@ struct TaskEditView: View {
                     }
                 }
         }.onDisappear {
-            task.save()
+            if task.editableContent != original {
+                task.save()
+            }
         }
     }
 }
