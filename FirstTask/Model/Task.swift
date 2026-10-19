@@ -121,6 +121,17 @@ class Task: ObservableObject, Identifiable, Codable {
 
 extension Task {
 
+    struct EditableContent: Equatable {
+        let title: String
+        let memo: String
+        let startDate: Timestamp?
+        let dueDate: Timestamp?
+    }
+
+    var editableContent: EditableContent {
+        EditableContent(title: title, memo: memo, startDate: startDate, dueDate: dueDate)
+    }
+
     func allTags(tags: [Tag]) -> [Tag] {
         return tags.filter { tag in
             tagIds.contains(tag.id)
@@ -266,7 +277,12 @@ extension Task {
     func save() {
         updatedAt = ServerTimestamp(wrappedValue: Date())
         do {
-            try documentReference.setData(from: self, merge: true)
+            let fields = try Firestore.Encoder().encode(self)
+            documentReference.updateData(fields) { error in
+                if let error = error {
+                    print("Error saving task: \(error)")
+                }
+            }
         } catch {
             print("Error saving task: \(error)")
         }
