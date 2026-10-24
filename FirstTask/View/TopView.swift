@@ -22,11 +22,13 @@ struct TopView: View {
             ZStack(alignment: .bottom) {
                 if sessionState.isSignedIn {
                     List {
-                        ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
-                            task.projectId == ""
-                        }
-                        ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
-                            task.hasTag(tagId: todayTagId)
+                        Section {
+                            ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
+                                task.projectId == ""
+                            }
+                            ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
+                                task.hasTag(tagId: todayTagId)
+                            }
                         }
 
                         Section(header: Text(.projects)) {
@@ -58,7 +60,7 @@ struct TopView: View {
                             }
                         }
                     }
-                    .listStyle(GroupedListStyle())
+                    .listStyle(.insetGrouped)
 
                     if UIDevice.current.userInterfaceIdiom != .pad && self.showingFabButton {
                         VStack {
