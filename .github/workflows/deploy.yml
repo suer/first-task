@@ -45,6 +45,13 @@ jobs:
         env:
           PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
 
+      - name: Setup widget provisioning profile
+        run: |
+          echo "$PROVISIONING_PROFILE_WIDGET" > distribution-widget.mobileprovision.txt
+          base64 --decode < distribution-widget.mobileprovision.txt > distribution-widget.mobileprovision
+        env:
+          PROVISIONING_PROFILE_WIDGET: ${{ secrets.PROVISIONING_PROFILE_WIDGET }}
+
       - name: Setup GoogleService-Info.plist
         run: |
           echo "$GOOGLE_SERVICE_INFO_RELEASE_PLIST" > FirstTask/Configs/GoogleService-Info-Release.plist
