@@ -9,11 +9,11 @@ jq = "latest"
 
 [tasks.format]
 description = "Format Swift source files in-place"
-run = "swift format --in-place --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTests FirstTaskUITests"
+run = "swift format --in-place --parallel --recursive FirstTask FirstTaskShared FirstTaskWidget FirstTaskDependencies FirstTaskTests FirstTaskUITests"
 
 [tasks.lint]
 description = "Lint Swift source files with strict mode"
-run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskDependencies FirstTaskTests FirstTaskUITests"
+run = "swift format lint --strict --parallel --recursive FirstTask FirstTaskShared FirstTaskWidget FirstTaskDependencies FirstTaskTests FirstTaskUITests"
 
 [tasks.swiftlint]
 description = "Run SwiftLint with strict mode"

@@ -7,21 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1542B965B8F09F0959C968CE /* TaskListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C791B0456C20E21731ABB5E /* TaskListWidget.swift */; };
 		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
 		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
-		ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */; };
 		1905DA1E2507ABAE00D74BA7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1D2507ABAE00D74BA7 /* Date.swift */; };
 		193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193704AE252D46BD004FF6A5 /* ProjectAddView.swift */; };
 		19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */; };
 		194AD5112E9DD13100B4B5DA /* FirstTaskDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 194AD5102E9DD13100B4B5DA /* FirstTaskDependencies */; };
 		19578B6824FB065C0041B165 /* TagBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19578B6724FB065C0041B165 /* TagBubble.swift */; };
 		1978B2DE2F88EEC300AC2E45 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1978B2DD2F88EEC300AC2E45 /* Localizable.xcstrings */; };
-		50EDE707F54B5F79CFFCD5A4 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */; };
 		197EA4CF2529A24C00317E53 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4CE2529A24C00317E53 /* TopView.swift */; };
 		197EA4D72529A83500317E53 /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197EA4D62529A83500317E53 /* ProjectRow.swift */; };
 		198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */; };
 		19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */; };
-		7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */; };
 		19CF0C6C2F1CD0E1002295A1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CF0C6B2F1CD0E1002295A1 /* Auth.swift */; };
 		19D1298A256A45B400BB7732 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D12989256A45B400BB7732 /* SessionState.swift */; };
 		19DABEF9252EE90C000FB6AE /* ProjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */; };
@@ -32,7 +30,10 @@
 		19F5BA6824E5521A002B02CF /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F5BA6724E5521A002B02CF /* TaskEditView.swift */; };
 		19F8F4BA24F218CC00F352EA /* SettingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4B924F218CC00F352EA /* SettingMenuView.swift */; };
 		19F8F4BC24F2216900F352EA /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F8F4BB24F2216900F352EA /* TagView.swift */; };
-		A7345F3D664B3EF8C6D460FD /* CompletedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */; };
+		27A3E9786381043635A1BF1E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7CA34157282A4A88445B4895 /* Localizable.xcstrings */; };
+		4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */; };
+		50EDE707F54B5F79CFFCD5A4 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */; };
+		7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */; };
 		801BBD4925737A5F00B7D66E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801BBD4825737A5F00B7D66E /* User.swift */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
 		802C2F1A259C619D00389927 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802C2F19259C619D00389927 /* Project.swift */; };
@@ -54,9 +55,26 @@
 		80775DFF250907E8007ED383 /* AddTodayTagsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */; };
 		8089D1CE24E6BDAC00988D74 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089D1CD24E6BDAC00988D74 /* AppSettings.swift */; };
 		80EF0E0F2511B554004D0C1C /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EF0E0E2511B554004D0C1C /* ModalState.swift */; };
+		978C49BAAC7F7635CAFDDCF6 /* FirstTaskWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F625DE30096D1AD668EE9 /* FirstTaskWidgetBundle.swift */; };
+		9BB6129F93FA9E13BFEF0CA8 /* TaskListIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12217BF8B511034E29A61F7 /* TaskListIntent.swift */; };
+		9C87D61D1BAA7264980C3722 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0849E32E538BE04DCDBDC0B0 /* Foundation.framework */; };
+		A0C8BBC83CD5BB52A4FD2432 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */; };
+		A7345F3D664B3EF8C6D460FD /* CompletedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */; };
+		ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */; };
+		D9259D63D4AF9C78BBE4D02A /* FirstTaskWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1A680B0C20DA2E496B119910 /* FirstTaskWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E9F9D2E8628854C8D39081C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F34EB49A996D15C7F84065A /* Assets.xcassets */; };
+		F5B9AED468DA4C74D533644E /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */; };
+		F7FA6DF40F27D4CD6E5DA6A8 /* WidgetSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9891097A5BD9DA6C160086 /* WidgetSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2EF227AD2996729451BB6B06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8044678824DF97CC00011164 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DA0EE970CB7585473E59021;
+			remoteInfo = FirstTaskWidget;
+		};
 		804467AA24DF97D000011164 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8044678824DF97CC00011164 /* Project object */;
@@ -73,23 +91,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		92A6CD4C783EA42E712FD58A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D9259D63D4AF9C78BBE4D02A /* FirstTaskWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0849E32E538BE04DCDBDC0B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
-		2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		1905DA1D2507ABAE00D74BA7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		192BCE292F6D786A00C06A98 /* FirstTaskDependencies */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FirstTaskDependencies; sourceTree = "<group>"; };
 		193704AE252D46BD004FF6A5 /* ProjectAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAddView.swift; sourceTree = "<group>"; };
 		19484DC724F5302000824347 /* BottomTextFieldSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTextFieldSheetModal.swift; sourceTree = "<group>"; };
 		19578B6724FB065C0041B165 /* TagBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBubble.swift; sourceTree = "<group>"; };
 		1978B2DD2F88EEC300AC2E45 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		197EA4CE2529A24C00317E53 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		197EA4D62529A83500317E53 /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		198B13562537C10D00CDA3A6 /* ProjectSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectView.swift; sourceTree = "<group>"; };
 		19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
-		7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		19CF0C6B2F1CD0E1002295A1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		19D12989256A45B400BB7732 /* SessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		19DABEF8252EE90C000FB6AE /* ProjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFormView.swift; sourceTree = "<group>"; };
 		19DABEFD252EEB3B000FB6AE /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
@@ -99,7 +130,17 @@
 		19F5BA6724E5521A002B02CF /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 		19F8F4B924F218CC00F352EA /* SettingMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuView.swift; sourceTree = "<group>"; };
 		19F8F4BB24F2216900F352EA /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskList.swift; sourceTree = "<group>"; };
+		1A680B0C20DA2E496B119910 /* FirstTaskWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FirstTaskWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CBE6C7A058E21E5BD222923 /* FirstTask.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = FirstTask.entitlements; sourceTree = "<group>"; };
+		2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
+		337D44A75989E50F67D916C6 /* FirstTaskWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = FirstTaskWidget.entitlements; sourceTree = "<group>"; };
+		5F34EB49A996D15C7F84065A /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncWidgetSnapshot.swift; sourceTree = "<group>"; };
+		747F625DE30096D1AD668EE9 /* FirstTaskWidgetBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirstTaskWidgetBundle.swift; sourceTree = "<group>"; };
+		7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
+		7A9891097A5BD9DA6C160086 /* WidgetSnapshotTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetSnapshotTests.swift; sourceTree = "<group>"; };
+		7C791B0456C20E21731ABB5E /* TaskListWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TaskListWidget.swift; sourceTree = "<group>"; };
+		7CA34157282A4A88445B4895 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		801BBD4825737A5F00B7D66E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8021776D24EFEFC50076A24C /* TagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
 		802C2F19259C619D00389927 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -128,9 +169,21 @@
 		80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTagsOperation.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		80EF0E0E2511B554004D0C1C /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
+		A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		C12217BF8B511034E29A61F7 /* TaskListIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TaskListIntent.swift; sourceTree = "<group>"; };
+		C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskList.swift; sourceTree = "<group>"; };
+		E298F8D568E4F20DFF58DD71 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		208FFFAE209DAA4C72DFD034 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C87D61D1BAA7264980C3722 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8044678D24DF97CC00011164 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +215,7 @@
 				1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */,
 				1905DA182507A22700D74BA7 /* CreateTodayTag.swift */,
 				2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */,
+				732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */,
 			);
 			path = "Use Case";
 			sourceTree = "<group>";
@@ -212,6 +266,46 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		1CAACA1D459E66046C2E3EBC /* FirstTaskShared */ = {
+			isa = PBXGroup;
+			children = (
+				19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */,
+			);
+			name = FirstTaskShared;
+			path = FirstTaskShared;
+			sourceTree = "<group>";
+		};
+		2C94F48AFC37C3846A3D56CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DBE278C1D0B22E2B14B668B /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DBE278C1D0B22E2B14B668B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0849E32E538BE04DCDBDC0B0 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6B868538935449126B6F5DB4 /* FirstTaskWidget */ = {
+			isa = PBXGroup;
+			children = (
+				747F625DE30096D1AD668EE9 /* FirstTaskWidgetBundle.swift */,
+				C12217BF8B511034E29A61F7 /* TaskListIntent.swift */,
+				7C791B0456C20E21731ABB5E /* TaskListWidget.swift */,
+				7CA34157282A4A88445B4895 /* Localizable.xcstrings */,
+				E298F8D568E4F20DFF58DD71 /* Info.plist */,
+				337D44A75989E50F67D916C6 /* FirstTaskWidget.entitlements */,
+				5F34EB49A996D15C7F84065A /* Assets.xcassets */,
+			);
+			name = FirstTaskWidget;
+			path = FirstTaskWidget;
+			sourceTree = "<group>";
+		};
 		801BBD4725737A4400B7D66E /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +322,9 @@
 				804467B724DF97D000011164 /* FirstTaskUITests */,
 				8044679124DF97CC00011164 /* Products */,
 				192BCE292F6D786A00C06A98 /* FirstTaskDependencies */,
+				2C94F48AFC37C3846A3D56CE /* Frameworks */,
+				1CAACA1D459E66046C2E3EBC /* FirstTaskShared */,
+				6B868538935449126B6F5DB4 /* FirstTaskWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +334,7 @@
 				8044679024DF97CC00011164 /* FirstTask.app */,
 				804467A924DF97D000011164 /* FirstTaskTests.xctest */,
 				804467B424DF97D000011164 /* FirstTaskUITests.xctest */,
+				1A680B0C20DA2E496B119910 /* FirstTaskWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,6 +359,7 @@
 				19DEE5A02543C7E00079459E /* Settings.bundle */,
 				1905DA172507A1C500D74BA7 /* Use Case */,
 				19A3EB2124FD09C50071C40B /* View */,
+				1CBE6C7A058E21E5BD222923 /* FirstTask.entitlements */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -279,6 +378,7 @@
 				19C797242ECAB2FE00F8CCAA /* DateExtensionTests.swift */,
 				7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */,
 				804467AF24DF97D000011164 /* Info.plist */,
+				7A9891097A5BD9DA6C160086 /* WidgetSnapshotTests.swift */,
 			);
 			path = FirstTaskTests;
 			sourceTree = "<group>";
@@ -331,6 +431,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4DA0EE970CB7585473E59021 /* FirstTaskWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38F05A3AD3C495AE48D2F3EB /* Build configuration list for PBXNativeTarget "FirstTaskWidget" */;
+			buildPhases = (
+				EBAFE7DE3EE122C66713739F /* Sources */,
+				208FFFAE209DAA4C72DFD034 /* Frameworks */,
+				AF03BB803F17930D2F04C02F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirstTaskWidget;
+			productName = FirstTaskWidget;
+			productReference = 1A680B0C20DA2E496B119910 /* FirstTaskWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8044678F24DF97CC00011164 /* FirstTask */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 804467BD24DF97D000011164 /* Build configuration list for PBXNativeTarget "FirstTask" */;
@@ -343,10 +460,12 @@
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */,
+				92A6CD4C783EA42E712FD58A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CD67567873A73EF0BD7E48A8 /* PBXTargetDependency */,
 			);
 			name = FirstTask;
 			productName = FirstTask;
@@ -432,6 +551,7 @@
 				8044678F24DF97CC00011164 /* FirstTask */,
 				804467A824DF97D000011164 /* FirstTaskTests */,
 				804467B324DF97D000011164 /* FirstTaskUITests */,
+				4DA0EE970CB7585473E59021 /* FirstTaskWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -460,6 +580,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF03BB803F17930D2F04C02F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27A3E9786381043635A1BF1E /* Localizable.xcstrings in Resources */,
+				E9F9D2E8628854C8D39081C9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +735,8 @@
 				197EA4CF2529A24C00317E53 /* TopView.swift in Sources */,
 				8044679624DF97CC00011164 /* SceneDelegate.swift in Sources */,
 				19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */,
+				F5B9AED468DA4C74D533644E /* WidgetSnapshot.swift in Sources */,
+				4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +746,7 @@
 			files = (
 				19C797252ECAB2FE00F8CCAA /* DateExtensionTests.swift in Sources */,
 				7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */,
+				F7FA6DF40F27D4CD6E5DA6A8 /* WidgetSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +755,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				804467B924DF97D000011164 /* FirstTaskUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBAFE7DE3EE122C66713739F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0C8BBC83CD5BB52A4FD2432 /* WidgetSnapshot.swift in Sources */,
+				978C49BAAC7F7635CAFDDCF6 /* FirstTaskWidgetBundle.swift in Sources */,
+				9BB6129F93FA9E13BFEF0CA8 /* TaskListIntent.swift in Sources */,
+				1542B965B8F09F0959C968CE /* TaskListWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,9 +782,64 @@
 			target = 8044678F24DF97CC00011164 /* FirstTask */;
 			targetProxy = 804467B524DF97D000011164 /* PBXContainerItemProxy */;
 		};
+		CD67567873A73EF0BD7E48A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FirstTaskWidget;
+			target = 4DA0EE970CB7585473E59021 /* FirstTaskWidget */;
+			targetProxy = 2EF227AD2996729451BB6B06 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		37A7DB6040102B611443C687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = FirstTaskWidget/FirstTaskWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirstTaskWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.FirstTask.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		624BF3A0DC05D3487EEAF396 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = FirstTaskWidget/FirstTaskWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirstTaskWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.FirstTask.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		804467BB24DF97D000011164 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -769,6 +967,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Accent;
+				CODE_SIGN_ENTITLEMENTS = FirstTask/FirstTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"FirstTask/Preview Content\"";
@@ -790,6 +989,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Accent;
+				CODE_SIGN_ENTITLEMENTS = FirstTask/FirstTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FirstTask/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -884,6 +1084,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		38F05A3AD3C495AE48D2F3EB /* Build configuration list for PBXNativeTarget "FirstTaskWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37A7DB6040102B611443C687 /* Release */,
+				624BF3A0DC05D3487EEAF396 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8044678B24DF97CC00011164 /* Build configuration list for PBXProject "FirstTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
