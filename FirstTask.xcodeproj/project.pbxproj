@@ -456,11 +456,11 @@
 				8044678C24DF97CC00011164 /* Sources */,
 				8044678D24DF97CC00011164 /* Frameworks */,
 				8044678E24DF97CC00011164 /* Resources */,
+				92A6CD4C783EA42E712FD58A /* Embed Foundation Extensions */,
 				19F5BA6D24E69270002B02CF /* Run Script (swiftlint) */,
 				8061E5D42543065C00CCBDFF /* Run Script (Copy GoogleService-Info.plist) */,
 				80CCDF58253F165A0026D041 /* Run Script (FirebaseCrashlytics) */,
 				19F202942E9C743600697D40 /* Run Script (Update Settings.bundle) */,
-				92A6CD4C783EA42E712FD58A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
