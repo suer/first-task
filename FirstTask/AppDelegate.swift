@@ -11,11 +11,19 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let refreshWidgetTaskIdentifier = "org.codefirst.firsttask.refreshWidget"
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "org.codefirst.firsttask.addTodayTags", using: nil) { task in
             if let task = task as? BGProcessingTask {
                 self.handleAppProcessing(task: task)
+            }
+        }
+
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: Self.refreshWidgetTaskIdentifier, using: nil) { task in
+            if let task = task as? BGAppRefreshTask {
+                self.handleAppRefresh(task: task)
             }
         }
 
@@ -95,5 +103,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             task.setTaskCompleted(success: operation.isFinished)
         }
         queue.addOperation(operation)
+    }
+
+    func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: Self.refreshWidgetTaskIdentifier)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Could not schedule app refresh: \(error)")
+        }
+    }
+
+    private func handleAppRefresh(task: BGAppRefreshTask) {
+        scheduleAppRefresh()
+
+        let work = _Concurrency.Task {
+            do {
+                try await SyncWidgetSnapshot.fetchAndSave()
+                task.setTaskCompleted(success: true)
+            } catch {
+                task.setTaskCompleted(success: false)
+            }
+        }
+        task.expirationHandler = {
+            work.cancel()
+        }
     }
 }
