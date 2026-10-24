@@ -5,6 +5,7 @@ struct TaskEditView: View {
     @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var task: Task
     @State private var original: Task.EditableContent
+    @State private var showingCloseConfirmation = false
 
     init(task: Task) {
         self.task = task
@@ -52,9 +53,13 @@ struct TaskEditView: View {
                 }
             }.navigationTitle(.editTask)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            if self.task.editableContent == self.original {
+                                self.presentationMode.wrappedValue.dismiss()
+                            } else {
+                                self.showingCloseConfirmation = true
+                            }
                         }) {
                             Image(systemName: "xmark")
                                 .frame(width: 40, height: 40)
@@ -63,6 +68,31 @@ struct TaskEditView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel(Text(.close))
+                        .confirmationDialog(
+                            "",
+                            isPresented: self.$showingCloseConfirmation,
+                            titleVisibility: .hidden
+                        ) {
+                            Button(.saveChanges) {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                            Button(.discardChanges, role: .destructive) {
+                                self.discardChanges()
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "checkmark")
+                                .frame(width: 40, height: 40)
+                                .imageScale(.large)
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .accessibilityLabel(Text(.save))
                     }
                 }
         }.onDisappear {
@@ -70,6 +100,13 @@ struct TaskEditView: View {
                 task.save()
             }
         }
+    }
+
+    private func discardChanges() {
+        task.title = original.title
+        task.memo = original.memo
+        task.startDate = original.startDate
+        task.dueDate = original.dueDate
     }
 }
 
