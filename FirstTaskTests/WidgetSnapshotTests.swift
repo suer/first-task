@@ -55,8 +55,8 @@ struct WidgetSnapshotTests {
 
     @Test
     func urlRejectsUnknownLinks() throws {
-        #expect(WidgetListKind(url: try #require(URL(string: "firsttask://list/unknown"))) == nil)
-        #expect(WidgetListKind(url: try #require(URL(string: "firsttask://other/inbox"))) == nil)
+        #expect(WidgetListKind(url: try #require(URL(string: "org.codefirst.firsttask://list/unknown"))) == nil)
+        #expect(WidgetListKind(url: try #require(URL(string: "org.codefirst.firsttask://other/inbox"))) == nil)
         #expect(WidgetListKind(url: try #require(URL(string: "https://example.com/list/inbox"))) == nil)
     }
 }

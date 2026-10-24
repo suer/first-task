@@ -30,7 +30,7 @@
 			<string>org.codefirst.firsttask</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>firsttask</string>
+				<string>org.codefirst.firsttask</string>
 			</array>
 		</dict>
 		<dict>

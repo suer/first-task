@@ -30,7 +30,7 @@ enum WidgetListKind: Hashable, Sendable {
     case project(id: String)
     case tag(id: String)
 
-    static let urlScheme = "firsttask"
+    static let urlScheme = "org.codefirst.firsttask"
     private static let urlHost = "list"
 
     var url: URL? {
