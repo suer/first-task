@@ -40,4 +40,23 @@ struct WidgetSnapshotTests {
         #expect(snapshot.tasks(for: .project(id: "p1")).map(\.id) == ["3"])
         #expect(snapshot.tasks(for: .tag(id: "t1")).map(\.id) == ["4"])
     }
+
+    @Test(arguments: [
+        WidgetListKind.inbox,
+        .today,
+        .project(id: "p1"),
+        .tag(id: "t1"),
+        .project(id: "id with/special chars"),
+    ])
+    func urlRoundTrips(kind: WidgetListKind) throws {
+        let url = try #require(kind.url)
+        #expect(WidgetListKind(url: url) == kind)
+    }
+
+    @Test
+    func urlRejectsUnknownLinks() throws {
+        #expect(WidgetListKind(url: try #require(URL(string: "firsttask://list/unknown"))) == nil)
+        #expect(WidgetListKind(url: try #require(URL(string: "firsttask://other/inbox"))) == nil)
+        #expect(WidgetListKind(url: try #require(URL(string: "https://example.com/list/inbox"))) == nil)
+    }
 }

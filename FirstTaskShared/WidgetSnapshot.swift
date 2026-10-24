@@ -24,11 +24,43 @@ struct WidgetTag: Codable, Equatable, Identifiable, Sendable {
     let kind: String
 }
 
-enum WidgetListKind: Sendable {
+enum WidgetListKind: Hashable, Sendable {
     case inbox
     case today
     case project(id: String)
     case tag(id: String)
+
+    static let urlScheme = "firsttask"
+    private static let urlHost = "list"
+
+    var url: URL? {
+        let path =
+            switch self {
+            case .inbox: "inbox"
+            case .today: "today"
+            case .project(let id): "project/\(Self.encode(id))"
+            case .tag(let id): "tag/\(Self.encode(id))"
+            }
+        return URL(string: "\(Self.urlScheme)://\(Self.urlHost)/\(path)")
+    }
+
+    init?(url: URL) {
+        guard url.scheme == Self.urlScheme, url.host == Self.urlHost else { return nil }
+        let components = url.pathComponents.filter { $0 != "/" }
+        switch components.count {
+        case 1 where components[0] == "inbox": self = .inbox
+        case 1 where components[0] == "today": self = .today
+        case 2 where components[0] == "project": self = .project(id: components[1])
+        case 2 where components[0] == "tag": self = .tag(id: components[1])
+        default: return nil
+        }
+    }
+
+    private static func encode(_ id: String) -> String {
+        var allowed = CharacterSet.urlPathAllowed
+        allowed.remove("/")
+        return id.addingPercentEncoding(withAllowedCharacters: allowed) ?? id
+    }
 }
 
 struct WidgetSnapshot: Codable, Equatable, Sendable {

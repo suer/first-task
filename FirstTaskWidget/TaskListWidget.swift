@@ -11,6 +11,7 @@ struct TaskListEntry: TimelineEntry {
 
     let date: Date
     let content: Content
+    var url: URL?
 }
 
 struct TaskListProvider: AppIntentTimelineProvider {
@@ -32,6 +33,7 @@ struct TaskListProvider: AppIntentTimelineProvider {
         }
 
         let list = configuration.list ?? .inbox
+        let url = list.kind?.url
         let content: TaskListEntry.Content =
             switch list.kind {
             case .inbox, .today:
@@ -51,7 +53,7 @@ struct TaskListProvider: AppIntentTimelineProvider {
             case nil:
                 .needsSelection("Select a list")
             }
-        return TaskListEntry(date: .now, content: content)
+        return TaskListEntry(date: .now, content: content, url: url)
     }
 
     private static let sampleTasks = [
@@ -124,6 +126,7 @@ struct TaskListWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: WidgetShared.widgetKind, intent: TaskListIntent.self, provider: TaskListProvider()) { entry in
             TaskListWidgetView(entry: entry)
+                .widgetURL(entry.url)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Tasks")
