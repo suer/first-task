@@ -252,6 +252,24 @@
         }
       }
     },
+    "Discard Changes" : {
+      "comment" : "A button that discards unsaved edits and closes the edit screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard Changes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "変更を破棄"
+          }
+        }
+      }
+    },
     "Due Date" : {
       "comment" : "A label displayed above a toggle to set a due date.",
       "extractionState" : "manual",
@@ -597,6 +615,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存"
+          }
+        }
+      }
+    },
+    "Save Changes" : {
+      "comment" : "A button that saves unsaved edits and closes the edit screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save Changes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "変更を保存"
           }
         }
       }
