@@ -83,6 +83,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.scheduleAppProcessing()
+            appDelegate.scheduleAppRefresh()
         }
     }
 }

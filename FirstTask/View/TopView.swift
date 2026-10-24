@@ -13,6 +13,7 @@ struct TopView: View {
     @State var showingProjectAddModal = false
     @State var addingProject: Project = Project()
     @State var showingFabButton = false
+    @State private var hasLoadedTasks = false
 
     @StateObject private var sessionState = SessionState()
     @State private var showingSignOutConfirm = false
@@ -216,7 +217,9 @@ struct TopView: View {
             self.appSettings.tags = []
             self.projects = []
             self.tasks = []
+            self.hasLoadedTasks = false
             self.showingFabButton = false
+            SyncWidgetSnapshot.clear()
             return
         }
 
@@ -230,6 +233,7 @@ struct TopView: View {
                 self.appSettings.tags = documents.map { queryDocumentSnapshot -> Tag? in
                     return try? Tag(snapshot: queryDocumentSnapshot)
                 }.compactMap { $0 }
+                self.syncWidget()
             }
         user
             .collection(path: .projects)
@@ -240,6 +244,7 @@ struct TopView: View {
                 self.projects = documents.map { queryDocumentSnapshot -> Project? in
                     return try? Project(snapshot: queryDocumentSnapshot)
                 }.compactMap { $0 }
+                self.syncWidget()
             }
         user
             .collection(path: .tasks)
@@ -249,8 +254,15 @@ struct TopView: View {
                 self.tasks = documents.map { queryDocumentSnapshot -> Task? in
                     return try? Task(snapshot: queryDocumentSnapshot)
                 }.compactMap { $0 }
+                self.hasLoadedTasks = true
+                self.syncWidget()
             }
         self.showingFabButton = true
+    }
+
+    private func syncWidget() {
+        guard hasLoadedTasks else { return }
+        SyncWidgetSnapshot.call(tasks: tasks, projects: projects, tags: appSettings.tags)
     }
 }
 
