@@ -1,4 +1,5 @@
 import FirebaseAuth
+import FirebaseFirestore
 import SwiftUI
 
 struct TaskList: View {
@@ -119,9 +120,15 @@ struct TaskList: View {
         }
         .onAppear {
             let user = User(id: Auth.auth().currentUser?.uid ?? "NotFound")
-            user
-                .collection(path: .tasks)
-                .whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+            let tasksCollection = user.collection(path: .tasks)
+            let query: Query =
+                switch self.taskListType {
+                case .tag, .today:
+                    tasksCollection
+                case .inbox, .project:
+                    tasksCollection.whereField("projectId", isEqualTo: project?.documentReference.documentID ?? "")
+                }
+            query
                 .order(by: "displayOrder")
                 .addSnapshotListener { querySnapshot, _ in
                     guard let documents = querySnapshot?.documents else { return }
