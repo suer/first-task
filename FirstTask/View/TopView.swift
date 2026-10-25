@@ -14,27 +14,28 @@ struct TopView: View {
     @State var addingProject: Project = Project()
     @State var showingFabButton = false
     @State private var hasLoadedTasks = false
+    @State private var path: [WidgetListKind] = []
 
     @StateObject private var sessionState = SessionState()
     @State private var showingSignOutConfirm = false
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack(alignment: .bottom) {
                 if sessionState.isSignedIn {
                     List {
                         Section {
-                            ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), taskListType: .inbox) { task in
+                            ProjectRow(tasks: self.$tasks, name: String(localized: .inbox), kind: .inbox, taskListType: .inbox) { task in
                                 task.projectId == ""
                             }
-                            ProjectRow(tasks: self.$tasks, name: String(localized: .today), taskListType: .today) { task in
+                            ProjectRow(tasks: self.$tasks, name: String(localized: .today), kind: .today, taskListType: .today) { task in
                                 task.hasTag(tagId: todayTagId)
                             }
                         }
 
                         Section(header: Text(.projects)) {
                             ForEach(self.projects) { project in
-                                ProjectRow(tasks: self.$tasks, name: project.title, project: project, taskListType: .project) { task in
+                                ProjectRow(tasks: self.$tasks, name: project.title, kind: .project(id: project.id), taskListType: .project) { task in
                                     return task.projectId == project.documentReference.documentID
                                 }
                             }
@@ -55,7 +56,7 @@ struct TopView: View {
 
                         Section(header: Text(.tags)) {
                             ForEach(appSettings.tags.filter { $0.kind != "today" }) { tag in
-                                ProjectRow(tasks: self.$tasks, name: tag.name, taskListType: .tag) { task in
+                                ProjectRow(tasks: self.$tasks, name: tag.name, kind: .tag(id: tag.id), taskListType: .tag) { task in
                                     task.hasTag(tagId: tag.id)
                                 }
                             }
@@ -105,6 +106,13 @@ struct TopView: View {
             }
             .onChange(of: sessionState.isSignedIn) {
                 reloadView()
+            }
+            .onChange(of: appSettings.pendingList) {
+                openPendingList()
+            }
+            .navigationDestination(for: WidgetListKind.self) { kind in
+                LinkedTaskList(kind: kind, projects: projects, tags: appSettings.tags)
+                    .id(kind)
             }
         }
     }
@@ -234,6 +242,7 @@ struct TopView: View {
                     return try? Tag(snapshot: queryDocumentSnapshot)
                 }.compactMap { $0 }
                 self.syncWidget()
+                self.openPendingList()
             }
         user
             .collection(path: .projects)
@@ -245,6 +254,7 @@ struct TopView: View {
                     return try? Project(snapshot: queryDocumentSnapshot)
                 }.compactMap { $0 }
                 self.syncWidget()
+                self.openPendingList()
             }
         user
             .collection(path: .tasks)
@@ -256,11 +266,24 @@ struct TopView: View {
                 }.compactMap { $0 }
                 self.hasLoadedTasks = true
                 self.syncWidget()
+                self.openPendingList()
             }
         self.showingFabButton = true
     }
 
-    private func syncWidget() {
+}
+
+extension TopView {
+    fileprivate func openPendingList() {
+        guard let kind = appSettings.pendingList, sessionState.isSignedIn else { return }
+        guard LinkedTaskList.canResolve(kind, projects: projects, tags: appSettings.tags) else { return }
+
+        appSettings.pendingList = nil
+        showingCompletedTaskList = false
+        path = [kind]
+    }
+
+    fileprivate func syncWidget() {
         guard hasLoadedTasks else { return }
         SyncWidgetSnapshot.call(tasks: tasks, projects: projects, tags: appSettings.tags)
     }

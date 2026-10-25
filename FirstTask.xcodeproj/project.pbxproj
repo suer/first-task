@@ -33,6 +33,7 @@
 		27A3E9786381043635A1BF1E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7CA34157282A4A88445B4895 /* Localizable.xcstrings */; };
 		4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */; };
 		50EDE707F54B5F79CFFCD5A4 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */; };
+		6AACCADD6937D79C0B2ABB49 /* LinkedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB34C36BD78BBC99C81A6265 /* LinkedTaskList.swift */; };
 		7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */; };
 		801BBD4925737A5F00B7D66E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801BBD4825737A5F00B7D66E /* User.swift */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
@@ -173,6 +174,7 @@
 		C12217BF8B511034E29A61F7 /* TaskListIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TaskListIntent.swift; sourceTree = "<group>"; };
 		C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskList.swift; sourceTree = "<group>"; };
 		E298F8D568E4F20DFF58DD71 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB34C36BD78BBC99C81A6265 /* LinkedTaskList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LinkedTaskList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				804467C824DF98F100011164 /* TaskRow.swift */,
 				197EA4CE2529A24C00317E53 /* TopView.swift */,
 				19A3EB2224FD0A0B0071C40B /* UIKit */,
+				EB34C36BD78BBC99C81A6265 /* LinkedTaskList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				19DABEFE252EEB3B000FB6AE /* ProjectEditView.swift in Sources */,
 				F5B9AED468DA4C74D533644E /* WidgetSnapshot.swift in Sources */,
 				4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */,
+				6AACCADD6937D79C0B2ABB49 /* LinkedTaskList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

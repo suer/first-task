@@ -4,7 +4,7 @@ struct ProjectRow: View {
     @Binding var tasks: [Task]
 
     var name = ""
-    var project: Project?
+    var kind: WidgetListKind
     var taskListType: TaskListType
     var filter: (Task) -> Bool
 
@@ -13,7 +13,7 @@ struct ProjectRow: View {
     }
 
     var body: some View {
-        NavigationLink(destination: TaskList(navigationBarTitle: name, filter: { task in filter(task) }, project: self.project, taskListType: taskListType)) {
+        NavigationLink(value: kind) {
             HStack {
                 Image(systemName: taskListType.icon())
                 Text(self.name)

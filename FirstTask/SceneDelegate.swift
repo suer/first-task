@@ -32,12 +32,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+
+        if let url = connectionOptions.urlContexts.first?.url {
+            handle(url)
+        }
     }
 
     func scene(_ scene: UIScene, openURLContexts urlContexts: Set<UIOpenURLContext>) {
         guard let url = urlContexts.first?.url else { return }
 
-        GIDSignIn.sharedInstance.handle(url)
+        handle(url)
+    }
+
+    private func handle(_ url: URL) {
+        if let kind = WidgetListKind(url: url) {
+            appSettings.pendingList = kind
+        } else {
+            GIDSignIn.sharedInstance.handle(url)
+        }
     }
 
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
