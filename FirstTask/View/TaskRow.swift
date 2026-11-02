@@ -15,12 +15,22 @@ struct TaskRow: View {
                     self.vibrate()
                     self.task.toggleDone()
                 }
-            Text(task.title)
-                .lineLimit(2)
-            ForEach(task.allTags(tags: appSettings.tags)) { tag in
-                TagBubble(tag: tag)
-                    .fixedSize()
-                    .layoutPriority(1)
+            VStack(alignment: .leading, spacing: 2) {
+                HStack {
+                    Text(task.title)
+                        .lineLimit(2)
+                    ForEach(task.allTags(tags: appSettings.tags)) { tag in
+                        TagBubble(tag: tag)
+                            .fixedSize()
+                            .layoutPriority(1)
+                    }
+                }
+                if !task.memo.isEmpty {
+                    Text(task.memo)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
             }
             Spacer()
         }
