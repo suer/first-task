@@ -15,20 +15,14 @@ struct TaskRow: View {
                     self.vibrate()
                     self.task.toggleDone()
                 }
-            VStack {
-                HStack {
-                    Text(task.title)
-                    Spacer()
-                }
-                if task.allTags(tags: appSettings.tags).count > 0 {
-                    HStack {
-                        ForEach(task.allTags(tags: appSettings.tags)) { tag in
-                            TagBubble(tag: tag)
-                        }
-                        Spacer()
-                    }.padding(.top, 4)
-                }
+            Text(task.title)
+                .lineLimit(2)
+            ForEach(task.allTags(tags: appSettings.tags)) { tag in
+                TagBubble(tag: tag)
+                    .fixedSize()
+                    .layoutPriority(1)
             }
+            Spacer()
         }
     }
 
