@@ -15,21 +15,43 @@ struct TaskRow: View {
                     self.vibrate()
                     self.task.toggleDone()
                 }
-            VStack {
+            VStack(alignment: .leading, spacing: 2) {
                 HStack {
                     Text(task.title)
-                    Spacer()
+                        .lineLimit(2)
+                    ForEach(task.allTags(tags: appSettings.tags)) { tag in
+                        TagBubble(tag: tag)
+                            .fixedSize()
+                            .layoutPriority(1)
+                    }
                 }
-                if task.allTags(tags: appSettings.tags).count > 0 {
-                    HStack {
-                        ForEach(task.allTags(tags: appSettings.tags)) { tag in
-                            TagBubble(tag: tag)
-                        }
-                        Spacer()
-                    }.padding(.top, 4)
+                if !task.memo.isEmpty {
+                    Text(Self.linkedMemo(task.memo))
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
             }
+            Spacer()
         }
+    }
+
+    static func linkedMemo(_ memo: String) -> AttributedString {
+        var attributed = AttributedString(memo)
+        guard
+            let detector = try? NSDataDetector(
+                types: NSTextCheckingResult.CheckingType.link.rawValue)
+        else { return attributed }
+        let fullRange = NSRange(location: 0, length: (memo as NSString).length)
+        for match in detector.matches(in: memo, range: fullRange) {
+            guard let url = match.url, let range = Range(match.range, in: attributed) else {
+                continue
+            }
+            attributed[range].link = url
+            attributed[range].foregroundColor = .secondary
+            attributed[range].underlineStyle = .single
+        }
+        return attributed
     }
 
     func vibrate() {

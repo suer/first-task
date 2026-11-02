@@ -38,4 +38,23 @@ struct TaskTests {
         task.projectId = "project"
         #expect(task.editableContent == original)
     }
+
+    @Test
+    func linkedMemoLinksOnlyURLs() throws {
+        let memo = "see https://example.com/a?b=1 and more"
+        let attributed = TaskRow.linkedMemo(memo)
+        let links = attributed.runs.compactMap { run in
+            run.link.map { (String(attributed[run.range].characters), $0) }
+        }
+        #expect(links.count == 1)
+        #expect(links.first?.0 == "https://example.com/a?b=1")
+        #expect(links.first?.1 == URL(string: "https://example.com/a?b=1"))
+    }
+
+    @Test
+    func linkedMemoWithoutURLHasNoLinks() {
+        let attributed = TaskRow.linkedMemo("2 bottles of milk")
+        #expect(attributed.runs.allSatisfy { $0.link == nil })
+        #expect(String(attributed.characters) == "2 bottles of milk")
+    }
 }
