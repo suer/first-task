@@ -185,6 +185,12 @@ struct TaskList: View {
                     Text(.move)
                     Image(systemName: "arrow.turn.up.right")
                 }
+                Button(action: {
+                    UIPasteboard.general.string = task.title
+                }) {
+                    Text(.copyTitle)
+                    Image(systemName: "doc.on.doc")
+                }
                 Button(
                     role: .destructive,
                     action: {
