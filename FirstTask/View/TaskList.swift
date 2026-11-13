@@ -156,6 +156,8 @@ struct TaskList: View {
 
     func move(from source: IndexSet, to destination: Int) {
         Task.reorder(tasks: self.filteredTasks.map { $0 }, source: source, destination: destination)
+        // Apply the new order locally so the list does not wait for the snapshot listener
+        self.tasks.sort { $0.displayOrder < $1.displayOrder }
 
         withAnimation {
             self.editing = false
