@@ -164,47 +164,6 @@ struct TaskList: View {
         }
     }
 
-    func taskRow(task: Task) -> some View {
-        TaskRow(task: task)
-            .contentShape(Rectangle())  // can tap Spacer
-            .onTapGesture {
-                self.editingTaskID = task.id
-            }
-            .contextMenu {
-                Button(action: {
-                    withAnimation {
-                        // XXX: editing with filtered view
-                        self.editing = self.filteringTagName.isEmpty
-                    }
-                }) {
-                    Text(.reorder)
-                    Image(systemName: "arrow.up.arrow.down")
-                }
-                Button(action: {
-                    self.movingTask = task
-                    self.showingProjectMoveModal = true
-                }) {
-                    Text(.move)
-                    Image(systemName: "arrow.turn.up.right")
-                }
-                Button(action: {
-                    UIPasteboard.general.string = task.title
-                }) {
-                    Text(.copyTitle)
-                    Image(systemName: "doc.on.doc")
-                }
-                Button(
-                    role: .destructive,
-                    action: {
-                        Task.destroy(task: task)
-                    }
-                ) {
-                    Text(.delete)
-                    Image(systemName: "trash")
-                }
-            }
-    }
-
     private var searchButton: some View {
         Button(action: {
             self.modalState.showingSearchModal = true
@@ -272,6 +231,49 @@ struct TaskList: View {
         } message: {
             Text(.completeAllTasksAndTheProjectIncludedInThisProject)
         }
+    }
+}
+
+extension TaskList {
+    func taskRow(task: Task) -> some View {
+        TaskRow(task: task)
+            .contentShape(Rectangle())  // can tap Spacer
+            .onTapGesture {
+                self.editingTaskID = task.id
+            }
+            .contextMenu {
+                Button(action: {
+                    withAnimation {
+                        // XXX: editing with filtered view
+                        self.editing = self.filteringTagName.isEmpty
+                    }
+                }) {
+                    Text(.reorder)
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+                Button(action: {
+                    self.movingTask = task
+                    self.showingProjectMoveModal = true
+                }) {
+                    Text(.move)
+                    Image(systemName: "arrow.turn.up.right")
+                }
+                Button(action: {
+                    UIPasteboard.general.string = task.title
+                }) {
+                    Text(.copyTitle)
+                    Image(systemName: "doc.on.doc")
+                }
+                Button(
+                    role: .destructive,
+                    action: {
+                        Task.destroy(task: task)
+                    }
+                ) {
+                    Text(.delete)
+                    Image(systemName: "trash")
+                }
+            }
     }
 }
 
