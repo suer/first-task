@@ -233,6 +233,24 @@
         }
       }
     },
+    "Copy Title" : {
+      "comment" : "A context menu option to copy the task title to the clipboard.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy Title"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイトルをコピー"
+          }
+        }
+      }
+    },
     "Delete" : {
       "comment" : "A destructive button that deletes a tag.",
       "extractionState" : "manual",
