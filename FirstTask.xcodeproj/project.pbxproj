@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1D0C0DE0000000000000101 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000001 /* AddTaskIntent.swift */; };
+		A1D0C0DE0000000000000102 /* FirstTaskShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */; };
+		A1D0C0DE0000000000000103 /* AddInboxTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000003 /* AddInboxTask.swift */; };
+		A1D0C0DE0000000000000104 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */; };
 		1542B965B8F09F0959C968CE /* TaskListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C791B0456C20E21731ABB5E /* TaskListWidget.swift */; };
 		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
 		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
@@ -107,6 +111,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A1D0C0DE0000000000000001 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTaskShortcuts.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000003 /* AddInboxTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInboxTask.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		0849E32E538BE04DCDBDC0B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
@@ -211,9 +219,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1D0C0DE0000000000000005 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				A1D0C0DE0000000000000001 /* AddTaskIntent.swift */,
+				A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */,
+			);
+			path = Intent;
+			sourceTree = "<group>";
+		};
 		1905DA172507A1C500D74BA7 /* Use Case */ = {
 			isa = PBXGroup;
 			children = (
+				A1D0C0DE0000000000000003 /* AddInboxTask.swift */,
 				1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */,
 				1905DA182507A22700D74BA7 /* CreateTodayTag.swift */,
 				2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */,
@@ -352,6 +370,8 @@
 				801BBD4725737A4400B7D66E /* Firestore */,
 				8044679724DF97CC00011164 /* FirstTask.xcdatamodeld */,
 				804467A424DF97D000011164 /* Info.plist */,
+				A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */,
+				A1D0C0DE0000000000000005 /* Intent */,
 				A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */,
 				1978B2DD2F88EEC300AC2E45 /* Localizable.xcstrings */,
 				804467CA24DF99F800011164 /* Model */,
@@ -567,6 +587,7 @@
 				19DEE5A12543C7E00079459E /* Settings.bundle in Resources */,
 				804467A024DF97D000011164 /* Preview Assets.xcassets in Resources */,
 				1978B2DE2F88EEC300AC2E45 /* Localizable.xcstrings in Resources */,
+				A1D0C0DE0000000000000104 /* AppShortcuts.xcstrings in Resources */,
 				50EDE707F54B5F79CFFCD5A4 /* InfoPlist.xcstrings in Resources */,
 				8044679D24DF97D000011164 /* Assets.xcassets in Resources */,
 			);
@@ -707,6 +728,9 @@
 				19578B6824FB065C0041B165 /* TagBubble.swift in Sources */,
 				19484DC824F5302000824347 /* BottomTextFieldSheetModal.swift in Sources */,
 				1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */,
+				A1D0C0DE0000000000000101 /* AddTaskIntent.swift in Sources */,
+				A1D0C0DE0000000000000102 /* FirstTaskShortcuts.swift in Sources */,
+				A1D0C0DE0000000000000103 /* AddInboxTask.swift in Sources */,
 				ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */,
 				198B13572537C10D00CDA3A6 /* ProjectSelectView.swift in Sources */,
 				193704AF252D46BD004FF6A5 /* ProjectAddView.swift in Sources */,
