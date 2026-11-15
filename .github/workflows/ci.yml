@@ -51,8 +51,9 @@ jobs:
         env:
           MISE_DISABLE_TOOLS: ruby
 
+      # The swiftlint binary needs libxml2.so.2, which is missing on ubuntu-26.04
       - name: Run SwiftLint
-        run: mise run swiftlint
+        run: mise exec github:realm/SwiftLint@latest -- swiftlint-static --strict
         env:
           MISE_DISABLE_TOOLS: ruby
 
