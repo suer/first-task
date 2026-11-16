@@ -58,7 +58,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "${taskTitle} を受信箱に追加"
+            "value" : "${taskTitle} をインボックスに追加"
           }
         }
       }
@@ -150,7 +150,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「%@」を受信箱に追加しました。"
+            "value" : "「%@」をインボックスに追加しました。"
           }
         }
       }
@@ -168,7 +168,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "受信箱にタスクを追加します。"
+            "value" : "インボックスにタスクを追加します。"
           }
         }
       }
