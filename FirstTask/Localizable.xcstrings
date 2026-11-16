@@ -45,6 +45,24 @@
         }
       }
     },
+    "Add ${taskTitle} to the inbox" : {
+      "comment" : "The summary of the Add Task shortcut. ${taskTitle} is the task title parameter.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add ${taskTitle} to the inbox"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "${taskTitle} を受信箱に追加"
+          }
+        }
+      }
+    },
     "Add a task to get started" : {
       "comment" : "A description shown when a task list is empty.",
       "extractionState" : "manual",
@@ -97,6 +115,60 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "プロジェクトを追加する"
+          }
+        }
+      }
+    },
+    "Add Task" : {
+      "comment" : "The name of the shortcut that adds a task.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Task"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクを追加"
+          }
+        }
+      }
+    },
+    "Added \"%@\" to the inbox." : {
+      "comment" : "The spoken confirmation after the Add Task shortcut ran. The argument is the task title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added \"%@\" to the inbox."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「%@」を受信箱に追加しました。"
+          }
+        }
+      }
+    },
+    "Adds a task to the inbox." : {
+      "comment" : "The description of the Add Task shortcut.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adds a task to the inbox."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "受信箱にタスクを追加します。"
           }
         }
       }
@@ -768,6 +840,24 @@
         }
       }
     },
+    "Sign in to FirstTask to add tasks." : {
+      "comment" : "The error shown when the Add Task shortcut runs while signed out.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in to FirstTask to add tasks."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクを追加するには FirstTask にサインインしてください。"
+          }
+        }
+      }
+    },
     "Sign in to see your tasks" : {
       "comment" : "A description shown when the user is not signed in.",
       "extractionState" : "manual",
@@ -862,6 +952,24 @@
         }
       }
     },
+    "Title" : {
+      "comment" : "The label of the task title parameter of the Add Task shortcut.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイトル"
+          }
+        }
+      }
+    },
     "today" : {
       "comment" : "A section of the app that lists the user’s today tasks.",
       "extractionState" : "manual",
@@ -895,6 +1003,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "不明"
+          }
+        }
+      }
+    },
+    "What is the task?" : {
+      "comment" : "The question Siri asks for the task title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is the task?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タスクは何ですか？"
           }
         }
       }
