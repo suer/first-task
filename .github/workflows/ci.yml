@@ -102,8 +102,30 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: read
+    # Experiment: compare test duration with and without diagnosticd
+    strategy:
+      fail-fast: false
+      matrix:
+        diagnosticd: [keep, stop]
     steps:
       - uses: actions/checkout@v7
+
+      # Experiment: sample CPU load during the job
+      - name: Start load sampler
+        run: |
+          echo "hw.ncpu: $(sysctl -n hw.ncpu), hw.memsize: $(sysctl -n hw.memsize)"
+          cat > "$RUNNER_TEMP/load-sampler.sh" <<'EOF'
+          while true; do
+            echo "===== $(date -u +%H:%M:%S) loadavg: $(sysctl -n vm.loadavg)"
+            echo "processes: $(ps -A | wc -l)"
+            ps -Ao pid,pcpu,pmem,state,comm -r | head -n 11
+            echo "diagnosticd:"
+            ps -Ao pid,pcpu,user,comm | grep '[d]iagnosticd'
+            memory_pressure | tail -n 1
+            sleep 10
+          done
+          EOF
+          nohup bash "$RUNNER_TEMP/load-sampler.sh" > "$RUNNER_TEMP/load-sampler.log" 2>&1 < /dev/null &
 
       - name: Set Xcode version
         uses: ./.github/actions/setup-xcode
@@ -199,6 +221,21 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
+      # Experiment: stop the unified logging daemon on the host and in the simulator
+      - name: Stop diagnosticd
+        if: matrix.diagnosticd == 'stop'
+        run: |
+          csrutil status || true
+          echo "Before:"
+          ps -o pid,pcpu,user,comm -p "$(pgrep -d, diagnosticd)" || true
+          sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.diagnosticd.plist || echo "::warning::Failed to unload host diagnosticd"
+          xcrun simctl spawn "$DEVICE_ID" killall diagnosticd || echo "::warning::Failed to kill simulator diagnosticd"
+          sleep 5
+          echo "After:"
+          ps -o pid,pcpu,user,comm -p "$(pgrep -d, diagnosticd)" || true
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
       # The booted simulator saturates the runner, so call xcodebuild directly
       # with the .xctestrun file to skip mise, bundler, fastlane and project loading
       - name: Test
@@ -210,7 +247,15 @@ jobs:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
 
+      - name: Show diagnosticd after tests
+        if: always()
+        run: ps -o pid,pcpu,user,comm -p "$(pgrep -d, diagnosticd)" || true
+
       # Shut down the simulator so that the cache is saved on an idle runner
       - name: Shutdown simulator
         if: always()
         run: xcrun simctl shutdown all
+
+      - name: Show load sampler log
+        if: always()
+        run: cat "$RUNNER_TEMP/load-sampler.log" || true
