@@ -63,6 +63,20 @@ else
 fi
 """
 
+[tasks.build-for-testing]
+description = "Build the app and test bundles for the given simulator without running tests"
+depends = ["bundle-install"]
+usage = 'flag "--destination <destination>" help="Target simulator destination"'
+env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
+run = 'bundle exec fastlane scan --scheme FirstTask --destination "$usage_destination" --build_for_testing true'
+
+[tasks.test-without-building]
+description = "Run tests built by build-for-testing on the given simulator"
+depends = ["bundle-install"]
+usage = 'flag "--destination <destination>" help="Target simulator destination"'
+env = { FASTLANE_SKIP_UPDATE_CHECK = "true", FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = "120" }
+run = 'bundle exec fastlane scan --scheme FirstTask --destination "$usage_destination" --test_without_building true --skip_package_dependencies_resolution true'
+
 [tasks.download-upload-symbols]
 description = "Download upload-symbols binary for Crashlytics"
 run = """
