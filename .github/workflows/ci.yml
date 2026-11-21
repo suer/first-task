@@ -142,6 +142,8 @@ jobs:
           ' | head -n 1)
           echo "Selected simulator: $DEVICE_ID"
           echo "device_id=$DEVICE_ID" >> "$GITHUB_OUTPUT"
+          RUNTIME=$(xcrun simctl list devices -j | jq -r --arg id "$DEVICE_ID" '.devices | to_entries[] | select(any(.value[]; .udid == $id)) | .key')
+          echo "warm_simulator_cache_key=warm-simulator-v1-$ImageVersion-$RUNTIME-$DEVICE_ID" >> "$GITHUB_OUTPUT"
 
       # Build before the simulator boots: a booted simulator saturates the runner
       # and slows down everything else, including SPM resolution and compilation
@@ -161,6 +163,22 @@ jobs:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_DISABLE_TOOLS: ruby
+
+      # A fresh simulator spends minutes on first-boot initialization (data migration,
+      # widget setup, indexing, etc.). Restore the data directory of a simulator that has
+      # already finished it.
+      - name: Restore warm simulator data
+        id: restore_warm_simulator
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ runner.temp }}/warm-simulator-data
+          key: ${{ steps.select_simulator.outputs.warm_simulator_cache_key }}
+
+      - name: Apply warm simulator data
+        if: steps.restore_warm_simulator.outputs.cache-hit == 'true'
+        run: rsync -a --delete "$RUNNER_TEMP/warm-simulator-data/" "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data/"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
       # https://github.com/actions/runner-images/issues/12777
       - name: Workaround for hanging simulator
@@ -214,3 +232,17 @@ jobs:
       - name: Shutdown simulator
         if: always()
         run: xcrun simctl shutdown all
+
+      # Save only on master to keep the cache usage low; pull requests restore it from master
+      - name: Copy simulator data for the warm cache
+        if: github.ref == 'refs/heads/master' && steps.restore_warm_simulator.outputs.cache-hit != 'true'
+        run: rsync -a "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data/" "$RUNNER_TEMP/warm-simulator-data/"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
+      - name: Save warm simulator data
+        if: github.ref == 'refs/heads/master' && steps.restore_warm_simulator.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ runner.temp }}/warm-simulator-data
+          key: ${{ steps.select_simulator.outputs.warm_simulator_cache_key }}
