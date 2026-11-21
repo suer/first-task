@@ -102,8 +102,28 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: read
+    # Experiment: compare the warm simulator with and without the widget services
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [warm, warm-widgets-off, fresh-widgets-off]
     steps:
       - uses: actions/checkout@v7
+
+      # Experiment: sample CPU load during the job
+      - name: Start load sampler
+        run: |
+          echo "hw.ncpu: $(sysctl -n hw.ncpu), hw.memsize: $(sysctl -n hw.memsize)"
+          cat > "$RUNNER_TEMP/load-sampler.sh" <<'EOF'
+          while true; do
+            echo "===== $(date -u +%H:%M:%S) loadavg: $(sysctl -n vm.loadavg)"
+            echo "processes: $(ps -A | wc -l)"
+            ps -Ao pid,pcpu,pmem,state,comm -r | head -n 11
+            memory_pressure | tail -n 1
+            sleep 10
+          done
+          EOF
+          nohup bash "$RUNNER_TEMP/load-sampler.sh" > "$RUNNER_TEMP/load-sampler.log" 2>&1 < /dev/null &
 
       - name: Set Xcode version
         uses: ./.github/actions/setup-xcode
@@ -169,6 +189,7 @@ jobs:
       # already finished it.
       - name: Restore warm simulator data
         id: restore_warm_simulator
+        if: matrix.variant != 'fresh-widgets-off'
         uses: actions/cache/restore@v6
         with:
           path: ${{ runner.temp }}/warm-simulator-data
@@ -177,6 +198,22 @@ jobs:
       - name: Apply warm simulator data
         if: steps.restore_warm_simulator.outputs.cache-hit == 'true'
         run: rsync -a --delete "$RUNNER_TEMP/warm-simulator-data/" "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data/"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
+      # Experiment: disable the widget and wallpaper services before the boot by writing
+      # the launchd disable overrides that launchd_sim reads at startup (same labels as
+      # simslim's "widgets" category)
+      - name: Disable widget services
+        if: endsWith(matrix.variant, 'widgets-off')
+        run: |
+          STORE_DIR="/private/var/tmp/com.apple.CoreSimulator.SimDevice.$DEVICE_ID"
+          STORE="$STORE_DIR/disabled.plist"
+          mkdir -p "$STORE_DIR"
+          for label in com.apple.PosterBoard com.apple.chronod com.apple.liveactivitiesd com.apple.navd; do
+            /usr/libexec/PlistBuddy -c "Set :$label true" "$STORE" 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :$label bool true" "$STORE"
+          done
+          cat "$STORE"
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
@@ -229,6 +266,14 @@ jobs:
           XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
 
       # Shut down the simulator so that the cache is saved on an idle runner
+      # Experiment: check that launchd_sim honoured the overrides (after the tests, to keep
+      # the measurement clean)
+      - name: Show disabled widget services
+        if: always()
+        run: xcrun simctl spawn "$DEVICE_ID" launchctl print-disabled system | grep -E 'PosterBoard|chronod|liveactivitiesd|navd' || true
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
       - name: Shutdown simulator
         if: always()
         run: xcrun simctl shutdown all
@@ -246,3 +291,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/warm-simulator-data
           key: ${{ steps.select_simulator.outputs.warm_simulator_cache_key }}
+
+      - name: Show load sampler log
+        if: always()
+        run: cat "$RUNNER_TEMP/load-sampler.log" || true
