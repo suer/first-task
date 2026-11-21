@@ -167,6 +167,43 @@ jobs:
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_DISABLE_TOOLS: ruby
 
+      # https://github.com/actions/runner-images/issues/12777
+      - name: Workaround for hanging simulator
+        timeout-minutes: 12
+        run: |
+          brew install coreutils -q
+
+          echo "--------------------------------"
+          echo "👀 Updating dyld_shared_cache:"
+          xcrun simctl runtime dyld_shared_cache update --all
+          echo "--------------------------------"
+          echo "👀 Booting simulator: with ID: $DEVICE_ID"
+
+          i=1
+          max=5
+          while [ $i -le $max ]; do
+            echo "👀 Launching Simulator (Attempt $i/$max)"
+            # Brewfile installs coreutils which includes gtimeout
+            if gtimeout -s SIGKILL 2m xcrun simctl bootstatus "$DEVICE_ID" -b; then
+              echo "✅ Simulator booted successfully"
+              break
+            else
+              echo "❌ Simulator boot timed out. Shutting down..."
+              xcrun simctl shutdown "$DEVICE_ID" || true # prevents "Unable to shutdown device in current state: Shutdown" error
+
+              echo "🔁 Retrying in 5s..."
+              i=$((i + 1))
+              sleep 5
+            fi
+          done
+
+          if [ $i -gt $max ]; then
+            echo "::error::Failed to boot simulator after $max attempts."
+            exit 1
+          fi
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
       - name: Test
         timeout-minutes: 15
         run: mise run test-without-building --destination "id=$DEVICE_ID"
