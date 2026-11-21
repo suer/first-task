@@ -127,14 +127,9 @@ jobs:
         run: |
           cp FirstTask/Configs/GoogleService-Info-Release.plist.sample FirstTask/Configs/GoogleService-Info-Release.plist
 
-      # https://github.com/actions/runner-images/issues/12777
-      - name: Workaround for hanging simulator
-        id: boot_simulator
-        timeout-minutes: 12
+      - name: Select simulator
+        id: select_simulator
         run: |
-          brew install coreutils -q
-
-          echo "Listing simulator devices:"
           DEVICE_ID=$(xcrun simctl list devices available -j | jq -r '
             .devices
             | to_entries
@@ -145,7 +140,34 @@ jobs:
             | select(.name | startswith("iPhone"))
             | .udid
           ' | head -n 1)
+          echo "Selected simulator: $DEVICE_ID"
           echo "device_id=$DEVICE_ID" >> "$GITHUB_OUTPUT"
+
+      # Build before the simulator boots: a booted simulator saturates the runner
+      # and slows down everything else, including SPM resolution and compilation
+      - name: Build for testing
+        id: build_for_testing
+        run: |
+          mise run build-for-testing --destination "id=$DEVICE_ID"
+          XCTESTRUN=""
+          for f in "$HOME"/Library/Developer/Xcode/DerivedData/FirstTask-*/Build/Products/*.xctestrun; do
+            if [ -z "$XCTESTRUN" ] || [ "$f" -nt "$XCTESTRUN" ]; then
+              XCTESTRUN=$f
+            fi
+          done
+          echo "Using $XCTESTRUN"
+          echo "xctestrun=$XCTESTRUN" >> "$GITHUB_OUTPUT"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+          LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISE_DISABLE_TOOLS: ruby
+
+      # https://github.com/actions/runner-images/issues/12777
+      - name: Workaround for hanging simulator
+        timeout-minutes: 12
+        run: |
+          brew install coreutils -q
+
           echo "--------------------------------"
           echo "👀 Updating dyld_shared_cache:"
           xcrun simctl runtime dyld_shared_cache update --all
@@ -174,10 +196,16 @@ jobs:
             echo "::error::Failed to boot simulator after $max attempts."
             exit 1
           fi
-
-      - name: Test
-        run: mise run test --destination "id=$DEVICE_ID"
         env:
-          DEVICE_ID: ${{ steps.boot_simulator.outputs.device_id }}
-          LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MISE_DISABLE_TOOLS: ruby
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
+      # The booted simulator saturates the runner, so call xcodebuild directly
+      # with the .xctestrun file to skip mise, bundler, fastlane and project loading
+      - name: Test
+        timeout-minutes: 15
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$DEVICE_ID" | xcbeautify --renderer github-actions
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+          XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
