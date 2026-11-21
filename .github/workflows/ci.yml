@@ -209,3 +209,8 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
+
+      # Shut down the simulator so that the cache is saved on an idle runner
+      - name: Shutdown simulator
+        if: always()
+        run: xcrun simctl shutdown all
