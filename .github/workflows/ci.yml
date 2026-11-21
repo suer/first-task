@@ -105,6 +105,21 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Temporary: sample CPU/IO load during the job to find out why the test job is slow
+      - name: Start load sampler
+        run: |
+          echo "hw.ncpu: $(sysctl -n hw.ncpu), hw.memsize: $(sysctl -n hw.memsize)"
+          cat > "$RUNNER_TEMP/load-sampler.sh" <<'EOF'
+          while true; do
+            echo "===== $(date -u +%H:%M:%S) loadavg: $(sysctl -n vm.loadavg)"
+            top -l 2 -s 1 -o cpu -n 10 -stats pid,cpu,mem,state,command | tail -n 11
+            iostat -d -c 2 -w 1 | sed -n '1,2p;$p'
+            memory_pressure | tail -n 1
+            sleep 10
+          done
+          EOF
+          nohup bash "$RUNNER_TEMP/load-sampler.sh" > "$RUNNER_TEMP/load-sampler.log" 2>&1 < /dev/null &
+
       - name: Set Xcode version
         uses: ./.github/actions/setup-xcode
 
@@ -181,3 +196,7 @@ jobs:
           DEVICE_ID: ${{ steps.boot_simulator.outputs.device_id }}
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_DISABLE_TOOLS: ruby
+
+      - name: Show load sampler log
+        if: always()
+        run: cat "$RUNNER_TEMP/load-sampler.log" || true
