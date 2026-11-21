@@ -102,8 +102,28 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: read
+    # Experiment: compare a fresh simulator with one restored from a warmed-up snapshot
+    strategy:
+      fail-fast: false
+      matrix:
+        simulator: [fresh, warm]
     steps:
       - uses: actions/checkout@v7
+
+      # Experiment: sample CPU load during the job
+      - name: Start load sampler
+        run: |
+          echo "hw.ncpu: $(sysctl -n hw.ncpu), hw.memsize: $(sysctl -n hw.memsize)"
+          cat > "$RUNNER_TEMP/load-sampler.sh" <<'EOF'
+          while true; do
+            echo "===== $(date -u +%H:%M:%S) loadavg: $(sysctl -n vm.loadavg)"
+            echo "processes: $(ps -A | wc -l)"
+            ps -Ao pid,pcpu,pmem,state,comm -r | head -n 11
+            memory_pressure | tail -n 1
+            sleep 10
+          done
+          EOF
+          nohup bash "$RUNNER_TEMP/load-sampler.sh" > "$RUNNER_TEMP/load-sampler.log" 2>&1 < /dev/null &
 
       - name: Set Xcode version
         uses: ./.github/actions/setup-xcode
@@ -142,6 +162,9 @@ jobs:
           ' | head -n 1)
           echo "Selected simulator: $DEVICE_ID"
           echo "device_id=$DEVICE_ID" >> "$GITHUB_OUTPUT"
+          RUNTIME=$(xcrun simctl list devices -j | jq -r --arg id "$DEVICE_ID" '.devices | to_entries[] | select(any(.value[]; .udid == $id)) | .key')
+          echo "Runtime: $RUNTIME, image: $ImageVersion"
+          echo "warm_cache_key=warm-simulator-v1-$ImageVersion-$RUNTIME-$DEVICE_ID" >> "$GITHUB_OUTPUT"
 
       # Build before the simulator boots: a booted simulator saturates the runner
       # and slows down everything else, including SPM resolution and compilation
@@ -161,6 +184,24 @@ jobs:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_DISABLE_TOOLS: ruby
+
+      # Experiment: restore the data directory of a simulator that has already finished
+      # its first-boot initialization, so that the boot skips that work
+      - name: Restore warm simulator data
+        id: restore_warm_simulator
+        if: matrix.simulator == 'warm'
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ runner.temp }}/warm-simulator-data
+          key: ${{ steps.select_simulator.outputs.warm_cache_key }}
+
+      - name: Apply warm simulator data
+        if: steps.restore_warm_simulator.outputs.cache-hit == 'true'
+        run: |
+          du -sh "$RUNNER_TEMP/warm-simulator-data"
+          rsync -a --delete "$RUNNER_TEMP/warm-simulator-data/" "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data/"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
       # https://github.com/actions/runner-images/issues/12777
       - name: Workaround for hanging simulator
@@ -214,3 +255,22 @@ jobs:
       - name: Shutdown simulator
         if: always()
         run: xcrun simctl shutdown all
+
+      - name: Copy simulator data for the warm cache
+        if: matrix.simulator == 'warm' && steps.restore_warm_simulator.outputs.cache-hit != 'true'
+        run: |
+          du -sh "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data"
+          rsync -a "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE_ID/data/" "$RUNNER_TEMP/warm-simulator-data/"
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
+      - name: Save warm simulator data
+        if: matrix.simulator == 'warm' && steps.restore_warm_simulator.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ runner.temp }}/warm-simulator-data
+          key: ${{ steps.select_simulator.outputs.warm_cache_key }}
+
+      - name: Show load sampler log
+        if: always()
+        run: cat "$RUNNER_TEMP/load-sampler.log" || true
