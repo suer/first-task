@@ -162,7 +162,17 @@ jobs:
       # Build before the simulator boots: a booted simulator saturates the runner
       # and slows down everything else, including SPM resolution and compilation
       - name: Build for testing
-        run: mise run build-for-testing --destination "id=$DEVICE_ID"
+        id: build_for_testing
+        run: |
+          mise run build-for-testing --destination "id=$DEVICE_ID"
+          XCTESTRUN=""
+          for f in "$HOME"/Library/Developer/Xcode/DerivedData/FirstTask-*/Build/Products/*.xctestrun; do
+            if [ -z "$XCTESTRUN" ] || [ "$f" -nt "$XCTESTRUN" ]; then
+              XCTESTRUN=$f
+            fi
+          done
+          echo "Using $XCTESTRUN"
+          echo "xctestrun=$XCTESTRUN" >> "$GITHUB_OUTPUT"
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -210,12 +220,16 @@ jobs:
       - name: Test
         timeout-minutes: 15
         run: |
-          XCTESTRUN=$(find "$HOME/Library/Developer/Xcode/DerivedData" -path '*/FirstTask-*/Build/Products/*.xctestrun' -print0 | xargs -0 ls -t | head -n 1)
-          echo "Using $XCTESTRUN"
           set -o pipefail
           xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$DEVICE_ID" | xcbeautify --renderer github-actions
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+          XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
+
+      # Shut down the simulator so that the cache is saved on an idle runner
+      - name: Shutdown simulator
+        if: always()
+        run: xcrun simctl shutdown all
 
       - name: Show load sampler log
         if: always()
