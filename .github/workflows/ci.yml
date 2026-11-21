@@ -112,7 +112,8 @@ jobs:
           cat > "$RUNNER_TEMP/load-sampler.sh" <<'EOF'
           while true; do
             echo "===== $(date -u +%H:%M:%S) loadavg: $(sysctl -n vm.loadavg)"
-            top -l 2 -s 1 -o cpu -n 10 -stats pid,cpu,mem,state,command | tail -n 11
+            echo "processes: $(ps -A | wc -l)"
+            ps -Ao pid,pcpu,pmem,state,comm -r | head -n 11
             iostat -d -c 2 -w 1 | sed -n '1,2p;$p'
             memory_pressure | tail -n 1
             sleep 10
@@ -204,13 +205,17 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
+      # The booted simulator saturates the runner, so call xcodebuild directly
+      # with the .xctestrun file to skip mise, bundler, fastlane and project loading
       - name: Test
         timeout-minutes: 15
-        run: mise run test-without-building --destination "id=$DEVICE_ID"
+        run: |
+          XCTESTRUN=$(find "$HOME/Library/Developer/Xcode/DerivedData" -path '*/FirstTask-*/Build/Products/*.xctestrun' -print0 | xargs -0 ls -t | head -n 1)
+          echo "Using $XCTESTRUN"
+          set -o pipefail
+          xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$DEVICE_ID" | xcbeautify --renderer github-actions
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
-          LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MISE_DISABLE_TOOLS: ruby
 
       - name: Show load sampler log
         if: always()
