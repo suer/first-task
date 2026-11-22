@@ -52,6 +52,13 @@ jobs:
         env:
           PROVISIONING_PROFILE_WIDGET: ${{ secrets.PROVISIONING_PROFILE_WIDGET }}
 
+      - name: Setup share extension provisioning profile
+        run: |
+          echo "$PROVISIONING_PROFILE_SHARE_EXTENSION" > distribution-share-extension.mobileprovision.txt
+          base64 --decode < distribution-share-extension.mobileprovision.txt > distribution-share-extension.mobileprovision
+        env:
+          PROVISIONING_PROFILE_SHARE_EXTENSION: ${{ secrets.PROVISIONING_PROFILE_SHARE_EXTENSION }}
+
       - name: Setup GoogleService-Info.plist
         run: |
           echo "$GOOGLE_SERVICE_INFO_RELEASE_PLIST" > FirstTask/Configs/GoogleService-Info-Release.plist
