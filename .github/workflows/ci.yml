@@ -180,6 +180,22 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
+      # On a freshly booted simulator iOS launches every widget and wallpaper extension,
+      # which keeps the runner saturated for minutes. Disable those services before the
+      # boot by writing the launchd disable overrides that launchd_sim reads at startup
+      # (the labels of simslim's "widgets" category). Widgets and Live Activities do not
+      # work in the simulator as a result, so remove this step for tests that need them.
+      - name: Disable widget services
+        run: |
+          STORE_DIR="/private/var/tmp/com.apple.CoreSimulator.SimDevice.$DEVICE_ID"
+          STORE="$STORE_DIR/disabled.plist"
+          mkdir -p "$STORE_DIR"
+          for label in com.apple.PosterBoard com.apple.chronod com.apple.liveactivitiesd com.apple.navd; do
+            /usr/libexec/PlistBuddy -c "Set :$label true" "$STORE" 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :$label bool true" "$STORE"
+          done
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
+
       # https://github.com/actions/runner-images/issues/12777
       - name: Workaround for hanging simulator
         timeout-minutes: 12
@@ -227,6 +243,17 @@ jobs:
         env:
           DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
           XCTESTRUN: ${{ steps.build_for_testing.outputs.xctestrun }}
+
+      # The override store is an undocumented CoreSimulator detail, so warn if a runtime
+      # stops honouring it
+      - name: Check disabled widget services
+        if: always()
+        run: |
+          if ! xcrun simctl spawn "$DEVICE_ID" launchctl print-disabled system | grep -q '"com.apple.chronod" => disabled'; then
+            echo "::warning::The simulator did not honour the launchd overrides for the widget services"
+          fi
+        env:
+          DEVICE_ID: ${{ steps.select_simulator.outputs.device_id }}
 
       # Shut down the simulator so that the cache is saved on an idle runner
       - name: Shutdown simulator
