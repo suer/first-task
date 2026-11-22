@@ -143,9 +143,10 @@ extension Task {
         return self.allTags(tags: tags).contains { $0.name == name }
     }
 
-    static func make(title: String, projectId: String = "", tagId: String = "") -> Task {
+    static func make(title: String, memo: String = "", projectId: String = "", tagId: String = "") -> Task {
         let task = Task()
         task.title = title
+        task.memo = memo
         task.projectId = projectId
         if !tagId.isEmpty {
             task.tagIds = [tagId]
@@ -153,8 +154,8 @@ extension Task {
         return task
     }
 
-    static func create(title: String, projectId: String = "", tagId: String = "", tasks: [Task]) -> Task {
-        let task = make(title: title, projectId: projectId, tagId: tagId)
+    static func create(title: String, memo: String = "", projectId: String = "", tagId: String = "", tasks: [Task]) -> Task {
+        let task = make(title: title, memo: memo, projectId: projectId, tagId: tagId)
         if let lastTask = tasks.last {
             task.displayOrder = lastTask.displayOrder + 1
         } else {

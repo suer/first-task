@@ -16,6 +16,7 @@ platform :ios do
     )
     install_provisioning_profile(path: "distribution.mobileprovision")
     install_provisioning_profile(path: "distribution-widget.mobileprovision")
+    install_provisioning_profile(path: "distribution-share-extension.mobileprovision")
   end
 
   desc "Submit a new Beta Build to App Distribution"
@@ -37,6 +38,14 @@ platform :ios do
       bundle_identifier: "org.codefirst.FirstTask.Widget",
       profile_name: "FirstTask Widget App Distribution Adhoc deployment"
     )
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "FirstTask.xcodeproj",
+      targets: ["FirstTaskShareExtension"],
+      code_sign_identity: "Apple Distribution",
+      bundle_identifier: "org.codefirst.FirstTask.ShareExtension",
+      profile_name: "FirstTask Share App Distribution Adhoc deployment"
+    )
     increment_build_number(
       build_number: ENV["BUILD_NUMBER"]
     )
@@ -49,7 +58,8 @@ platform :ios do
         method: 'ad-hoc',
         provisioningProfiles: {
           "org.codefirst.FirstTask" => "FirstTask App Distribution Adhoc deployment",
-          "org.codefirst.FirstTask.Widget" => "FirstTask Widget App Distribution Adhoc deployment"
+          "org.codefirst.FirstTask.Widget" => "FirstTask Widget App Distribution Adhoc deployment",
+          "org.codefirst.FirstTask.ShareExtension" => "FirstTask Share App Distribution Adhoc deployment"
         }
       }
     )
