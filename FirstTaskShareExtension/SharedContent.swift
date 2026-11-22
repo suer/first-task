@@ -19,7 +19,7 @@ struct SharedContent: Equatable, Sendable {
                     content.title = content.title.isEmpty ? text : content.title
                 }
             }
-            if content.title.isEmpty, let text = item.attributedContentText?.string {
+            if content.title.isEmpty, let text = item.attributedContentText?.string ?? item.attributedTitle?.string {
                 content.title = text
             }
         }
