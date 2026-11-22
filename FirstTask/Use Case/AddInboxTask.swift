@@ -13,7 +13,7 @@ enum AddInboxTaskError: Error, CustomLocalizedStringResourceConvertible {
 }
 
 enum AddInboxTask {
-    static func call(title: String) async throws {
+    static func call(title: String, memo: String = "") async throws {
         // An intent can run in a freshly launched process before the app UI sets Firebase up.
         if !FirebaseApp.isDefaultAppConfigured() {
             FirebaseApp.configure()
@@ -29,6 +29,6 @@ enum AddInboxTask {
             .documents
             .compactMap { try? Task(snapshot: $0) }
 
-        _ = Task.create(title: title, tasks: lastTasks ?? [])
+        _ = Task.create(title: title, memo: memo, tasks: lastTasks ?? [])
     }
 }
