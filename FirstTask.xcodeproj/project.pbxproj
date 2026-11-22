@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1D0C0DE0000000000000101 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000001 /* AddTaskIntent.swift */; };
-		A1D0C0DE0000000000000102 /* FirstTaskShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */; };
-		A1D0C0DE0000000000000103 /* AddInboxTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000003 /* AddInboxTask.swift */; };
-		A1D0C0DE0000000000000104 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */; };
 		1542B965B8F09F0959C968CE /* TaskListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C791B0456C20E21731ABB5E /* TaskListWidget.swift */; };
 		1905DA192507A22700D74BA7 /* CreateTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA182507A22700D74BA7 /* CreateTodayTag.swift */; };
 		1905DA1B2507A5E700D74BA7 /* AddTodayTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */; };
@@ -37,7 +33,9 @@
 		27A3E9786381043635A1BF1E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7CA34157282A4A88445B4895 /* Localizable.xcstrings */; };
 		4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */; };
 		50EDE707F54B5F79CFFCD5A4 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */; };
+		53B8B380C0B6092BC2E6489E /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE962D3DEE30495352D2A3 /* AppGroup.swift */; };
 		6AACCADD6937D79C0B2ABB49 /* LinkedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB34C36BD78BBC99C81A6265 /* LinkedTaskList.swift */; };
+		779D0056FD27E29EC7DFC1F9 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE962D3DEE30495352D2A3 /* AppGroup.swift */; };
 		7A1C0D022EDA000100A1B2C3 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */; };
 		801BBD4925737A5F00B7D66E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801BBD4825737A5F00B7D66E /* User.swift */; };
 		8021776E24EFEFC50076A24C /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021776D24EFEFC50076A24C /* TagList.swift */; };
@@ -64,6 +62,10 @@
 		9BB6129F93FA9E13BFEF0CA8 /* TaskListIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12217BF8B511034E29A61F7 /* TaskListIntent.swift */; };
 		9C87D61D1BAA7264980C3722 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0849E32E538BE04DCDBDC0B0 /* Foundation.framework */; };
 		A0C8BBC83CD5BB52A4FD2432 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */; };
+		A1D0C0DE0000000000000101 /* AddTaskIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000001 /* AddTaskIntent.swift */; };
+		A1D0C0DE0000000000000102 /* FirstTaskShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */; };
+		A1D0C0DE0000000000000103 /* AddInboxTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000003 /* AddInboxTask.swift */; };
+		A1D0C0DE0000000000000104 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */; };
 		A7345F3D664B3EF8C6D460FD /* CompletedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */; };
 		ACDCB755872143E4A57C4694 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */; };
 		D9259D63D4AF9C78BBE4D02A /* FirstTaskWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1A680B0C20DA2E496B119910 /* FirstTaskWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -111,10 +113,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A1D0C0DE0000000000000001 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
-		A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTaskShortcuts.swift; sourceTree = "<group>"; };
-		A1D0C0DE0000000000000003 /* AddInboxTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInboxTask.swift; sourceTree = "<group>"; };
-		A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		0849E32E538BE04DCDBDC0B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1905DA182507A22700D74BA7 /* CreateTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodayTag.swift; sourceTree = "<group>"; };
 		1905DA1A2507A5E700D74BA7 /* AddTodayTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTag.swift; sourceTree = "<group>"; };
@@ -144,6 +142,7 @@
 		2CD9C7AB890B408F97E9EEC4 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		337D44A75989E50F67D916C6 /* FirstTaskWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = FirstTaskWidget.entitlements; sourceTree = "<group>"; };
 		5F34EB49A996D15C7F84065A /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6DFE962D3DEE30495352D2A3 /* AppGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		732B82CBA45B2CBA0119BEEF /* SyncWidgetSnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncWidgetSnapshot.swift; sourceTree = "<group>"; };
 		747F625DE30096D1AD668EE9 /* FirstTaskWidgetBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirstTaskWidgetBundle.swift; sourceTree = "<group>"; };
 		7A1C0D012EDA000100A1B2C3 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
@@ -178,6 +177,10 @@
 		80775DFE250907E8007ED383 /* AddTodayTagsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodayTagsOperation.swift; sourceTree = "<group>"; };
 		8089D1CD24E6BDAC00988D74 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		80EF0E0E2511B554004D0C1C /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000001 /* AddTaskIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskIntent.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTaskShortcuts.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000003 /* AddInboxTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInboxTask.swift; sourceTree = "<group>"; };
+		A1D0C0DE0000000000000004 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		A48A972C0D82CF6EE0B53737 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		C12217BF8B511034E29A61F7 /* TaskListIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TaskListIntent.swift; sourceTree = "<group>"; };
 		C3EEA68EF952FFE298BC2482 /* CompletedTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskList.swift; sourceTree = "<group>"; };
@@ -219,15 +222,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1D0C0DE0000000000000005 /* Intent */ = {
-			isa = PBXGroup;
-			children = (
-				A1D0C0DE0000000000000001 /* AddTaskIntent.swift */,
-				A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */,
-			);
-			path = Intent;
-			sourceTree = "<group>";
-		};
 		1905DA172507A1C500D74BA7 /* Use Case */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				19D07EEB401128CBA2AF1591 /* WidgetSnapshot.swift */,
+				6DFE962D3DEE30495352D2A3 /* AppGroup.swift */,
 			);
 			name = FirstTaskShared;
 			path = FirstTaskShared;
@@ -449,6 +444,15 @@
 				19D12989256A45B400BB7732 /* SessionState.swift */,
 			);
 			path = ObservableObject;
+			sourceTree = "<group>";
+		};
+		A1D0C0DE0000000000000005 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				A1D0C0DE0000000000000001 /* AddTaskIntent.swift */,
+				A1D0C0DE0000000000000002 /* FirstTaskShortcuts.swift */,
+			);
+			path = Intent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -765,6 +769,7 @@
 				F5B9AED468DA4C74D533644E /* WidgetSnapshot.swift in Sources */,
 				4C97653A02972EEE048419E4 /* SyncWidgetSnapshot.swift in Sources */,
 				6AACCADD6937D79C0B2ABB49 /* LinkedTaskList.swift in Sources */,
+				53B8B380C0B6092BC2E6489E /* AppGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +799,7 @@
 				978C49BAAC7F7635CAFDDCF6 /* FirstTaskWidgetBundle.swift in Sources */,
 				9BB6129F93FA9E13BFEF0CA8 /* TaskListIntent.swift in Sources */,
 				1542B965B8F09F0959C968CE /* TaskListWidget.swift in Sources */,
+				779D0056FD27E29EC7DFC1F9 /* AppGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

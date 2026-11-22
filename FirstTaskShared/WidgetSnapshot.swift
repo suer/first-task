@@ -1,7 +1,6 @@
 import Foundation
 
 enum WidgetShared {
-    static let appGroupIdentifier = "group.org.codefirst.FirstTaskExtension"
     static let widgetKind = "TaskListWidget"
 }
 
@@ -91,9 +90,7 @@ struct WidgetSnapshot: Codable, Equatable, Sendable {
 
 enum WidgetSnapshotStore {
     private static var fileURL: URL? {
-        FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: WidgetShared.appGroupIdentifier)?
-            .appendingPathComponent("widget-snapshot.json")
+        AppGroup.containerURL?.appendingPathComponent("widget-snapshot.json")
     }
 
     static func load() -> WidgetSnapshot? {
