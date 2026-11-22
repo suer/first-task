@@ -28,6 +28,9 @@ class SessionState: ObservableObject {
                     }
                     self.photoURL = user.photoURL?.absoluteString ?? ""
                 }
+                _Concurrency.Task {
+                    await ImportPendingTasks.call()
+                }
                 self.isSignedIn = true
             } else {
                 print("Sign-out")

@@ -120,6 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         scheduleAppRefresh()
 
         let work = _Concurrency.Task {
+            await ImportPendingTasks.call()
             do {
                 try await SyncWidgetSnapshot.fetchAndSave()
                 task.setTaskCompleted(success: true)
