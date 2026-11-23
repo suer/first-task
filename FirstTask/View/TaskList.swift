@@ -22,6 +22,7 @@ struct TaskList: View {
     @State var showingProjectEditModal = false
     @State var showingProjectMoveModal = false
     @State var showingCompleteConfirmation = false
+    @State var scrollTargetTaskID: String?
 
     var filter: (Task) -> Bool = { _ in true }
     var project: Project?
@@ -57,15 +58,30 @@ struct TaskList: View {
                     Text(.addATaskToGetStarted)
                 }
             } else {
-                List {
-                    ForEach(self.filteredTasks) { task in
-                        taskRow(task: task)
+                ScrollViewReader { proxy in
+                    List {
+                        ForEach(self.filteredTasks) { task in
+                            taskRow(task: task)
+                        }
+                        .onDelete(perform: removeRow)
+                        .onMove(perform: move)
+                        .onTapGesture {}  // work around to scroll list with onLongPressGesture
                     }
-                    .onDelete(perform: removeRow)
-                    .onMove(perform: move)
-                    .onTapGesture {}  // work around to scroll list with onLongPressGesture
+                    .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
+                    // Keep the added task visible above the add task sheet
+                    .safeAreaInset(edge: .bottom, spacing: 0) {
+                        Color.clear.frame(height: self.showingAddTaskModal ? 88 : 0)
+                    }
+                    .onChange(of: self.filteredTasks.map(\.id)) { _, ids in
+                        guard let id = self.scrollTargetTaskID, ids.contains(id) else { return }
+                        self.scrollTargetTaskID = nil
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                proxy.scrollTo(id)
+                            }
+                        }
+                    }
                 }
-                .environment(\.editMode, self.editing ? .constant(.active) : .constant(.inactive))
             }
             VStack {
                 Spacer()
@@ -87,11 +103,17 @@ struct TaskList: View {
                         nil
                     }
 
-                _ = Task.create(
+                let task = Task.create(
                     title: self.$newTaskTitle.wrappedValue,
                     projectId: self.project?.id ?? "",
                     tagId: tag?.id ?? "",
                     tasks: self.tasks)
+                self.scrollTargetTaskID = task.id
+            }
+            .onChange(of: self.showingAddTaskModal) { _, isShown in
+                if !isShown {
+                    self.scrollTargetTaskID = nil
+                }
             }
 
             BottomSheetModal(isShown: self.$showingProjectMoveModal) {
