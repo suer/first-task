@@ -37,6 +37,7 @@ struct TaskRow: View {
     }
 
     static func linkedMemo(_ memo: String) -> AttributedString {
+        let memo = memo.split(whereSeparator: \.isNewline).joined(separator: " ")
         var attributed = AttributedString(memo)
         guard
             let detector = try? NSDataDetector(
