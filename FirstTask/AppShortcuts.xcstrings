@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Add a task in ${applicationName}" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
